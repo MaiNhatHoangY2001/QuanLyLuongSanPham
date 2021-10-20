@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\.metadata\.plugins\org.eclipse.jdt.core
+6322965.index
+1865797976.index
+1695662857.index
