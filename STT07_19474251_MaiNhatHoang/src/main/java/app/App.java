@@ -11,6 +11,7 @@ import entity.Department;
 import entity.Employee;
 import entity.JobInfo;
 ///Hoagn Van CHionh
+//Phạm Minh Hùng
 public class App {
 	public static void main(String[] args) throws InterruptedException {
 		MongoClient client = MongoClients.create();
