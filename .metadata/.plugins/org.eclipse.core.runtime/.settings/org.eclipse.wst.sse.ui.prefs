@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 content_assist_number_of_computers=27
+=======
+content_assist_number_of_computers=24
+>>>>>>> 137bd60ed1ef7269b3f0838618c92655693b0045
 eclipse.preferences.version=1
 useAnnotationsPrefPage=true
 useQuickDiffPrefPage=true

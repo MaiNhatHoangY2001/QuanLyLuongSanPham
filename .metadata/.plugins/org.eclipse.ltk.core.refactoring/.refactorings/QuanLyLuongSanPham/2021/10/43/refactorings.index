@@ -1,2 +1,19 @@
 1634701600802	Delete element
+<<<<<<< HEAD
 1635002456384	Rename type 'ThemHoaDonBan'
+=======
+1634977725791	Delete element
+1634983297160	Rename compilation unit 'CustomTabbedPaneUI.java'
+1634985333513	Delete element
+1634993984591	Delete element
+1634994157245	Delete element
+1635000544584	Rename type 'QuanLyLuong'
+1635006056665	Rename local variable 'lblTenKH_3'
+1635006079042	Rename local variable 'lblTenKH_4'
+1635006117940	Rename local variable 'lblTenKH_5'
+1635006250540	Rename local variable 'lblNewLabel_4'
+1635006268281	Rename local variable 'lblTenKH_5_1'
+1635006363026	Rename local variable 'lblURLabel'
+1635007367724	Rename local variable 'lblTenKH'
+1635007377484	Rename local variable 'lblMaKH'
+>>>>>>> 137bd60ed1ef7269b3f0838618c92655693b0045

@@ -1,0 +1,82 @@
+package gui;
+ 
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+ 
+
+public class DemoCustomTab extends JPanel implements MouseListener {
+ 
+    QuanLyLuong customJTabbedPane;
+ 
+    /** JPanel contain a JLabel*/
+    public DemoCustomTab(QuanLyLuong customJTabbedPane) {
+        this.customJTabbedPane = customJTabbedPane;
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(5, 2, 2, 2));
+        setPreferredSize(new Dimension(300, 68));
+        setOpaque(false);
+        
+        addLabel();
+        
+    }
+ 
+    private void addLabel() {
+        JLabel label = new JLabel() {
+            /** set text for JLabel, it will title of tab */
+            public String getText() {
+                int index = customJTabbedPane.tabbedPane
+                        .indexOfTabComponent(DemoCustomTab.this);
+                if (index != -1) {
+                    return customJTabbedPane.tabbedPane.getTitleAt(index);
+                }
+                return null;
+            }
+        };
+        /** add more space between the label and the button */
+        label.setBorder(new EmptyBorder(0, 0, 0, 10));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setFont(new Font("Tahoma", Font.BOLD, 36));
+        label.setForeground(Color.WHITE);
+        add(label, BorderLayout.CENTER);
+    }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+ 
+    
+}

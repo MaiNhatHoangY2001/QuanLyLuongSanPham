@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.131+D:\TuHocLapTrinh\DeTai\QuanLyLuongSanPham\.metadata\.plugins\org.eclipse.jdt.core
 2153485610.index
 2176685623.index
@@ -20,3 +21,32 @@ INDEX VERSION 1.131+D:\TuHocLapTrinh\DeTai\QuanLyLuongSanPham\.metadata\.plugins
 4074721215.index
 3413418375.index
 1598978058.index
+=======
+INDEX VERSION 1.131+D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\.metadata\.plugins\org.eclipse.jdt.core
+2508355589.index
+3164560147.index
+1865797976.index
+48807553.index
+1366885501.index
+1502431086.index
+2357699700.index
+1983420642.index
+3633257243.index
+469325327.index
+2101505657.index
+3809821679.index
+2100223608.index
+799565027.index
+2572385922.index
+6322965.index
+2731575950.index
+2437173645.index
+4087168300.index
+1695662857.index
+851387133.index
+541459680.index
+1722370686.index
+1593722765.index
+3517254035.index
+713500199.index
+>>>>>>> 137bd60ed1ef7269b3f0838618c92655693b0045

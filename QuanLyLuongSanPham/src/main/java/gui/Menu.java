@@ -149,7 +149,7 @@ public class Menu extends JPanel {
 		btnThoat.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThoat.setBounds(0, 665, 400, 86);
 		add(btnThoat);
-
+	
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(
 				"src/main/resources/images/img_bill/Logo.PNG"));
