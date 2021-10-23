@@ -4,30 +4,20 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import jiconfont.swing.IconFontSwing;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JScrollPane;
-import javax.swing.table.TableModel;
-import javax.swing.ScrollPaneConstants;
-import java.awt.ComponentOrientation;
-import java.awt.Cursor;
 
 public class Gui_QuanLyHoaDon extends JFrame {
 	private JTextField textField;
@@ -60,42 +50,35 @@ public class Gui_QuanLyHoaDon extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(242, 129, 25));
-		panel.setBounds(0, 0, 1440, 154);
+		panel.setBounds(0, 0, 1424, 154);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(20, 27, 52, 45);
-		panel.add(menuBar);
-
-		IconFontSwing.register(FontAwesome.getIconFont());
-		Icon iconMenu = IconFontSwing.buildIcon(FontAwesome.TASKS, 40, Color.WHITE);
-		JMenu mnNewMenu = new JMenu("");
-		mnNewMenu.setIcon(iconMenu);
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem);
-
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_1);
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_2);
-
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_4);
-
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_3);
-
-		JLabel lblNewLabel = new JLabel("New label");
-		mnNewMenu.add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("QU\u1EA2N L\u00DD H\u00D3A \u0110\u01A0N");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 59));
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(448, 27, 580, 91);
 		panel.add(lblNewLabel_1);
+
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(
+				"D:\\workspace\\LTPhanTan\\QuanLyLuongSanPham\\src\\main\\resources\\images\\img_bill\\uerlogin.PNG"));
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 36));
+		lblNewLabel_5.setBounds(1372, 27, 52, 45);
+		panel.add(lblNewLabel_5);
+
+		JLabel lblNewLabel_6 = new JLabel("Chinh");
+		lblNewLabel_6.setToolTipText("Đã đăng nhập");
+		lblNewLabel_6.setForeground(Color.WHITE);
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 36));
+		lblNewLabel_6.setBounds(1240, 27, 161, 45);
+		panel.add(lblNewLabel_6);
+
+		JLabel lblNewLabel_7 = new JLabel("12:00");
+		lblNewLabel_7.setForeground(Color.WHITE);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 36));
+		lblNewLabel_7.setBounds(1320, 83, 94, 35);
+		panel.add(lblNewLabel_7);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(194, 93, 0));
@@ -128,19 +111,22 @@ public class Gui_QuanLyHoaDon extends JFrame {
 
 		String[] colsname = { "Mã hóa đơn", "Số lượng", "Ngày lập", "Khuyến mãi", "Thuế", "Tên nhân viên",
 				"Thành tiền" };
-		DefaultTableModel model = new DefaultTableModel(colsname, 4);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		scrollPane.setBounds(23, 11, 1380, 288);
+		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_2.add(scrollPane);
 
-		table = new JTable(model);
-		table.setSelectionBackground(new Color(255, 165, 0));
-		table.setGridColor(Color.BLACK);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		table.setFillsViewportHeight(true);
-		table.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		table.setRowHeight(52);
+		table.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null }, },
+				new String[] { "M\u00E3 h\u00F3a \u0111\u01A1n", "S\u1ED1 l\u01B0\u1EE3ng", "Ng\u00E0y l\u1EADp",
+						"Khuy\u1EBFn m\u00E3i", "Thu\u1EBF", "T\u00EAn nh\u00E2n vi\u00EAn", "Th\u00E0nh ti\u1EC1n" }));
 		scrollPane.setViewportView(table);
 
 		JPanel panel_3 = new JPanel();
