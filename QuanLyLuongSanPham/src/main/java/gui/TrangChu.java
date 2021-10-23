@@ -22,11 +22,25 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 public class TrangChu extends JFrame {
 
 	private JPanel contentPane;
-	private final JPanel panel_1 = new JPanel();
+	private final JPanel panelNutBam = new JPanel();
+	private JButton btnQuanLyNhanVien;
+	private JButton btnQuanLyHoaDon;
+	private JButton btnQuanLyLuong;
+	private JButton btnQuanLySanPham;
+	private JButton btnThongKeThuChi;
+	private JButton btnQuanLyDuLieu;
+	private JLabel lblTaiKhoan;
+	private JLabel lblChuaLogo;
+	private JLabel lblDangXuat;
+	private JMenuBar menuBar;
+	private JMenu mnNewMenu;
+	private JMenu mnTrangChu;
+	
 
 	/**
 	 * Launch the application.
@@ -49,78 +63,128 @@ public class TrangChu extends JFrame {
 	 */
 	public TrangChu() {
 		setLocationByPlatform(true);
-		setResizable(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1440, 1024);
+		setBounds(100, 100, 1440, 1057);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.ORANGE);
-		panel.setSize(new Dimension(0, 204));
-		panel.setBounds(0, 0, 1440, 264);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JPanel panelMenu = new JPanel();
+		panelMenu.setBackground(new Color(245, 129, 25));
+		panelMenu.setSize(new Dimension(0, 204));
+		panelMenu.setBounds(0, 0, 1440, 264);
+		contentPane.add(panelMenu);
+		panelMenu.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("D:\\HOC_TAP\\Nam 3-HK1\\PTUD\\BaiTapLon\\dt.png"));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblNewLabel.setBounds(517, 22, 406, 225);
-		panel.add(lblNewLabel);
+		lblChuaLogo = new JLabel("");
+		lblChuaLogo.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\dt2.png"));
+		lblChuaLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChuaLogo.setBounds(517, 22, 406, 225);
+		panelMenu.add(lblChuaLogo);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(47, 35, 101, 22);
-		panel.add(menuBar);
+		lblTaiKhoan = new JLabel("");
+		lblTaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTaiKhoan.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\user.png"));
+		lblTaiKhoan.setBounds(1352, 22, 50, 50);
+		panelMenu.add(lblTaiKhoan);
 		
-		JMenu mnNewMenu = new JMenu("New menu");
+		lblDangXuat = new JLabel("");
+		lblDangXuat.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\dangxuat.png"));
+		lblDangXuat.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDangXuat.setBounds(1370, 83, 25, 25);
+		panelMenu.add(lblDangXuat);
+		
+		menuBar = new JMenuBar();
+		menuBar.setBorderPainted(false);
+		menuBar.setFont(new Font("Calibri", Font.PLAIN, 24));
+		menuBar.setBounds(27, 22, 88, 80);
+		panelMenu.add(menuBar);
+		
+		mnNewMenu = new JMenu("");
+		mnNewMenu.setAlignmentY(0.0f);
+		mnNewMenu.setMargin(new Insets(0, 0, 0, 0));
+		mnNewMenu.setIconTextGap(0);
+		mnNewMenu.setAlignmentX(Component.LEFT_ALIGNMENT);
+		mnNewMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\menu.png"));
+		mnNewMenu.setHorizontalTextPosition(SwingConstants.CENTER);
+		mnNewMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem);
+		mnTrangChu = new JMenu("Trang Chủ");
+		mnTrangChu.setContentAreaFilled(false);
+		mnTrangChu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		mnTrangChu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		mnTrangChu.setFont(new Font("Calibri", Font.PLAIN, 24));
+		mnTrangChu.setHorizontalAlignment(SwingConstants.CENTER);
+		mnTrangChu.setAlignmentY(Component.TOP_ALIGNMENT);
+		mnTrangChu.setAlignmentX(Component.LEFT_ALIGNMENT);
+		mnNewMenu.add(mnTrangChu);
+		panelNutBam.setBounds(0, 264, 1440, 760);
+		contentPane.add(panelNutBam);
+		panelNutBam.setLayout(null);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_2);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_3);
-		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_4);
-		panel_1.setBounds(0, 264, 1440, 760);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JButton btnQuanLyNhanVien = new JButton("New button");
-		btnQuanLyNhanVien.setActionCommand("Qu\u1EA3n l\u00FD nh\u00E2n vi\u00EAn");
+		btnQuanLyNhanVien = new JButton("Quản Lý Nhân Viên");
+		btnQuanLyNhanVien.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnQuanLyNhanVien.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\nv.png"));
+		btnQuanLyNhanVien.setVerticalTextPosition(SwingConstants.TOP);
+		btnQuanLyNhanVien.setForeground(Color.WHITE);
+		btnQuanLyNhanVien.setFont(new Font("Calibri", Font.PLAIN, 36));
+		btnQuanLyNhanVien.setBackground(new Color(245, 129, 25));
 		btnQuanLyNhanVien.setBounds(49, 41, 407, 313);
-		panel_1.add(btnQuanLyNhanVien);
+		panelNutBam.add(btnQuanLyNhanVien);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(518, 41, 407, 313);
-		panel_1.add(btnNewButton_1);
+		btnQuanLyHoaDon = new JButton("Quản Lý Hóa Đơn");
+		btnQuanLyHoaDon.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnQuanLyHoaDon.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\hd.png"));
+		btnQuanLyHoaDon.setVerticalTextPosition(SwingConstants.TOP);
+		btnQuanLyHoaDon.setForeground(Color.WHITE);
+		btnQuanLyHoaDon.setFont(new Font("Calibri", Font.PLAIN, 36));
+		btnQuanLyHoaDon.setBackground(new Color(245, 129, 25));
+		btnQuanLyHoaDon.setBounds(518, 41, 407, 313);
+		panelNutBam.add(btnQuanLyHoaDon);
 		
-		JButton btnNewButton_1_1 = new JButton("New button");
-		btnNewButton_1_1.setBounds(980, 41, 407, 313);
-		panel_1.add(btnNewButton_1_1);
+		btnQuanLyLuong = new JButton("Quản Lý Lương");
+		btnQuanLyLuong.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnQuanLyLuong.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\l.png"));
+		btnQuanLyLuong.setVerticalTextPosition(SwingConstants.TOP);
+		btnQuanLyLuong.setForeground(Color.WHITE);
+		btnQuanLyLuong.setFont(new Font("Calibri", Font.PLAIN, 36));
+		btnQuanLyLuong.setBackground(new Color(245, 129, 25));
+		btnQuanLyLuong.setBounds(980, 41, 407, 313);
+		panelNutBam.add(btnQuanLyLuong);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(49, 406, 407, 313);
-		panel_1.add(btnNewButton_2);
+		btnQuanLySanPham = new JButton("Quản Lý Sản Phẩm");
+		btnQuanLySanPham.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnQuanLySanPham.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\sp.png"));
+		btnQuanLySanPham.setVerticalTextPosition(SwingConstants.TOP);
+		btnQuanLySanPham.setForeground(Color.WHITE);
+		btnQuanLySanPham.setFont(new Font("Calibri", Font.PLAIN, 36));
+		btnQuanLySanPham.setBackground(new Color(245, 129, 25));
+		btnQuanLySanPham.setBounds(518, 406, 407, 313);
+		panelNutBam.add(btnQuanLySanPham);
 		
-		JButton btnNewButton_2_1 = new JButton("New button");
-		btnNewButton_2_1.setBounds(518, 406, 407, 313);
-		panel_1.add(btnNewButton_2_1);
+		btnQuanLyDuLieu = new JButton("Quản Lý Dữ Liệu");
+		btnQuanLyDuLieu.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnQuanLyDuLieu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\database.png"));
+		btnQuanLyDuLieu.setVerticalTextPosition(SwingConstants.TOP);
+		btnQuanLyDuLieu.setForeground(Color.WHITE);
+		btnQuanLyDuLieu.setFont(new Font("Calibri", Font.PLAIN, 36));
+		btnQuanLyDuLieu.setBackground(new Color(245, 129, 25));
+		btnQuanLyDuLieu.setBounds(980, 406, 407, 313);
+		panelNutBam.add(btnQuanLyDuLieu);
 		
-		JButton btnNewButton_2_1_1 = new JButton("New button");
-		btnNewButton_2_1_1.setBounds(980, 406, 407, 313);
-		panel_1.add(btnNewButton_2_1_1);
+		btnThongKeThuChi = new JButton("Thống Kê Thu Chi");
+		btnThongKeThuChi.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnThongKeThuChi.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\img\\tk.png"));
+		btnThongKeThuChi.setVerticalTextPosition(SwingConstants.TOP);
+		btnThongKeThuChi.setForeground(Color.WHITE);
+		btnThongKeThuChi.setFont(new Font("Calibri", Font.PLAIN, 36));
+		btnThongKeThuChi.setBackground(new Color(245, 129, 25));
+		btnThongKeThuChi.setBounds(49, 406, 407, 313);
+		panelNutBam.add(btnThongKeThuChi);
+
 	}
 }
