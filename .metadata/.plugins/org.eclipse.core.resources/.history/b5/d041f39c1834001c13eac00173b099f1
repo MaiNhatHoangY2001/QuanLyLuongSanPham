@@ -1,0 +1,52 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Dimension;
+import java.awt.Color;
+
+public class Gui_ThemHoaDonNhap extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Gui_ThemHoaDonNhap frame = new Gui_ThemHoaDonNhap();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Gui_ThemHoaDonNhap() {
+		setMinimumSize(new Dimension(1440, 1024));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1440, 833);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(242, 129, 25));
+		panel.setLocation(5, 5);
+		panel.setSize(new Dimension(1414, 137));
+		contentPane.add(panel);
+		panel.setLayout(null);
+	}
+
+}
