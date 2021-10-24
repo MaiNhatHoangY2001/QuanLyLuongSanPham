@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JMonthChooser;
 
-public class FrmTinhDoanhThu extends JPanel {
+public class Gui_TinhDoanhThu extends JPanel {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class FrmTinhDoanhThu extends JPanel {
 	private JTextField txtThu;
 	private JTextField txtLoiNhuan;
 
-	public FrmTinhDoanhThu() {
+	public Gui_TinhDoanhThu() {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 		/**

@@ -27,6 +27,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import gui_package.ChucNang;
+
 public class Gui_QuanLyHoaDon extends JFrame {
 	private JTextField txtTimKiem;
 	private JTextField txtTongTien;
@@ -276,7 +278,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		txtTongTien.setColumns(10);
 		txtTongTien.setBounds(247, 278, 390, 44);
 		panel_4_1.add(txtTongTien);
-		JPanel pnMenu = new Menu();
+		JPanel pnMenu = new Gui_Menu();
 		Rectangle temp = panel.getBounds();
 		Rectangle temp1 = panel_1.getBounds();
 		Rectangle temp2 = panel_2.getBounds();

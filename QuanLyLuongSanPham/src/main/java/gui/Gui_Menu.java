@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class Menu extends JPanel {
+public class Gui_Menu extends JPanel {
 	private JButton btnTrangChu;
 	private JButton btnQuanLyNhanVien;
 	private JButton btnNewButton;
@@ -28,7 +28,7 @@ public class Menu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Menu() {
+	public Gui_Menu() {
 		setBackground(new Color(231, 231, 231));
 		setBorder(new LineBorder(new Color(255, 140, 0)));
 		setSize(new Dimension(400, 1024));
@@ -158,7 +158,7 @@ public class Menu extends JPanel {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setSize(400, 1024);
-		frame.getContentPane().add(new Menu());
+		frame.getContentPane().add(new Gui_Menu());
 		frame.setVisible(true);
 
 	}
