@@ -38,8 +38,6 @@ public class TrangChu extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu mnNewMenu;
 	private JMenu mnTrangChu;
-	private int xClicked;
-	private int yClicked;
 
 	/**
 	 * Launch the application.
@@ -61,21 +59,7 @@ public class TrangChu extends JFrame {
 	 * Create the frame.
 	 */
 	public TrangChu() {
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				xClicked = e.getX();
-				yClicked = e.getY();
-			}
-		});
-		addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				int x = e.getXOnScreen();
-				int y = e.getYOnScreen();
-				setLocation(x - xClicked, y - yClicked);
-			}
-		});
+		ChucNang.setDiChuyenGD(this);
 //		setUndecorated(true);
 		setLocationByPlatform(true);
 		setResizable(false);
