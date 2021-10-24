@@ -68,10 +68,10 @@ public class Gui_ThemHoaDonBan extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("QU\u1EA2N L\u00DD H\u00D3A \u0110\u01A0N");
+		JLabel lblNewLabel_1 = new JLabel("THÊM HÓA ĐƠN BÁN");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 59));
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(448, 27, 580, 91);
+		lblNewLabel_1.setBounds(389, 27, 639, 91);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("");

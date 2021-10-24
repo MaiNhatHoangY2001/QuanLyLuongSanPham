@@ -22,4 +22,13 @@
     <fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
     <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
     <fullyQualifiedTypeName name="gui.Gui_ThemHoaDonBan"/>
+    <fullyQualifiedTypeName name="gui.ChucNang"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThemHoaDonNhap"/>
+    <fullyQualifiedTypeName name="org.hibernate.SessionFactory"/>
+    <fullyQualifiedTypeName name="hibernateCfg.HibernateConfig"/>
+    <fullyQualifiedTypeName name="dao.NhanVienDao"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.hibernate.Session"/>
+    <fullyQualifiedTypeName name="model.NhanVien"/>
 </qualifiedTypeNameHistroy>

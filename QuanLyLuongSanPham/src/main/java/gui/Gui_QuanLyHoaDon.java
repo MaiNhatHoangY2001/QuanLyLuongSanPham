@@ -74,7 +74,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBackground(new Color(242, 129, 25));
@@ -89,8 +89,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		panel.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/uerlogin.PNG"));
+		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/images/img_bill/uerlogin.PNG"));
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 36));
 		lblNewLabel_5.setBounds(1372, 27, 52, 45);
 		panel.add(lblNewLabel_5);
@@ -283,6 +282,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		Rectangle temp3 = panel_3.getBounds();
 
 		ChucNang.setGio(lblGio);
+
 		btnMenu.addActionListener(e -> {
 
 			if (panel.getX() == 400) {
@@ -301,16 +301,22 @@ public class Gui_QuanLyHoaDon extends JFrame {
 				add(pnMenu);
 			}
 		});
-		btnThemHoaDon.addActionListener(e->{
-			Gui_ThemHoaDonBan gui_ThemHoaDonBan= new Gui_ThemHoaDonBan();
+		btnThemHoaDon.addActionListener(e -> {
+			if (cboLoaiHoaDon.getSelectedIndex() == 0) {
+				Gui_ThemHoaDonBan gui_ThemHoaDonBan = new Gui_ThemHoaDonBan();
+				gui_ThemHoaDonBan.setVisible(rootPaneCheckingEnabled);
+			}
+			else {
+				Gui_ThemHoaDonNhap gui_ThemHoaDonNhap= new Gui_ThemHoaDonNhap();
+				gui_ThemHoaDonNhap.setVisible(rootPaneCheckingEnabled);
+			}
 		});
 		btnXemChiTiet.addActionListener(e -> {
-			AtomicInteger integer= new AtomicInteger(1);
-			Gui_ChiTietHoaDon chiTietHoaDon= new Gui_ChiTietHoaDon();
-			chiTietHoaDon.setLblMaHoaDon("Mã hóa đơn:"+integer);
+			AtomicInteger integer = new AtomicInteger(1);
+			Gui_ChiTietHoaDon chiTietHoaDon = new Gui_ChiTietHoaDon();
+			chiTietHoaDon.setLblMaHoaDon("Mã hóa đơn:" + integer);
 			chiTietHoaDon.setVisible(true);
 		});
 	}
 
-	
 }
