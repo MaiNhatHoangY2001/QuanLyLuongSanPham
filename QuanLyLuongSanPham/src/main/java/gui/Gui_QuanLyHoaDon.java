@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -70,7 +71,10 @@ public class Gui_QuanLyHoaDon extends JFrame {
 	public Gui_QuanLyHoaDon() {
 		setMinimumSize(new Dimension(1440, 1024));
 		getContentPane().setLayout(null);
-
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBackground(new Color(242, 129, 25));
@@ -129,9 +133,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		cboLoaiHoaDon.setBounds(30, 20, 282, 54);
 		panel_1.add(cboLoaiHoaDon);
 
-	
-		
-		txtNgayLap= new JDateChooser(new Date());
+		txtNgayLap = new JDateChooser(new Date());
 		txtNgayLap.setBackground(new Color(233, 180, 46));
 		txtNgayLap.setFont(new Font("Tahoma", Font.PLAIN, 36));
 		txtNgayLap.setForeground(Color.WHITE);
@@ -299,10 +301,20 @@ public class Gui_QuanLyHoaDon extends JFrame {
 				add(pnMenu);
 			}
 		});
+		btnThemHoaDon.addActionListener(e->{
+			Gui_ThemHoaDonBan gui_ThemHoaDonBan= new Gui_ThemHoaDonBan();
+		});
+		btnXemChiTiet.addActionListener(e -> {
+			AtomicInteger integer= new AtomicInteger(1);
+			Gui_ChiTietHoaDon chiTietHoaDon= new Gui_ChiTietHoaDon();
+			chiTietHoaDon.setLblMaHoaDon("Mã hóa đơn:"+integer);
+			chiTietHoaDon.setVisible(true);
+		});
 	}
 
 	/**
 	 * chỉnh giờ cho lable
+	 * 
 	 * @param lblGio
 	 */
 	public static void setGio(JLabel lblGio) {
