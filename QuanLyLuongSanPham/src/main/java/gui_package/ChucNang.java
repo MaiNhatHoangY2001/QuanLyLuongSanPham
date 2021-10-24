@@ -31,13 +31,14 @@ public class ChucNang {
 		Timer timer = new Timer("Timer");
 		timer.schedule(timerTask, 0, delay);
 	}
-	
+
 	/**
 	 * Giúp di chuyển giao diện khi kéo thả giao diện
+	 * 
 	 * @param frame
 	 */
 	public static void setDiChuyenGD(JFrame frame) {
-		
+
 		AtomicInteger xClicked = new AtomicInteger(0);
 		AtomicInteger yClicked = new AtomicInteger(0);
 
@@ -57,5 +58,5 @@ public class ChucNang {
 			}
 		});
 	}
-	
+
 }

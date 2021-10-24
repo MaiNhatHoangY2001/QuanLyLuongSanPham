@@ -20,15 +20,15 @@ import model.NhanVien;
 import model.SanPham;
 import model.TaiKhoan;
 
-public class Hibernatee {
+public class HibernateConfig {
 	public static SessionFactory sessionFactory = null;
-	private static Hibernatee instance = new Hibernatee();
+	private static HibernateConfig instance = new HibernateConfig();
 
-	public static Hibernatee getInstance() {
+	public static HibernateConfig getInstance() {
 		return instance;
 	}
 
-	public Hibernatee() {
+	public HibernateConfig() {
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
 		Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(BangLuong.class)
@@ -47,7 +47,7 @@ public class Hibernatee {
 	}
 
 	public static void main(String[] args) {
-		SessionFactory factory= Hibernatee.getInstance().getSessionFactory();
+		SessionFactory factory= HibernateConfig.getInstance().getSessionFactory();
 		Session session=factory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {

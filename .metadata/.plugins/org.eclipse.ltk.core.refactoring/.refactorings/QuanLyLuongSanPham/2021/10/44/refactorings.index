@@ -2,6 +2,7 @@
 1635039214325	Delete element
 1635049257750	Delete element
 1635049260901	Delete element
+<<<<<<< HEAD
 1635082519653	Move compilation unit
 1635082620493	Rename type 'DemoCustomTab'
 1635082759420	Move compilation unit
@@ -19,3 +20,6 @@
 1635085910477	Rename type 'CustomTabQuanLyLuong'
 1635087809349	Rename field 'scrollPane'
 1635088218424	Rename field 'colsname'
+=======
+1635082481485	Rename type 'Hibernatee'
+>>>>>>> ac1d1edf959951fefeb8ee76b33d86400d1a6dfc
