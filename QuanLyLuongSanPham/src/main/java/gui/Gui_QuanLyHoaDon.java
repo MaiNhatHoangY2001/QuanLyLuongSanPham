@@ -90,7 +90,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon(
-				"D:\\workspace\\LTPhanTan\\QuanLyLuongSanPham\\src\\main\\resources\\images\\img_bill\\uerlogin.PNG"));
+				"src/main/resources/images/img_bill/uerlogin.PNG"));
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 36));
 		lblNewLabel_5.setBounds(1372, 27, 52, 45);
 		panel.add(lblNewLabel_5);
@@ -282,7 +282,7 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		Rectangle temp2 = panel_2.getBounds();
 		Rectangle temp3 = panel_3.getBounds();
 
-		setGio(lblGio);
+		ChucNang.setGio(lblGio);
 		btnMenu.addActionListener(e -> {
 
 			if (panel.getX() == 400) {
@@ -312,23 +312,5 @@ public class Gui_QuanLyHoaDon extends JFrame {
 		});
 	}
 
-	/**
-	 * chỉnh giờ cho lable
-	 * 
-	 * @param lblGio
-	 */
-	public static void setGio(JLabel lblGio) {
-		TimerTask timerTask = new TimerTask() {
-			@Override
-			public void run() {
-				lblGio.setText((new Date().getHours() >= 10 ? "" : "0") + (new Date().getHours())
-						+ ((new Date().getSeconds() % 2) != 0 ? " " : ":")
-						+ ((new Date().getMinutes() >= 10 ? "" : "0") + (new Date().getMinutes())));
-			}
-
-		};
-		long delay = 1000L;
-		Timer timer = new Timer("Timer");
-		timer.schedule(timerTask, 0, delay);
-	}
+	
 }
