@@ -8,14 +8,20 @@
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.font.FontDialog">
 		<item key="x" value="708"/>
-		<item key="y" value="267"/>
-		<item key="width" value="504"/>
-		<item key="height" value="506"/>
+		<item key="y" value="257"/>
+		<item key="width" value="724"/>
+		<item key="height" value="763"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.border.BorderDialog">
 		<item key="x" value="719"/>
 		<item key="y" value="279"/>
 		<item key="width" value="482"/>
 		<item key="height" value="481"/>
+	</section>
+	<section name="org.eclipse.wb.internal.swing.model.property.editor.models.combo.ComboBoxModelDialog">
+		<item key="x" value="722"/>
+		<item key="y" value="337"/>
+		<item key="width" value="476"/>
+		<item key="height" value="365"/>
 	</section>
 </section>

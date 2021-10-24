@@ -1,21 +1,18 @@
 package gui;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Point;
+import javax.swing.border.LineBorder;
 
 public class Menu extends JPanel {
 	private JButton btnTrangChu;
@@ -149,7 +146,7 @@ public class Menu extends JPanel {
 		btnThoat.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThoat.setBounds(0, 665, 400, 86);
 		add(btnThoat);
-
+	
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(
 				"src/main/resources/images/img_bill/Logo.PNG"));

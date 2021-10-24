@@ -1,0 +1,186 @@
+package gui;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import java.util.Calendar;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import java.util.Properties;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JYearChooser;
+import com.toedter.calendar.JDayChooser;
+import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.ListSelectionModel;
+
+public class FrmQuanLyLuong extends JFrame {
+
+	private JPanel contentPane;
+	protected JTabbedPane tabbedPane;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmQuanLyLuong frame = new FrmQuanLyLuong();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmQuanLyLuong() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(0, 0, 1440, 1024);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(194, 93, 0));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 1424, 150);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		panel.setBackground(new Color(242, 129, 25));
+
+		JLabel lblNewLabel = new JLabel("QUẢN LÝ LƯƠNG");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 60));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(292, 34, 885, 74);
+		panel.add(lblNewLabel);
+
+		UIManager.put("TabbedPane.selected", new Color(242, 129, 25));
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, 150, 1424, 835);
+		tabbedPane.setBackground(new Color(194, 93, 0));
+
+		contentPane.add(tabbedPane);
+
+		/**
+		 * tab
+		 */
+		tabbedPane.add("Tính lương", new FrmTinhLuong());
+		tabbedPane.setTabComponentAt(0, new DemoCustomTab(this));
+		
+
+		
+		
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane.add("Tính doanh thu", panel_2);
+		tabbedPane.setTabComponentAt(1, new DemoCustomTab(this));
+		panel_2.setBackground(new Color(242, 129, 25));
+		panel_2.setLayout(null);
+		
+		JMonthChooser monthChooser = new JMonthChooser();
+		monthChooser.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
+		monthChooser.setBounds(1160, 5, 140, 40);
+		panel_2.add(monthChooser);
+
+		JSpinner spinner = new JSpinner();
+		spinner.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		spinner.setBounds(1316, 5, 59, 40);
+		panel_2.add(spinner);
+
+		
+		JScrollPane scrTKThu;
+		JScrollPane scrTKChi;
+		JTable tblTKChi, tblTKThu;
+		String[] colsnameTKChi = { "STT", "Nhập sản phẩm", "Lương Nhân Viên", "Khác" };
+		String[] colsnameTKThu = { "Ngày", "Số Lượng Hóa Đơn", "Tổng Tiền hóa đơn trong ngày"};
+		
+		
+		/**
+		 * Bảng tiền chi
+		 */
+		JLabel lblNewLabel_3_5 = new JLabel("Tiền chi");
+		lblNewLabel_3_5.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblNewLabel_3_5.setBounds(23, 20, 268, 42);
+		panel_2.add(lblNewLabel_3_5);
+		
+		scrTKChi = new JScrollPane();
+		scrTKChi.setBounds(23, 70, 668, 465);
+		scrTKChi.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		panel_2.add(scrTKChi);
+
+		tblTKChi = new JTable();
+		tblTKChi.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		tblTKChi.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		tblTKChi.setRowHeight(52);
+		tblTKChi.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null},
+				{ null, null, null, null }, { null, null, null, null, null }, { null, null, null, null },
+				{ null, null, null, null }, { null, null, null, null, null }, { null, null, null, null },
+				{ null, null, null, null }, }, colsnameTKChi));
+		scrTKChi.setViewportView(tblTKChi);
+		
+		
+		
+		/**
+		 * Bảng tiền thu
+		 */
+		JLabel lblNewLabel_3_5_1 = new JLabel("Tiền thu");
+		lblNewLabel_3_5_1.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblNewLabel_3_5_1.setBounds(741, 20, 268, 42);
+		panel_2.add(lblNewLabel_3_5_1);
+		
+		scrTKThu = new JScrollPane();
+		scrTKThu.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scrTKThu.setBounds(741, 70, 668, 465);
+		panel_2.add(scrTKThu);
+		
+		tblTKThu = new JTable();
+		tblTKThu.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		tblTKThu.setRowHeight(52);
+		tblTKThu.setModel(new DefaultTableModel(new Object[][] { { null, null, null},
+				{ null, null, null}, { null, null, null}, { null, null, null, null},
+				{ null, null, null}, { null, null, null}, { null, null, null, null},
+				{ null, null, null}, }, colsnameTKThu));
+		scrTKThu.setViewportView(tblTKThu);
+		
+
+		
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBackground(new Color(248, 198, 153));
+		panel_4.setBounds(22, 570, 1384, 181);
+		panel_2.add(panel_4);
+		
+		JLabel lblNewLabel_4 = new JLabel("Loại tệp tin: ");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_4.setBounds(34, 92, 134, 44);
+		panel_2.add(lblNewLabel_4);
+	
+
+	}
+}

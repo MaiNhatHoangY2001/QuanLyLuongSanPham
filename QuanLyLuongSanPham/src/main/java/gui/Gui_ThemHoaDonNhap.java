@@ -1,0 +1,191 @@
+package gui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
+
+public class Gui_ThemHoaDonNhap extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JDateChooser txtNgaySanXuat;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Gui_ThemHoaDonNhap frame = new Gui_ThemHoaDonNhap();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Gui_ThemHoaDonNhap() {
+		setMinimumSize(new Dimension(1440, 1024));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1440, 833);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(242, 129, 25));
+		panel.setLocation(0, 0);
+		panel.setSize(new Dimension(1440, 137));
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("THÊM HÓA ĐƠN NHẬP HÀNG");
+		lblNewLabel.setBounds(282, 32, 871, 73);
+		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 60));
+		panel.add(lblNewLabel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(242, 129, 25));
+		panel_1.setBounds(0, 140, 1440, 845);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(248, 198, 153));
+		panel_2.setBounds(134, 65, 1174, 627);
+		panel_1.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Tên sản phẩm:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1.setBounds(95, 40, 258, 59);
+		panel_2.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Giá thành:");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1_1.setBounds(95, 138, 158, 59);
+		panel_2.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Loại:");
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1_2.setBounds(95, 241, 201, 59);
+		panel_2.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Ngày sản xuất:");
+		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1_3.setBounds(95, 432, 201, 59);
+		panel_2.add(lblNewLabel_1_3);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("Số lượng:");
+		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1_4.setBounds(95, 537, 139, 59);
+		panel_2.add(lblNewLabel_1_4);
+		
+		JLabel lblNewLabel_1_5 = new JLabel("Nhà cung cấp:");
+		lblNewLabel_1_5.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1_5.setBounds(95, 333, 258, 59);
+		panel_2.add(lblNewLabel_1_5);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		textField.setBounds(300, 40, 734, 59);
+		panel_2.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		textField_1.setColumns(10);
+		textField_1.setBounds(300, 138, 734, 59);
+		panel_2.add(textField_1);
+		
+		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		textField_3.setColumns(10);
+		textField_3.setBounds(300, 333, 734, 59);
+		panel_2.add(textField_3);
+		
+		txtNgaySanXuat= new JDateChooser();
+		txtNgaySanXuat.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		txtNgaySanXuat.setBounds(300, 432, 734, 59);
+		txtNgaySanXuat.setDateFormatString("dd/mm/yyyy");
+		panel_2.add(txtNgaySanXuat);
+		
+		textField_5 = new JTextField();
+		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		textField_5.setColumns(10);
+		textField_5.setBounds(300, 537, 323, 59);
+		panel_2.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		textField_6.setToolTipText("Nhâp vào thuế từ 0% đến 100%");
+		textField_6.setColumns(10);
+		textField_6.setBounds(711, 537, 323, 59);
+		panel_2.add(textField_6);
+		
+		JLabel lblNewLabel_1_4_1 = new JLabel("Thuế:");
+		lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel_1_4_1.setBounds(633, 537, 79, 59);
+		panel_2.add(lblNewLabel_1_4_1);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Điện Thoại", "Phụ kiện"}));
+		comboBox.setBounds(300, 241, 734, 59);
+		panel_2.add(comboBox);
+		
+		JButton btnNewButton = new JButton("Thêm");
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnNewButton.setBackground(new Color(233,180,46));
+		btnNewButton.setBounds(224, 725, 250, 90);
+		panel_1.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Xóa rỗng");
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnNewButton_1.setBackground(new Color(233,180,46));
+		btnNewButton_1.setBounds(574, 725, 250, 90);
+		panel_1.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Hủy bỏ");
+		btnNewButton_2.setForeground(Color.WHITE);
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_2.setBackground(new Color(233,180,46));
+		btnNewButton_2.setBounds(915, 725, 250, 90);
+		panel_1.add(btnNewButton_2);
+	}
+}
