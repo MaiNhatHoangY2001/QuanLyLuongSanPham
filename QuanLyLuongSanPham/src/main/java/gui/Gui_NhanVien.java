@@ -46,6 +46,10 @@ import javax.swing.border.TitledBorder;
 
 public class Gui_NhanVien extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lbliconMenu;
 	private JLabel lblDangXuat;
@@ -127,19 +131,19 @@ public class Gui_NhanVien extends JFrame {
 		pnlHeader.add(lblGio);
 		
 		JLabel lblIconMenu = new JLabel("");
-		Image imgMenu = new ImageIcon(this.getClass().getResource("/menu3.png")).getImage();
+		Image imgMenu = new ImageIcon("img\\menu3.png").getImage();
 		lblIconMenu.setIcon(new ImageIcon(imgMenu));
 		lblIconMenu.setBounds(31, 43, 70, 64);
 		pnlHeader.add(lblIconMenu);
 		
 		lblIconUser = new JLabel("");
-		Image imgUser = new ImageIcon(this.getClass().getResource("/user1.png")).getImage();
+		Image imgUser = new ImageIcon("img\\user1.png").getImage();
 		lblIconUser.setIcon(new ImageIcon(imgUser));
 		lblIconUser.setBounds(1355, 22, 40, 40);
 		pnlHeader.add(lblIconUser);
 		
 		lblIconDX = new JLabel("");
-		Image imgDX = new ImageIcon(this.getClass().getResource("/dangxuat.png")).getImage();
+		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
 		lblIconDX.setIcon(new ImageIcon(imgDX));
 		lblIconDX.setBounds(1370, 67, 25, 25);
 		pnlHeader.add(lblIconDX);

@@ -1,6 +1,7 @@
-package gui;
+package gui_package;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
@@ -14,12 +15,11 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JMonthChooser;
 
-import gui_package.ChucNang;
-
-public class Gui_TinhLuong extends JPanel {
+public class PnlTinhLuong extends JPanel {
 	/**
 	 * 
 	 */
@@ -30,11 +30,9 @@ public class Gui_TinhLuong extends JPanel {
 	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
-	private JScrollPane scrTinhLuong;
 	private JSpinner spinner;
 	private JMonthChooser monthChooser;
-
-	public Gui_TinhLuong() {
+	public PnlTinhLuong() {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
@@ -50,25 +48,28 @@ public class Gui_TinhLuong extends JPanel {
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		spinner.setBounds(1316, 5, 59, 40);
 		add(spinner);
-
+		
 		/**
-		 * Bảng tiền lương
+		 * Bảng lương của các nhân viên trong tháng
 		 */
-		scrTinhLuong = new JScrollPane();
-		scrTinhLuong.setToolTipText("Bảng lương của nhân viên trong tháng");
-		scrTinhLuong.setBounds(23, 60, 1380, 328);
-		scrTinhLuong.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		add(scrTinhLuong);
-
-		tblTinhLuong = new JTable();
-		tblTinhLuong.setToolTipText("Bảng của nhân viên trong tháng");
-		tblTinhLuong.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		tblTinhLuong.setRowHeight(52);
-		tblTinhLuong.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
+		new DefaultTableModel(colsname, 0);
+		tblTinhLuong = new JTable(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
-				{ null, null, null, null, null }, }, colsname));
-		scrTinhLuong.setViewportView(tblTinhLuong);
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null } },
+				colsname));
+		tblTinhLuong.setRowMargin(5);
+		tblTinhLuong.setRowHeight(30);
+		tblTinhLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		tblTinhLuong.setToolTipText("Bảng lương của các nhân viên trong tháng");
+		JTableHeader headerTable = tblTinhLuong.getTableHeader();
+		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		headerTable.setBackground(new Color(248, 198, 153));
+		JScrollPane thanhCuon = new JScrollPane(tblTinhLuong);
+		thanhCuon.setBounds(23, 60, 1380, 328);
+		thanhCuon.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		thanhCuon.setToolTipText("Bảng lương của các nhân viên trong tháng");
+		add(thanhCuon);
 
 		/**
 		 * Thông tin nhân viên
@@ -123,11 +124,12 @@ public class Gui_TinhLuong extends JPanel {
 		pnlIn.setBounds(790, 420, 608, 331);
 		add(pnlIn);
 
-		btnIn = new JButton("In");
+		btnIn = new CircleBtn("In");
 		btnIn.setForeground(Color.WHITE);
 		btnIn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnIn.setBackground(new Color(233, 180, 46));
 		btnIn.setBounds(262, 251, 177, 44);
+		btnIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlIn.add(btnIn);
 
 		cboLoaiTep = new JComboBox<String>();
@@ -154,17 +156,18 @@ public class Gui_TinhLuong extends JPanel {
 		lblURL.setBounds(34, 161, 134, 44);
 		pnlIn.add(lblURL);
 
-		txtSrc = new JTextField();
+		txtSrc = new RoundTextField("", 1000);
 		txtSrc.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtSrc.setBounds(178, 163, 345, 43);
 		pnlIn.add(txtSrc);
 		txtSrc.setColumns(10);
 
-		btnSrc = new JButton("...");
+		btnSrc = new CircleBtn("...");
 		btnSrc.setForeground(Color.WHITE);
 		btnSrc.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSrc.setBackground(new Color(233, 180, 46));
 		btnSrc.setBounds(533, 161, 51, 44);
+		btnSrc.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlIn.add(btnSrc);
 	}
 }

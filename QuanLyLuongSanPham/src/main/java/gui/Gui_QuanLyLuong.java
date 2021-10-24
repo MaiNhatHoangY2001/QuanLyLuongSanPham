@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 
 import gui_package.ChucNang;
 import gui_package.CustomTab;
+import gui_package.PnlTinhDoanhThu;
+import gui_package.PnlTinhLuong;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -26,7 +28,9 @@ public class Gui_QuanLyLuong extends JFrame {
 	public JTabbedPane tabbedPane;
 	private JLabel lblGio;
 	private JButton btnMenu;
-	private JLabel lblNguoiSuDung;
+	private JLabel lblIconUser;
+	private JLabel lblIconDX;
+	private JLabel lblDangXuat;
 
 	/**
 	 * Launch the application.
@@ -70,35 +74,47 @@ public class Gui_QuanLyLuong extends JFrame {
 		lblChinh.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChinh.setBounds(292, 34, 885, 74);
 		panel.add(lblChinh);
+
 		/**
-		 * lblGio
+		 * Tên người dùng
+		 */
+		JLabel lblTenTaiKhoan = new JLabel("Chinh");
+		lblTenTaiKhoan.setForeground(Color.WHITE);
+		lblTenTaiKhoan.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		lblTenTaiKhoan.setFont(new Font("Arial", Font.PLAIN, 36));
+		lblTenTaiKhoan.setBounds(1246, 22, 90, 40);
+		panel.add(lblTenTaiKhoan);
+
+		lblIconUser = new JLabel("");
+		Image imgUser = new ImageIcon("img\\user1.png").getImage();
+		lblIconUser.setIcon(new ImageIcon(imgUser));
+		lblIconUser.setBounds(1355, 22, 40, 40);
+		panel.add(lblIconUser);
+
+		/**
+		 * Nút đăng xuất
+		 */
+		lblDangXuat = new JLabel("\u0110\u0103ng xu\u1EA5t");
+		lblDangXuat.setForeground(Color.WHITE);
+		lblDangXuat.setFont(new Font("Arial", Font.PLAIN, 24));
+		lblDangXuat.setBounds(1246, 67, 110, 24);
+		panel.add(lblDangXuat);
+
+		lblIconDX = new JLabel("");
+		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
+		lblIconDX.setIcon(new ImageIcon(imgDX));
+		lblIconDX.setBounds(1370, 67, 25, 25);
+		panel.add(lblIconDX);
+
+		/**
+		 * giờ
 		 */
 		lblGio = new JLabel("12:00");
 		lblGio.setForeground(Color.WHITE);
-		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblGio.setBounds(1320, 83, 94, 35);
+		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
+		lblGio.setBounds(1305, 96, 90, 36);
 		panel.add(lblGio);
-		
 		ChucNang.setGio(lblGio);
-		
-		/**
-		 * user login
-		 */
-		lblNguoiSuDung = new JLabel("Chinh");
-		lblNguoiSuDung.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblNguoiSuDung.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNguoiSuDung.setToolTipText("Đã đăng nhập");
-		lblNguoiSuDung.setForeground(Color.WHITE);
-		lblNguoiSuDung.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNguoiSuDung.setBounds(1229, 27, 136, 45);
-		panel.add(lblNguoiSuDung);
-		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/uerlogin.PNG"));
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNewLabel_5.setBounds(1372, 27, 52, 45);
-		panel.add(lblNewLabel_5);
 
 		/**
 		 * tab
@@ -109,14 +125,13 @@ public class Gui_QuanLyLuong extends JFrame {
 		tabbedPane.setBackground(new Color(194, 93, 0));
 
 		contentPane.add(tabbedPane);
-		
-		tabbedPane.add("Tính lương", new Gui_TinhLuong());
+
+		tabbedPane.add("Tính lương", new PnlTinhLuong());
 		tabbedPane.setTabComponentAt(0, new CustomTab(tabbedPane));
 
-		tabbedPane.add("Tính doanh thu", new Gui_TinhDoanhThu());
+		tabbedPane.add("Tính doanh thu", new PnlTinhDoanhThu());
 		tabbedPane.setTabComponentAt(1, new CustomTab(tabbedPane));
-		
-		
+
 		/**
 		 * menu
 		 */
@@ -127,11 +142,11 @@ public class Gui_QuanLyLuong extends JFrame {
 		btnMenu.setBounds(27, 27, 72, 83);
 		btnMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnMenu);
-			
+
 		JPanel pnMenu = new Gui_Menu();
 		Rectangle temp = panel.getBounds();
 		Rectangle temp1 = tabbedPane.getBounds();
-		
+
 		btnMenu.addActionListener(e -> {
 
 			if (panel.getX() == 400) {
@@ -146,9 +161,6 @@ public class Gui_QuanLyLuong extends JFrame {
 				add(pnMenu);
 			}
 		});
-		
-		
-		
 
 	}
 }

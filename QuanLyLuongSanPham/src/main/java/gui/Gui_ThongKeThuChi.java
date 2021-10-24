@@ -19,6 +19,8 @@ import javax.swing.border.EmptyBorder;
 
 import gui_package.ChucNang;
 import gui_package.CustomTab;
+import gui_package.PnlThongKeThu;
+import gui_package.PnlTinhDoanhThu;
 
 public class Gui_ThongKeThuChi extends JFrame {
 
@@ -110,10 +112,10 @@ public class Gui_ThongKeThuChi extends JFrame {
 
 		contentPane.add(tabbedPane);
 		
-		tabbedPane.add("Thống kê thu", new Gui_ThongKeThu());
+		tabbedPane.add("Thống kê thu", new PnlThongKeThu());
 		tabbedPane.setTabComponentAt(0, new CustomTab(tabbedPane));
 
-		tabbedPane.add("Thống kê chi", new Gui_TinhDoanhThu());
+		tabbedPane.add("Thống kê chi", new PnlTinhDoanhThu());
 		tabbedPane.setTabComponentAt(1, new CustomTab(tabbedPane));
 		
 		
