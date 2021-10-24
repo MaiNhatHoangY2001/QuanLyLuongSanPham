@@ -1,4 +1,4 @@
-package gui;
+package gui_package;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,30 +7,29 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class DemoCustomTab extends JPanel {
+
+public class CustomTab extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	FrmQuanLyLuong customJTabbedPane;
 
 	/** JPanel contain a JLabel */
-	public DemoCustomTab(FrmQuanLyLuong customJTabbedPane) {
-		this.customJTabbedPane = customJTabbedPane;
+	public CustomTab(JTabbedPane tabbedPane) {
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(5, 2, 2, 2));
 		setPreferredSize(new Dimension(300, 50));
 		setOpaque(false);
-
-		addLabel();
-
+		
+		addLabel(tabbedPane);
 	}
 
-	private void addLabel() {
+	public void addLabel(JTabbedPane tabbedPane) {
 		JLabel label = new JLabel() {
 			/**
 			 * 
@@ -39,9 +38,9 @@ public class DemoCustomTab extends JPanel {
 
 			/** set text for JLabel, it will title of tab */
 			public String getText() {
-				int index = customJTabbedPane.tabbedPane.indexOfTabComponent(DemoCustomTab.this);
+				int index = tabbedPane.indexOfTabComponent(CustomTab.this);
 				if (index != -1) {
-					return customJTabbedPane.tabbedPane.getTitleAt(index);
+					return tabbedPane.getTitleAt(index);
 				}
 				return null;
 			}

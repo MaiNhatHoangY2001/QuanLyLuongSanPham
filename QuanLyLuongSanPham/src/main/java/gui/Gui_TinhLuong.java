@@ -17,22 +17,24 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JMonthChooser;
 
-public class FrmTinhLuong extends JPanel {
+import gui_package.ChucNang;
+
+public class Gui_TinhLuong extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTable table;
+	private JTable tblTinhLuong;
 	private JTextField txtSrc;
 	private String[] colsname = { "Mã bảng lương", "Mức lương", "Hệ số lương", "Tiền sản phẩm", "Số ngày công" };
 	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
-	private JScrollPane scrollPane;
+	private JScrollPane scrTinhLuong;
 	private JSpinner spinner;
 	private JMonthChooser monthChooser;
 
-	public FrmTinhLuong() {
+	public Gui_TinhLuong() {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
@@ -52,21 +54,21 @@ public class FrmTinhLuong extends JPanel {
 		/**
 		 * Bảng tiền lương
 		 */
-		scrollPane = new JScrollPane();
-		scrollPane.setToolTipText("Bảng lương của nhân viên trong tháng");
-		scrollPane.setBounds(23, 60, 1380, 328);
-		scrollPane.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		add(scrollPane);
+		scrTinhLuong = new JScrollPane();
+		scrTinhLuong.setToolTipText("Bảng lương của nhân viên trong tháng");
+		scrTinhLuong.setBounds(23, 60, 1380, 328);
+		scrTinhLuong.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		add(scrTinhLuong);
 
-		table = new JTable();
-		table.setToolTipText("Bảng của nhân viên trong tháng");
-		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		table.setRowHeight(52);
-		table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
+		tblTinhLuong = new JTable();
+		tblTinhLuong.setToolTipText("Bảng của nhân viên trong tháng");
+		tblTinhLuong.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		tblTinhLuong.setRowHeight(52);
+		tblTinhLuong.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, }, colsname));
-		scrollPane.setViewportView(table);
+		scrTinhLuong.setViewportView(tblTinhLuong);
 
 		/**
 		 * Thông tin nhân viên

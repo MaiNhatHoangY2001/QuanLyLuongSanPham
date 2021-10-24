@@ -22,7 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class TrangChu extends JFrame {
+import gui_package.ChucNang;
+
+public class Gui_TrangChu extends JFrame {
 
 	private JPanel contentPane;
 	private final JPanel panelNutBam = new JPanel();
@@ -46,7 +48,7 @@ public class TrangChu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TrangChu frame = new TrangChu();
+					Gui_TrangChu frame = new Gui_TrangChu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +60,7 @@ public class TrangChu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TrangChu() {
+	public Gui_TrangChu() {
 		ChucNang.setDiChuyenGD(this);
 //		setUndecorated(true);
 		setLocationByPlatform(true);

@@ -19,7 +19,7 @@ import javax.swing.border.TitledBorder;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
-public class DangNhap extends JFrame {
+public class Gui_DangNhap extends JFrame {
 
 	private JPanel contentPane;
 	private int xClicked;
@@ -41,7 +41,7 @@ public class DangNhap extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DangNhap frame = new DangNhap();
+					Gui_DangNhap frame = new Gui_DangNhap();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class DangNhap extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DangNhap() {
+	public Gui_DangNhap() {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

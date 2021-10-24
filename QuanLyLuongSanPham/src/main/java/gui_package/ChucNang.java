@@ -1,4 +1,4 @@
-package gui;
+package gui_package;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,8 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class ChucNang {
-	private int xClicked;
-	private int yClicked;
 	/**
 	 * chỉnh giờ cho lable
 	 * 
@@ -33,10 +31,14 @@ public class ChucNang {
 		Timer timer = new Timer("Timer");
 		timer.schedule(timerTask, 0, delay);
 	}
-	
-	
+
+	/**
+	 * Giúp di chuyển giao diện khi kéo thả giao diện
+	 * 
+	 * @param frame
+	 */
 	public static void setDiChuyenGD(JFrame frame) {
-		
+
 		AtomicInteger xClicked = new AtomicInteger(0);
 		AtomicInteger yClicked = new AtomicInteger(0);
 
@@ -56,5 +58,5 @@ public class ChucNang {
 			}
 		});
 	}
-	
+
 }

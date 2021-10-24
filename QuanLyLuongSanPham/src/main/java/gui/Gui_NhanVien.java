@@ -12,6 +12,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import gui_package.CircleBtn;
+import gui_package.RoundTextField;
+import gui_package.RoundedPanel;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -39,7 +44,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 
-public class FrmNhanVien extends JFrame {
+public class Gui_NhanVien extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lbliconMenu;
@@ -68,7 +73,7 @@ public class FrmNhanVien extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmNhanVien frame = new FrmNhanVien();
+					Gui_NhanVien frame = new Gui_NhanVien();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,7 +85,7 @@ public class FrmNhanVien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmNhanVien() {
+	public Gui_NhanVien() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1440, 1024);
 		contentPane = new JPanel();

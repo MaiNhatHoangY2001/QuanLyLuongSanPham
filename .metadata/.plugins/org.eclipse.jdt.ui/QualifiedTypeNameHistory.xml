@@ -15,13 +15,24 @@
     <fullyQualifiedTypeName name="collections.TableGioHang"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="model.SanPham"/>
-    <fullyQualifiedTypeName name="java.util.concurrent.atomic.AtomicInteger"/>
-    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="gui.Gui_ChiTietHoaDon"/>
     <fullyQualifiedTypeName name="java.awt.Event"/>
     <fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
     <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
     <fullyQualifiedTypeName name="gui.Gui_ThemHoaDonBan"/>
+<<<<<<< HEAD
+    <fullyQualifiedTypeName name="java.util.concurrent.atomic.AtomicInteger"/>
+    <fullyQualifiedTypeName name="gui.ChucNang"/>
+    <fullyQualifiedTypeName name="services.DemoCustomTab"/>
+    <fullyQualifiedTypeName name="gui.FrmQuanLyLuong"/>
+    <fullyQualifiedTypeName name="services.ChucNang"/>
+    <fullyQualifiedTypeName name="java.awt.Cursor"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyLuong"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="javax.swing.JTabbedPane"/>
+    <fullyQualifiedTypeName name="javax.swing.JPanel"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKeThu"/>
+=======
     <fullyQualifiedTypeName name="gui.ChucNang"/>
     <fullyQualifiedTypeName name="gui.Gui_ThemHoaDonNhap"/>
     <fullyQualifiedTypeName name="org.hibernate.SessionFactory"/>
@@ -31,4 +42,5 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.hibernate.Session"/>
     <fullyQualifiedTypeName name="model.NhanVien"/>
+>>>>>>> ac1d1edf959951fefeb8ee76b33d86400d1a6dfc
 </qualifiedTypeNameHistroy>

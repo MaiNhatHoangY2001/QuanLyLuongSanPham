@@ -2,4 +2,24 @@
 1635039214325	Delete element
 1635049257750	Delete element
 1635049260901	Delete element
+<<<<<<< HEAD
+1635082519653	Move compilation unit
+1635082620493	Rename type 'DemoCustomTab'
+1635082759420	Move compilation unit
+1635083734250	Move compilation unit
+1635083739259	Move compilation unit
+1635083761566	Rename type 'DangNhap'
+1635083773111	Rename type 'FrmQuanLyLuong'
+1635083781348	Rename type 'FrmTinhDoanhThu'
+1635083804515	Rename type 'FrmTinhLuong'
+1635083840090	Rename type 'Menu'
+1635083852088	Rename type 'PnlTinhLuong'
+1635083862366	Rename type 'TrangChu'
+1635085226816	Delete element
+1635085830093	Rename type 'CustomTab'
+1635085910477	Rename type 'CustomTabQuanLyLuong'
+1635087809349	Rename field 'scrollPane'
+1635088218424	Rename field 'colsname'
+=======
 1635082481485	Rename type 'Hibernatee'
+>>>>>>> ac1d1edf959951fefeb8ee76b33d86400d1a6dfc

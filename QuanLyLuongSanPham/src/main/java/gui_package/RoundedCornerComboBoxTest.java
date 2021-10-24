@@ -1,4 +1,4 @@
-package gui;
+package gui_package;
 
 import java.awt.*;
 import java.awt.geom.*;
