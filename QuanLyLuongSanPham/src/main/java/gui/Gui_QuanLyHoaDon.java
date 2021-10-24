@@ -21,11 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
-
-import javax.swing.SwingConstants;
 
 public class Gui_QuanLyHoaDon extends JFrame {
 	private JTextField txtTimKiem;
