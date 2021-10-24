@@ -76,7 +76,7 @@ public class TrangChu extends JFrame {
 				setLocation(x - xClicked, y - yClicked);
 			}
 		});
-		setUndecorated(true);
+//		setUndecorated(true);
 		setLocationByPlatform(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
