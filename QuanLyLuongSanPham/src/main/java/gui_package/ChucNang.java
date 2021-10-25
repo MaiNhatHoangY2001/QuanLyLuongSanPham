@@ -1,5 +1,6 @@
 package gui_package;
 
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -91,5 +92,6 @@ public class ChucNang {
 			model.addRow(new Object[] { null, null, null, null, null, null, null });
 		}
 	}
+	
 
 }

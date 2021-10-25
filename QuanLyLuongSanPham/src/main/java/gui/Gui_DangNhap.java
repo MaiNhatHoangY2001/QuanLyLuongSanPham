@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-import javax.swing.border.TitledBorder;
 
 import gui_package.CircleBtn;
 import gui_package.RoundedPanel;
@@ -186,10 +185,5 @@ public class Gui_DangNhap extends JFrame {
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
 	}
 	
-	public static void centreWindow(Window frame) {
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-	    frame.setLocation(x, y);
-	}
+
 }
