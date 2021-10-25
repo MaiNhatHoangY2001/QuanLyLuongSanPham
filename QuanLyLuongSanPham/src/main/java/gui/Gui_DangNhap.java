@@ -1,6 +1,7 @@
 package gui;
 
-
+import java.awt.event.*;
+import java.awt.*;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,8 +18,14 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
+import gui_package.CircleBtn;
+import gui_package.RoundedPanel;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import gui.Gui_TrangChu;
 public class Gui_DangNhap extends JFrame {
 
 	private JPanel contentPane;
@@ -28,11 +35,13 @@ public class Gui_DangNhap extends JFrame {
 	private JLabel lblDangNhap;
 	private JPanel panelThongTinDN;
 	private JButton btnDangNhap;
-	private JButton btnHuyBo;
+	private JButton btnThoat;
 	private JLabel lblTaiKhoan;
 	private JTextField txtTaiKhoan;
 	private JTextField txtMatKhau;
 	private JLabel lblMatKhau;
+	private JLabel lblTTTK;
+	private CircleBtn btnXoa;
 
 	/**
 	 * Launch the application.
@@ -43,6 +52,8 @@ public class Gui_DangNhap extends JFrame {
 				try {
 					Gui_DangNhap frame = new Gui_DangNhap();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,6 +65,7 @@ public class Gui_DangNhap extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui_DangNhap() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -69,9 +81,9 @@ public class Gui_DangNhap extends JFrame {
 				setLocation(x - xClicked, y - yClicked);
 			}
 		});
+		
 		setUndecorated(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 440, 330);
+		setBounds(100, 100, 440, 345);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(245	, 129, 25));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -89,48 +101,94 @@ public class Gui_DangNhap extends JFrame {
 		lblDangNhap.setForeground(Color.WHITE);
 		lblDangNhap.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDangNhap.setFont(new Font("Calibri", Font.BOLD, 36));
-		lblDangNhap.setBounds(115, 28, 206, 61);
+		lblDangNhap.setBounds(114, 22, 206, 61);
 		contentPane.add(lblDangNhap);
 		
-		panelThongTinDN = new JPanel();
-		panelThongTinDN.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 1, true), "Th\u00F4ng Tin T\u00E0i Kho\u1EA3n", TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null, new Color(255, 255, 255)));
+		panelThongTinDN = new RoundedPanel();
 		panelThongTinDN.setBackground(new Color(248, 198, 153));
-		panelThongTinDN.setBounds(26, 87, 389, 164);
+		panelThongTinDN.setBounds(26, 94, 389, 164);
 		contentPane.add(panelThongTinDN);
 		panelThongTinDN.setLayout(null);
 		
 		lblTaiKhoan = new JLabel("Tài Khoản:");
 		lblTaiKhoan.setIconTextGap(-20);
 		lblTaiKhoan.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTaiKhoan.setBounds(20, 36, 345, 35);
+		lblTaiKhoan.setBounds(20, 30, 345, 35);
 		panelThongTinDN.add(lblTaiKhoan);
 		
 		txtTaiKhoan = new JTextField();
-		txtTaiKhoan.setBounds(85, 38, 282, 30);
+		txtTaiKhoan.setBounds(85, 32, 282, 30);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 		
 		txtMatKhau = new JTextField();
 		txtMatKhau.setColumns(10);
-		txtMatKhau.setBounds(85, 100, 282, 30);
+		txtMatKhau.setBounds(85, 92, 282, 30);
 		panelThongTinDN.add(txtMatKhau);
 		
 		lblMatKhau = new JLabel("Mật Khẩu:");
 		lblMatKhau.setIconTextGap(-20);
 		lblMatKhau.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMatKhau.setBounds(20, 98, 345, 35);
+		lblMatKhau.setBounds(20, 90, 345, 35);
 		panelThongTinDN.add(lblMatKhau);
 		
-		btnDangNhap = new JButton("Đăng Nhập");
+		btnDangNhap = new CircleBtn("Đăng Nhập");
+		btnDangNhap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				close();	
+				Gui_TrangChu s = new Gui_TrangChu();
+				s.setVisible(true);
+				
+			}
+
+		});
+		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
 		btnDangNhap.setBackground(new Color(233, 180, 46));
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnDangNhap.setBounds(76, 268, 120, 47);
+		btnDangNhap.setBounds(62, 275, 90, 45);
 		contentPane.add(btnDangNhap);
 		
-		btnHuyBo = new JButton("Hủy Bỏ");
-		btnHuyBo.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnHuyBo.setBackground(new Color(233, 180, 46));
-		btnHuyBo.setBounds(252, 268, 120, 47);
-		contentPane.add(btnHuyBo);
+		btnThoat = new CircleBtn("Thoát");
+		btnThoat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnThoat.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnThoat.setBorder(new LineBorder(new Color(1, 242, 233)));
+		btnThoat.setBackground(new Color(233, 180, 46));
+		btnThoat.setBounds(306, 275, 90, 45);
+		contentPane.add(btnThoat);
+		
+		lblTTTK = new JLabel("Thông Tin Tài Khoản");
+		lblTTTK.setFont(new Font("Calibri", Font.BOLD, 12));
+		lblTTTK.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTTTK.setForeground(Color.WHITE);
+		lblTTTK.setBounds(38, 69, 157, 30);
+		contentPane.add(lblTTTK);
+		
+		btnXoa = new CircleBtn("Xóa");
+		btnXoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtTaiKhoan.setText("");
+				txtMatKhau.setText("");
+			}
+		});
+		btnXoa.setBackground(new Color(233, 180, 46));
+		btnXoa.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnXoa.setBounds(183, 275, 90, 45);
+		contentPane.add(btnXoa);
+	}
+	private void close() {
+		// TODO Auto-generated method stub
+		WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
+	
+	public static void centreWindow(Window frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 }
