@@ -8,18 +8,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
-import model.SanPham;
+import model.ChiTietHoaDonBan;
+import model.HoaDonBanHang;
 
-public class SanPhamDao {
+public class ChiTietHoaDonBanDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
-	
-	public SanPham getSanPham(String maSanPham) {
-		SanPham sanPham = null;
+
+	public ChiTietHoaDonBan getChiTietHoaDonBan(String maChiTietHoaDonBan) {
+		ChiTietHoaDonBan chiTietHoaDonBan = null;
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			sanPham = session.get(SanPham.class, maSanPham);
+			chiTietHoaDonBan = session.get(ChiTietHoaDonBan.class, maChiTietHoaDonBan);
 			tr.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -27,18 +28,18 @@ public class SanPhamDao {
 		}
 		session.close();
 
-		return sanPham;
+		return chiTietHoaDonBan;
 
 	}
-	
-	public List<SanPham> getAllBangLuong() {
-		List<SanPham> list = new ArrayList<SanPham>();
+
+	public List<ChiTietHoaDonBan> getAllHoaDonBanHang() {
+		List<ChiTietHoaDonBan> list = new ArrayList<ChiTietHoaDonBan>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
 
-			list = session.createNativeQuery("select * from SanPham", SanPham.class).getResultList();
+			list = session.createNativeQuery("select * from ChiTietHoaDonBan", ChiTietHoaDonBan.class).getResultList();
 
 			tr.commit();
 		} catch (Exception e) {

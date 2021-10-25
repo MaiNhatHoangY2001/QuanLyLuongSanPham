@@ -53,6 +53,8 @@ public class Gui_QuanLyLuong extends JFrame {
 	 */
 	public Gui_QuanLyLuong() {
 		ChucNang.setDiChuyenGD(this);
+		ChucNang.setTableAlternateRow();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1440, 1024);
 		setLocationRelativeTo(null);
