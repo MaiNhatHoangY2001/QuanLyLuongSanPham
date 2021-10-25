@@ -9,7 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -21,10 +20,8 @@ public class PnlTinhDoanhThu extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JScrollPane scrTKChi;
 	private JTable tblTKChi, tblTKThu;
 	private String[] colsnameTKChi = { "STT", "Sản phẩm", "Lương NV", "Khác" };
-	private JScrollPane scrTKThu;
 	private String[] colsnameTKThu = { "Ngày", "Số Lượng Hóa Đơn", "Thành tiền" };
 	private JTextField txtChi;
 	private JTextField txtThu;
@@ -106,7 +103,7 @@ public class PnlTinhDoanhThu extends JPanel {
 		 * Thông tin thu, chi và tổng tiền
 		 */
 
-		JPanel panel_4 = new JPanel();
+		JPanel panel_4 = new RoundedPanel();
 		panel_4.setToolTipText("Bảng tổng tiền trong ngày");
 		panel_4.setLayout(null);
 		panel_4.setBackground(new Color(248, 198, 153));

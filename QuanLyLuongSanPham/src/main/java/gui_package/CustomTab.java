@@ -2,6 +2,7 @@ package gui_package;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -25,7 +26,7 @@ public class CustomTab extends JPanel {
 		setBorder(new EmptyBorder(5, 2, 2, 2));
 		setPreferredSize(new Dimension(300, 50));
 		setOpaque(false);
-		
+		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addLabel(tabbedPane);
 	}
 

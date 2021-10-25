@@ -1,10 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
@@ -19,16 +20,24 @@ import javax.swing.border.EmptyBorder;
 
 import gui_package.ChucNang;
 import gui_package.CustomTab;
+import gui_package.PnlThongKeChi;
 import gui_package.PnlThongKeThu;
 import gui_package.PnlTinhDoanhThu;
 
 public class Gui_ThongKeThuChi extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblGio;
 	private JLabel lblNguoiSuDung;
 	private JTabbedPane tabbedPane;
 	private JButton btnMenu;
+	private JLabel lblIconUser;
+	private JLabel lblDangXuat;
+	private JLabel lblIconDX;
 
 	/**
 	 * Launch the application.
@@ -73,34 +82,45 @@ public class Gui_ThongKeThuChi extends JFrame {
 		lblChinh.setBounds(292, 34, 885, 74);
 		panel.add(lblChinh);
 		/**
-		 * lblGio
+		 * Tên người dùng
+		 */
+		JLabel lblTenTaiKhoan = new JLabel("Chinh");
+		lblTenTaiKhoan.setForeground(Color.WHITE);
+		lblTenTaiKhoan.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		lblTenTaiKhoan.setFont(new Font("Arial", Font.PLAIN, 36));
+		lblTenTaiKhoan.setBounds(1246, 22, 90, 40);
+		panel.add(lblTenTaiKhoan);
+
+		lblIconUser = new JLabel("");
+		Image imgUser = new ImageIcon("img\\user1.png").getImage();
+		lblIconUser.setIcon(new ImageIcon(imgUser));
+		lblIconUser.setBounds(1355, 22, 40, 40);
+		panel.add(lblIconUser);
+
+		/**
+		 * Nút đăng xuất
+		 */
+		lblDangXuat = new JLabel("\u0110\u0103ng xu\u1EA5t");
+		lblDangXuat.setForeground(Color.WHITE);
+		lblDangXuat.setFont(new Font("Arial", Font.PLAIN, 24));
+		lblDangXuat.setBounds(1246, 67, 110, 24);
+		panel.add(lblDangXuat);
+
+		lblIconDX = new JLabel("");
+		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
+		lblIconDX.setIcon(new ImageIcon(imgDX));
+		lblIconDX.setBounds(1370, 67, 25, 25);
+		panel.add(lblIconDX);
+
+		/**
+		 * giờ
 		 */
 		lblGio = new JLabel("12:00");
 		lblGio.setForeground(Color.WHITE);
-		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblGio.setBounds(1320, 83, 94, 35);
+		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
+		lblGio.setBounds(1305, 96, 90, 36);
 		panel.add(lblGio);
-		
 		ChucNang.setGio(lblGio);
-		
-		/**
-		 * user login
-		 */
-		lblNguoiSuDung = new JLabel("Chinh");
-		lblNguoiSuDung.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblNguoiSuDung.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNguoiSuDung.setToolTipText("Đã đăng nhập");
-		lblNguoiSuDung.setForeground(Color.WHITE);
-		lblNguoiSuDung.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNguoiSuDung.setBounds(1229, 27, 136, 45);
-		panel.add(lblNguoiSuDung);
-		
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/uerlogin.PNG"));
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 36));
-		lblNewLabel_5.setBounds(1372, 27, 52, 45);
-		panel.add(lblNewLabel_5);
 
 		/**
 		 * tab
@@ -115,7 +135,7 @@ public class Gui_ThongKeThuChi extends JFrame {
 		tabbedPane.add("Thống kê thu", new PnlThongKeThu());
 		tabbedPane.setTabComponentAt(0, new CustomTab(tabbedPane));
 
-		tabbedPane.add("Thống kê chi", new PnlTinhDoanhThu());
+		tabbedPane.add("Thống kê chi", new PnlThongKeChi());
 		tabbedPane.setTabComponentAt(1, new CustomTab(tabbedPane));
 		
 		

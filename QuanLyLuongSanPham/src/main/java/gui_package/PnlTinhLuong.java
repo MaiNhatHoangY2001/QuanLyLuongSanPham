@@ -74,7 +74,7 @@ public class PnlTinhLuong extends JPanel {
 		/**
 		 * Thông tin nhân viên
 		 */
-		JPanel pnlNhanVien = new JPanel();
+		JPanel pnlNhanVien = new RoundedPanel();
 		pnlNhanVien.setLayout(null);
 		pnlNhanVien.setBackground(new Color(248, 198, 153));
 		pnlNhanVien.setBounds(23, 420, 676, 331);
@@ -118,7 +118,7 @@ public class PnlTinhLuong extends JPanel {
 		/**
 		 * In
 		 */
-		JPanel pnlIn = new JPanel();
+		JPanel pnlIn = new RoundedPanel();
 		pnlIn.setLayout(null);
 		pnlIn.setBackground(new Color(248, 198, 153));
 		pnlIn.setBounds(790, 420, 608, 331);

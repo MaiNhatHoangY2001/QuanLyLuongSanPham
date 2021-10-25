@@ -5276,3 +5276,4 @@ java.util.ConcurrentModificationException: null
 2021-10-25 00:00:53,104 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 27 resources
 2021-10-25 00:00:53,106 [Worker-31: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-10-25 00:00:53,107 [Worker-31: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-10-25 08:55:10,322 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
