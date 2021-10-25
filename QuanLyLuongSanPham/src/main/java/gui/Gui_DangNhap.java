@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -121,7 +122,7 @@ public class Gui_DangNhap extends JFrame {
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 		
-		txtMatKhau = new JTextField();
+		txtMatKhau = new JPasswordField();
 		txtMatKhau.setColumns(10);
 		txtMatKhau.setBounds(85, 92, 282, 30);
 		panelThongTinDN.add(txtMatKhau);
