@@ -59,7 +59,9 @@ public class Gui_ThongKeThuChi extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui_ThongKeThuChi() {
+		ChucNang.setTableAlternateRow();
 		ChucNang.setDiChuyenGD(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1440, 1024);
 		setLocationRelativeTo(null);

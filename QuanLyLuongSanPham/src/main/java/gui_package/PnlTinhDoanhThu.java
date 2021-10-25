@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JYearChooser;
 
 public class PnlTinhDoanhThu extends JPanel {
 
@@ -26,6 +27,8 @@ public class PnlTinhDoanhThu extends JPanel {
 	private JTextField txtChi;
 	private JTextField txtThu;
 	private JTextField txtLoiNhuan;
+	private JMonthChooser cboMonth;
+	private JYearChooser spnYear;
 
 	public PnlTinhDoanhThu() {
 		setBackground(new Color(242, 129, 25));
@@ -33,15 +36,15 @@ public class PnlTinhDoanhThu extends JPanel {
 		/**
 		 * Chọn ngày để hiện thông tin (tháng/năm)
 		 */
-		JMonthChooser monthChooser = new JMonthChooser();
-		monthChooser.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
-		monthChooser.setBounds(1160, 5, 140, 40);
-		add(monthChooser);
+		cboMonth = new JMonthChooser();
+		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cboMonth.setBounds(1160, 5, 140, 40);
+		add(cboMonth);
 
-		JSpinner spinner = new JSpinner();
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		spinner.setBounds(1316, 5, 59, 40);
-		add(spinner);
+		spnYear = new JYearChooser();
+		spnYear.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		spnYear.setBounds(1316, 5, 65, 40);
+		add(spnYear);
 
 		/**
 		 * Bảng tiền chi
@@ -57,7 +60,21 @@ public class PnlTinhDoanhThu extends JPanel {
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
-				{ null, null, null, null, null }, { null, null, null, null, null } }, colsnameTKChi));
+				{ null, null, null, null, null }, { null, null, null, null, null } }, colsnameTKChi)){
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+		};
 		tblTKChi.setRowMargin(5);
 		tblTKChi.setRowHeight(30);
 		tblTKChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -85,7 +102,21 @@ public class PnlTinhDoanhThu extends JPanel {
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
 				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
-				{ null, null, null, null, null }, { null, null, null, null, null } }, colsnameTKThu));
+				{ null, null, null, null, null }, { null, null, null, null, null } }, colsnameTKThu)){
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+		};
 		tblTKThu.setRowMargin(5);
 		tblTKThu.setRowHeight(30);
 		tblTKThu.setFont(new Font("Tahoma", Font.PLAIN, 24));
