@@ -1,4 +1,4 @@
-package gui;
+package gui_package;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,10 +11,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JMonthChooser;
 
-public class Gui_TinhDoanhThu extends JPanel {
+public class PnlTinhDoanhThu extends JPanel {
 
 	/**
 	 * 
@@ -22,14 +23,14 @@ public class Gui_TinhDoanhThu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JScrollPane scrTKChi;
 	private JTable tblTKChi, tblTKThu;
-	private String[] colsnameTKChi = { "STT", "Nhập sản phẩm", "Lương Nhân Viên", "Khác" };
+	private String[] colsnameTKChi = { "STT", "Sản phẩm", "Lương NV", "Khác" };
 	private JScrollPane scrTKThu;
-	private String[] colsnameTKThu = { "Ngày", "Số Lượng Hóa Đơn", "Tổng Tiền hóa đơn trong ngày" };
+	private String[] colsnameTKThu = { "Ngày", "Số Lượng Hóa Đơn", "Thành tiền" };
 	private JTextField txtChi;
 	private JTextField txtThu;
 	private JTextField txtLoiNhuan;
 
-	public Gui_TinhDoanhThu() {
+	public PnlTinhDoanhThu() {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 		/**
@@ -53,23 +54,25 @@ public class Gui_TinhDoanhThu extends JPanel {
 		lblTableChi.setBounds(23, 20, 268, 42);
 		add(lblTableChi);
 
-		scrTKChi = new JScrollPane();
-		scrTKChi.setToolTipText("Bảng thống kê những khoản tiền chi  trong tháng");
-		scrTKChi.setBounds(23, 70, 668, 465);
-		scrTKChi.setFont(new Font("Tahoma", Font.PLAIN, 34));
-		add(scrTKChi);
-
-		tblTKChi = new JTable();
+		new DefaultTableModel(colsnameTKChi, 0);
+		tblTKChi = new JTable(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null } }, colsnameTKChi));
+		tblTKChi.setRowMargin(5);
+		tblTKChi.setRowHeight(30);
+		tblTKChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		tblTKChi.setToolTipText("Bảng thống kê những khoản tiền đã chi trong tháng");
-		tblTKChi.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		tblTKChi.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		tblTKChi.setRowHeight(52);
-		tblTKChi.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null, null }, { null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null, null }, { null, null, null, null }, { null, null, null, null }, },
-				colsnameTKChi));
-		scrTKChi.setViewportView(tblTKChi);
+		JTableHeader headerTable1 = tblTKChi.getTableHeader();
+		headerTable1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		headerTable1.setBackground(new Color(248, 198, 153));
+		JScrollPane thanhCuon1 = new JScrollPane(tblTKChi);
+		thanhCuon1.setBounds(23, 70, 668, 465);
+		thanhCuon1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		thanhCuon1.setToolTipText("Bảng thống kê những khoản tiền đã chi trong tháng");
+		add(thanhCuon1);
 
 		/**
 		 * Bảng tiền thu
@@ -79,20 +82,25 @@ public class Gui_TinhDoanhThu extends JPanel {
 		lblTableThu.setBounds(741, 20, 268, 42);
 		add(lblTableThu);
 
-		scrTKThu = new JScrollPane();
-		scrTKThu.setToolTipText("Bảng thống kê những khoản tiền đã chi tại cửa hàng ");
-		scrTKThu.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scrTKThu.setBounds(741, 70, 668, 465);
-		add(scrTKThu);
-
-		tblTKThu = new JTable();
+		new DefaultTableModel(colsnameTKThu, 0);
+		tblTKThu = new JTable(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null } }, colsnameTKThu));
+		tblTKThu.setRowMargin(5);
+		tblTKThu.setRowHeight(30);
+		tblTKThu.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		tblTKThu.setToolTipText("Bảng thống kê những khoản tiền thu được tại cửa hàng trong tháng");
-		tblTKThu.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		tblTKThu.setRowHeight(52);
-		tblTKThu.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, { null, null, null },
-				{ null, null, null }, { null, null, null, null }, { null, null, null }, { null, null, null },
-				{ null, null, null, null }, { null, null, null }, }, colsnameTKThu));
-		scrTKThu.setViewportView(tblTKThu);
+		JTableHeader headerTable2 = tblTKThu.getTableHeader();
+		headerTable2.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		headerTable2.setBackground(new Color(248, 198, 153));
+		JScrollPane thanhCuon2 = new JScrollPane(tblTKThu);
+		thanhCuon2.setBounds(741, 70, 668, 465);
+		thanhCuon2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		thanhCuon2.setToolTipText("Bảng thống kê những khoản tiền thu được tại cửa hàng trong tháng");
+		add(thanhCuon2);
 
 		/**
 		 * Thông tin thu, chi và tổng tiền
@@ -110,13 +118,13 @@ public class Gui_TinhDoanhThu extends JPanel {
 		lblChi.setBounds(28, 35, 176, 49);
 		panel_4.add(lblChi);
 
-		txtChi = new JTextField();
+		txtChi = new RoundTextField("", 1000);
 		txtChi.setToolTipText("Số tiền đã chi ra trong tháng");
 		txtChi.setBounds(17, 81, 380, 47);
 		panel_4.add(txtChi);
 		txtChi.setColumns(10);
 
-		txtThu = new JTextField();
+		txtThu = new RoundTextField("", 1000);
 		txtThu.setToolTipText("Số tiền thu được trong tháng");
 		txtThu.setColumns(10);
 		txtThu.setBounds(497, 81, 380, 47);
@@ -127,7 +135,7 @@ public class Gui_TinhDoanhThu extends JPanel {
 		lblThu.setBounds(504, 35, 176, 49);
 		panel_4.add(lblThu);
 
-		txtLoiNhuan = new JTextField();
+		txtLoiNhuan = new RoundTextField("", 1000);;
 		txtLoiNhuan.setToolTipText("Lợi nhuận của cửa hàng");
 		txtLoiNhuan.setColumns(10);
 		txtLoiNhuan.setBounds(977, 81, 380, 47);

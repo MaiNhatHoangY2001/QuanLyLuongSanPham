@@ -1,4 +1,4 @@
-package gui;
+package gui_package;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JMonthChooser;
 
-public class Gui_ThongKeThu extends JPanel {
+public class PnlThongKeThu extends JPanel {
 	/**
 	 * 
 	 */
@@ -33,7 +33,7 @@ public class Gui_ThongKeThu extends JPanel {
 	private JSpinner spinner;
 	private JMonthChooser monthChooser;
 
-	public Gui_ThongKeThu() {
+	public PnlThongKeThu() {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 

@@ -25,8 +25,8 @@ public class CircleBtn extends JButton {
 	@Override
 	protected void paintComponent(Graphics g) {
 		if (getModel().isArmed()) {
-			g.setColor(Color.GREEN);
-			setForeground(Color.yellow);
+			g.setColor(new Color(231, 193,96));
+			setForeground(Color.BLACK);
 		} else {
 			g.setColor(getBackground());
 			setForeground(Color.WHITE);
@@ -38,7 +38,7 @@ public class CircleBtn extends JButton {
 
 	@Override
 	protected void paintBorder(Graphics g) {
-		g.setColor(getForeground());
+		g.setColor(new Color(233, 180, 46));
 		g.drawRoundRect(0, 0, getSize().width - 1, getSize().height - 1, 20, 20);
 	}
 }

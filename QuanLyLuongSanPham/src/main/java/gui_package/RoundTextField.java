@@ -48,7 +48,7 @@ class RoundBorder extends AbstractBorder {
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		Color oldColor = g.getColor();
 
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		g.drawRoundRect(x, y, width - 1, height - 1, 20, 20);
 
 		g.setColor(oldColor);
