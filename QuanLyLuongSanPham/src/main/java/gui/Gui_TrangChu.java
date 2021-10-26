@@ -108,7 +108,7 @@ public class Gui_TrangChu extends JFrame {
 		panelMenu.add(lblTaiKhoan);
 
 		lblHinhDangXuat = new JLabel("");
-		lblHinhDangXuat.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\dangxuat.png"));
+		lblHinhDangXuat.setIcon(new ImageIcon("img\\dangxuat.png"));
 		lblHinhDangXuat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinhDangXuat.setBounds(1370, 83, 25, 28);
 		panelMenu.add(lblHinhDangXuat);
@@ -129,7 +129,7 @@ public class Gui_TrangChu extends JFrame {
 		 * private void remove(JPanel pnMenu) { // TODO Auto-generated method stub
 		 * this.remove(pnMenu); } });
 		 */
-		lblMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\menu.png"));
+		lblMenu.setIcon(new ImageIcon("img\\menu.png"));
 		lblMenu.setBounds(55, 36, 84, 83);
 		panelMenu.add(lblMenu);
 		

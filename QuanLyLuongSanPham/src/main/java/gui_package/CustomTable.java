@@ -20,6 +20,11 @@ public class CustomTable extends DefaultTableCellRenderer {
 		this.fg = fg;
 		setHorizontalAlignment(CENTER);
 	}
+	
+	public CustomTable() {
+		setHorizontalAlignment(RIGHT);
+	};
+	
 
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {

@@ -39,7 +39,7 @@ public class PnlTinhLuong extends JPanel {
 	private JTextField txtSrc;
 	private String[] colsname = { "Mã nhân viên", "Tên nhân viên", "Mức lương", "Hệ số lương", "Tổng tiền sản phẩm",
 			"Số ngày công", "Tiền lương" };
-	private JComboBox cboLoaiTep;
+	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
 	private JYearChooser spnYear;
@@ -49,6 +49,7 @@ public class PnlTinhLuong extends JPanel {
 	private DefaultTableModel modelTinhLuong, modelSanPham;
 
 	public PnlTinhLuong() {
+
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
@@ -104,6 +105,12 @@ public class PnlTinhLuong extends JPanel {
 		TableColumn column = tblTinhLuong.getColumnModel().getColumn(5);
 		column.setCellRenderer(new CustomTable(new Color(255, 232, 210), Color.BLACK));
 
+		
+		//Căn chữ của cột sang phải
+		int[] listCanPhai = {2,3,4,6};		
+		ChucNang.setRightAlignmentTable(listCanPhai, tblTinhLuong);
+		
+		
 		add(thanhCuon);
 
 		/**
@@ -164,8 +171,8 @@ public class PnlTinhLuong extends JPanel {
 		btnIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlIn.add(btnIn);
 
-		cboLoaiTep = new JComboBox();
-		cboLoaiTep.setModel(new DefaultComboBoxModel(new String[] { "Excel", "Notepad" }));
+		cboLoaiTep = new JComboBox<String>();
+		cboLoaiTep.setModel(new DefaultComboBoxModel<String>(new String[] { "Excel", "Notepad" }));
 
 		cboLoaiTep.setForeground(Color.WHITE);
 		cboLoaiTep.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -209,12 +216,19 @@ public class PnlTinhLuong extends JPanel {
 		setDataTableBangLuong(cboMonth.getMonth(), spnYear.getYear());
 
 		/**
-		 * sự kiện cboMonth
+		 * sự kiện cboMonth và spnYear
 		 */
 		cboMonth.addPropertyChangeListener("month", new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				setDataTableBangLuong((Integer)evt.getNewValue() + 1, spnYear.getYear());
+			}
+		});
+		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				setDataTableBangLuong(cboMonth.getMonth() + 1,(Integer) evt.getNewValue());
 			}
 		});
 	}
@@ -223,7 +237,7 @@ public class PnlTinhLuong extends JPanel {
 	 * Đổ dữ liệu vào table bảng lương
 	 */
 	public void setDataTableBangLuong(int month, int year) {
-		ChucNang.clearDateTable(modelTinhLuong);
+		ChucNang.clearDataTable(modelTinhLuong);
 		BangLuongDao bangLuongDao = new BangLuongDao();
 		NhanVienDao nhanVienDao = new NhanVienDao();
 
