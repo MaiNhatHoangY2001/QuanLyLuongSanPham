@@ -81,57 +81,87 @@ public class Gui_TrangChu extends JFrame {
 		setBounds(100, 100, 1440, 1057);
 		setLocationRelativeTo(null);
 		
-		
+		/**
+		 * Content pane bự chứa tất cả 
+		 */	
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		/**
+		 * Menu
+		 */
 		JPanel panelMenu = new JPanel();
 		panelMenu.setBackground(new Color(245, 129, 25));
 		panelMenu.setSize(new Dimension(0, 204));
 		panelMenu.setBounds(0, 0, 1440, 264);
 		contentPane.add(panelMenu);
 		panelMenu.setLayout(null);
-
+		
+		/**
+		 * Label chứa logo cửa hàng
+		 */
 		lblChuaLogo = new JLabel("");
 		lblChuaLogo.setIcon(new ImageIcon("img\\dt2.png"));
 		lblChuaLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblChuaLogo.setBounds(517, 22, 406, 225);
 		panelMenu.add(lblChuaLogo);
-
+		
+		/**
+		 * Label chứa hình người dùng
+		 */
+		
 		lblTaiKhoan = new JLabel("");
 		lblTaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTaiKhoan.setIcon(new ImageIcon("img\\user.png"));
 		lblTaiKhoan.setBounds(1352, 22, 50, 50);
 		panelMenu.add(lblTaiKhoan);
-
+		
+		/**
+		 *label chứa hình nút đăng xuất
+		 */
 		lblHinhDangXuat = new JLabel("");
 		lblHinhDangXuat.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\dangxuat.png"));
 		lblHinhDangXuat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinhDangXuat.setBounds(1370, 83, 25, 28);
 		panelMenu.add(lblHinhDangXuat);
 		
-		lblMenu = new JLabel("");
-		/* kẹt nút menu
-		 * JPanel pnMenu = new Gui_Menu(); Rectangle temp = panelMenu.getBounds();
-		 * Rectangle temp1 = panelNutBam.getBounds(); lblMenu.addMouseListener(new
-		 * MouseAdapter() {
-		 * 
-		 * @Override public void mouseClicked(MouseEvent e) { if (panelMenu.getX() ==
-		 * 400) { panelMenu.setBounds(temp); panelNutBam.setBounds(temp1);
-		 * 
-		 * } else { panelMenu.setBounds(400, 0, 1440 - 400, panelMenu.getHeight());
-		 * panelNutBam.setBounds(400, panelNutBam.getY(), 1440 - 400,
-		 * panelNutBam.getHeight()); add(pnMenu); } }
-		 * 
-		 * private void remove(JPanel pnMenu) { // TODO Auto-generated method stub
-		 * this.remove(pnMenu); } });
+		/**
+		 * Label chứa nút menu 
 		 */
+		lblMenu = new JLabel("");
+		
+		  JPanel pnMenu = new Gui_Menu(); Rectangle temp = panelMenu.getBounds();
+		  Rectangle temp1 = panelNutBam.getBounds(); lblMenu.addMouseListener(new
+		  MouseAdapter() {
+		  
+	/*	  @Override public void mouseClicked(MouseEvent e) { 
+			  if (panelMenu.getX() ==400) {
+				  	this.remove(pnMenu);
+			  		panelMenu.setBounds(temp); 
+			  		panelNutBam.setBounds(temp1);
+			  }
+			  else { 		
+			  		panelMenu.setBounds(400, 0, 1440 - 400, panelMenu.getHeight());
+		  			panelNutBam.setBounds(400, panelNutBam.getY(), 1440 - 400,
+		  			panelNutBam.getHeight()); add(pnMenu); 
+		  		} 
+		  }
+				
+				 private void remove(JPanel pnMenu) { // TODO Auto-generated method stub
+				  //this.remove(pnMenu); }
+				 */
+		 });
+		 
 		lblMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\menu.png"));
 		lblMenu.setBounds(55, 36, 84, 83);
 		panelMenu.add(lblMenu);
+		
+		/**
+		 * Label giờ
+		 */
 		
 		lblGio = new JLabel("12:00");
 		lblGio.setForeground(Color.WHITE);
@@ -140,6 +170,10 @@ public class Gui_TrangChu extends JFrame {
 		lblGio.setBounds(1298, 129, 111, 34);
 		ChucNang.setGio(lblGio);
 		panelMenu.add(lblGio);
+		
+		/**
+		 * Label chứa dòng chữ đăng xuất
+		 */
 		
 		lblChuDangXuat = new JLabel("Đăng Xuất");
 		/* Ket o day
@@ -156,6 +190,7 @@ public class Gui_TrangChu extends JFrame {
 				//Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
 			}
 		});*/
+		
 		lblChuDangXuat.setForeground(Color.WHITE);
 		lblChuDangXuat.setFont(new Font("Calibri", Font.PLAIN, 26));
 		lblChuDangXuat.setHorizontalAlignment(SwingConstants.TRAILING);
