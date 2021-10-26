@@ -32,40 +32,6 @@ public class SanPhamDao {
 
 	}
 
-	/**
-	 * lấy sản phẩm theo mã nhân viên và ngày tháng bên hóa đơn
-	 * 
-	 * @param maNhanVien
-	 * @param month
-	 * @param year
-	 * @return
-	 */
-
-	public SanPham getSPTheoHDVaMa(String maNhanVien, int month, int year) {
-		SanPham sanPham = null;
-		Session session = sessionFactory.getCurrentSession();
-		Transaction tr = session.getTransaction();
-		try {
-			tr.begin();
-
-			sanPham = session.createNativeQuery(
-					"SELECT s.* FROM ChiTietHoaDonBan AS c INNER JOIN HoaDonBanHang AS h ON "
-					+ "c.maHoaDonBan = h.maHoaDonBan "
-					+ "INNER JOIN SanPham AS s ON c.maSanPham = s.maSanpham "
-					+ "INNER JOIN NhanVien AS n ON h.maNhanVien = n.maNhanVien "
-					+ "where n.maNhanVien = " + "'" +maNhanVien+ "'"
-					+ " and MONTH(h.ngayLapHoaDon) = " + month
-					+ " and YEAR(h.ngayLapHoaDon) = " + year,
-					SanPham.class).getSingleResult();
-
-			tr.commit();
-		} catch (Exception e) {
-			tr.rollback();
-		}
-		session.close();
-		return sanPham;
-	}
-
 	public List<SanPham> getAllSanPham() {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();

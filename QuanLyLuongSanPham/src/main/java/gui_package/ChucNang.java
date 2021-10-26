@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -110,4 +112,19 @@ public class ChucNang {
 		}
 
 	}
+
+	/**
+	 * Chức năng căn giữa các cột trong bảng
+	 * 
+	 * @param list
+	 */
+	public static void setCenterAlignmentTable(int[] list, JTable table) {
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(JLabel.CENTER);
+		for (int i : list) {
+			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+		}
+
+	}
+
 }

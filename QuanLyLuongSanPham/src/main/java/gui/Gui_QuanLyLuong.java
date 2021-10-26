@@ -63,6 +63,7 @@ public class Gui_QuanLyLuong extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 1424, 150);

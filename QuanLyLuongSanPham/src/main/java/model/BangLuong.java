@@ -83,9 +83,15 @@ public class BangLuong {
 	public void setNhanVien(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
 	}
+	
+	
+
+	public BangLuong() {
+		super();
+	}
 
 	public BangLuong(String maBangLuong, LocalDate thoiGian, double mucLuong, double heSoLuong, double tienSanPham,
-			int soNgayCong, NhanVien nhanVien) {
+			int soNgayCong) {
 		super();
 		this.maBangLuong = maBangLuong;
 		this.thoiGian = thoiGian;
@@ -93,7 +99,6 @@ public class BangLuong {
 		this.heSoLuong = heSoLuong;
 		this.tienSanPham = tienSanPham;
 		this.soNgayCong = soNgayCong;
-		this.nhanVien = nhanVien;
 	}
 
 	@Override
@@ -103,6 +108,6 @@ public class BangLuong {
 	}
 
 	public double tinhLuong() {
-		return 0;
+		return mucLuong * heSoLuong * soNgayCong + tienSanPham;
 	}
 }

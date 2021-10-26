@@ -31,6 +31,35 @@ public class ChiTietHoaDonBanDao {
 		return chiTietHoaDonBan;
 
 	}
+	/**
+	 *  lấy chi tiết hóa đơn theo mã sản phẩm
+	 * @param maSanPham
+	 * @return
+	 */
+	public List<ChiTietHoaDonBan> getChiTietTheoMaNV(String maNhanVien, int month, int year) {
+		List<ChiTietHoaDonBan> list = new ArrayList<>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery("SELECT  c.* "
+					+ "FROM ChiTietHoaDonBan AS c "
+					+ "INNER JOIN HoaDonBanHang AS h ON c.maHoaDonBan = h.maHoaDonBan "
+					+ "WHERE h.maNhanVien = '" + maNhanVien + "'" 
+					+ " and MONTH(h.ngayLapHoaDon) = " + month
+					+ " and YEAR(h.ngayLapHoaDon) = " + year, ChiTietHoaDonBan.class).getResultList();
+
+			tr.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.commit();
+		}
+		session.close();
+
+		return list;
+
+	}
 
 	public List<ChiTietHoaDonBan> getAllHoaDonBanHang() {
 		List<ChiTietHoaDonBan> list = new ArrayList<ChiTietHoaDonBan>();
