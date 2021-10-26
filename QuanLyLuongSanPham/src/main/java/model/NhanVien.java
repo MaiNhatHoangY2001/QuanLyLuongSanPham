@@ -3,23 +3,30 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "NhanVien")
 public class NhanVien {
 	@Id
+	@GeneratedValue(generator = "sinhMaNhanVien")
+	@GenericGenerator(name = "sinhMaNhanVien", strategy = "generator.SinhMaNhanVien")
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
 	private String sDT;
+	@Column(columnDefinition = "varchar(12)")
 	private String cCCD;
-	private String chucVu;
+	private boolean trangThaiLamViec;
 	private String email;
 	private LocalDate ngaySinh;
 
@@ -38,7 +45,8 @@ public class NhanVien {
 	@Override
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
-				+ sDT + ", cCCD=" + cCCD + ", chucVu=" + chucVu + ", email=" + email + ", ngaySinh=" + ngaySinh + "]";
+				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
+				+ ngaySinh + "]";
 	}
 
 	public String getMaNhanVien() {
@@ -81,12 +89,12 @@ public class NhanVien {
 		this.cCCD = cCCD;
 	}
 
-	public String getChucVu() {
-		return chucVu;
+	public boolean gettrangThaiLamViec() {
+		return trangThaiLamViec;
 	}
 
-	public void setChucVu(String chucVu) {
-		this.chucVu = chucVu;
+	public void settrangThaiLamViec(boolean trangThaiLamViec) {
+		this.trangThaiLamViec = trangThaiLamViec;
 	}
 
 	public String getEmail() {
@@ -171,15 +179,14 @@ public class NhanVien {
 		return true;
 	}
 
-	public NhanVien(String maNhanVien, String tenNhanVien, String diaChi, String sDT, String cCCD, String chucVu,
-			String email, LocalDate ngaySinh) {
+	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD, boolean trangThaiLamViec, String email,
+			LocalDate ngaySinh) {
 		super();
-		this.maNhanVien = maNhanVien;
 		this.tenNhanVien = tenNhanVien;
 		this.diaChi = diaChi;
 		this.sDT = sDT;
 		this.cCCD = cCCD;
-		this.chucVu = chucVu;
+		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
 	}

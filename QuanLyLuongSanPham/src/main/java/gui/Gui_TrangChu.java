@@ -1,45 +1,29 @@
 package gui;
 
 import java.awt.event.*;
-import java.awt.*;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JFrame.*;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.UIManager;
 
+import gui.Gui_DangNhap;
 import gui_package.ChucNang;
 import gui_package.CircleBtn;
 
-public class Gui_TrangChu extends JFrame {
+public class Gui_TrangChu extends JFrame implements MouseListener {
 
 	private JPanel contentPane;
 	private final JPanel panelNutBam = new JPanel();
-	private final JPanel panelMenu = new JPanel();
 	private JButton btnQuanLyNhanVien;
 	private JButton btnQuanLyHoaDon;
 	private JButton btnQuanLyLuong;
@@ -52,6 +36,10 @@ public class Gui_TrangChu extends JFrame {
 	private JLabel lblMenu;
 	private JLabel lblGio;
 	private JLabel lblChuDangXuat;
+	private JPanel panelMenu;
+	private Gui_Menu pnMenu;
+	private Rectangle temp;
+	private Rectangle temp1;
 
 	/**
 	 * Launch the application.
@@ -93,7 +81,7 @@ public class Gui_TrangChu extends JFrame {
 		/**
 		 * Menu
 		 */
-		JPanel panelMenu = new JPanel();
+		panelMenu = new JPanel();
 		panelMenu.setBackground(new Color(245, 129, 25));
 		panelMenu.setSize(new Dimension(0, 204));
 		panelMenu.setBounds(0, 0, 1440, 264);
@@ -135,31 +123,6 @@ public class Gui_TrangChu extends JFrame {
 
 		lblMenu = new JLabel("");
 		
-		  JPanel pnMenu = new Gui_Menu(); Rectangle temp = panelMenu.getBounds();
-		  Rectangle temp1 = panelNutBam.getBounds(); lblMenu.addMouseListener(new
-		  MouseAdapter() {
-		  
-	/*	  @Override public void mouseClicked(MouseEvent e) { 
-			  if (panelMenu.getX() ==400) {
-				  	this.remove(pnMenu);
-			  		panelMenu.setBounds(temp); 
-			  		panelNutBam.setBounds(temp1);
-			  }
-			  else { 		
-			  		panelMenu.setBounds(400, 0, 1440 - 400, panelMenu.getHeight());
-		  			panelNutBam.setBounds(400, panelNutBam.getY(), 1440 - 400,
-		  			panelNutBam.getHeight()); add(pnMenu); 
-		  		} 
-		  }
-				
-				 private void remove(JPanel pnMenu) { // TODO Auto-generated method stub
-				  //this.remove(pnMenu); }
-				 */
-		 });
-		 
-		lblMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\menu.png"));
-		lblMenu.setBounds(55, 36, 84, 83);
-		panelMenu.add(lblMenu);
 		
 		/**
 		 * Label giờ
@@ -173,31 +136,8 @@ public class Gui_TrangChu extends JFrame {
 		ChucNang.setGio(lblGio);
 		panelMenu.add(lblGio);
 		
-		/**
-		 * Label chứa dòng chữ đăng xuất
-		 */
 		
-		lblChuDangXuat = new JLabel("Đăng Xuất");
-		/* Ket o day
-		lblChuDangXuat.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				close();	
-				Gui_TrangChu s = new Gui_TrangChu();
-				s.setVisible(true);
-			}
-			private void close() {
-				// TODO Auto-generated method stub
-			//	WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
-				//Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
-			}
-		});*/
 		
-		lblChuDangXuat.setForeground(Color.WHITE);
-		lblChuDangXuat.setFont(new Font("Calibri", Font.PLAIN, 26));
-		lblChuDangXuat.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblChuDangXuat.setBounds(1231, 83, 129, 36);
-		panelMenu.add(lblChuDangXuat);
 		panelNutBam.setBackground(Color.WHITE);
 		panelNutBam.setBounds(0, 264, 1440, 760);
 		contentPane.add(panelNutBam);
@@ -263,8 +203,89 @@ public class Gui_TrangChu extends JFrame {
 		btnThongKeThuChi.setBounds(49, 406, 407, 313);
 		panelNutBam.add(btnThongKeThuChi);
 		
-	
 		 
+		/**
+		 * Label chứa nút menu 
+		 */
+		lblMenu = new JLabel("");
+		pnMenu = new Gui_Menu();
+		temp = panelMenu.getBounds();
+		temp1 = panelNutBam.getBounds(); 
+		
+		lblMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\menu.png"));
+		lblMenu.setBounds(55, 36, 84, 83);
+		panelMenu.add(lblMenu);
+		
+		/**
+		 * Label chứa dòng chữ đăng xuất
+		 */
+		
+		lblChuDangXuat = new JLabel("Đăng Xuất");
+		lblChuDangXuat.setForeground(Color.WHITE);
+		lblChuDangXuat.setFont(new Font("Calibri", Font.PLAIN, 26));
+		lblChuDangXuat.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblChuDangXuat.setBounds(1231, 83, 129, 36);
+		panelMenu.add(lblChuDangXuat);
+		
+		/**
+		 *  Sự kiện
+		 */
+		lblMenu.addMouseListener(this);
+		lblChuDangXuat.addMouseListener(this);
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Object o = e.getSource();
+		if(o.equals(lblMenu)) {
+			if (panelMenu.getX() ==400) {
+			  	this.remove(pnMenu);
+		  		panelMenu.setBounds(temp); 
+		  		panelNutBam.setBounds(temp1);
+		  }
+		  else { 		
+		  		panelMenu.setBounds(400, 0, 1440 - 400, panelMenu.getHeight());
+	  			panelNutBam.setBounds(400, panelNutBam.getY(), 1440 - 400, panelNutBam.getHeight()); 
+	  			add(pnMenu); 
+	  		} 
+	  	}
+		else if(o.equals(lblChuDangXuat)){
+			//close();
+			Gui_DangNhap s = new Gui_DangNhap();
+			s.setLocationRelativeTo(null);
+			s.setVisible(true);	
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	/**
+	 * Phương thức close
+	 */
+	private void close() {
+		WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
 	}
 }
