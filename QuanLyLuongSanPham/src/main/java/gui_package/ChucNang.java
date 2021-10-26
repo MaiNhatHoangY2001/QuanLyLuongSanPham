@@ -1,5 +1,7 @@
 package gui_package;
 
+
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -10,6 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 public class ChucNang {
 	/**
@@ -58,5 +63,35 @@ public class ChucNang {
 			}
 		});
 	}
+
+	/**
+	 * Chức năng giúp làm cách 1 hàng của bảng có màu
+	 */
+	public static void setTableAlternateRow() {
+		UIDefaults defaults = UIManager.getLookAndFeelDefaults();
+		if (defaults.get("Table.alternateRowColor") == null)
+			defaults.put("Table.alternateRowColor", new Color(255, 240, 226));
+	}
+	
+	/**
+	 * chức năng giúp xóa tất cả dữ liệu có trong bảng
+	 * @param model
+	 */
+	public static void clearDateTable(DefaultTableModel model) {
+		while (model.getRowCount() > 0) {
+			model.removeRow(0);
+		}
+	}
+	
+	/**
+	 * Chức năng giúp thêm vào những hàng rỗng cho đẹp bảng
+	 * @param model
+	 */
+	public static void addNullDataTable(DefaultTableModel model) {
+		for (int i = 0; i < 10; i++) {
+			model.addRow(new Object[] { null, null, null, null, null, null, null });
+		}
+	}
+	
 
 }

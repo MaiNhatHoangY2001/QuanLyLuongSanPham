@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JMonthChooser;
+import com.toedter.calendar.JYearChooser;
 
 public class PnlThongKeThu extends JPanel {
 	/**
@@ -30,8 +31,6 @@ public class PnlThongKeThu extends JPanel {
 	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
-	private JSpinner spinner;
-	private JMonthChooser monthChooser;
 	private JComboBox<String> cboTimKiemBox;
 	private JPanel pnlTimKiem;
 	private JTextField txtTimKiem;
@@ -39,6 +38,8 @@ public class PnlThongKeThu extends JPanel {
 	private JLabel lblNewLabel;
 	private JLabel lblLoiTmKim;
 	private JLabel lblLoaiTep_2;
+	private JMonthChooser cboMonth;
+	private JYearChooser spnYear;
 
 	public PnlThongKeThu() {
 		setBackground(new Color(242, 129, 25));
@@ -47,15 +48,15 @@ public class PnlThongKeThu extends JPanel {
 		/**
 		 * Chọn ngày để hiện thông tin (tháng/năm)
 		 */
-		monthChooser = new JMonthChooser();
-		monthChooser.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
-		monthChooser.setBounds(1160, 5, 140, 40);
-		add(monthChooser);
+		cboMonth = new JMonthChooser();
+		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cboMonth.setBounds(1160, 5, 140, 40);
+		add(cboMonth);
 
-		spinner = new JSpinner();
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		spinner.setBounds(1316, 5, 59, 40);
-		add(spinner);
+		spnYear = new JYearChooser();
+		spnYear.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		spnYear.setBounds(1316, 5, 65, 40);
+		add(spnYear);
 
 		/**
 		 * Bảng thống kê số tiền đã thu được tại cửa hàng
@@ -67,7 +68,21 @@ public class PnlThongKeThu extends JPanel {
 								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null },
 								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null },
 								{ null, null, null, null }, { null, null, null, null }, { null, null, null, null }, },
-						colsnameTK));
+						colsnameTK)) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+		};
 		tblTienThu.setRowMargin(5);
 		tblTienThu.setRowHeight(30);
 		tblTienThu.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -89,7 +104,21 @@ public class PnlThongKeThu extends JPanel {
 		new DefaultTableModel(colsnameLK, 0);
 		tblSanPham = new JTable(new DefaultTableModel(new Object[][] { { null, null }, { null, null }, { null, null },
 				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null } }, colsnameLK));
+				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null } }, colsnameLK)) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+		};
 		tblSanPham.setRowMargin(5);
 		tblSanPham.setRowHeight(30);
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -135,12 +164,12 @@ public class PnlThongKeThu extends JPanel {
 		btnTimKiem.setBounds(543, 101, 135, 48);
 		btnTimKiem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlTimKiem.add(btnTimKiem);
-		
+
 		lblLoiTmKim = new JLabel("Loại tìm kiếm: ");
 		lblLoiTmKim.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLoiTmKim.setBounds(31, 41, 134, 44);
 		pnlTimKiem.add(lblLoiTmKim);
-		
+
 		lblLoaiTep_2 = new JLabel("Tìm kiếm:");
 		lblLoaiTep_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLoaiTep_2.setBounds(31, 103, 134, 44);
@@ -200,11 +229,11 @@ public class PnlThongKeThu extends JPanel {
 		btnSrc.setBounds(623, 119, 51, 44);
 		btnSrc.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlIn.add(btnSrc);
-		
-		lblNewLabel = new JLabel("In");
+
+		lblNewLabel = new JLabel("In bảng thống kê");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(692, 500, 105, 29);
+		lblNewLabel.setBounds(692, 500, 200, 29);
 		add(lblNewLabel);
 	}
 }

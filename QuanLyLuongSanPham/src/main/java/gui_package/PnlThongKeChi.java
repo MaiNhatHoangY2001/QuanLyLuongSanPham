@@ -10,13 +10,14 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class PnlThongKeChi extends JPanel{
+import com.toedter.calendar.JYearChooser;
+
+public class PnlThongKeChi extends JPanel {
 	/**
 	 * 
 	 */
@@ -29,37 +30,51 @@ public class PnlThongKeChi extends JPanel{
 	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
-	private JSpinner spinner;
 	private JComboBox<String> cboTimKiemBox;
 	private JPanel pnlTimKiem;
 	private JTextField txtTimKiem;
 	private JButton btnTimKiem;
 	private JLabel lblNewLabel;
-	
+
+	private JYearChooser spnYear;
+
 	public PnlThongKeChi() {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
-		/**
-		 * Chọn ngày để hiện thông tin (tháng/năm)
-		 */
 
-		spinner = new JSpinner();
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		spinner.setBounds(1316, 5, 59, 40);
-		add(spinner);
+		/**
+		 * Chọn ngày để hiện thông tin (năm)
+		 */
+		spnYear = new JYearChooser();
+		spnYear.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		spnYear.setBounds(1316, 5, 65, 40);
+		add(spnYear);
+
 
 		/**
 		 * Bảng thống kê số tiền đã chi ra tại cửa hàng
 		 */
 		new DefaultTableModel(colsnameTK, 0);
-		tblTienThu = new JTable(
-				new DefaultTableModel(
-						new Object[][] { { null, null, null, null, null }, { null, null, null, null, null },
-								{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
-								{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
-								{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null }, },
-						colsnameTK));
+		tblTienThu = new JTable(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, { null, null, null, null, null }, { null, null, null, null, null },
+				{ null, null, null, null, null }, }, colsnameTK)) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+		};
 		tblTienThu.setRowMargin(5);
 		tblTienThu.setRowHeight(30);
 		tblTienThu.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -81,7 +96,21 @@ public class PnlThongKeChi extends JPanel{
 		new DefaultTableModel(colsnameLK, 0);
 		tblSanPham = new JTable(new DefaultTableModel(new Object[][] { { null, null }, { null, null }, { null, null },
 				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null } }, colsnameLK));
+				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null } }, colsnameLK)) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+		};
 		tblSanPham.setRowMargin(5);
 		tblSanPham.setRowHeight(30);
 		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -127,12 +156,12 @@ public class PnlThongKeChi extends JPanel{
 		btnTimKiem.setBounds(543, 101, 135, 48);
 		btnTimKiem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlTimKiem.add(btnTimKiem);
-		
+
 		JLabel lblLoiTmKim = new JLabel("Loại tìm kiếm: ");
 		lblLoiTmKim.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLoiTmKim.setBounds(31, 41, 134, 44);
 		pnlTimKiem.add(lblLoiTmKim);
-		
+
 		JLabel lblLoaiTep_2 = new JLabel("Tìm kiếm:");
 		lblLoaiTep_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLoaiTep_2.setBounds(31, 103, 134, 44);
@@ -192,11 +221,11 @@ public class PnlThongKeChi extends JPanel{
 		btnSrc.setBounds(623, 119, 51, 44);
 		btnSrc.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlIn.add(btnSrc);
-		
-		lblNewLabel = new JLabel("In");
+
+		lblNewLabel = new JLabel("In bảng thống kê");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(692, 500, 105, 29);
+		lblNewLabel.setBounds(692, 500, 200, 29);
 		add(lblNewLabel);
 	}
 }
