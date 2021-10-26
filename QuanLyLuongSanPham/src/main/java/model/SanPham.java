@@ -3,15 +3,21 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "SanPham")
 public class SanPham {
 	@Id
+	@GeneratedValue(generator = "sinhMaSanPham")
+	@GenericGenerator(name = "sinhMaSanPham", strategy = "generator.SinhMaSanPham")
 	private String maSanpham;
 	private String tenSanPham;
 	private double giaThanh;

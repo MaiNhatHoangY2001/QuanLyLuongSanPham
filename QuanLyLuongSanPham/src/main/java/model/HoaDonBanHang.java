@@ -3,19 +3,24 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "HoaDonBanHang")
 public class HoaDonBanHang {
 	@Id
+	@GeneratedValue(generator = "sinhMaHoaDonBan")
+	@GenericGenerator(name = "sinhMaHoaDonBan", strategy = "generator.SinhMaHoaDonBan")
 	private String maHoaDonBan;
-	private int soLuong;
 	private LocalDate ngayLapHoaDon;
 	private double khuyenMai;
 	private double thue;
@@ -46,14 +51,6 @@ public class HoaDonBanHang {
 
 	public void setMaHoaDonBan(String maHoaDonBan) {
 		this.maHoaDonBan = maHoaDonBan;
-	}
-
-	public int getSoLuong() {
-		return soLuong;
-	}
-
-	public void setSoLuong(int soLuong) {
-		this.soLuong = soLuong;
 	}
 
 	public LocalDate getNgayLapHoaDon() {
@@ -116,9 +113,8 @@ public class HoaDonBanHang {
 		super();
 	}
 
-	public HoaDonBanHang(int soLuong, LocalDate ngayLapHoaDon, double khuyenMai, double thue) {
+	public HoaDonBanHang(LocalDate ngayLapHoaDon, double khuyenMai, double thue) {
 		super();
-		this.soLuong = soLuong;
 		this.ngayLapHoaDon = ngayLapHoaDon;
 		this.khuyenMai = khuyenMai;
 		this.thue = thue;
@@ -156,7 +152,7 @@ public class HoaDonBanHang {
 
 	@Override
 	public String toString() {
-		return "HoaDonBanHang [maHoaDonBan=" + maHoaDonBan + ", soLuong=" + soLuong + ", ngayLapHoaDon=" + ngayLapHoaDon
-				+ ", khuyenMai=" + khuyenMai + ", thue=" + thue + ", thanhTien=" + thanhTien + "]";
+		return "HoaDonBanHang [maHoaDonBan=" + maHoaDonBan + ", ngayLapHoaDon=" + ngayLapHoaDon + ", khuyenMai="
+				+ khuyenMai + ", thue=" + thue + ", thanhTien=" + thanhTien + "]";
 	}
 }
