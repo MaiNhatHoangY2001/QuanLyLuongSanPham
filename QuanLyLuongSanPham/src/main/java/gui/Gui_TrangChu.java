@@ -111,13 +111,17 @@ public class Gui_TrangChu extends JFrame implements MouseListener {
 		 *label chứa hình nút đăng xuất
 		 */
 		lblHinhDangXuat = new JLabel("");
-		lblHinhDangXuat.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\dangxuat.png"));
+		lblHinhDangXuat.setIcon(new ImageIcon("img\\dangxuat.png"));
 		lblHinhDangXuat.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHinhDangXuat.setBounds(1370, 83, 25, 28);
 		panelMenu.add(lblHinhDangXuat);
 		
-	
-		
+		/**
+		 * Label chứa nút menu 
+		 */
+		lblMenu.setIcon(new ImageIcon("img\\menu.png"));
+
+		lblMenu = new JLabel("");
 		
 		
 		/**

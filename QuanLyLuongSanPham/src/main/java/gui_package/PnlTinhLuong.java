@@ -3,8 +3,11 @@ package gui_package;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -26,11 +29,15 @@ import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
 
 import dao.BangLuongDao;
+import dao.ChiTietHoaDonBanDao;
 import dao.NhanVienDao;
+import dao.SanPhamDao;
 import model.BangLuong;
+import model.ChiTietHoaDonBan;
 import model.NhanVien;
+import model.SanPham;
 
-public class PnlTinhLuong extends JPanel {
+public class PnlTinhLuong extends JPanel implements MouseListener {
 	/**
 	 * 
 	 */
@@ -39,7 +46,7 @@ public class PnlTinhLuong extends JPanel {
 	private JTextField txtSrc;
 	private String[] colsname = { "Mã nhân viên", "Tên nhân viên", "Mức lương", "Hệ số lương", "Tổng tiền sản phẩm",
 			"Số ngày công", "Tiền lương" };
-	private JComboBox cboLoaiTep;
+	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
 	private JYearChooser spnYear;
@@ -47,8 +54,11 @@ public class PnlTinhLuong extends JPanel {
 	private String[] colsnameLK = { "Tên sản phẩm", "Số lượng", "Thành tiền" };
 	private JTable tblSanPham;
 	private DefaultTableModel modelTinhLuong, modelSanPham;
-
+	
+	private static final int CURRENT_DAY = LocalDateTime.now().getDayOfMonth();
+	
 	public PnlTinhLuong() {
+
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
@@ -104,8 +114,13 @@ public class PnlTinhLuong extends JPanel {
 		TableColumn column = tblTinhLuong.getColumnModel().getColumn(5);
 		column.setCellRenderer(new CustomTable(new Color(255, 232, 210), Color.BLACK));
 
+		// Căn chữ của cột sang phải
+		int[] listCanPhaiTblLuong = { 2, 3, 4, 6 };
+		ChucNang.setRightAlignmentTable(listCanPhaiTblLuong, tblTinhLuong);
+
 		add(thanhCuon);
 
+		modelTinhLuong = (DefaultTableModel) tblTinhLuong.getModel();
 		/**
 		 * Bảng liệt kê sản phẩm của 1 nhân viên bán hàng được chọn trong bảng trên (nếu
 		 * là nhân viên hành chánh thì sẽ trống)
@@ -145,8 +160,17 @@ public class PnlTinhLuong extends JPanel {
 		thanhCuon2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		thanhCuon2.setToolTipText(
 				"Bảng liệt kê sản phẩm của của 1 nhân viên bán hàng được chọn trong bảng trên (nếu là nhân viên hành chánh thì sẽ trống)");
-		modelTinhLuong = (DefaultTableModel) tblTinhLuong.getModel();
+
 		add(thanhCuon2);
+		modelSanPham = (DefaultTableModel) tblSanPham.getModel();
+
+		// Căn phải cột của bảng sản phẩm
+		int[] listCanPhaiTblSanPham = { 2 };
+		ChucNang.setRightAlignmentTable(listCanPhaiTblSanPham, tblSanPham);
+		// Căn giữa cột của bảng sản phẩm
+		int[] listCanGiuaTblSanPham = { 1 };
+		ChucNang.setCenterAlignmentTable(listCanGiuaTblSanPham, tblSanPham);
+
 		/**
 		 * In
 		 */
@@ -164,8 +188,8 @@ public class PnlTinhLuong extends JPanel {
 		btnIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlIn.add(btnIn);
 
-		cboLoaiTep = new JComboBox();
-		cboLoaiTep.setModel(new DefaultComboBoxModel(new String[] { "Excel", "Notepad" }));
+		cboLoaiTep = new JComboBox<String>();
+		cboLoaiTep.setModel(new DefaultComboBoxModel<String>(new String[] { "Excel", "Notepad" }));
 
 		cboLoaiTep.setForeground(Color.WHITE);
 		cboLoaiTep.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -209,32 +233,69 @@ public class PnlTinhLuong extends JPanel {
 		setDataTableBangLuong(cboMonth.getMonth(), spnYear.getYear());
 
 		/**
-		 * sự kiện cboMonth
+		 * sự kiện cboMonth và spnYear
 		 */
 		cboMonth.addPropertyChangeListener("month", new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 
-				setDataTableBangLuong((Integer)evt.getNewValue() + 1, spnYear.getYear());
+				setDataTableBangLuong((Integer) evt.getNewValue() + 1, spnYear.getYear());
 			}
 		});
+		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				setDataTableBangLuong(cboMonth.getMonth() + 1, (Integer) evt.getNewValue());
+			}
+		});
+		/**
+		 * Sự kiện click bảng lương ra thông tin sản phẩm
+		 */
+		tblTinhLuong.addMouseListener(this);
+		
+	}
+
+	/**
+	 * Đổ dữ liệu vào table sản phẩm
+	 * 
+	 * @param month
+	 * @param year
+	 */
+	private void setDataTableSanPham(int month, int year) {
+		ChucNang.clearDataTable(modelSanPham);
+		ChiTietHoaDonBanDao chiTietHoaDonBanDao = new ChiTietHoaDonBanDao();
+		
+		// Lấy mã nhân viên từ bảng tính lương đang chọn
+		Object maNhanVien = modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 0);
+		if (maNhanVien != null) {
+			List<ChiTietHoaDonBan> list = chiTietHoaDonBanDao.getChiTietTheoMaNV(maNhanVien.toString(), month, year);
+			for (ChiTietHoaDonBan chiTietHoaDonBan : list) {
+					modelSanPham.addRow(new Object[] { chiTietHoaDonBan.getSanPham().getTenSanPham(),
+							chiTietHoaDonBan.getSoLuong(), chiTietHoaDonBan.tinhTongTien() });
+			}
+
+		}
+
+		ChucNang.addNullDataTable(modelSanPham);
 	}
 
 	/**
 	 * Đổ dữ liệu vào table bảng lương
+	 * 
+	 * @param month
+	 * @param year
 	 */
 	public void setDataTableBangLuong(int month, int year) {
-		ChucNang.clearDateTable(modelTinhLuong);
+		ChucNang.clearDataTable(modelTinhLuong);
 		BangLuongDao bangLuongDao = new BangLuongDao();
 		NhanVienDao nhanVienDao = new NhanVienDao();
 
 		List<NhanVien> listNhanVien = new ArrayList<>();
-		List<BangLuong> listBangLuong = new ArrayList<>();
 
 		listNhanVien = nhanVienDao.getAllNhanVien();
 
 		for (NhanVien nhanVien : listNhanVien) {
 			BangLuong bangLuong = bangLuongDao.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
-
 			if (bangLuong != null) {
 				modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
 						bangLuong.getMucLuong(), bangLuong.getHeSoLuong(), bangLuong.getTienSanPham(),
@@ -242,6 +303,27 @@ public class PnlTinhLuong extends JPanel {
 			}
 		}
 		ChucNang.addNullDataTable(modelTinhLuong);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		setDataTableSanPham(cboMonth.getMonth() + 1, spnYear.getYear());
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
 	}
 
 }
