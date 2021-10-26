@@ -113,6 +113,7 @@ public class PnlTinhLuong extends JPanel {
 		
 		add(thanhCuon);
 
+		modelTinhLuong = (DefaultTableModel) tblTinhLuong.getModel();
 		/**
 		 * Bảng liệt kê sản phẩm của 1 nhân viên bán hàng được chọn trong bảng trên (nếu
 		 * là nhân viên hành chánh thì sẽ trống)
@@ -152,8 +153,9 @@ public class PnlTinhLuong extends JPanel {
 		thanhCuon2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		thanhCuon2.setToolTipText(
 				"Bảng liệt kê sản phẩm của của 1 nhân viên bán hàng được chọn trong bảng trên (nếu là nhân viên hành chánh thì sẽ trống)");
-		modelTinhLuong = (DefaultTableModel) tblTinhLuong.getModel();
+		
 		add(thanhCuon2);
+		modelSanPham = (DefaultTableModel) tblSanPham.getModel();
 		/**
 		 * In
 		 */
@@ -214,6 +216,7 @@ public class PnlTinhLuong extends JPanel {
 		 */
 
 		setDataTableBangLuong(cboMonth.getMonth(), spnYear.getYear());
+		setDataTableSanPham(cboMonth.getMonth(), spnYear.getYear());
 
 		/**
 		 * sự kiện cboMonth và spnYear
@@ -233,8 +236,15 @@ public class PnlTinhLuong extends JPanel {
 		});
 	}
 
+	private void setDataTableSanPham(int month, int year) {
+//		ChucNang.clearDataTable(modelSanPham);
+//		ChucNang.addNullDataTable(modelSanPham);
+	}
+
 	/**
 	 * Đổ dữ liệu vào table bảng lương
+	 * @param month
+	 * @param year
 	 */
 	public void setDataTableBangLuong(int month, int year) {
 		ChucNang.clearDataTable(modelTinhLuong);
@@ -242,7 +252,6 @@ public class PnlTinhLuong extends JPanel {
 		NhanVienDao nhanVienDao = new NhanVienDao();
 
 		List<NhanVien> listNhanVien = new ArrayList<>();
-		List<BangLuong> listBangLuong = new ArrayList<>();
 
 		listNhanVien = nhanVienDao.getAllNhanVien();
 

@@ -17,7 +17,6 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-    <fullyQualifiedTypeName name="model.SanPham"/>
     <fullyQualifiedTypeName name="model.HoaDonBanHang"/>
     <fullyQualifiedTypeName name="dao.ChiTietHoaDonBanDao"/>
     <fullyQualifiedTypeName name="model.ChiTietHoaDonBan"/>
@@ -37,8 +36,9 @@
     <fullyQualifiedTypeName name="javax.swing.JTable"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableCellRenderer"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
-    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.beans.PropertyChangeListener"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="model.SanPham"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
 </qualifiedTypeNameHistroy>
