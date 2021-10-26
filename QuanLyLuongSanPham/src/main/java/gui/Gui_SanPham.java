@@ -1,27 +1,16 @@
 package gui;
 
 import java.awt.EventQueue;
-import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
-import gui_package.ChucNang;
-import gui_package.CircleBtn;
-import gui_package.RoundTextField;
-import gui_package.RoundedPanel;
-
+import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-
-import javax.swing.ImageIcon;
-
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,46 +19,51 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.ComponentOrientation;
-import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import java.awt.Component;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
+import gui_package.ChucNang;
+import gui_package.CircleBtn;
+import gui_package.RoundTextField;
+import gui_package.RoundedPanel;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import java.awt.Cursor;
+import javax.swing.ImageIcon;
+import javax.swing.DefaultComboBoxModel;
 
-public class Gui_NhanVien extends JFrame implements ActionListener, MouseListener, WindowListener {
+public class Gui_SanPham extends JFrame implements ActionListener, MouseListener, WindowListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JPanel pnlCentent;
-	private JPanel pnlChucNang;
-	private JPanel pnlTimKiem;
-	private JPanel pnlHeader;
-	private JPanel pnlNgang;
 
-	private JLabel lblMenu;
-	private JLabel lblDangXuat;
-	private JLabel lblGio;
-	private JLabel lblNewLabel;
-	private JLabel lblIconUser;
-	private JLabel lblIconDX;
-	private JLabel lblTimKiem;
-
+	private JTable table;
 	private DefaultTableModel model;
-	private JTable tblNhanVien;
 
-	private JTextField txtTiemKiem;
+	private JTextField txtTimKiem;
 
-	private JButton btnThem;
+	private JButton btnXoa;
 	private JButton btnSua;
 	private JButton btnTimKiem;
-	private JButton btnXoa;
 
 	private JComboBox<String> cmbTimKiem;
-	
+
+	private JLabel lblIconDX;
+	private JLabel lblDangXuat;
+	private JPanel pnlHeader;
+	private JPanel pnlNgang;
+	private JPanel pnlCentent;
+	private JLabel lblIconMenu;
+
 	private Gui_Menu pnMenu;
 	private Rectangle temp;
 	private Rectangle temp2;
@@ -82,7 +76,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Gui_NhanVien frame = new Gui_NhanVien();
+					Gui_SanPham frame = new Gui_SanPham();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,51 +88,49 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 	/**
 	 * Create the frame.
 	 */
-	public Gui_NhanVien() {
+	public Gui_SanPham() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1440, 1024);
+		setBounds(100, 100, 1440, 1024);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
 		/**
-		 * Phần đầu
+		 * 	Phần đầu
 		 */
-		// BackGround Header
+		// Background header
 		pnlHeader = new JPanel();
+		pnlHeader.setLayout(null);
 		pnlHeader.setBackground(new Color(242, 129, 25));
 		pnlHeader.setBounds(0, 0, 1424, 150);
 		contentPane.add(pnlHeader);
-		pnlHeader.setLayout(null);
 
-		// Tiêu đề chính
-		JLabel lblTitile = new JLabel("QU\u1EA2N L\u00DD NH\u00C2N VI\u00CAN");
+		// Tiểu đề 
+		JLabel lblTitile = new JLabel("QUẢN LÝ SẢN PHẨM");
 		lblTitile.setForeground(Color.WHITE);
 		lblTitile.setFont(new Font("Arial", Font.BOLD, 60));
-		lblTitile.setBounds(406, 43, 612, 73);
+		lblTitile.setBounds(411, 38, 601, 73);
 		pnlHeader.add(lblTitile);
 
-		// Tài khoảng
+		// Tài khoảng nhân viên
 		JLabel lblTenTaiKhoang = new JLabel("Chinh");
 		lblTenTaiKhoang.setForeground(Color.WHITE);
-		lblTenTaiKhoang.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		lblTenTaiKhoang.setFont(new Font("Arial", Font.PLAIN, 36));
+		lblTenTaiKhoang.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		lblTenTaiKhoang.setBounds(1246, 22, 90, 40);
-		lblTenTaiKhoang.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlHeader.add(lblTenTaiKhoang);
 		
-		lblIconUser = new JLabel("");
+		JLabel lblIconUser = new JLabel("");
 		Image imgUser = new ImageIcon("img\\user1.png").getImage();
 		lblIconUser.setIcon(new ImageIcon(imgUser));
 		lblIconUser.setBounds(1355, 22, 40, 40);
-		lblIconUser.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlHeader.add(lblIconUser);
 
-		// Đăng xuất
-		lblDangXuat = new JLabel("\u0110\u0103ng xu\u1EA5t");
+		// Đăng nhập
+		lblDangXuat = new JLabel("Đăng xuất");
 		lblDangXuat.setForeground(Color.WHITE);
 		lblDangXuat.setFont(new Font("Arial", Font.PLAIN, 24));
 		lblDangXuat.setBounds(1246, 67, 110, 24);
@@ -153,7 +145,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		pnlHeader.add(lblIconDX);
 
 		// Giờ
-		lblGio = new JLabel("12:00");
+		JLabel lblGio = new JLabel("12:00");
 		lblGio.setForeground(Color.WHITE);
 		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblGio.setBounds(1305, 96, 90, 36);
@@ -162,152 +154,184 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		ChucNang.setGio(lblGio);
 
 		// Menu
-		lblMenu = new JLabel("");
+		lblIconMenu = new JLabel("");
 		Image imgMenu = new ImageIcon("img\\menu3.png").getImage();
-		lblMenu.setIcon(new ImageIcon(imgMenu));
-		lblMenu.setBounds(31, 43, 70, 64);
-		lblMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlHeader.add(lblMenu);
+		lblIconMenu.setIcon(new ImageIcon(imgMenu));
+		lblIconMenu.setBounds(31, 43, 70, 64);
+		lblIconMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		pnlHeader.add(lblIconMenu);
 
-		// Đường ngang cách giữa Header và Content
+		// Thanh ngang chia phần Header và phần Content
 		pnlNgang = new JPanel();
-		pnlNgang.setBackground(new Color(194, 93, 0));
 		pnlNgang.setBounds(0, 150, 1424, 50);
 		contentPane.add(pnlNgang);
+		pnlNgang.setBackground(new Color(194, 93, 0));
 
 		/**
-		 * Nội dung chính
+		 * Phần Content
 		 */
-
+		// Banckground Content
 		pnlCentent = new JPanel();
-		pnlCentent.setBounds(0, 200, 1424, 785);
-		pnlCentent.setBackground(new Color(242, 129, 25));
-		contentPane.add(pnlCentent);
 		pnlCentent.setLayout(null);
+		pnlCentent.setBackground(new Color(242, 129, 25));
+		pnlCentent.setBounds(0, 200, 1424, 785);
+		contentPane.add(pnlCentent);
 
 		/*
-		 * Phần Bảnh Nhân Viên
+		 * Tabel
 		 */
-		// modelTable
-		String header[] = { "MSNV", "Họ Và Tên", "Ngày Sinh", "Giới Tính", "SĐT", "Chức Vụ", "Email"};
-		model = new DefaultTableModel(header, 50);
-
-		// table
-		tblNhanVien = new JTable(model);
-		tblNhanVien.setRowMargin(5);
-		tblNhanVien.setRowHeight(30);
-		tblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 24));
-
-		// Tiêu để của bảng
-		JTableHeader headerTable = tblNhanVien.getTableHeader();
-		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		headerTable.setBackground(new Color(248, 198, 153));
-
 		// Thanh cuộn
-		JScrollPane thanhCuon = new JScrollPane(tblNhanVien);
-		thanhCuon.setBounds(31, 11, 1365, 536);
+		JScrollPane thanhCuon = new JScrollPane((Component) null);
 		thanhCuon.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		thanhCuon.setBounds(32, 11, 1365, 536);
 		pnlCentent.add(thanhCuon);
 
+		// modeltable
+		String header[] = { "Mã Sản Phẩm", "Tên Sản Phẩm", "Giá Thành", "Nhà Cung Cấp", "Loại", "Nhà Sản Xuất" };
+		model = new DefaultTableModel(header, 50);
+		
+		//table
+		table = new JTable(model);
+		table.setRowMargin(5);
+		table.setRowHeight(30);
+		JTableHeader headerTable = table.getTableHeader();
+		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		headerTable.setBackground(new Color(248, 198, 153));
+		thanhCuon.setViewportView(table);
+
 		/*
-		 * Phần chức năng
+		 * 	Các nút chức năng
 		 */
+		// Title chức năng
+		JLabel lblNewLabel = new JLabel("Chức Năng");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel.setBounds(62, 558, 123, 31);
+		pnlCentent.add(lblNewLabel);
+		
 		// Background Chức năng
-		pnlChucNang = new RoundedPanel();
-		pnlChucNang.setBackground(new Color(248, 198, 153));
-		pnlChucNang.setBounds(31, 589, 629, 174);
-		pnlCentent.add(pnlChucNang);
+		JPanel pnlChucNang = new RoundedPanel();
 		pnlChucNang.setLayout(null);
+		pnlChucNang.setBackground(new Color(248, 198, 153));
+		pnlChucNang.setBounds(33, 588, 479, 174);
+		pnlCentent.add(pnlChucNang);
 
 		// Nút Xóa
 		btnXoa = new CircleBtn("Xóa");
 		btnXoa.setForeground(Color.WHITE);
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setBounds(235, 56, 157, 62);
+		btnXoa.setBounds(55, 56, 157, 62);
 		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlChucNang.add(btnXoa);
 
-		// Nút thêm
-		btnThem = new CircleBtn("Thêm");
-		btnThem.setForeground(Color.WHITE);
-		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnThem.setBackground(new Color(233, 180, 46));
-		btnThem.setBounds(39, 56, 157, 62);
-		btnThem.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlChucNang.add(btnThem);
-
-		// Nút sửa
+		// Nút Sửa
 		btnSua = new CircleBtn("Sửa");
 		btnSua.setForeground(Color.WHITE);
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSua.setBackground(new Color(233, 180, 46));
-		btnSua.setBounds(431, 56, 157, 62);
+		btnSua.setBounds(267, 56, 157, 62);
 		btnSua.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlChucNang.add(btnSua);
 
-		// title Chưc năng
-		lblNewLabel = new JLabel("Chức Năng");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(54, 558, 117, 29);
-		pnlCentent.add(lblNewLabel);
-
 		/*
-		 * Phần tìm kiếm
+		 * 	Phần tìm kiếm 
 		 */
-		// Background tìm kiếm
-		pnlTimKiem = new RoundedPanel();
-		pnlTimKiem.setBackground(new Color(248, 198, 153));
-		pnlTimKiem.setBounds(670, 589, 726, 174);
+		// Title tìm kiếm
+		JLabel lblTmKim = new JLabel("Tìm kiếm");
+		lblTmKim.setForeground(Color.WHITE);
+		lblTmKim.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblTmKim.setBounds(561, 558, 123, 31);
+		pnlCentent.add(lblTmKim);
+		
+		// Background tìm kiếm 
+		JPanel pnlTimKiem = new RoundedPanel();
+		pnlTimKiem.setBounds(522, 588, 875, 174);
 		pnlCentent.add(pnlTimKiem);
 		pnlTimKiem.setLayout(null);
+		pnlTimKiem.setBackground(new Color(248, 198, 153));
 
-		// Combobox loại
-		String str[] = { "Tìm kiếm theo tên nhân viên", "Tìm kiếm theo năm sinh" };
-		cmbTimKiem = new JComboBox<String>(str);
-		cmbTimKiem.setBackground(new Color(233, 180, 46));
+		// Combobox tìm kiếm 
+		cmbTimKiem = new JComboBox<String>();
+		cmbTimKiem.setModel(
+				new DefaultComboBoxModel(new String[] { "Tìm kiếm theo mã sản phẩm", "Tìm kiếm theo tên sản phẩm" }));
 		cmbTimKiem.setForeground(Color.WHITE);
 		cmbTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cmbTimKiem.setBounds(50, 33, 628, 41);
+		cmbTimKiem.setBackground(new Color(233, 180, 46));
+		cmbTimKiem.setBounds(100, 29, 675, 41);
 		pnlTimKiem.add(cmbTimKiem);
 
-		// Textfield Tìm Kiếm
-		txtTiemKiem = new RoundTextField("", 1000);
-		txtTiemKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTiemKiem.setBounds(50, 101, 477, 48);
-		pnlTimKiem.add(txtTiemKiem);
-		txtTiemKiem.setColumns(10);
+		// Jtextfield tìm kiếm 
+		txtTimKiem = new RoundTextField("", 1000);
+		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtTimKiem.setColumns(10);
+		txtTimKiem.setBounds(100, 99, 462, 46);
+		pnlTimKiem.add(txtTimKiem);
 
-		// Nút Tìm kiếm
-		btnTimKiem = new CircleBtn("Tìm kiếm");
+		// Nút tìm kiếm 
+		btnTimKiem = new CircleBtn("Tìm Kiếm");
 		btnTimKiem.setForeground(Color.WHITE);
-		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnTimKiem.setBackground(new Color(233, 180, 46));
-		btnTimKiem.setBounds(543, 101, 135, 48);
+		btnTimKiem.setBounds(587, 99, 188, 46);
 		btnTimKiem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlTimKiem.add(btnTimKiem);
 
-		lblTimKiem = new JLabel("Tìm Kiếm");
-		lblTimKiem.setForeground(Color.WHITE);
-		lblTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTimKiem.setBounds(694, 558, 105, 29);
-		pnlCentent.add(lblTimKiem);
-		
 		pnMenu = new Gui_Menu();
 		temp = pnlHeader.getBounds();
 		temp2 = pnlNgang.getBounds();
 		temp3 = pnlCentent.getBounds();
 
 		/**
-		 * Các sự kiện
+		 * 	Thêm sự kiện
 		 */
-		lblMenu.addMouseListener(this);
+		lblIconMenu.addMouseListener(this);
 		lblDangXuat.addMouseListener(this);
 		lblIconDX.addMouseListener(this);
-		btnThem.addActionListener(this);
 		btnSua.addActionListener(this);
 		addWindowListener(this);
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+
+	}
+
+	/**
+	 *	 Xác nhận thoát
+	 */
+	@Override
+	public void windowClosing(WindowEvent e) {
+		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
+				JOptionPane.YES_NO_OPTION);
+		if (tl == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+
 	}
 
 	@Override
@@ -315,7 +339,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		Object o = e.getSource();
 		if (o.equals(lblIconDX) || o.equals(lblDangXuat)) { // Hiển thị From đăng nhập
 			new Gui_DangNhap().setVisible(true);
-		} else if (o.equals(lblMenu)) { // Hiển thị Menu
+		} else if (o.equals(lblIconMenu)) { // Hiển thị Menu
 			if (pnlHeader.getX() == 400) {
 				this.remove(pnMenu);
 				pnlHeader.setBounds(temp);
@@ -347,58 +371,14 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		if (o.equals(btnThem)) // Hiển thị From Thêm nhân viên
-			new Gui_ThemNhanVien().setVisible(true);
-		
-		else if (o.equals(btnSua)) // Hiển thị From Sửa thông tin nhân viên
-			new Gui_SuaNhanVien().setVisible(true);
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-		
-	}
-
-	/*
-	 * 	Xác nhận thoát
-	 */
-	@Override
-	public void windowClosing(WindowEvent e) {
-		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát", JOptionPane.YES_NO_OPTION);
-		if (tl == JOptionPane.YES_OPTION) {
-			System.exit(0);
+		if (o.equals(btnSua)) {
+			new Gui_SuaThongTinSanPham().setVisible(true);
 		}
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e) {
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e) {
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		
 	}
 
 }
