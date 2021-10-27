@@ -13311,3 +13311,9 @@ org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 2; The markup in the
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2021-10-27 21:51:49.409
 !MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2021-10-27 23:36:29.173
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2021-10-27 23:36:29.221
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
