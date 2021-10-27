@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "ChiTietHoaDonBan")
 public class ChiTietHoaDonBan {
 	private double donGia;
-	private double soLuong;
+	private int soLuong;
 
 	@Id
 	@ManyToOne
@@ -32,11 +32,11 @@ public class ChiTietHoaDonBan {
 		this.donGia = donGia;
 	}
 
-	public double getSoLuong() {
+	public int getSoLuong() {
 		return soLuong;
 	}
 
-	public void setSoLuong(double soLuong) {
+	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
 
@@ -60,7 +60,7 @@ public class ChiTietHoaDonBan {
 		super();
 	}
 
-	public ChiTietHoaDonBan(double donGia, double soLuong, HoaDonBanHang hoaDonBanHang, SanPham sanPham) {
+	public ChiTietHoaDonBan(double donGia, int soLuong, HoaDonBanHang hoaDonBanHang, SanPham sanPham) {
 		super();
 		this.donGia = donGia;
 		this.soLuong = soLuong;
