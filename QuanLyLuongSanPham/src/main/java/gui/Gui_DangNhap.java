@@ -91,7 +91,7 @@ public class Gui_DangNhap extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\dtNho.png"));
+		lblLogo.setIcon(new ImageIcon("img\\dtNho.png"));
 		lblLogo.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setBounds(0, 0, 72, 44);
