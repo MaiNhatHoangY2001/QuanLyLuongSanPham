@@ -30,7 +30,7 @@ public class PnlThongKeChi extends JPanel {
 	private JComboBox<String> cboLoaiTep;
 	private JButton btnSrc;
 	private JButton btnIn;
-	private JComboBox<String> cboTimKiemBox;
+	private JComboBox cboTimKiemBox;
 	private JPanel pnlTimKiem;
 	private JTextField txtTimKiem;
 	private JButton btnTimKiem;
@@ -135,7 +135,7 @@ public class PnlThongKeChi extends JPanel {
 
 		String str[] = { "Tìm kiếm theo tháng", "Tìm kiếm dữ liệu lớn hơn tổng tiền",
 				"Tìm kiếm dữ liệu nhỏ hơn tổng tiền" };
-		cboTimKiemBox = new JComboBox<String>(str);
+		cboTimKiemBox = new JComboBox(str);
 		cboTimKiemBox.setBackground(new Color(233, 180, 46));
 		cboTimKiemBox.setForeground(Color.WHITE);
 		cboTimKiemBox.setFont(new Font("Tahoma", Font.PLAIN, 20));

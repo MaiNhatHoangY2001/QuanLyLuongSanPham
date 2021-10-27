@@ -22,6 +22,7 @@ public class NhanVien {
 	private String chucVu;
 	private String email;
 	private LocalDate ngaySinh;
+	private boolean gioiTinh;
 
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -38,7 +39,9 @@ public class NhanVien {
 	@Override
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
-				+ sDT + ", cCCD=" + cCCD + ", chucVu=" + chucVu + ", email=" + email + ", ngaySinh=" + ngaySinh + "]";
+				+ sDT + ", cCCD=" + cCCD + ", chucVu=" + chucVu + ", email=" + email + ", ngaySinh=" + ngaySinh
+				+ ", gioiTinh=" + gioiTinh + ", taiKhoan=" + taiKhoan + ", dsBangLuong=" + dsBangLuong
+				+ ", dsHoaDonNhapHang=" + dsHoaDonNhapHang + ", dsHoaDonBanHang=" + dsHoaDonBanHang + "]";
 	}
 
 	public String getMaNhanVien() {
@@ -103,6 +106,14 @@ public class NhanVien {
 
 	public void setNgaySinh(LocalDate ngaySinh) {
 		this.ngaySinh = ngaySinh;
+	}
+
+	public boolean isGioiTinh() {
+		return gioiTinh;
+	}
+
+	public void setGioiTinh(boolean gioiTinh) {
+		this.gioiTinh = gioiTinh;
 	}
 
 	public TaiKhoan getTaiKhoan() {
@@ -172,7 +183,7 @@ public class NhanVien {
 	}
 
 	public NhanVien(String maNhanVien, String tenNhanVien, String diaChi, String sDT, String cCCD, String chucVu,
-			String email, LocalDate ngaySinh) {
+			String email, LocalDate ngaySinh, boolean gioiTinh) {
 		super();
 		this.maNhanVien = maNhanVien;
 		this.tenNhanVien = tenNhanVien;
@@ -182,5 +193,6 @@ public class NhanVien {
 		this.chucVu = chucVu;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
+		this.gioiTinh = gioiTinh;
 	}
 }

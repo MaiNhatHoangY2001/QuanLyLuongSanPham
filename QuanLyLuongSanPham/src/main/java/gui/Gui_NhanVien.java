@@ -10,10 +10,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import dao.NhanVienDao;
 import gui_package.ChucNang;
 import gui_package.CircleBtn;
 import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
+import model.NhanVien;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +31,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.ComponentOrientation;
 import java.awt.Color;
 import javax.swing.JTable;
@@ -69,11 +73,13 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 	private JButton btnXoa;
 
 	private JComboBox<String> cmbTimKiem;
-	
+
 	private Gui_Menu pnMenu;
 	private Rectangle temp;
 	private Rectangle temp2;
 	private Rectangle temp3;
+	private NhanVienDao daoNV;
+	private List<NhanVien> listNV;
 
 	/**
 	 * Launch the application.
@@ -103,7 +109,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		setContentPane(contentPane);
 		setLocationRelativeTo(null);
 		setResizable(false);
-
+		
 		/**
 		 * Phần đầu
 		 */
@@ -129,7 +135,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		lblTenTaiKhoang.setBounds(1246, 22, 90, 40);
 		lblTenTaiKhoang.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlHeader.add(lblTenTaiKhoang);
-		
+
 		lblIconUser = new JLabel("");
 		Image imgUser = new ImageIcon("img\\user1.png").getImage();
 		lblIconUser.setIcon(new ImageIcon(imgUser));
@@ -144,7 +150,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		lblDangXuat.setBounds(1246, 67, 110, 24);
 		lblDangXuat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlHeader.add(lblDangXuat);
-		
+
 		lblIconDX = new JLabel("");
 		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
 		lblIconDX.setIcon(new ImageIcon(imgDX));
@@ -189,7 +195,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		 * Phần Bảnh Nhân Viên
 		 */
 		// modelTable
-		String header[] = { "MSNV", "Họ Và Tên", "Ngày Sinh", "Giới Tính", "SĐT", "Chức Vụ", "Email"};
+		String header[] = { "MSNV", "Họ Và Tên", "Ngày Sinh", "Giới Tính", "SĐT", "Chức Vụ", "Email" };
 		model = new DefaultTableModel(header, 50);
 
 		// table
@@ -293,7 +299,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		lblTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblTimKiem.setBounds(694, 558, 105, 29);
 		pnlCentent.add(lblTimKiem);
-		
+
 		pnMenu = new Gui_Menu();
 		temp = pnlHeader.getBounds();
 		temp2 = pnlNgang.getBounds();
@@ -308,6 +314,15 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		btnThem.addActionListener(this);
 		btnSua.addActionListener(this);
 		addWindowListener(this);
+		
+		/**
+		 * 	Kết nối DAO và thực hiện các thao tác
+		 */
+//		daoNV = new NhanVienDao();
+//		listNV = daoNV.getAllNhanVien();
+//		
+//		// Thêm dữ liệu vào bảng Nhân viên
+//		themThongTinNhanVienVaoBang(listNV);
 	}
 
 	@Override
@@ -327,6 +342,40 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 				pnlCentent.setBounds(400, pnlCentent.getY(), 1440 - 400, pnlCentent.getHeight());
 				add(pnMenu);
 			}
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object o = e.getSource();
+		if (o.equals(btnThem)) // Hiển thị From Thêm nhân viên
+			new Gui_ThemNhanVien().setVisible(true);
+
+		else if (o.equals(btnSua)) // Hiển thị From Sửa thông tin nhân viên
+			new Gui_SuaNhanVien().setVisible(true);
+	}
+	
+	/*
+	 * Xác nhận thoát
+	 */
+	@Override
+	public void windowClosing(WindowEvent e) {
+		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
+				JOptionPane.YES_NO_OPTION);
+		if (tl == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	
+	/**
+	 * Thêm tất cả nhân viên vào bảng 
+	 * @param listNV2
+	 */
+	private void themThongTinNhanVienVaoBang(List<NhanVien> list) {
+		ChucNang.clearDateTable(model);
+		for (NhanVien nv : list) {
+			String n[] = {nv.getMaNhanVien(), nv.getTenNhanVien(), nv.getNgaySinh() + "", nv.isGioiTinh() == true ? "Nam":"Nữ", nv.getsDT(), nv.getChucVu(), nv.getEmail()};
+			model.addRow(n);
 		}
 	}
 
@@ -351,54 +400,33 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object o = e.getSource();
-		if (o.equals(btnThem)) // Hiển thị From Thêm nhân viên
-			new Gui_ThemNhanVien().setVisible(true);
-		
-		else if (o.equals(btnSua)) // Hiển thị From Sửa thông tin nhân viên
-			new Gui_SuaNhanVien().setVisible(true);
-	}
-
-	@Override
 	public void windowOpened(WindowEvent e) {
-		
-	}
 
-	/*
-	 * 	Xác nhận thoát
-	 */
-	@Override
-	public void windowClosing(WindowEvent e) {
-		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát", JOptionPane.YES_NO_OPTION);
-		if (tl == JOptionPane.YES_OPTION) {
-			System.exit(0);
-		}
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		
+
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		
+
 	}
 
 }
