@@ -20,9 +20,7 @@ import org.hibernate.annotations.Parameter;
 public class NhanVien {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
-	@GenericGenerator(	name = "sinhMaTheoNgay",
-						parameters = @Parameter(name="prefix",value = "NV"),
-						strategy = "generator.SinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "NV"), strategy = "generator.SinhMaTheoNgay")
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
@@ -49,7 +47,7 @@ public class NhanVien {
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
 				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
-				+ ngaySinh + "]";
+				+ ngaySinh + ", taiKhoan=" + taiKhoan + "]";
 	}
 
 	public String getMaNhanVien() {
@@ -182,9 +180,10 @@ public class NhanVien {
 		return true;
 	}
 
-	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD, boolean trangThaiLamViec, String email,
-			LocalDate ngaySinh) {
+	public NhanVien(String maNhanVien, String tenNhanVien, String diaChi, String sDT, String cCCD,
+			boolean trangThaiLamViec, String email, LocalDate ngaySinh, TaiKhoan taiKhoan) {
 		super();
+		this.maNhanVien = maNhanVien;
 		this.tenNhanVien = tenNhanVien;
 		this.diaChi = diaChi;
 		this.sDT = sDT;
@@ -192,5 +191,7 @@ public class NhanVien {
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
+		this.taiKhoan = taiKhoan;
 	}
+
 }

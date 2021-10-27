@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "ChiTietHoaDonBan")
 public class ChiTietHoaDonBan {
 	private double donGia;
-	private double soLuong;
+	private int soLuong;
 	
 	@Id
 	@ManyToOne
@@ -24,8 +24,52 @@ public class ChiTietHoaDonBan {
 	@JoinColumn(name = "maSanPham")
 	private SanPham sanPham;
 
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
+	}
+
+	public int getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
+	}
+
+	public HoaDonBanHang getHoaDonBanHang() {
+		return hoaDonBanHang;
+	}
+
+	public void setHoaDonBanHang(HoaDonBanHang hoaDonBanHang) {
+		this.hoaDonBanHang = hoaDonBanHang;
+	}
+
+	public SanPham getSanPham() {
+		return sanPham;
+	}
+
+	public void setSanPham(SanPham sanPham) {
+		this.sanPham = sanPham;
+	}
+
+	public ChiTietHoaDonBan() {
+		super();
+	}
+
+	public ChiTietHoaDonBan(double donGia, int soLuong, HoaDonBanHang hoaDonBanHang, SanPham sanPham) {
+		super();
+		this.donGia = donGia;
+		this.soLuong = soLuong;
+		this.hoaDonBanHang = hoaDonBanHang;
+		this.sanPham = sanPham;
+	}
+
 	public double tinhTongTien() {
-		return 0;
+		return soLuong * donGia;
 	}
 
 	@Override
