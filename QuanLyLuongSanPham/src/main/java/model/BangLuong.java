@@ -85,16 +85,13 @@ public class BangLuong {
 		this.nhanVien = nhanVien;
 	}
 
-	public BangLuong(String maBangLuong, LocalDate thoiGian, double mucLuong, double heSoLuong, double tienSanPham,
-			int soNgayCong, NhanVien nhanVien) {
+	public BangLuong(LocalDate thoiGian, double mucLuong, double heSoLuong, double tienSanPham, int soNgayCong) {
 		super();
-		this.maBangLuong = maBangLuong;
 		this.thoiGian = thoiGian;
 		this.mucLuong = mucLuong;
 		this.heSoLuong = heSoLuong;
 		this.tienSanPham = tienSanPham;
 		this.soNgayCong = soNgayCong;
-		this.nhanVien = nhanVien;
 	}
 
 	public BangLuong() {

@@ -34,7 +34,7 @@ public class SanPhamDao {
 			return false;
 		}
 	}
-	public SanPham getNhanVien(String id) {
+	public SanPham getSanPham(String id) {
 		SanPham sanPham;
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
