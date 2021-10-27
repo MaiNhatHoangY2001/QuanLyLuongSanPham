@@ -13,13 +13,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "HoaDonBanHang")
 public class HoaDonBanHang {
 	@Id
-	@GeneratedValue(generator = "sinhMaHoaDonBan")
-	@GenericGenerator(name = "sinhMaHoaDonBan", strategy = "generator.SinhMaHoaDonBan")
+	@GeneratedValue(generator = "sinhMaTheoNgay")
+	@GenericGenerator(	name = "sinhMaTheoNgay",
+						parameters = @Parameter(name="prefix",value = "HB"),
+						strategy = "generator.SinhMaTheoNgay")
 	private String maHoaDonBan;
 	private LocalDate ngayLapHoaDon;
 	private double khuyenMai;

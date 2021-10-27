@@ -13,13 +13,16 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "NhanVien")
 public class NhanVien {
 	@Id
-	@GeneratedValue(generator = "sinhMaNhanVien")
-	@GenericGenerator(name = "sinhMaNhanVien", strategy = "generator.SinhMaNhanVien")
+	@GeneratedValue(generator = "sinhMaTheoNgay")
+	@GenericGenerator(	name = "sinhMaTheoNgay",
+						parameters = @Parameter(name="prefix",value = "NV"),
+						strategy = "generator.SinhMaTheoNgay")
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
@@ -29,7 +32,6 @@ public class NhanVien {
 	private boolean trangThaiLamViec;
 	private String email;
 	private LocalDate ngaySinh;
-	private boolean gioiTinh;
 
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -114,14 +116,6 @@ public class NhanVien {
 		this.ngaySinh = ngaySinh;
 	}
 
-	public boolean isGioiTinh() {
-		return gioiTinh;
-	}
-
-	public void setGioiTinh(boolean gioiTinh) {
-		this.gioiTinh = gioiTinh;
-	}
-
 	public TaiKhoan getTaiKhoan() {
 		return taiKhoan;
 	}
@@ -198,6 +192,5 @@ public class NhanVien {
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
-		this.gioiTinh = gioiTinh;
 	}
 }

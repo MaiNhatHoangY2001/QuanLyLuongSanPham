@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,13 +10,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "SanPham")
 public class SanPham {
 	@Id
 	@GeneratedValue(generator = "sinhMaSanPham")
-	@GenericGenerator(name = "sinhMaSanPham", strategy = "generator.SinhMaSanPham")
+	@GenericGenerator(name = "sinhMaSanPham",
+						parameters = @Parameter(name="prefix", value = "SP"),
+						strategy = "generator.SinhMaSanPham")
 	private String maSanpham;
 	private String tenSanPham;
 	private double giaThanh;
@@ -31,8 +33,6 @@ public class SanPham {
 	private List<ChiTietHoaDonBan> dsChiTietHoaDonBan;
 
 	public SanPham() {
-		super();
-		setMaSanpham("DT211024000");
 	}
 
 	@Override
