@@ -8585,3 +8585,8 @@ java.util.ConcurrentModificationException: null
 2021-10-27 23:29:04,121 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
 2021-10-27 23:29:04,125 [Worker-40: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-10-27 23:29:04,125 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-10-27 23:36:28,196 [Worker-50: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: DeTaiPTUD:DeTaiPTUD:0.0.1-SNAPSHOT @ D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\pom.xml.
+2021-10-27 23:36:29,173 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-10-27 23:36:29,177 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-10-27 23:36:29,221 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-10-27 23:36:29,221 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
