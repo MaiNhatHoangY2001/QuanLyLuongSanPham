@@ -13,13 +13,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "NhanVien")
 public class NhanVien {
 	@Id
-	@GeneratedValue(generator = "sinhMaNhanVien")
-	@GenericGenerator(name = "sinhMaNhanVien", strategy = "generator.SinhMaNhanVien")
+	@GeneratedValue(generator = "sinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "NV"), strategy = "generator.SinhMaTheoNgay")
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
@@ -29,7 +30,6 @@ public class NhanVien {
 	private boolean trangThaiLamViec;
 	private String email;
 	private LocalDate ngaySinh;
-	private boolean gioiTinh;
 
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -47,7 +47,7 @@ public class NhanVien {
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
 				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
-				+ ngaySinh + ", gioiTinh=" + gioiTinh + ", taiKhoan=" + taiKhoan + "]";
+				+ ngaySinh + ", taiKhoan=" + taiKhoan + "]";
 	}
 
 	public String getMaNhanVien() {
@@ -112,14 +112,6 @@ public class NhanVien {
 
 	public void setNgaySinh(LocalDate ngaySinh) {
 		this.ngaySinh = ngaySinh;
-	}
-
-	public boolean isGioiTinh() {
-		return gioiTinh;
-	}
-
-	public void setGioiTinh(boolean gioiTinh) {
-		this.gioiTinh = gioiTinh;
 	}
 
 	public TaiKhoan getTaiKhoan() {
@@ -189,7 +181,7 @@ public class NhanVien {
 	}
 
 	public NhanVien(String maNhanVien, String tenNhanVien, String diaChi, String sDT, String cCCD,
-			boolean trangThaiLamViec, String email, LocalDate ngaySinh, boolean gioiTinh, TaiKhoan taiKhoan) {
+			boolean trangThaiLamViec, String email, LocalDate ngaySinh, TaiKhoan taiKhoan) {
 		super();
 		this.maNhanVien = maNhanVien;
 		this.tenNhanVien = tenNhanVien;
@@ -199,7 +191,6 @@ public class NhanVien {
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
-		this.gioiTinh = gioiTinh;
 		this.taiKhoan = taiKhoan;
 	}
 

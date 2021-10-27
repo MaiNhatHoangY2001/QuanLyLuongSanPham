@@ -49,10 +49,26 @@ public class NhanVienDao {
 
 	}
 
+	public boolean themNhanVien(NhanVien nhanVien) {
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.save(nhanVien);
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+			return false;
+		}
+		session.close();
+		return true;
+
+	}
 	public static void main(String[] args) {
 		NhanVienDao dao = new NhanVienDao();
-		dao.getAllNhanVien().forEach(e->{
-			System.out.println(e);
-		});
+		NhanVien nhanVien= new NhanVien();
+//		dao.getAllNhanVien().forEach(e->{
+//			System.out.println(e);
+//		});
 	}
 }

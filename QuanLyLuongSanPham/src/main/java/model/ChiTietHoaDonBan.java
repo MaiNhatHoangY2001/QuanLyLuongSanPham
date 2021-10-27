@@ -13,12 +13,12 @@ import javax.persistence.Table;
 public class ChiTietHoaDonBan {
 	private double donGia;
 	private int soLuong;
-
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "maHoaDonBan")
 	private HoaDonBanHang hoaDonBanHang;
-
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "maSanPham")
@@ -69,11 +69,11 @@ public class ChiTietHoaDonBan {
 	}
 
 	public double tinhTongTien() {
-		return donGia * soLuong;
+		return soLuong * donGia;
 	}
 
 	@Override
 	public String toString() {
-		return "ChiTietHoaDonBan [donGia=" + donGia + ", soLuong=" + soLuong + "]";
+		return "ChiTietHoaDonBan [donGia=" + donGia + ", soLuong=" + soLuong +"]";
 	}
 }

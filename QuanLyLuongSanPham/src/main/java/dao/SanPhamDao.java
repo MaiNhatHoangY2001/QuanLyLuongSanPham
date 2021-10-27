@@ -1,52 +1,62 @@
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.time.LocalDate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
-import model.BangLuong;
+import model.NhanVien;
 import model.SanPham;
 
 public class SanPhamDao {
-	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
+	private SessionFactory sessionFactory = null;
 
-	public SanPham getSanPham(String maSanPham) {
-		SanPham sanPham = null;
+	public SanPhamDao() {
+		sessionFactory = HibernateConfig.getInstance().getSessionFactory();
+	}
+
+	public boolean themSanPham(SanPham sanPham) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
+
 		try {
 			tr.begin();
-			sanPham = session.get(SanPham.class, maSanPham);
+			session.save(sanPham);
 			tr.commit();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			tr.commit();
+			tr.rollback();
+			return false;
 		}
-		session.close();
-
-		return sanPham;
-
 	}
-
-	public List<SanPham> getAllSanPham() {
-		List<SanPham> list = new ArrayList<SanPham>();
-		Session session = sessionFactory.getCurrentSession();
+	public SanPham getNhanVien(String id) {
+		SanPham sanPham;
+		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
+
 		try {
 			tr.begin();
-
-			list = session.createNativeQuery("select * from SanPham", SanPham.class).getResultList();
-
+			sanPham=session.find(SanPham.class, id);
 			tr.commit();
+			return sanPham;
 		} catch (Exception e) {
+			e.printStackTrace();
 			tr.rollback();
 		}
-		session.close();
-		return list;
-
+		return null;
 	}
+	public static void main(String[] args) {
+		
+		SanPham pham= new SanPham("Iphone 14", 499999999, "Chinh nghèo", "PK", LocalDate.of(2020,9, 23));
+		SanPhamDao sanPhamDao= new SanPhamDao();
+		
+//		System.out.println(sanPhamDao.getNhanVien("SP21100001"));
+		System.out.println(sanPhamDao.themSanPham(pham));
+	}
+
 }

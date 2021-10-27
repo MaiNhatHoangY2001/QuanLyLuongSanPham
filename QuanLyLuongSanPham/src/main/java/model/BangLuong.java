@@ -11,13 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "BangLuong")
 public class BangLuong {
 	@Id
-	@GeneratedValue(generator = "sinhMaBangLuong")
-	@GenericGenerator(name = "sinhMaBangLuong", strategy = "generator.SinhMaBangLuong")
+	@GeneratedValue(generator = "sinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "BL"), strategy = "generator.SinhMaTheoNgay")
 	private String maBangLuong;
 	private LocalDate thoiGian;
 	private double mucLuong;
@@ -83,15 +84,9 @@ public class BangLuong {
 	public void setNhanVien(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
 	}
-	
-	
-
-	public BangLuong() {
-		super();
-	}
 
 	public BangLuong(String maBangLuong, LocalDate thoiGian, double mucLuong, double heSoLuong, double tienSanPham,
-			int soNgayCong) {
+			int soNgayCong, NhanVien nhanVien) {
 		super();
 		this.maBangLuong = maBangLuong;
 		this.thoiGian = thoiGian;
@@ -99,6 +94,11 @@ public class BangLuong {
 		this.heSoLuong = heSoLuong;
 		this.tienSanPham = tienSanPham;
 		this.soNgayCong = soNgayCong;
+		this.nhanVien = nhanVien;
+	}
+
+	public BangLuong() {
+		super();
 	}
 
 	@Override
