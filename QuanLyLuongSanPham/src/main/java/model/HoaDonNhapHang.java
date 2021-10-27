@@ -16,31 +16,90 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name="HoaDonNhapHang")
+@Table(name = "HoaDonNhapHang")
 public class HoaDonNhapHang {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
-	@GenericGenerator(	name = "sinhMaTheoNgay",
-						parameters = @Parameter(name="prefix",value = "HN"),
-						strategy = "generator.SinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "HN"), strategy = "generator.SinhMaTheoNgay")
 	private String maHoaDonNhap;
 	private LocalDate ngayLapHoaDon;
 	private double thue;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "maNhanVien")
 	private NhanVien nhanVien;
-	
+
 	@OneToMany(mappedBy = "hoaDonNhapHang")
 	private List<ChiTietHoaDonNhap> dsChiTietHoaDonNhap;
 	private double thanhTien;
-	
+
+	public HoaDonNhapHang(LocalDate ngayLapHoaDon, double thue) {
+		super();
+		this.ngayLapHoaDon = ngayLapHoaDon;
+		this.thue = thue;
+	}
+
 	public double tinhThanhTien() {
+		this.thanhTien = 0;
+		dsChiTietHoaDonNhap.forEach(ct -> {
+			this.thanhTien += ct.tinhTongTien();
+		});
+		this.thanhTien = this.thanhTien - this.thanhTien * thue;
+		return this.thanhTien;
+	}
+
+	public double tinhThue() {
+		return thue;
+	}
+
+	public String getMaHoaDonNhap() {
+		return maHoaDonNhap;
+	}
+
+	public void setMaHoaDonNhap(String maHoaDonNhap) {
+		this.maHoaDonNhap = maHoaDonNhap;
+	}
+
+	public LocalDate getNgayLapHoaDon() {
+		return ngayLapHoaDon;
+	}
+
+	public void setNgayLapHoaDon(LocalDate ngayLapHoaDon) {
+		this.ngayLapHoaDon = ngayLapHoaDon;
+	}
+
+	public double getThue() {
+		return thue;
+	}
+
+	public void setThue(double thue) {
+		this.thue = thue;
+	}
+
+	public NhanVien getNhanVien() {
+		return nhanVien;
+	}
+
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
+	}
+
+	public List<ChiTietHoaDonNhap> getDsChiTietHoaDonNhap() {
+		return dsChiTietHoaDonNhap;
+	}
+
+	public void setDsChiTietHoaDonNhap(List<ChiTietHoaDonNhap> dsChiTietHoaDonNhap) {
+		this.dsChiTietHoaDonNhap = dsChiTietHoaDonNhap;
+	}
+
+	public double getThanhTien() {
 		return thanhTien;
 	}
-	public double tinhThue() {
-		return 0;
+
+	public void setThanhTien(double thanhTien) {
+		this.thanhTien = thanhTien;
 	}
+
 	@Override
 	public String toString() {
 		return "HoaDonNhapHang [maHoaDonNhap=" + maHoaDonNhap + ", ngayLapHoaDon=" + ngayLapHoaDon + ", thue=" + thue
