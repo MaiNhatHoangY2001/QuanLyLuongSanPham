@@ -1,0 +1,17 @@
+package newGui;
+
+import javax.swing.JPanel;
+import java.awt.Dimension;
+
+public class Gui_QuanLyHoaDon extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Gui_QuanLyHoaDon() {
+		setMinimumSize(new Dimension(1600, 1046));
+		setLayout(null);
+		
+	}
+
+}

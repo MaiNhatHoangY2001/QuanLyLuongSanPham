@@ -1,0 +1,7 @@
+package services;
+
+import dao.HoaDonBanHangDao;
+
+public class QuanLyHoaDonService {
+	private HoaDonBanHangDao hoaDonBanHangDao= new HoaDonBanHangDao()
+}

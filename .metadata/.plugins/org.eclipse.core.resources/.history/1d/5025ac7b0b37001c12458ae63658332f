@@ -1,0 +1,14 @@
+package newGui;
+
+import javax.swing.JPanel;
+
+public class Gui_QuanLyHoaDon extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Gui_QuanLyHoaDon() {
+
+	}
+
+}

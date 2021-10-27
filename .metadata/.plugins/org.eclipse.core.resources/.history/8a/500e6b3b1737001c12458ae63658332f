@@ -1,0 +1,48 @@
+package newGui;
+
+import javax.swing.JPanel;
+import java.awt.Dimension;
+import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+public class Gui_QuanLyHoaDon extends JPanel {
+	private JTable table;
+	private JTable table_1;
+
+	/**
+	 * Create the panel.
+	 */
+	public Gui_QuanLyHoaDon() {
+		setPreferredSize(new Dimension(1600, 1046));
+		setMinimumSize(new Dimension(1600, 1046));
+		setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 153, 0));
+		panel.setBounds(0, 0, 1600, 92);
+		add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(194, 93, 0));
+		panel_1.setPreferredSize(new Dimension(1600, 72));
+		panel_1.setBounds(0, 92, 1600, 72);
+		add(panel_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(255, 153, 0));
+		scrollPane.setBounds(0, 200, 1600, 426);
+		add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 670, 1150, 362);
+		add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		
+	}
+}
