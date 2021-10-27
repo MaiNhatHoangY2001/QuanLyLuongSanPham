@@ -1,10 +1,11 @@
 package gui_package;
 
-
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,8 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class ChucNang {
@@ -24,6 +27,7 @@ public class ChucNang {
 	 */
 	public static void setGio(JLabel lblGio) {
 		TimerTask timerTask = new TimerTask() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				lblGio.setText((new Date().getHours() >= 10 ? "" : "0") + (new Date().getHours())
@@ -72,19 +76,21 @@ public class ChucNang {
 		if (defaults.get("Table.alternateRowColor") == null)
 			defaults.put("Table.alternateRowColor", new Color(255, 240, 226));
 	}
-	
+
 	/**
 	 * chức năng giúp xóa tất cả dữ liệu có trong bảng
+	 * 
 	 * @param model
 	 */
-	public static void clearDateTable(DefaultTableModel model) {
+	public static void clearDataTable(DefaultTableModel model) {
 		while (model.getRowCount() > 0) {
 			model.removeRow(0);
 		}
 	}
-	
+
 	/**
 	 * Chức năng giúp thêm vào những hàng rỗng cho đẹp bảng
+	 * 
 	 * @param model
 	 */
 	public static void addNullDataTable(DefaultTableModel model) {
@@ -92,6 +98,33 @@ public class ChucNang {
 			model.addRow(new Object[] { null, null, null, null, null, null, null });
 		}
 	}
-	
+
+	/**
+	 * Chức năng căn phải các cột trong bảng
+	 * 
+	 * @param list
+	 */
+	public static void setRightAlignmentTable(int[] list, JTable table) {
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+		for (int i : list) {
+			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+		}
+
+	}
+
+	/**
+	 * Chức năng căn giữa các cột trong bảng
+	 * 
+	 * @param list
+	 */
+	public static void setCenterAlignmentTable(int[] list, JTable table) {
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(JLabel.CENTER);
+		for (int i : list) {
+			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+		}
+
+	}
 
 }

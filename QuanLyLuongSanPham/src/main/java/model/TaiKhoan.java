@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,6 +14,7 @@ public class TaiKhoan {
 
 	@Id
 	private String tenTaiKhoan;
+	@Column(columnDefinition = "varchar(30)")
 	private String matKhau;
 
 	@OneToOne

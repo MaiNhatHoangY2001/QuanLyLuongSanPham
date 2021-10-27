@@ -2,16 +2,22 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "BangLuong")
 public class BangLuong {
 	@Id
+	@GeneratedValue(generator = "sinhMaBangLuong")
+	@GenericGenerator(name = "sinhMaBangLuong", strategy = "generator.SinhMaBangLuong")
 	private String maBangLuong;
 	private LocalDate thoiGian;
 	private double mucLuong;
@@ -77,9 +83,15 @@ public class BangLuong {
 	public void setNhanVien(NhanVien nhanVien) {
 		this.nhanVien = nhanVien;
 	}
+	
+	
+
+	public BangLuong() {
+		super();
+	}
 
 	public BangLuong(String maBangLuong, LocalDate thoiGian, double mucLuong, double heSoLuong, double tienSanPham,
-			int soNgayCong, NhanVien nhanVien) {
+			int soNgayCong) {
 		super();
 		this.maBangLuong = maBangLuong;
 		this.thoiGian = thoiGian;
@@ -87,11 +99,6 @@ public class BangLuong {
 		this.heSoLuong = heSoLuong;
 		this.tienSanPham = tienSanPham;
 		this.soNgayCong = soNgayCong;
-		this.nhanVien = nhanVien;
-	}
-
-	public BangLuong() {
-		super();
 	}
 
 	@Override
@@ -101,6 +108,6 @@ public class BangLuong {
 	}
 
 	public double tinhLuong() {
-		return heSoLuong * soNgayCong + mucLuong + tienSanPham;
+		return mucLuong * heSoLuong * soNgayCong + tienSanPham;
 	}
 }

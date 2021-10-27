@@ -56,6 +56,10 @@ public class ChiTietHoaDonBan {
 		this.sanPham = sanPham;
 	}
 
+	public ChiTietHoaDonBan() {
+		super();
+	}
+
 	public ChiTietHoaDonBan(double donGia, double soLuong, HoaDonBanHang hoaDonBanHang, SanPham sanPham) {
 		super();
 		this.donGia = donGia;
@@ -64,12 +68,8 @@ public class ChiTietHoaDonBan {
 		this.sanPham = sanPham;
 	}
 
-	public ChiTietHoaDonBan() {
-		super();
-	}
-
 	public double tinhTongTien() {
-		return 0;
+		return donGia * soLuong;
 	}
 
 	@Override

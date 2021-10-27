@@ -8,11 +8,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
+import model.BangLuong;
 import model.SanPham;
 
 public class SanPhamDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
-	
+
 	public SanPham getSanPham(String maSanPham) {
 		SanPham sanPham = null;
 		Session session = sessionFactory.openSession();
@@ -30,8 +31,8 @@ public class SanPhamDao {
 		return sanPham;
 
 	}
-	
-	public List<SanPham> getAllBangLuong() {
+
+	public List<SanPham> getAllSanPham() {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
