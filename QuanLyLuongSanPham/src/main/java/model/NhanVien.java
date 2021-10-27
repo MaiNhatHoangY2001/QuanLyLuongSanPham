@@ -46,14 +46,8 @@ public class NhanVien {
 	@Override
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
-<<<<<<< HEAD
-				+ sDT + ", cCCD=" + cCCD + ", chucVu=" + chucVu + ", email=" + email + ", ngaySinh=" + ngaySinh
-				+ ", gioiTinh=" + gioiTinh + ", taiKhoan=" + taiKhoan + ", dsBangLuong=" + dsBangLuong
-				+ ", dsHoaDonNhapHang=" + dsHoaDonNhapHang + ", dsHoaDonBanHang=" + dsHoaDonBanHang + "]";
-=======
 				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
 				+ ngaySinh + "]";
->>>>>>> 6fb0d682e01bef56cac0a03dee36e8db83d705f4
 	}
 
 	public String getMaNhanVien() {
@@ -194,13 +188,8 @@ public class NhanVien {
 		return true;
 	}
 
-<<<<<<< HEAD
-	public NhanVien(String maNhanVien, String tenNhanVien, String diaChi, String sDT, String cCCD, String chucVu,
-			String email, LocalDate ngaySinh, boolean gioiTinh) {
-=======
 	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD, boolean trangThaiLamViec, String email,
 			LocalDate ngaySinh) {
->>>>>>> 6fb0d682e01bef56cac0a03dee36e8db83d705f4
 		super();
 		this.tenNhanVien = tenNhanVien;
 		this.diaChi = diaChi;
