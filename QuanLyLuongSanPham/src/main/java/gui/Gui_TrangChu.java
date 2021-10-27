@@ -128,7 +128,7 @@ public class Gui_TrangChu extends JFrame implements MouseListener {
 		lblGio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblGio.setBounds(1298, 129, 111, 34);
-		ChucNang.setGio(lblGio);
+//		ChucNang.setGio(lblGio);
 		panelMenu.add(lblGio);
 		
 		

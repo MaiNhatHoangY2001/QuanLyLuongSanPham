@@ -51,7 +51,8 @@ public class Gui_ThemHoaDonNhap extends JFrame {
 	 */
 	public Gui_ThemHoaDonNhap() {
 		setMinimumSize(new Dimension(1440, 1024));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 1440, 833);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

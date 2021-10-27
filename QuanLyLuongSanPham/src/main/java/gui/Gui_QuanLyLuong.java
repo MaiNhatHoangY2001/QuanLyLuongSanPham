@@ -117,7 +117,7 @@ public class Gui_QuanLyLuong extends JFrame {
 		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblGio.setBounds(1305, 96, 90, 36);
 		panel.add(lblGio);
-		ChucNang.setGio(lblGio);
+//		ChucNang.setGio(lblGio);
 
 		/**
 		 * tab

@@ -165,7 +165,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		lblGio.setBounds(1305, 96, 90, 36);
 		pnlHeader.add(lblGio);
 		ChucNang.setDiChuyenGD(this);
-		ChucNang.setGio(lblGio);
+//		ChucNang.setGio(lblGio);
 
 		// Menu
 		lblMenu = new JLabel("");

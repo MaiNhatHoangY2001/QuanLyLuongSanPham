@@ -45,7 +45,7 @@ public class HoaDonBanHang {
 	}
 
 	public double tinhThue() {
-		return 0;
+		return thue;
 	}
 
 	public String getMaHoaDonBan() {
@@ -123,6 +123,7 @@ public class HoaDonBanHang {
 		this.thue = thue;
 	}
 
+
 	public HoaDonBanHang(String maHoaDonBan) {
 		super();
 		this.maHoaDonBan = maHoaDonBan;
@@ -152,7 +153,7 @@ public class HoaDonBanHang {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "HoaDonBanHang [maHoaDonBan=" + maHoaDonBan + ", ngayLapHoaDon=" + ngayLapHoaDon + ", khuyenMai="

@@ -12,17 +12,31 @@ import javax.persistence.Table;
 @Table(name = "ChiTietHoaDonBan")
 public class ChiTietHoaDonBan {
 	private double donGia;
-	private int soLuong;
-	
+	private double soLuong;
+
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "maHoaDonBan")
 	private HoaDonBanHang hoaDonBanHang;
-	
+
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "maSanPham")
 	private SanPham sanPham;
+
+	public double tinhTongTien() {
+		return donGia*soLuong;
+	}
+
+	public ChiTietHoaDonBan() {
+		super();
+	}
+
+	public ChiTietHoaDonBan(double donGia, double soLuong) {
+		super();
+		this.donGia = donGia;
+		this.soLuong = soLuong;
+	}
 
 	public double getDonGia() {
 		return donGia;
@@ -32,11 +46,11 @@ public class ChiTietHoaDonBan {
 		this.donGia = donGia;
 	}
 
-	public int getSoLuong() {
+	public double getSoLuong() {
 		return soLuong;
 	}
 
-	public void setSoLuong(int soLuong) {
+	public void setSoLuong(double soLuong) {
 		this.soLuong = soLuong;
 	}
 
@@ -56,24 +70,8 @@ public class ChiTietHoaDonBan {
 		this.sanPham = sanPham;
 	}
 
-	public ChiTietHoaDonBan() {
-		super();
-	}
-
-	public ChiTietHoaDonBan(double donGia, int soLuong, HoaDonBanHang hoaDonBanHang, SanPham sanPham) {
-		super();
-		this.donGia = donGia;
-		this.soLuong = soLuong;
-		this.hoaDonBanHang = hoaDonBanHang;
-		this.sanPham = sanPham;
-	}
-
-	public double tinhTongTien() {
-		return soLuong * donGia;
-	}
-
 	@Override
 	public String toString() {
-		return "ChiTietHoaDonBan [donGia=" + donGia + ", soLuong=" + soLuong +"]";
+		return "ChiTietHoaDonBan [donGia=" + donGia + ", soLuong=" + soLuong + "]";
 	}
 }

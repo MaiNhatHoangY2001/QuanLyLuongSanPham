@@ -18,7 +18,9 @@ import org.hibernate.annotations.Parameter;
 public class BangLuong {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
-	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "BL"), strategy = "generator.SinhMaTheoNgay")
+	@GenericGenerator(	name = "sinhMaTheoNgay",
+						parameters = @Parameter(name="prefix",value = "BL"),
+						strategy = "generator.SinhMaTheoNgay")
 	private String maBangLuong;
 	private LocalDate thoiGian;
 	private double mucLuong;
@@ -103,8 +105,7 @@ public class BangLuong {
 		return "BangLuong [maBangLuong=" + maBangLuong + ", thoiGian=" + thoiGian + ", mucLuong=" + mucLuong
 				+ ", heSoLuong=" + heSoLuong + ", tienSanPham=" + tienSanPham + ", soNgayCong=" + soNgayCong + "]";
 	}
-
 	public double tinhLuong() {
-		return mucLuong * heSoLuong * soNgayCong + tienSanPham;
+		return 0;
 	}
 }
