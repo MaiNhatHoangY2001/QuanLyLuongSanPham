@@ -203,16 +203,4 @@ public class NhanVien {
 		this.taiKhoan = taiKhoan;
 	}
 
-	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD, boolean trangThaiLamViec, String email,
-			LocalDate ngaySinh) {
-		super();
-		this.tenNhanVien = tenNhanVien;
-		this.diaChi = diaChi;
-		this.sDT = sDT;
-		this.cCCD = cCCD;
-		this.trangThaiLamViec = trangThaiLamViec;
-		this.email = email;
-		this.ngaySinh = ngaySinh;
-		this.gioiTinh = gioiTinh;
-	}
 }

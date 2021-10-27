@@ -374,7 +374,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 	private void themThongTinNhanVienVaoBang(List<NhanVien> list) {
 		ChucNang.clearDataTable(model);
 		for (NhanVien nv : list) {
-			String n[] = {nv.getMaNhanVien(), nv.getTenNhanVien(), nv.getNgaySinh() + "", nv.isGioiTinh() == true ? "Nam":"Nữ", nv.getsDT(), nv.getChucVu(), nv.getEmail()};
+			String n[] = {nv.getMaNhanVien(), nv.getTenNhanVien(), nv.getNgaySinh() + "", nv.isGioiTinh() == true ? "Nam":"Nữ", nv.getsDT(), nv.gettrangThaiLamViec() == true ? "Đang làm" : "Đã nghĩ", nv.getEmail()};
 			model.addRow(n);
 		}
 	}

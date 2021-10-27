@@ -452,7 +452,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		String CMND = txtCMND.getText();
 		String chucVu = cmbChucVu.getSelectedItem().toString();
 		String email = txtEmail.getText();
-		return new NhanVien("NV0005", ten, diaChi, sdt, CMND, chucVu, email, date, gioiTinh);
+		return null;
 	}
 	
 	/**
