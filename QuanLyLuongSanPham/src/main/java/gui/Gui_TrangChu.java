@@ -116,12 +116,7 @@ public class Gui_TrangChu extends JFrame implements MouseListener {
 		lblHinhDangXuat.setBounds(1370, 83, 25, 28);
 		panelMenu.add(lblHinhDangXuat);
 		
-		/**
-		 * Label chứa nút menu 
-		 */
-		lblMenu.setIcon(new ImageIcon("img\\menu.png"));
-
-		lblMenu = new JLabel("");
+	
 		
 		
 		/**
@@ -208,11 +203,12 @@ public class Gui_TrangChu extends JFrame implements MouseListener {
 		 * Label chứa nút menu 
 		 */
 		lblMenu = new JLabel("");
+		lblMenu = new JLabel("");
 		pnMenu = new Gui_Menu();
 		temp = panelMenu.getBounds();
 		temp1 = panelNutBam.getBounds(); 
-		
-		lblMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\menu.png"));
+		//lblMenu.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\menu.png"));
+		lblMenu.setIcon(new ImageIcon("img\\menu.png"));
 		lblMenu.setBounds(55, 36, 84, 83);
 		panelMenu.add(lblMenu);
 		
