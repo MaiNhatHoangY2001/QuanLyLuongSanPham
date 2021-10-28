@@ -1,34 +1,30 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Panel;
-
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import gui_package.PnlTinhDoanhThu;
-import gui_package.PnlTinhLuong;
+import java.awt.Cursor;
 
-import java.awt.Point;
-
-public class Gui_Chinh extends JFrame implements ActionListener{
-	private final JButton btnNewButton = new JButton("New button");
+public class Gui_Chinh extends JFrame implements ActionListener, WindowListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel pnlChange;
 	private JButton btnQuanLyTaiKhoan;
 	private JButton btnThoat;
@@ -38,8 +34,7 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 	private JButton btnQuanLyHoaDon;
 	private JButton btnQuanLyNhanVien;
 	private CardLayout cardLayout;
-	private JPanel panel_2;
-	private JPanel panel_3;
+	private JButton temp;
 
 	/**
 	 * Launch the application.
@@ -61,35 +56,43 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);
 		getContentPane().setLayout(null);
-		
+
+		// thông báo khi thoát
+		addWindowListener(this);
+
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(242, 129,25));
+		panel.setBackground(new Color(240, 115, 0));
 		panel.setBounds(0, 0, 320, 1029);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("img/dt-navbar.png"));
 		lblNewLabel.setBounds(95, 21, 174, 104);
 		panel.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("CỬA HÀNG ĐIỆN THOẠI 17");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(9, 147, 294, 27);
 		panel.add(lblNewLabel_1);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 200, 320, 807);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
-		
+
+		/**
+		 * các nút menu
+		 */
 		btnThoat = new JButton("Thoát");
+		btnThoat.setFocusPainted(false);
+		btnThoat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnThoat.setIcon(new ImageIcon("img\\thoat.png"));
 		btnThoat.setBounds(0, 690, 320, 115);
 		panel_1.add(btnThoat);
@@ -97,9 +100,15 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnThoat.setForeground(Color.WHITE);
 		btnThoat.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThoat.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnThoat.setBackground(new Color(242, 129,25));
-		
+		btnThoat.setBackground(new Color(242, 129, 25));
+		// Sự kiện thoát
+		btnThoat.addActionListener(e -> {
+			thongBaoThoat();
+		});
+
 		btnQuanLyTaiKhoan = new JButton("Quản lý tài khoản");
+		btnQuanLyTaiKhoan.setFocusPainted(false);
+		btnQuanLyTaiKhoan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuanLyTaiKhoan.setIcon(new ImageIcon("img\\taikhoan.png"));
 		btnQuanLyTaiKhoan.setBounds(0, 575, 320, 115);
 		panel_1.add(btnQuanLyTaiKhoan);
@@ -107,9 +116,11 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnQuanLyTaiKhoan.setForeground(Color.WHITE);
 		btnQuanLyTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnQuanLyTaiKhoan.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnQuanLyTaiKhoan.setBackground(new Color(242, 129,25));
-		
+		btnQuanLyTaiKhoan.setBackground(new Color(242, 129, 25));
+
 		btnQuanLySanPham = new JButton("Quản lý sản phẩm");
+		btnQuanLySanPham.setFocusPainted(false);
+		btnQuanLySanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuanLySanPham.setIcon(new ImageIcon("img\\sanpham.png"));
 		btnQuanLySanPham.setBounds(0, 460, 320, 115);
 		panel_1.add(btnQuanLySanPham);
@@ -117,9 +128,11 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnQuanLySanPham.setForeground(Color.WHITE);
 		btnQuanLySanPham.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnQuanLySanPham.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnQuanLySanPham.setBackground(new Color(242, 129,25));
-		
+		btnQuanLySanPham.setBackground(new Color(242, 129, 25));
+
 		btnThongKe = new JButton("Thống kê thu chi");
+		btnThongKe.setFocusPainted(false);
+		btnThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnThongKe.setIcon(new ImageIcon("img\\thongke.png"));
 		btnThongKe.setBounds(0, 345, 320, 115);
 		panel_1.add(btnThongKe);
@@ -127,9 +140,11 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnThongKe.setForeground(Color.WHITE);
 		btnThongKe.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThongKe.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnThongKe.setBackground(new Color(242, 129,25));
-		
+		btnThongKe.setBackground(new Color(242, 129, 25));
+
 		btnQuanLyLuong = new JButton("Quản lý lương");
+		btnQuanLyLuong.setFocusPainted(false);
+		btnQuanLyLuong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuanLyLuong.setIcon(new ImageIcon("img\\luong.png"));
 		btnQuanLyLuong.setBounds(0, 230, 320, 115);
 		panel_1.add(btnQuanLyLuong);
@@ -137,9 +152,11 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnQuanLyLuong.setForeground(Color.WHITE);
 		btnQuanLyLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnQuanLyLuong.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnQuanLyLuong.setBackground(new Color(242, 129,25));
-		
+		btnQuanLyLuong.setBackground(new Color(242, 129, 25));
+
 		btnQuanLyHoaDon = new JButton("Quản lý hóa đơn");
+		btnQuanLyHoaDon.setFocusPainted(false);
+		btnQuanLyHoaDon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuanLyHoaDon.setIcon(new ImageIcon("img\\hoadon.png"));
 		btnQuanLyHoaDon.setBounds(0, 115, 320, 115);
 		panel_1.add(btnQuanLyHoaDon);
@@ -147,10 +164,12 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnQuanLyHoaDon.setForeground(Color.WHITE);
 		btnQuanLyHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnQuanLyHoaDon.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnQuanLyHoaDon.setBackground(new Color(242, 129,25));
+		btnQuanLyHoaDon.setBackground(new Color(242, 129, 25));
 		btnQuanLyHoaDon.setAlignmentX(1.0f);
-		
+
 		btnQuanLyNhanVien = new JButton("Quản lý nhân viên");
+		btnQuanLyNhanVien.setFocusPainted(false);
+		btnQuanLyNhanVien.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuanLyNhanVien.setIconTextGap(10);
 		btnQuanLyNhanVien.setIcon(new ImageIcon("img\\nv.png"));
 		btnQuanLyNhanVien.setBounds(0, 0, 320, 115);
@@ -158,52 +177,115 @@ public class Gui_Chinh extends JFrame implements ActionListener{
 		btnQuanLyNhanVien.setForeground(Color.WHITE);
 		btnQuanLyNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnQuanLyNhanVien.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnQuanLyNhanVien.setBackground(new Color(242, 129,25));
-		
+		btnQuanLyNhanVien.setBackground(new Color(242, 129, 25));
+
 		btnQuanLyHoaDon.addActionListener(this);
 		btnQuanLyLuong.addActionListener(this);
 		btnQuanLyNhanVien.addActionListener(this);
 		btnQuanLySanPham.addActionListener(this);
 		btnQuanLyTaiKhoan.addActionListener(this);
 		btnThongKe.addActionListener(this);
-		btnThoat.addActionListener(this);
-		
-		
+
 		pnlChange = new JPanel();
-		pnlChange.setBounds(320, 0, 1584, 1007);
+		pnlChange.setBounds(320, 0, 1600, 1007);
 		getContentPane().add(pnlChange);
 		pnlChange.setLayout(new CardLayout(0, 0));
-		
-		cardLayout = (CardLayout) pnlChange.getLayout();
-		
 
-//		pnlChange.add(new test(), "btnQuanLyHoaDon");
-		pnlChange.add(new PnlTinhLuong(), "btnQuanLyLuong");
+		cardLayout = (CardLayout) pnlChange.getLayout();
+
+		pnlChange.add(new Gui_QuanLyHoaDon(), "btnQuanLyHoaDon");
+		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
 //		pnlChange.add(new test(), "btnQuanLyNhanVien");
 //		pnlChange.add(new test(), "btnQuanLySanPham");
 //		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
-		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
+//		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
 //		pnlChange.add(new test(), "btnThoat");
 
+		temp = btnQuanLyHoaDon;
+		activeButton(btnQuanLyHoaDon);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object key = e.getSource();
-		if (key == btnQuanLyHoaDon) 
+
+		activeButton((JButton) key);
+		inActiveButton(temp);
+		temp = (JButton) key;
+
+		if (key == btnQuanLyHoaDon) {
 			cardLayout.show(pnlChange, "btnQuanLyHoaDon");
-		else if (key == btnQuanLyLuong) 
+		} else if (key == btnQuanLyLuong)
 			cardLayout.show(pnlChange, "btnQuanLyLuong");
-		else if (key == btnQuanLyNhanVien) 
+		else if (key == btnQuanLyNhanVien)
 			cardLayout.show(pnlChange, "btnQuanLyNhanVien");
-		else if (key == btnQuanLySanPham) 
+		else if (key == btnQuanLySanPham)
 			cardLayout.show(pnlChange, "btnQuanLySanPham");
-		else if (key == btnQuanLyTaiKhoan) 
+		else if (key == btnQuanLyTaiKhoan)
 			cardLayout.show(pnlChange, "btnQuanLyTaiKhoan");
-		else if (key == btnThoat) 
-			cardLayout.show(pnlChange, "btnThoat");
-		else if (key == btnThongKe) 
+		else if (key == btnThongKe)
 			cardLayout.show(pnlChange, "btnThongKe");
 	}
-	
+
+	/**
+	 * đổ màu tab khi active
+	 * 
+	 * @param buttonActive
+	 * 
+	 */
+	public void activeButton(JButton buttonActive) {
+		buttonActive.setEnabled(false);
+		buttonActive.setBackground(new Color(248, 198, 153));
+		buttonActive.setForeground(Color.black);
+	}
+
+	/**
+	 * đổ màu lại khi inactive
+	 * 
+	 * @param buttonInactive
+	 */
+	public void inActiveButton(JButton buttonInactive) {
+		buttonInactive.setEnabled(true);
+		buttonInactive.setForeground(Color.WHITE);
+		buttonInactive.setBackground(new Color(242, 129, 25));
+	}
+
+	/**
+	 * Thông báo khi muốn thoát ứng dụng
+	 */
+	public void thongBaoThoat() {
+		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
+				JOptionPane.YES_NO_OPTION);
+		if (tl == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		thongBaoThoat();
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+	}
+	@Override
+	public void windowClosed(WindowEvent e) {
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+	}
 }

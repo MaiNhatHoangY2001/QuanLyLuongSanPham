@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
+    <fullyQualifiedTypeName name="net.bytebuddy.dynamic.DynamicType.Builder.InnerTypeDefinition"/>
+    <fullyQualifiedTypeName name="dao.BangLuongDao"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="java.awt.event.WindowListener"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
+    <fullyQualifiedTypeName name="gui_package.CustomTable"/>
+    <fullyQualifiedTypeName name="gui_package.RoundedPanel"/>
+</qualifiedTypeNameHistroy>

@@ -34,6 +34,7 @@ public class BangLuongDao {
 
 	}
 
+
 	public BangLuong getBangLuongTheoMaNhanVien(String maNhanVien, int year, int month) {
 		BangLuong bangLuong = null;
 		Session session = sessionFactory.openSession();
@@ -41,10 +42,10 @@ public class BangLuongDao {
 		try {
 			tr.begin();
 
-			bangLuong = session.createNativeQuery(
-					"select * from BangLuong where maNhanVien = '"+maNhanVien+
-					"'and YEAR(thoiGian) = "+year+" and MONTH(thoiGian) = " + month,
-					BangLuong.class).getSingleResult();
+			bangLuong = session
+					.createNativeQuery("select * from BangLuong where maNhanVien = '" + maNhanVien
+							+ "'and YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month, BangLuong.class)
+					.getSingleResult();
 
 			tr.commit();
 		} catch (Exception e) {
@@ -62,18 +63,17 @@ public class BangLuongDao {
 			tr.begin();
 			session.save(bangLuong);
 			tr.commit();
-			
+
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 		return false;
 	}
-	
+
 	public boolean suaBangLuong(BangLuong bangLuong) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -82,18 +82,47 @@ public class BangLuongDao {
 			tr.begin();
 			session.update(bangLuong);
 			tr.commit();
-				
+
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 		return false;
 	}
-	
+	/**
+	 * Sửa số ngày công theo mã nhân viên và tháng năm
+	 * @param maNhanVienString
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public boolean updateSoNgayCong(String maNhanVien, int month, int year, int soNgayCong) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+
+		try {
+			tr.begin();
+			String query = "UPDATE BangLuong "
+					+ "SET soNgayCong = " + soNgayCong
+					+ " WHERE maNhanVien = '"+maNhanVien+"'"
+					+ " and MONTH(thoiGian) = " + month
+					+ " and YEAR(thoiGian) = " + year;
+			session.createSQLQuery(query).executeUpdate();
+			tr.commit();
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
+
 	public boolean xoaBangLuong(String id) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -102,18 +131,17 @@ public class BangLuongDao {
 			tr.begin();
 			session.delete(session.find(BangLuong.class, id));
 			tr.commit();
-			
+
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 		return false;
 	}
-	
+
 	public List<BangLuong> getAllBangLuong() {
 		List<BangLuong> list = new ArrayList<BangLuong>();
 		Session session = sessionFactory.getCurrentSession();
@@ -131,14 +159,14 @@ public class BangLuongDao {
 		return list;
 
 	}
+
 	public static void main(String[] args) {
 		BangLuongDao bangLuongDao = new BangLuongDao();
-		NhanVien nhanVien = new NhanVien("NV0001");
-		BangLuong bangLuong = new BangLuong(LocalDate.now(), 2, 2, 2, 2);
-		bangLuong.setNhanVien(nhanVien);
+//		NhanVien nhanVien = new NhanVien("NV0001");
+//		BangLuong bangLuong = new BangLuong(LocalDate.now(), 2, 2, 2, 2);
+//		bangLuong.setNhanVien(nhanVien);
 //		System.out.println(bangLuongDao.themBangLuong(bangLuong));
-		
-		System.out.println(bangLuongDao.xoaBangLuong("BL21100003"));
-		
+
+
 	}
 }
