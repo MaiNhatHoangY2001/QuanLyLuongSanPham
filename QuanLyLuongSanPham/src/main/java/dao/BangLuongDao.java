@@ -1,5 +1,7 @@
 package dao;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,6 @@ public class BangLuongDao {
 		return bangLuong;
 
 	}
-
 
 	public BangLuong getBangLuongTheoMaNhanVien(String maNhanVien, int year, int month) {
 		BangLuong bangLuong = null;
@@ -92,8 +93,10 @@ public class BangLuongDao {
 		}
 		return false;
 	}
+
 	/**
 	 * Sửa số ngày công theo mã nhân viên và tháng năm
+	 * 
 	 * @param maNhanVienString
 	 * @param month
 	 * @param year
@@ -105,11 +108,8 @@ public class BangLuongDao {
 
 		try {
 			tr.begin();
-			String query = "UPDATE BangLuong "
-					+ "SET soNgayCong = " + soNgayCong
-					+ " WHERE maNhanVien = '"+maNhanVien+"'"
-					+ " and MONTH(thoiGian) = " + month
-					+ " and YEAR(thoiGian) = " + year;
+			String query = "UPDATE BangLuong " + "SET soNgayCong = " + soNgayCong + " WHERE maNhanVien = '" + maNhanVien
+					+ "'" + " and MONTH(thoiGian) = " + month + " and YEAR(thoiGian) = " + year;
 			session.createSQLQuery(query).executeUpdate();
 			tr.commit();
 
@@ -159,7 +159,58 @@ public class BangLuongDao {
 		return list;
 
 	}
+	
+	/**
+	 * Tạo tiền sản phẩm 
+	 * @param maNhanVien
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public double getTienSanPham(String maNhanVien, int month, int year) {
+		double tienSanPham = 0;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT sum(thanhTien) as tienSanPham FROM HoaDonBanHang where " + "maNhanVien = '"
+					+ maNhanVien + "'" + " and MONTH(ngayLapHoaDon) = " + month + " and YEAR(ngayLapHoaDon) = " + year;
+			tienSanPham = (double) session.createSQLQuery(query).getSingleResult();
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return tienSanPham;
 
+	}
+	
+	/**
+	 * Xóa tất cả bảng lương theo thời gian
+	 * @param month
+	 * @param year
+	 */
+	public boolean deleteAllBangLuongInTime(int month, int year) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+
+		try {
+			tr.begin();
+			String query = "DELETE from BangLuong where MONTH(thoiGian) = "+ month
+					+ " and YEAR(thoiGian) = "+ year;
+			session.createSQLQuery(query).executeUpdate();
+			tr.commit();
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		BangLuongDao bangLuongDao = new BangLuongDao();
 //		NhanVien nhanVien = new NhanVien("NV0001");
@@ -167,6 +218,7 @@ public class BangLuongDao {
 //		bangLuong.setNhanVien(nhanVien);
 //		System.out.println(bangLuongDao.themBangLuong(bangLuong));
 
+		System.out.println(bangLuongDao.getTienSanPham("NV0001", 10, 2021));
 
 	}
 }

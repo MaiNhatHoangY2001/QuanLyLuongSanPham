@@ -59,6 +59,8 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);
+		setTitle("Chương trình quản lý lương sản phẩm");
+		setIconImage(new ImageIcon("img/logo.png").getImage());
 		getContentPane().setLayout(null);
 
 		// thông báo khi thoát

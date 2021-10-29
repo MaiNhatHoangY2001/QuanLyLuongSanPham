@@ -8,7 +8,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
 import java.net.Socket;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,12 +20,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -52,6 +57,7 @@ import javax.swing.event.ChangeEvent;
 
 import java.awt.Dimension;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.ListSelectionModel;
 
 public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	/**
@@ -86,10 +92,11 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	private JLabel lblSanPham;
 	private JLabel lblNhanVien;
 	private JButton btnTao;
-	private JButton btnXoa;
 	private JButton btnHienTai;
 	private JButton btnIn;
 	private int oldValue;
+	// Format tiền theo VND
+	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
 
 	public Gui_QuanLyLuong() {
 		setSize(1600, 1046);
@@ -197,6 +204,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				}
 			}
 		};
+		tblTinhLuong.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tblTinhLuong.setRowMargin(5);
 		tblTinhLuong.setRowHeight(30);
 		tblTinhLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -238,6 +246,8 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 							BangLuongDao bangLuongDao = new BangLuongDao();
 							System.out.println(bangLuongDao.updateSoNgayCong(maNhanVien, month, year, newValue));
+
+							setDataTableBangLuong(month, year);
 						}
 					}
 				} else {
@@ -274,6 +284,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				}
 			}
 		};
+		tblSanPham.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		tblSanPham.setRowMargin(5);
 		tblSanPham.setRowHeight(30);
@@ -347,21 +358,33 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 		cboMonth.addPropertyChangeListener("month", new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				btnXoa.setEnabled(false);
 				setDataTableBangLuong((Integer) evt.getNewValue() + 1, spnYear.getYear());
+				
+				Boolean bool = cboMonth.getMonth() + 1 == LocalDate.now().getMonthValue() ? true : false;
+				btnTao.setEnabled(bool);
+				
+				clearThongTinNhanVien();
+				ChucNang.clearDataTable(modelSanPham);
+				ChucNang.addNullDataTable(modelSanPham);
 			}
 		});
 		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				btnXoa.setEnabled(false);
 				setDataTableBangLuong(cboMonth.getMonth() + 1, (Integer) evt.getNewValue());
+				
+				Boolean bool = spnYear.getYear() == LocalDate.now().getYear() ? true : false;
+				btnTao.setEnabled(bool);
+				
+				clearThongTinNhanVien();
+				ChucNang.clearDataTable(modelSanPham);
+				ChucNang.addNullDataTable(modelSanPham);
 			}
 		});
 
 		/**
-		 * thêm, xóa bảng lương và nút cho thời gian về hiện tại
+		 * thêm bảng lương, nút cho thời gian về hiện tại và nút in
 		 */
 		btnTao = new JButton("Tạo bảng lương");
 		btnTao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -372,17 +395,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnTao.setBackground(new Color(233, 180, 46));
 		btnTao.setBounds(10, 14, 185, 42);
 		panel_1_1.add(btnTao);
-
-		btnXoa = new JButton("Xóa bảng lương");
-		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnXoa.setFocusPainted(false);
-		btnXoa.setBorderPainted(false);
-		btnXoa.setForeground(Color.WHITE);
-		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setBounds(205, 14, 192, 42);
-		btnXoa.setEnabled(false);
-		panel_1_1.add(btnXoa);
+		btnTao.addActionListener(e -> eventTaoBangLuong());
 
 		btnHienTai = new JButton("Hiện tại");
 		btnHienTai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -477,6 +490,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	 */
 	public void setDataTableBangLuong(int month, int year) {
 		ChucNang.clearDataTable(modelTinhLuong);
+
 		BangLuongDao bangLuongDao = new BangLuongDao();
 		NhanVienDao nhanVienDao = new NhanVienDao();
 
@@ -488,8 +502,9 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			BangLuong bangLuong = bangLuongDao.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
 			if (bangLuong != null) {
 				modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
-						bangLuong.getMucLuong(), bangLuong.getHeSoLuong(), bangLuong.getTienSanPham(),
-						bangLuong.getSoNgayCong(), bangLuong.tinhLuong() });
+						vnFormat.format(bangLuong.getMucLuong()), bangLuong.getHeSoLuong(),
+						vnFormat.format(bangLuong.getTienSanPham()), bangLuong.getSoNgayCong(),
+						vnFormat.format(bangLuong.tinhLuong()) });
 			}
 		}
 		ChucNang.addNullDataTable(modelTinhLuong);
@@ -508,7 +523,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			List<ChiTietHoaDonBan> list = chiTietHoaDonBanDao.getChiTietTheoMaNV(maNhanVien.toString(), month, year);
 			for (ChiTietHoaDonBan chiTietHoaDonBan : list) {
 				modelSanPham.addRow(new Object[] { chiTietHoaDonBan.getSanPham().getTenSanPham(),
-						chiTietHoaDonBan.getSoLuong(), chiTietHoaDonBan.tinhTongTien() });
+						chiTietHoaDonBan.getSoLuong(), vnFormat.format(chiTietHoaDonBan.tinhTongTien()) });
 			}
 
 		}
@@ -533,12 +548,66 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			lblNgaySinh
 					.setText("Ngày sinh: " + DateTimeFormatter.ofPattern("dd/MM/yyyy").format(nhanVien.getNgaySinh()));
 		} else {
-			lblTenNhanVien.setText("");
-			lblMaNhanVien.setText("Mã Nhân viên:");
-			lblSdt.setText("Số điện thoại:");
-			lblDiaChi.setText("Địa chỉ:");
-			lblNgaySinh.setText("Ngày sinh:");
+			clearThongTinNhanVien();
 		}
+	}
+	
+	public void clearThongTinNhanVien() {
+		lblTenNhanVien.setText("");
+		lblMaNhanVien.setText("Mã Nhân viên:");
+		lblSdt.setText("Số điện thoại:");
+		lblDiaChi.setText("Địa chỉ:");
+		lblNgaySinh.setText("Ngày sinh:");
+	}
+	/**
+	 * tạo bảng lương mức lương: 100.000 thời gian: ngày hiện tại hệ số lương: Nhân
+	 * viên bán hàng: 0.5 Nhân viên hành chính: 2 tiền sản phẩm: tổng thành tiền hóa
+	 * đơn bán hàng * 10% (nếu là nhân viên hình chính thì 0) Số ngày công: lấy ngày
+	 * hiện tại
+	 * 
+	 * @return
+	 */
+	public void themBangLuong() {
+
+		BangLuongDao bangLuongDao = new BangLuongDao();
+		NhanVienDao nhanVienDao = new NhanVienDao();
+
+		List<NhanVien> nhanViens = nhanVienDao.getAllNhanVien();
+
+		int month = cboMonth.getMonth() + 1;
+		int year = spnYear.getYear();
+
+		for (NhanVien nhanVien : nhanViens) {
+			if (nhanVien.gettrangThaiLamViec()) {
+				Double tienSanPham = bangLuongDao.getTienSanPham(nhanVien.getMaNhanVien(), month, year);
+				Double heSoLuong = (double) (tienSanPham == 0 ? 2 : 1);
+				Double mucLuong = (double) (tienSanPham == 0 ? 100000 : 20000);
+				LocalDate thoiGian = LocalDate.now();
+				int soNgayCong = CURRENT_DAY;
+
+				BangLuong bangLuong = new BangLuong(thoiGian, mucLuong, heSoLuong, tienSanPham, soNgayCong);
+				bangLuong.setNhanVien(nhanVien);
+
+				bangLuongDao.themBangLuong(bangLuong);
+			}
+		}
+		ChucNang.clearDataTable(modelTinhLuong);
+		setDataTableBangLuong(month, year);
+
+	}
+
+	public void eventTaoBangLuong() {
+		if (modelTinhLuong.getValueAt(0, 0) != null) {
+			int rs = JOptionPane.showConfirmDialog(null,
+					"Bạn có chắc muốn tạo lại bảng lương không?\n(Lưu ý: những bảng hiện có trong tháng này sẽ bị xóa)",
+					"Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			if (rs == JOptionPane.YES_OPTION) {
+				new BangLuongDao().deleteAllBangLuongInTime(cboMonth.getMonth() + 1, spnYear.getYear());
+				themBangLuong();
+			}
+		} else
+			themBangLuong();
+
 	}
 
 	@Override
@@ -550,11 +619,6 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		Object maNhanVien = modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 0);
 		setDataTableSanPham(maNhanVien, cboMonth.getMonth() + 1, spnYear.getYear());
 		setDataPanelThongTinNV(maNhanVien);
-		if (maNhanVien != null) {
-			btnXoa.setEnabled(true);
-		} else {
-			btnXoa.setEnabled(false);
-		}
 	}
 
 	@Override

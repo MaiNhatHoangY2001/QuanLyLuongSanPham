@@ -106,6 +106,6 @@ public class BangLuong {
 				+ ", heSoLuong=" + heSoLuong + ", tienSanPham=" + tienSanPham + ", soNgayCong=" + soNgayCong + "]";
 	}
 	public double tinhLuong() {
-		return 0;
+		return mucLuong * heSoLuong * soNgayCong + tienSanPham * 0.05;
 	}
 }
