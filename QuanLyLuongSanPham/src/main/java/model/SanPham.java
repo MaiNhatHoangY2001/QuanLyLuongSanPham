@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ public class SanPham {
 						strategy = "generator.SinhMaTheoNgay")
 	private String maSanpham;
 	private String tenSanPham;
+	@Column(columnDefinition = "money")
 	private double giaThanh;
 	private String nCC;
 	private String loai;
@@ -33,6 +35,11 @@ public class SanPham {
 	private List<ChiTietHoaDonBan> dsChiTietHoaDonBan;
 
 	public SanPham() {
+	}
+
+	public SanPham(String maSanpham) {
+		super();
+		this.maSanpham = maSanpham;
 	}
 
 	@Override

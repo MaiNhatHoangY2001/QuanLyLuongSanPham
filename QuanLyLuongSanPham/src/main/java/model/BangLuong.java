@@ -18,13 +18,11 @@ import org.hibernate.annotations.Parameter;
 public class BangLuong {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
-	@GenericGenerator(	name = "sinhMaTheoNgay",
-						parameters = @Parameter(name="prefix",value = "BL"),
-						strategy = "generator.SinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "BL"), strategy = "generator.SinhMaTheoNgay")
 	private String maBangLuong;
 	private LocalDate thoiGian;
-	private double mucLuong;
 	private double heSoLuong;
+	@Column(columnDefinition = "money")
 	private double tienSanPham;
 	private int soNgayCong;
 	@ManyToOne
@@ -45,14 +43,6 @@ public class BangLuong {
 
 	public void setThoiGian(LocalDate thoiGian) {
 		this.thoiGian = thoiGian;
-	}
-
-	public double getMucLuong() {
-		return mucLuong;
-	}
-
-	public void setMucLuong(double mucLuong) {
-		this.mucLuong = mucLuong;
 	}
 
 	public double getHeSoLuong() {
@@ -87,10 +77,9 @@ public class BangLuong {
 		this.nhanVien = nhanVien;
 	}
 
-	public BangLuong(LocalDate thoiGian, double mucLuong, double heSoLuong, double tienSanPham, int soNgayCong) {
+	public BangLuong(LocalDate thoiGian, double heSoLuong, double tienSanPham, int soNgayCong) {
 		super();
 		this.thoiGian = thoiGian;
-		this.mucLuong = mucLuong;
 		this.heSoLuong = heSoLuong;
 		this.tienSanPham = tienSanPham;
 		this.soNgayCong = soNgayCong;
@@ -102,10 +91,11 @@ public class BangLuong {
 
 	@Override
 	public String toString() {
-		return "BangLuong [maBangLuong=" + maBangLuong + ", thoiGian=" + thoiGian + ", mucLuong=" + mucLuong
-				+ ", heSoLuong=" + heSoLuong + ", tienSanPham=" + tienSanPham + ", soNgayCong=" + soNgayCong + "]";
+		return "BangLuong [maBangLuong=" + maBangLuong + ", thoiGian=" + thoiGian + ", heSoLuong=" + heSoLuong
+				+ ", tienSanPham=" + tienSanPham + ", soNgayCong=" + soNgayCong + "]";
 	}
+
 	public double tinhLuong() {
-		return mucLuong * heSoLuong * soNgayCong + tienSanPham * 0.05;
+		return 0;
 	}
 }

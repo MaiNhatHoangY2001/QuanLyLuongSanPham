@@ -26,13 +26,15 @@ public class NhanVien {
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
+	@Column(columnDefinition = "varchar(11)")
 	private String sDT;
 	@Column(columnDefinition = "varchar(12)")
 	private String cCCD;
 	private boolean trangThaiLamViec;
 	private String email;
 	private LocalDate ngaySinh;
-
+	@Column(columnDefinition = "money")
+	private double mucLuong;
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private TaiKhoan taiKhoan;
@@ -45,12 +47,6 @@ public class NhanVien {
 	@OneToMany(mappedBy = "nhanVien")
 	private List<HoaDonBanHang> dsHoaDonBanHang;
 
-	@Override
-	public String toString() {
-		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
-				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
-				+ ngaySinh + "]";
-	}
 
 	public String getMaNhanVien() {
 		return maNhanVien;
@@ -183,7 +179,7 @@ public class NhanVien {
 	}
 
 	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD, boolean trangThaiLamViec, String email,
-			LocalDate ngaySinh) {
+			LocalDate ngaySinh, double mucLuong) {
 		super();
 		this.tenNhanVien = tenNhanVien;
 		this.diaChi = diaChi;
@@ -192,5 +188,14 @@ public class NhanVien {
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
+		this.mucLuong = mucLuong;
 	}
+
+	@Override
+	public String toString() {
+		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
+				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
+				+ ngaySinh + ", mucLuong=" + mucLuong + "]";
+	}
+
 }

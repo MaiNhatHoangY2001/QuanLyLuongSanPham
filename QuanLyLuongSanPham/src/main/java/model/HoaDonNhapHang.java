@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,7 @@ public class HoaDonNhapHang {
 
 	@OneToMany(mappedBy = "hoaDonNhapHang")
 	private List<ChiTietHoaDonNhap> dsChiTietHoaDonNhap;
+	@Column(columnDefinition = "money")
 	private double thanhTien;
 
 	public HoaDonNhapHang(LocalDate ngayLapHoaDon, double thue) {

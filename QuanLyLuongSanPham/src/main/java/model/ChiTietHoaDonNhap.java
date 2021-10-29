@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 @IdClass(ChiTietHoaDonNhapPK.class)
 @Table(name = "ChiTietHoaDonNhap")
 public class ChiTietHoaDonNhap {
+	@Column(columnDefinition = "money")
 	private double donGia;
 	private int soLoHang;// so san pham
 	@Id

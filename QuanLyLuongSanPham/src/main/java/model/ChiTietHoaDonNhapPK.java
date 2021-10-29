@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -10,6 +11,7 @@ public class ChiTietHoaDonNhapPK implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3004244576179007899L;
+
 	private String hoaDonNhapHang;
 	private String sanPham;
 
