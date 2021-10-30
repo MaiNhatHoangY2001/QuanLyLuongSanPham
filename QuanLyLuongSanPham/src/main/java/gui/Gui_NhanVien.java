@@ -109,7 +109,7 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		setContentPane(contentPane);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
+
 		/**
 		 * Phần đầu
 		 */
@@ -314,15 +314,15 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 		btnThem.addActionListener(this);
 		btnSua.addActionListener(this);
 		addWindowListener(this);
-		
+
 		/**
-		 * 	Kết nối DAO và thực hiện các thao tác
+		 * Kết nối DAO và thực hiện các thao tác
 		 */
-//		daoNV = new NhanVienDao();
-//		listNV = daoNV.getAllNhanVien();
-//		
-//		// Thêm dữ liệu vào bảng Nhân viên
-//		themThongTinNhanVienVaoBang(listNV);
+		daoNV = new NhanVienDao();
+		listNV = daoNV.getAllNhanVien();
+		
+		// Thêm dữ liệu vào bảng Nhân viên
+		themThongTinNhanVienVaoBang(listNV);
 	}
 
 	@Override
@@ -344,17 +344,18 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 			}
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnThem)) // Hiển thị From Thêm nhân viên
 			new Gui_ThemNhanVien().setVisible(true);
 
-		else if (o.equals(btnSua)) // Hiển thị From Sửa thông tin nhân viên
-			new Gui_SuaNhanVien().setVisible(true);
+		else if (o.equals(btnSua)) { // Hiển thị From Sửa thông tin nhân viên
+//			new Gui_SuaNhanVien().setVisible(true);
+		}
 	}
-	
+
 	/*
 	 * Xác nhận thoát
 	 */
@@ -366,18 +367,21 @@ public class Gui_NhanVien extends JFrame implements ActionListener, MouseListene
 			System.exit(0);
 		}
 	}
-	
+
 	/**
-	 * Thêm tất cả nhân viên vào bảng 
+	 * Thêm tất cả nhân viên vào bảng
+	 * 
 	 * @param listNV2
 	 */
 	private void themThongTinNhanVienVaoBang(List<NhanVien> list) {
 		ChucNang.clearDataTable(model);
-		//isGioiTinh chưa tạo
-//		for (NhanVien nv : list) {
-//	String n[] = {nv.getMaNhanVien(), nv.getTenNhanVien(), nv.getNgaySinh() + "", nv.isGioiTinh() == true ? "Nam":"Nữ", nv.getsDT(), nv.gettrangThaiLamViec() == true ? "Đang làm" : "Đã nghĩ", nv.getEmail()};
-//			model.addRow(n);
-//		}
+		// isGioiTinh chưa tạo
+		for (NhanVien nv : list) {
+			String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), nv.getNgaySinh() + "",
+					nv.isGioiTinh() == true ? "Nam" : "Nữ", nv.getsDT(),
+					nv.gettrangThaiLamViec() == true ? "Đang làm" : "Đã nghĩ", nv.getEmail() };
+			model.addRow(n);
+		}
 	}
 
 	@Override

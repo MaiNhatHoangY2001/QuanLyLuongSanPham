@@ -30,6 +30,7 @@ public class NhanVien {
 	private boolean trangThaiLamViec;
 	private String email;
 	private LocalDate ngaySinh;
+	private boolean gioiTinh;
 
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -47,7 +48,7 @@ public class NhanVien {
 	public String toString() {
 		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
 				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
-				+ ngaySinh + ", taiKhoan=" + taiKhoan + "]";
+				+ ngaySinh + ", gioiTinh=" + gioiTinh + ", taiKhoan=" + taiKhoan + "]";
 	}
 
 	public String getMaNhanVien() {
@@ -112,6 +113,22 @@ public class NhanVien {
 
 	public void setNgaySinh(LocalDate ngaySinh) {
 		this.ngaySinh = ngaySinh;
+	}
+
+	public boolean isTrangThaiLamViec() {
+		return trangThaiLamViec;
+	}
+
+	public void setTrangThaiLamViec(boolean trangThaiLamViec) {
+		this.trangThaiLamViec = trangThaiLamViec;
+	}
+
+	public boolean isGioiTinh() {
+		return gioiTinh;
+	}
+
+	public void setGioiTinh(boolean gioiTinh) {
+		this.gioiTinh = gioiTinh;
 	}
 
 	public TaiKhoan getTaiKhoan() {
@@ -180,10 +197,20 @@ public class NhanVien {
 		return true;
 	}
 
-	public NhanVien(String maNhanVien, String tenNhanVien, String diaChi, String sDT, String cCCD,
-			boolean trangThaiLamViec, String email, LocalDate ngaySinh, TaiKhoan taiKhoan) {
+	/**
+	 * @param maNhanVien
+	 * @param tenNhanVien
+	 * @param diaChi
+	 * @param sDT
+	 * @param cCCD
+	 * @param trangThaiLamViec
+	 * @param email
+	 * @param ngaySinh
+	 * @param gioiTinh
+	 */
+	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD,
+			boolean trangThaiLamViec, String email, LocalDate ngaySinh, boolean gioiTinh) {
 		super();
-		this.maNhanVien = maNhanVien;
 		this.tenNhanVien = tenNhanVien;
 		this.diaChi = diaChi;
 		this.sDT = sDT;
@@ -191,7 +218,7 @@ public class NhanVien {
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
-		this.taiKhoan = taiKhoan;
+		this.gioiTinh = gioiTinh;
 	}
 
 }

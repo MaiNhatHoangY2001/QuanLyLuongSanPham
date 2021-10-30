@@ -297,9 +297,9 @@ public class PnlTinhLuong extends JPanel implements MouseListener {
 		for (NhanVien nhanVien : listNhanVien) {
 			BangLuong bangLuong = bangLuongDao.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
 			if (bangLuong != null) {
-				modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
-						bangLuong.getMucLuong(), bangLuong.getHeSoLuong(), bangLuong.getTienSanPham(),
-						bangLuong.getSoNgayCong(), bangLuong.tinhLuong() });
+//				modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
+//						bangLuong.getMucLuong(), bangLuong.getHeSoLuong(), bangLuong.getTienSanPham(),
+//						bangLuong.getSoNgayCong(), bangLuong.tinhLuong() });
 			}
 		}
 		ChucNang.addNullDataTable(modelTinhLuong);

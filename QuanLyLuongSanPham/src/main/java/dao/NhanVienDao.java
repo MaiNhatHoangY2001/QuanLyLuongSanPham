@@ -33,7 +33,7 @@ public class NhanVienDao {
 
 	public List<NhanVien> getAllNhanVien() {
 		List<NhanVien> list = new ArrayList<NhanVien>();
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
@@ -50,7 +50,7 @@ public class NhanVienDao {
 	}
 
 	public boolean themNhanVien(NhanVien nhanVien) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
