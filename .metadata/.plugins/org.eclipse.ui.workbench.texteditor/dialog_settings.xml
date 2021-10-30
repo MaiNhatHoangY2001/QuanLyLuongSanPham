@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="th"/>
 			<item value="D:\\HOC_TAP\\Nam 3-HK1\\PTUD\\BaiTapLon\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\"/>
 			<item value="231, 231, 231"/>
 			<item value="310, 86"/>
@@ -22,7 +23,6 @@
 			<item value="yearChooser"/>
 			<item value="year"/>
 			<item value="tblTinhLuong"/>
-			<item value="tblTKThu"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

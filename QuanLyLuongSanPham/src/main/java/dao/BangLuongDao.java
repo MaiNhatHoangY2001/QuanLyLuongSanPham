@@ -168,20 +168,20 @@ public class BangLuongDao {
 	 * @return
 	 */
 	public double getTienSanPham(String maNhanVien, int month, int year) {
-		double tienSanPham = 0;
+		BigDecimal tienSanPham = null;
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
 			String query = "SELECT sum(thanhTien) as tienSanPham FROM HoaDonBanHang where " + "maNhanVien = '"
 					+ maNhanVien + "'" + " and MONTH(ngayLapHoaDon) = " + month + " and YEAR(ngayLapHoaDon) = " + year;
-			tienSanPham = (double) session.createSQLQuery(query).getSingleResult();
+			tienSanPham = (BigDecimal)session.createSQLQuery(query).getSingleResult();
 			tr.commit();
 		} catch (Exception e) {
 			tr.rollback();
 		}
 		session.close();
-		return tienSanPham;
+		return tienSanPham == null ? 0 : tienSanPham.doubleValue();
 
 	}
 	
@@ -218,7 +218,7 @@ public class BangLuongDao {
 //		bangLuong.setNhanVien(nhanVien);
 //		System.out.println(bangLuongDao.themBangLuong(bangLuong));
 
-		System.out.println(bangLuongDao.getTienSanPham("NV0001", 10, 2021));
+		System.out.println(bangLuongDao.getTienSanPham("NV0003", 10, 2021));
 
 	}
 }

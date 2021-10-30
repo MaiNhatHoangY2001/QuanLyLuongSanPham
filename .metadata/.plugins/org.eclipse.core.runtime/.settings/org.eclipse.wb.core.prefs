@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-design.palette.flyout.width=154
-design.structure.flyout.width=358
-=======
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=7a643ddaead30f98bf52bb67cbc37db0271713df
 design.palette.flyout.dockLocation=2
-design.palette.flyout.width=150
+design.palette.flyout.width=154
 design.structure.flyout.width=231
->>>>>>> 7a643ddaead30f98bf52bb67cbc37db0271713df
 eclipse.preferences.version=1

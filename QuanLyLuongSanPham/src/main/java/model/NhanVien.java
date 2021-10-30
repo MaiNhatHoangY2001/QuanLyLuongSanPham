@@ -20,9 +20,7 @@ import org.hibernate.annotations.Parameter;
 public class NhanVien {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
-	@GenericGenerator(	name = "sinhMaTheoNgay",
-						parameters = @Parameter(name="prefix",value = "NV"),
-						strategy = "generator.SinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "NV"), strategy = "generator.SinhMaTheoNgay")
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
@@ -46,7 +44,6 @@ public class NhanVien {
 	private List<HoaDonNhapHang> dsHoaDonNhapHang;
 	@OneToMany(mappedBy = "nhanVien")
 	private List<HoaDonBanHang> dsHoaDonBanHang;
-
 
 	public String getMaNhanVien() {
 		return maNhanVien;
@@ -142,6 +139,22 @@ public class NhanVien {
 
 	public void setDsHoaDonBanHang(List<HoaDonBanHang> dsHoaDonBanHang) {
 		this.dsHoaDonBanHang = dsHoaDonBanHang;
+	}
+
+	public boolean isTrangThaiLamViec() {
+		return trangThaiLamViec;
+	}
+
+	public void setTrangThaiLamViec(boolean trangThaiLamViec) {
+		this.trangThaiLamViec = trangThaiLamViec;
+	}
+
+	public double getMucLuong() {
+		return mucLuong;
+	}
+
+	public void setMucLuong(double mucLuong) {
+		this.mucLuong = mucLuong;
 	}
 
 	public NhanVien() {

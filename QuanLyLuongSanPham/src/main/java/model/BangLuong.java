@@ -96,6 +96,6 @@ public class BangLuong {
 	}
 
 	public double tinhLuong() {
-		return 0;
+		return nhanVien.getMucLuong() * heSoLuong * soNgayCong + tienSanPham * 0.1;
 	}
 }
