@@ -288,7 +288,7 @@ public class Gui_QuanLyDuLieu extends JFrame implements MouseListener {
 		lblGio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblGio.setBounds(1290, 104, 111, 34);
-		ChucNang.setGio(lblGio);
+//		ChucNang.setGio(lblGio);
 		panelMenu.add(lblGio);
 	
 		

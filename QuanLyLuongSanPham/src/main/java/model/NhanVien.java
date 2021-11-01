@@ -24,14 +24,15 @@ public class NhanVien {
 	private String maNhanVien;
 	private String tenNhanVien;
 	private String diaChi;
+	@Column(columnDefinition = "varchar(11)")
 	private String sDT;
 	@Column(columnDefinition = "varchar(12)")
 	private String cCCD;
 	private boolean trangThaiLamViec;
 	private String email;
 	private LocalDate ngaySinh;
-	private boolean gioiTinh;
-
+	@Column(columnDefinition = "money")
+	private double mucLuong;
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private TaiKhoan taiKhoan;
@@ -43,13 +44,6 @@ public class NhanVien {
 	private List<HoaDonNhapHang> dsHoaDonNhapHang;
 	@OneToMany(mappedBy = "nhanVien")
 	private List<HoaDonBanHang> dsHoaDonBanHang;
-
-	@Override
-	public String toString() {
-		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
-				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
-				+ ngaySinh + ", gioiTinh=" + gioiTinh + ", taiKhoan=" + taiKhoan + "]";
-	}
 
 	public String getMaNhanVien() {
 		return maNhanVien;
@@ -115,22 +109,6 @@ public class NhanVien {
 		this.ngaySinh = ngaySinh;
 	}
 
-	public boolean isTrangThaiLamViec() {
-		return trangThaiLamViec;
-	}
-
-	public void setTrangThaiLamViec(boolean trangThaiLamViec) {
-		this.trangThaiLamViec = trangThaiLamViec;
-	}
-
-	public boolean isGioiTinh() {
-		return gioiTinh;
-	}
-
-	public void setGioiTinh(boolean gioiTinh) {
-		this.gioiTinh = gioiTinh;
-	}
-
 	public TaiKhoan getTaiKhoan() {
 		return taiKhoan;
 	}
@@ -161,6 +139,22 @@ public class NhanVien {
 
 	public void setDsHoaDonBanHang(List<HoaDonBanHang> dsHoaDonBanHang) {
 		this.dsHoaDonBanHang = dsHoaDonBanHang;
+	}
+
+	public boolean isTrangThaiLamViec() {
+		return trangThaiLamViec;
+	}
+
+	public void setTrangThaiLamViec(boolean trangThaiLamViec) {
+		this.trangThaiLamViec = trangThaiLamViec;
+	}
+
+	public double getMucLuong() {
+		return mucLuong;
+	}
+
+	public void setMucLuong(double mucLuong) {
+		this.mucLuong = mucLuong;
 	}
 
 	public NhanVien() {
@@ -206,10 +200,9 @@ public class NhanVien {
 	 * @param trangThaiLamViec
 	 * @param email
 	 * @param ngaySinh
-	 * @param gioiTinh
 	 */
-	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD,
-			boolean trangThaiLamViec, String email, LocalDate ngaySinh, boolean gioiTinh) {
+	public NhanVien(String tenNhanVien, String diaChi, String sDT, String cCCD, boolean trangThaiLamViec, String email,
+			LocalDate ngaySinh, double mucLuong) {
 		super();
 		this.tenNhanVien = tenNhanVien;
 		this.diaChi = diaChi;
@@ -218,7 +211,14 @@ public class NhanVien {
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.email = email;
 		this.ngaySinh = ngaySinh;
-		this.gioiTinh = gioiTinh;
+		this.mucLuong = mucLuong;
 	}
 
+	@Override
+	public String toString() {
+		return "NhanVien [maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", diaChi=" + diaChi + ", sDT="
+				+ sDT + ", cCCD=" + cCCD + ", trangThaiLamViec=" + trangThaiLamViec + ", email=" + email + ", ngaySinh="
+				+ ngaySinh + ", mucLuong=" + mucLuong + "]";
+	}
+	
 }

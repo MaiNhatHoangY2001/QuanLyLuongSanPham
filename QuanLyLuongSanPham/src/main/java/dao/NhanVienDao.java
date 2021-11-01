@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +65,43 @@ public class NhanVienDao {
 		return true;
 
 	}
+	
+	public boolean suaNhanVienTheoMa(NhanVien nv) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.update(nv);
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+			return false;
+		}
+		session.close();
+		return true;
+	}
+	
+	public boolean xoaNhanVienTheoMa(String maNVCanXoa) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.delete(session.find(NhanVien.class, maNVCanXoa));
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+			return false;
+		}
+		session.close();
+		return true;
+	}
+
 	public static void main(String[] args) {
 		NhanVienDao dao = new NhanVienDao();
-		NhanVien nhanVien= new NhanVien();
+		NhanVien nhanVien = new NhanVien("Hoang van LOng", "Go vap", "0967127086", "222222226", true, "chinh@yahoo.com",
+				LocalDate.of(2001, 06, 15), 3000000);
+		dao.themNhanVien(nhanVien);
+
 //		dao.getAllNhanVien().forEach(e->{
 //			System.out.println(e);
 //		});

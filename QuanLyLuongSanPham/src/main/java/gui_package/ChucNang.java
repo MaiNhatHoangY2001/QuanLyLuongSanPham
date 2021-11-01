@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -25,11 +26,13 @@ public class ChucNang {
 	 * 
 	 * @param lblGio
 	 */
-	public static void setGio(JLabel lblGio) {
+	public static void setGio(JLabel lblGio,JLabel lblNgay) {
 		TimerTask timerTask = new TimerTask() {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
+				DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				lblNgay.setText(formatter.format(LocalDate.now()));
 				lblGio.setText((new Date().getHours() >= 10 ? "" : "0") + (new Date().getHours())
 						+ ((new Date().getSeconds() % 2) != 0 ? " " : ":")
 						+ ((new Date().getMinutes() >= 10 ? "" : "0") + (new Date().getMinutes())));
@@ -94,7 +97,7 @@ public class ChucNang {
 	 * @param model
 	 */
 	public static void addNullDataTable(DefaultTableModel model) {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 15; i++) {
 			model.addRow(new Object[] { null, null, null, null, null, null, null });
 		}
 	}

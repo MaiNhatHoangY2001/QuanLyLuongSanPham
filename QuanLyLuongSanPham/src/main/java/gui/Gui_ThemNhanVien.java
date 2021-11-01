@@ -38,7 +38,7 @@ import javax.swing.JRadioButton;
 import java.awt.Dimension;
 import javax.swing.DefaultComboBoxModel;
 
-public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseListener {
+public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -58,18 +58,8 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 	private JComboBox<String> cmbNgay;
 	private JComboBox<String> cmbThang;
 	private JComboBox<String> cmbNam;
-
-	private JRadioButton rdbtnNam;
-	private JRadioButton rdbtnNu;
-	private JPanel pnlNam;
-	private JLabel lblNam;
-	private JPanel pnlNu;
-	private JLabel lblNu;
 	private NhanVienDao daoNV;
-
-	public static void main(String[] args) {
-		new Gui_ThemNhanVien().setVisible(true);
-	}
+	private RoundTextField txtHeSoLuong;
 
 	/**
 	 * Create the frame.
@@ -93,7 +83,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		pnlHeader.setLayout(null);
 		pnlHeader.setBorder(new MatteBorder(0, 0, 5, 0, (Color) Color.WHITE));
 		pnlHeader.setBackground(new Color(242, 129, 25));
-		pnlHeader.setBounds(0, 0, 1424, 150);
+		pnlHeader.setBounds(0, 0, 1440, 150);
 		contentPane.add(pnlHeader);
 
 		// Titile
@@ -117,7 +107,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		JPanel pnlContent = new JPanel();
 		pnlContent.setLayout(null);
 		pnlContent.setBackground(new Color(242, 129, 25));
-		pnlContent.setBounds(0, 151, 1424, 834);
+		pnlContent.setBounds(0, 151, 1440, 862);
 		contentPane.add(pnlContent);
 
 		// Background Input
@@ -125,72 +115,72 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		((RoundedPanel) pnlInput).setArcs(new DimensionUIResource(100, 100));
 		pnlInput.setLayout(null);
 		pnlInput.setBackground(new Color(248, 198, 153));
-		pnlInput.setBounds(112, 54, 1200, 602);
+		pnlInput.setBounds(120, 65, 1200, 597);
 		pnlContent.add(pnlInput);
 
 		// Nhập tên nhân viên
 		JLabel lblHoTen = new JLabel("Họ Và Tên:");
 		lblHoTen.setForeground(Color.BLACK);
-		lblHoTen.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblHoTen.setBounds(81, 40, 225, 40);
+		lblHoTen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblHoTen.setBounds(81, 39, 225, 40);
 		pnlInput.add(lblHoTen);
 
 		txtTen = new RoundTextField("", 1000);
-		txtTen.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtTen.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		txtTen.setColumns(10);
-		txtTen.setBounds(387, 35, 730, 50);
+		txtTen.setBounds(316, 37, 801, 45);
 		pnlInput.add(txtTen);
 
 		// Nhập dịa chỉ
 		JLabel lblDiaChi = new JLabel("Địa Chỉ:");
 		lblDiaChi.setForeground(Color.BLACK);
-		lblDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblDiaChi.setBounds(81, 280, 225, 40);
+		lblDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDiaChi.setBounds(81, 276, 225, 40);
 		pnlInput.add(lblDiaChi);
 
 		txtDiaChi = new RoundTextField("", 1000);
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtDiaChi.setColumns(10);
-		txtDiaChi.setBounds(387, 275, 730, 50);
+		txtDiaChi.setBounds(316, 274, 801, 45);
 		pnlInput.add(txtDiaChi);
 
 		// Nhập số điện thoại
 		JLabel lblSDT = new JLabel("Số Điện Thoại:");
 		lblSDT.setForeground(Color.BLACK);
-		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblSDT.setBounds(81, 360, 225, 40);
+		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblSDT.setBounds(81, 355, 225, 40);
 		pnlInput.add(lblSDT);
 
 		txtSDT = new RoundTextField("", 1000);
 		txtSDT.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtSDT.setColumns(10);
-		txtSDT.setBounds(387, 355, 730, 50);
+		txtSDT.setBounds(316, 353, 801, 45);
 		pnlInput.add(txtSDT);
 
 		// Nhập chứng minh nhân dân
 		JLabel lblCMND = new JLabel("CMND:");
 		lblCMND.setForeground(Color.BLACK);
-		lblCMND.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblCMND.setBounds(81, 440, 225, 40);
+		lblCMND.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCMND.setBounds(81, 434, 225, 40);
 		pnlInput.add(lblCMND);
 
 		txtCMND = new RoundTextField("", 1000);
 		txtCMND.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtCMND.setColumns(10);
-		txtCMND.setBounds(387, 435, 730, 50);
+		txtCMND.setBounds(316, 432, 801, 45);
 		pnlInput.add(txtCMND);
 
 		// Nhập Email
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.BLACK);
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblEmail.setBounds(81, 520, 225, 40);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblEmail.setBounds(81, 513, 225, 40);
 		pnlInput.add(lblEmail);
 
 		txtEmail = new RoundTextField("", 1000);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(387, 515, 730, 50);
+		txtEmail.setBounds(316, 511, 801, 45);
 		pnlInput.add(txtEmail);
 
 		/*
@@ -199,8 +189,8 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		// title
 		JLabel lblNgaySinh = new JLabel("Ngày sinh:");
 		lblNgaySinh.setForeground(Color.BLACK);
-		lblNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNgaySinh.setBounds(81, 120, 225, 40);
+		lblNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNgaySinh.setBounds(81, 118, 225, 40);
 		pnlInput.add(lblNgaySinh);
 
 		// Ngày
@@ -210,7 +200,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 						"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbNgay.setBackground(Color.WHITE);
-		cmbNgay.setBounds(387, 115, 220, 50);
+		cmbNgay.setBounds(316, 116, 250, 45);
 		pnlInput.add(cmbNgay);
 
 		// Tháng
@@ -219,7 +209,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 				"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
 		cmbThang.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbThang.setBackground(Color.WHITE);
-		cmbThang.setBounds(646, 115, 220, 50);
+		cmbThang.setBounds(590, 116, 250, 45);
 		pnlInput.add(cmbThang);
 
 		// Năm
@@ -232,71 +222,27 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		cmbNam.setModel(modelNam);
 		cmbNam.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbNam.setBackground(Color.WHITE);
-		cmbNam.setBounds(897, 115, 220, 50);
+		cmbNam.setBounds(867, 116, 250, 45);
 		pnlInput.add(cmbNam);
 
 		/*
-		 * Nhập giới tính
+		 * Input HeSoLuong
 		 */
-		// title giới tính
-		JLabel lblGioiTinh = new JLabel("Giới tính:");
-		lblGioiTinh.setForeground(Color.BLACK);
-		lblGioiTinh.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblGioiTinh.setBounds(81, 200, 225, 40);
-		pnlInput.add(lblGioiTinh);
+		// JLable HeSoLuong
+		JLabel lblHeSoLuong = new JLabel("Hệ số lương");
+		lblHeSoLuong.setForeground(Color.BLACK);
+		lblHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblHeSoLuong.setBounds(81, 197, 225, 40);
+		pnlInput.add(lblHeSoLuong);
 
-		// Giới tính nam
-		pnlNam = new JPanel();
-		pnlNam.setBackground(Color.WHITE);
-		pnlNam.setBounds(387, 194, 220, 50);
-		pnlInput.add(pnlNam);
-		pnlNam.setLayout(null);
-		pnlNam.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-		rdbtnNam = new JRadioButton("");
-		rdbtnNam.setBackground(Color.WHITE);
-		rdbtnNam.setPreferredSize(new Dimension(30, 30));
-		rdbtnNam.setMaximumSize(new Dimension(30, 30));
-		rdbtnNam.setIconTextGap(6);
-		rdbtnNam.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		rdbtnNam.setBounds(194, 0, 20, 50);
-		rdbtnNam.setSelected(true);
-		pnlNam.add(rdbtnNam);
-		rdbtnNam.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-		lblNam = new JLabel("Nam");
-		lblNam.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNam.setBounds(10, 11, 49, 28);
-		pnlNam.add(lblNam);
-		lblNam.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-		// giới tính nữ
-		pnlNu = new JPanel();
-		pnlNu.setLayout(null);
-		pnlNu.setBackground(Color.WHITE);
-		pnlNu.setBounds(646, 194, 220, 50);
-		pnlNu.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlInput.add(pnlNu);
-
-		rdbtnNu = new JRadioButton("");
-		rdbtnNu.setPreferredSize(new Dimension(30, 30));
-		rdbtnNu.setMaximumSize(new Dimension(30, 30));
-		rdbtnNu.setIconTextGap(6);
-		rdbtnNu.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		rdbtnNu.setBackground(Color.WHITE);
-		rdbtnNu.setBounds(194, 0, 20, 50);
-		pnlNu.add(rdbtnNu);
-
-		lblNu = new JLabel("Nữ");
-		lblNu.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNu.setBounds(10, 11, 37, 28);
-		lblNu.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlNu.add(lblNu);
+		// JtextField HeSoLuong
+		txtHeSoLuong = new RoundTextField("", 1000);
+		txtHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtHeSoLuong.setBounds(316, 195, 801, 45);
+		pnlInput.add(txtHeSoLuong);
 
 		// Thiết lập: Chi cho phép chọn 1 button radio
 		ButtonGroup btnGroupGioiTinh = new ButtonGroup();
-		btnGroupGioiTinh.add(rdbtnNam);
-		btnGroupGioiTinh.add(rdbtnNu);
 
 		/*
 		 * Các nút
@@ -306,7 +252,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		btnLuu.setForeground(Color.WHITE);
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnLuu.setBackground(new Color(233, 180, 46));
-		btnLuu.setBounds(183, 710, 230, 70);
+		btnLuu.setBounds(187, 727, 230, 70);
 		btnLuu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnLuu);
 
@@ -315,7 +261,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		btnXoaRong.setForeground(Color.WHITE);
 		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnXoaRong.setBackground(new Color(233, 180, 46));
-		btnXoaRong.setBounds(596, 710, 230, 70);
+		btnXoaRong.setBounds(604, 727, 230, 70);
 		btnXoaRong.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnXoaRong);
 
@@ -324,7 +270,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		btnHuyBo.setForeground(Color.WHITE);
 		btnHuyBo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnHuyBo.setBackground(new Color(233, 180, 46));
-		btnHuyBo.setBounds(1009, 710, 230, 70);
+		btnHuyBo.setBounds(1021, 727, 230, 70);
 		btnHuyBo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnHuyBo);
 
@@ -334,12 +280,8 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		btnLuu.addActionListener(this);
 		btnXoaRong.addActionListener(this);
 		btnHuyBo.addActionListener(this);
-		pnlNam.addMouseListener(this);
-		lblNam.addMouseListener(this);
-		pnlNu.addMouseListener(this);
-		lblNu.addMouseListener(this);
 
-//		daoNV =  new NhanVienDao();
+		daoNV = new NhanVienDao();
 	}
 
 	@Override
@@ -348,9 +290,12 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		if (o.equals(btnLuu)) {
 			if (kiemTraRegex()) {
 				NhanVien nv = getNhanVienTuTextfield();
-				System.out.println(nv);
-				JOptionPane.showMessageDialog(this, "Bạn đã thêm thành công");
-				xoaRongText();
+				if (daoNV.themNhanVien(nv)) {
+					JOptionPane.showMessageDialog(this, "Thêm thành công");
+					xoaRongText();
+				} else
+					JOptionPane.showMessageDialog(this, "Thêm thất bại");
+
 			}
 		} else if (o.equals(btnXoaRong)) {
 			xoaRongText();
@@ -369,7 +314,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		txtCMND.setText("");
 		txtEmail.setText("");
 		txtDiaChi.setText("");
-		rdbtnNam.setSelected(true);
+		txtHeSoLuong.setText("");
 		cmbNgay.setSelectedIndex(0);
 		cmbThang.setSelectedIndex(0);
 		cmbNam.setSelectedIndex(0);
@@ -378,17 +323,6 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 
 	public boolean KiemTraRongText(JTextField txt) {
 		return txt.getText().equals("") ? true : false;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Object o = e.getSource();
-		if (o.equals(pnlNam) || o.equals(lblNam)) { // thiết lập chọn Giới tính là Nam
-			rdbtnNam.setSelected(true);
-
-		} else if (o.equals(pnlNu) || o.equals(lblNu)) { // Thiết lập chọn giới tính là Nữ
-			rdbtnNu.setSelected(true);
-		}
 	}
 
 	/**
@@ -421,13 +355,13 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 
 		String ten = txtTen.getText();
 		LocalDate date = getDate();
-		boolean gioiTinh = getGioiTinhTuInput();
 		String diaChi = txtDiaChi.getText();
 		String sdt = txtSDT.getText();
 		String CMND = txtCMND.getText();
 		boolean trangThai = true;
 		String email = txtEmail.getText();
-		return new NhanVien(ten, diaChi, sdt, CMND, trangThai, email, date, gioiTinh);
+		double hsl = Double.parseDouble(txtHeSoLuong.getText());
+		return new NhanVien(capitalizer(ten), diaChi, sdt, CMND, trangThai, email, date, hsl);
 	}
 
 	/**
@@ -444,6 +378,12 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 		return date;
 	}
 
+	/**
+	 * Kiểm tra Regex SĐT, kiểm tra Regex CMND, Kiểm tra Regex email, Kiểm tra rỗng
+	 * DiaChi
+	 * 
+	 * @return
+	 */
 	public boolean kiemTraRegex() {
 		Regex rs = new Regex();
 		if (rs.kiemTraSDT(txtSDT))
@@ -456,31 +396,5 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener, MouseLis
 			return false;
 		else
 			return true;
-	}
-
-	public boolean getGioiTinhTuInput() {
-		if (rdbtnNam.isSelected())
-			return true;
-		return false;
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
 	}
 }

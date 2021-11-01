@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="modelTinhLuong"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="th"/>
+			<item value="D:\\HOC_TAP\\Nam 3-HK1\\PTUD\\BaiTapLon\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\"/>
+			<item value="231, 231, 231"/>
+			<item value="310, 86"/>
+			<item value="129, 25"/>
+			<item value="320, 110"/>
+			<item value="320, 100"/>
+			<item value="320, 120"/>
 			<item value="modelTinhLuong"/>
 			<item value="ChucNang"/>
 			<item value="//Căn chữ của cột sang phải"/>
@@ -15,16 +23,14 @@
 			<item value="yearChooser"/>
 			<item value="year"/>
 			<item value="tblTinhLuong"/>
-			<item value="tblTKThu"/>
-			<item value="java.net.URL.toExternalForm"/>
-			<item value="java.net.URL.toExternalForm()"/>
-			<item value="CircleBtn"/>
-			<item value="tblTienThu"/>
-			<item value="scrTienThu"/>
-			<item value="menu"/>
-			<item value="GioHang"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="242, 129,25"/>
+			<item value="320, 115"/>
+			<item value="320,115"/>
+			<item value="320, 110"/>
+			<item value="320, 100"/>
 			<item value="tblTienThu"/>
 			<item value="tblSanPham"/>
 			<item value="tblTKChi"/>
@@ -34,12 +40,6 @@
 			<item value="MatHang"/>
 			<item value="lblTenKH"/>
 			<item value="lblMaKH"/>
-			<item value="lblTenNhanVien"/>
-			<item value="lblAnh"/>
-			<item value="pnlIn"/>
-			<item value="pnlNhanVien"/>
-			<item value=""/>
-			<item value="tabbedPane"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

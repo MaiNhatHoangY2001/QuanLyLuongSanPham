@@ -247,5 +247,3 @@ public class RoundedPanel extends JPanel {
 		}
 	}
 }
-
-

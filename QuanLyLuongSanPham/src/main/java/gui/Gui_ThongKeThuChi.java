@@ -22,7 +22,6 @@ import gui_package.ChucNang;
 import gui_package.CustomTab;
 import gui_package.PnlThongKeChi;
 import gui_package.PnlThongKeThu;
-import gui_package.PnlTinhDoanhThu;
 
 public class Gui_ThongKeThuChi extends JFrame {
 
@@ -123,7 +122,7 @@ public class Gui_ThongKeThuChi extends JFrame {
 		lblGio.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblGio.setBounds(1305, 96, 90, 36);
 		panel.add(lblGio);
-		ChucNang.setGio(lblGio);
+//		ChucNang.setGio(lblGio);
 
 		/**
 		 * tab

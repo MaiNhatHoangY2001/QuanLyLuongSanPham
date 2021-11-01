@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,13 +21,12 @@ import org.hibernate.annotations.Parameter;
 public class HoaDonBanHang {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
-	@GenericGenerator(	name = "sinhMaTheoNgay",
-						parameters = @Parameter(name="prefix",value = "HB"),
-						strategy = "generator.SinhMaTheoNgay")
+	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "HB"), strategy = "generator.SinhMaTheoNgay")
 	private String maHoaDonBan;
 	private LocalDate ngayLapHoaDon;
 	private double khuyenMai;
 	private double thue;
+	@Column(columnDefinition = "money")
 	private double thanhTien;
 
 	@ManyToOne
@@ -45,7 +45,7 @@ public class HoaDonBanHang {
 	}
 
 	public double tinhThue() {
-		return 0;
+		return thue;
 	}
 
 	public String getMaHoaDonBan() {
@@ -116,16 +116,16 @@ public class HoaDonBanHang {
 		super();
 	}
 
-	public HoaDonBanHang(LocalDate ngayLapHoaDon, double khuyenMai, double thue) {
-		super();
-		this.ngayLapHoaDon = ngayLapHoaDon;
-		this.khuyenMai = khuyenMai;
-		this.thue = thue;
-	}
-
 	public HoaDonBanHang(String maHoaDonBan) {
 		super();
 		this.maHoaDonBan = maHoaDonBan;
+	}
+
+	public HoaDonBanHang(double khuyenMai, double thue) {
+		super();
+		this.ngayLapHoaDon = LocalDate.now();
+		this.khuyenMai = khuyenMai;
+		this.thue = thue;
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class CustomTable extends DefaultTableCellRenderer {
 	private static final long serialVersionUID = 1L;
 	private Color bg, fg;
 
-	public CustomTable(Color bg, Color fg) {
+	public  CustomTable(Color bg, Color fg) {
 		super();
 		this.bg = bg;
 		this.fg = fg;

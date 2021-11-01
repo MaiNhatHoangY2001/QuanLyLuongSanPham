@@ -40,8 +40,7 @@ public class Gui_Menu extends JPanel {
 		btnTrangChu.setIconTextGap(50);
 		btnTrangChu.setHorizontalTextPosition(SwingConstants.RIGHT);
 		btnTrangChu.setAlignmentX(0.5f);
-		btnTrangChu.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/Home.PNG"));
+		btnTrangChu.setIcon(new ImageIcon("src/main/resources/images/img_bill/Home.PNG"));
 		btnTrangChu.setBackground(new Color(231, 231, 231));
 		btnTrangChu.setBorder(new LineBorder(new Color(255, 127, 80)));
 		btnTrangChu.setForeground(new Color(242, 129, 25));
@@ -52,8 +51,7 @@ public class Gui_Menu extends JPanel {
 		btnQuanLyNhanVien = new JButton("Quản lý nhân viên");
 		btnQuanLyNhanVien.setIconTextGap(50);
 		btnQuanLyNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
-		btnQuanLyNhanVien.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/QuanLyNhanVien.PNG"));
+		btnQuanLyNhanVien.setIcon(new ImageIcon("src/main/resources/images/img_bill/QuanLyNhanVien.PNG"));
 		btnQuanLyNhanVien.setBackground(new Color(231, 231, 231));
 		btnQuanLyNhanVien.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnQuanLyNhanVien.setForeground(new Color(242, 129, 25));
@@ -65,8 +63,7 @@ public class Gui_Menu extends JPanel {
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton.setIconTextGap(50);
 		btnNewButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		btnNewButton.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/QuanLyHoaDon.PNG"));
+		btnNewButton.setIcon(new ImageIcon("src/main/resources/images/img_bill/QuanLyHoaDon.PNG"));
 		btnNewButton.setBackground(new Color(231, 231, 231));
 		btnNewButton.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnNewButton.setForeground(new Color(242, 129, 25));
@@ -78,8 +75,7 @@ public class Gui_Menu extends JPanel {
 		btnQuanLyLuong.setLocation(new Point(20, 0));
 		btnQuanLyLuong.setIconTextGap(50);
 		btnQuanLyLuong.setHorizontalAlignment(SwingConstants.LEADING);
-		btnQuanLyLuong.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/QuanLyLuong.PNG"));
+		btnQuanLyLuong.setIcon(new ImageIcon("src/main/resources/images/img_bill/QuanLyLuong.PNG"));
 		btnQuanLyLuong.setBackground(new Color(231, 231, 231));
 		btnQuanLyLuong.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnQuanLyLuong.setForeground(new Color(242, 129, 25));
@@ -90,8 +86,7 @@ public class Gui_Menu extends JPanel {
 		btnThongKe = new JButton("Thống kê thu chi");
 		btnThongKe.setHorizontalAlignment(SwingConstants.LEFT);
 		btnThongKe.setIconTextGap(50);
-		btnThongKe.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/ThongkeThuChi.PNG"));
+		btnThongKe.setIcon(new ImageIcon("src/main/resources/images/img_bill/ThongkeThuChi.PNG"));
 		btnThongKe.setBackground(new Color(231, 231, 231));
 		btnThongKe.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnThongKe.setForeground(new Color(242, 129, 25));
@@ -102,8 +97,7 @@ public class Gui_Menu extends JPanel {
 		btnQuanLySanPham = new JButton("Quản lý sản phẩm");
 		btnQuanLySanPham.setHorizontalAlignment(SwingConstants.LEFT);
 		btnQuanLySanPham.setIconTextGap(50);
-		btnQuanLySanPham.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/QuanLysanPham.PNG"));
+		btnQuanLySanPham.setIcon(new ImageIcon("src/main/resources/images/img_bill/QuanLysanPham.PNG"));
 		btnQuanLySanPham.setBackground(new Color(231, 231, 231));
 		btnQuanLySanPham.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnQuanLySanPham.setForeground(new Color(242, 129, 25));
@@ -114,8 +108,7 @@ public class Gui_Menu extends JPanel {
 		btnQuanLyDuLieu = new JButton("Quản lý dữ liệu");
 		btnQuanLyDuLieu.setHorizontalAlignment(SwingConstants.LEFT);
 		btnQuanLyDuLieu.setIconTextGap(50);
-		btnQuanLyDuLieu.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/QuanLyDuLieu.PNG"));
+		btnQuanLyDuLieu.setIcon(new ImageIcon("src/main/resources/images/img_bill/QuanLyDuLieu.PNG"));
 		btnQuanLyDuLieu.setBackground(new Color(231, 231, 231));
 		btnQuanLyDuLieu.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnQuanLyDuLieu.setForeground(new Color(242, 129, 25));
@@ -126,8 +119,7 @@ public class Gui_Menu extends JPanel {
 		btnVeChungToi = new JButton("Về chúng tôi");
 		btnVeChungToi.setHorizontalAlignment(SwingConstants.LEFT);
 		btnVeChungToi.setIconTextGap(50);
-		btnVeChungToi.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/VeChungToi.PNG"));
+		btnVeChungToi.setIcon(new ImageIcon("src/main/resources/images/img_bill/VeChungToi.PNG"));
 		btnVeChungToi.setBackground(new Color(231, 231, 231));
 		btnVeChungToi.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnVeChungToi.setForeground(new Color(242, 129, 25));
@@ -138,18 +130,16 @@ public class Gui_Menu extends JPanel {
 		btnThoat = new JButton("Thoát");
 		btnThoat.setHorizontalAlignment(SwingConstants.LEFT);
 		btnThoat.setIconTextGap(50);
-		btnThoat.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/Thoat.PNG"));
+		btnThoat.setIcon(new ImageIcon("src/main/resources/images/img_bill/Thoat.PNG"));
 		btnThoat.setBackground(new Color(231, 231, 231));
 		btnThoat.setBorder(new LineBorder(new Color(255, 140, 0)));
 		btnThoat.setForeground(new Color(242, 129, 25));
 		btnThoat.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThoat.setBounds(0, 665, 400, 86);
 		add(btnThoat);
-	
+
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(
-				"src/main/resources/images/img_bill/Logo.PNG"));
+		lblNewLabel.setIcon(new ImageIcon("src/main/resources/images/img_bill/Logo.PNG"));
 		lblNewLabel.setBounds(105, 805, 175, 121);
 		add(lblNewLabel);
 

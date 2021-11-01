@@ -151,7 +151,7 @@ public class Gui_SanPham extends JFrame implements ActionListener, MouseListener
 		lblGio.setBounds(1305, 96, 90, 36);
 		pnlHeader.add(lblGio);
 		ChucNang.setDiChuyenGD(this);
-		ChucNang.setGio(lblGio);
+//		ChucNang.setGio(lblGio);
 
 		// Menu
 		lblIconMenu = new JLabel("");
