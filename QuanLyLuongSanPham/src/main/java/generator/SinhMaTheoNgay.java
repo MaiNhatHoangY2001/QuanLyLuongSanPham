@@ -24,7 +24,7 @@ public class SinhMaTheoNgay implements IdentifierGenerator, Configurable {
 				object.getClass().getSimpleName());
 
 		Stream<String> ids = session.createQuery(query).stream();
-		Long max = ids.map(o -> o.replace(o.substring(0,5), "")).mapToLong(Long::parseLong).max().orElse(0L);
+		Long max = ids.map(o -> o.replace(o.substring(0,6), "")).mapToLong(Long::parseLong).max().orElse(0L);
 
 		return prefix + s + (String.format("%04d", max + 1));
 	}
