@@ -26,6 +26,7 @@ import gui_package.ChucNang;
 import gui_package.CircleBtn;
 import gui_package.RoundTextField;
 import model.NhanVien;
+import model.SanPham;
 
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -34,15 +35,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import dao.NhanVienDao;
+import dao.SanPhamDao;
 
-public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemListener {
+public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtTImKiem;
-	private JTextField txtTongSoSV;
+	private JTextField txtTongSoSP;
 
 	private JPanel pnlHeader;
 	private JPanel pnlContent;
@@ -52,8 +54,8 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	private JLabel lblTitleHeader;
 	private JLabel lblUser;
 	private JLabel lblDangXuat;
-	private JLabel lblThongTinNV;
-	private JLabel lblTongSoNV;
+	private JLabel lblThongTinSP;
+	private JLabel lblTongSoSP;
 
 	private JButton btnThemNV;
 	private JButton btnSuaNV;
@@ -71,11 +73,13 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private CircleBtn btnLamMoi;
+	private SanPhamDao daoSP;
+	private List<SanPham> listSP;
 
 	/**
 	 * Create the panel.
 	 */
-	public Gui_QuanLyNhanVien() {
+	public Gui_QuanLySanPham() {
 		setSize(1600, 1046);
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
@@ -91,7 +95,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		add(pnlHeader);
 
 		// Jlable Title Header
-		lblTitleHeader = new JLabel("QUẢN LÝ NHÂN VIÊN");
+		lblTitleHeader = new JLabel("QUẢN LÝ SẢN PHẨM");
 		lblTitleHeader.setForeground(Color.WHITE);
 		lblTitleHeader.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblTitleHeader.setBounds(519, 11, 535, 78);
@@ -202,30 +206,30 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		add(pnlContent);
 
 		// JLable title Bang
-		lblThongTinNV = new JLabel("Thông tin nhân viên");
-		lblThongTinNV.setForeground(Color.WHITE);
-		lblThongTinNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblThongTinNV.setBounds(10, 11, 216, 34);
-		pnlContent.add(lblThongTinNV);
+		lblThongTinSP = new JLabel("Thông tin sản phẩm");
+		lblThongTinSP.setForeground(Color.WHITE);
+		lblThongTinSP.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblThongTinSP.setBounds(10, 11, 216, 34);
+		pnlContent.add(lblThongTinSP);
 
 		/*
 		 * Hien So Luong Nhan Vien
 		 */
 		// JTextField Tong so Nhan Vien
-		txtTongSoSV = new JTextField();
-		txtTongSoSV.setForeground(Color.BLACK);
-		txtTongSoSV.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTongSoSV.setEnabled(false);
-		txtTongSoSV.setColumns(10);
-		txtTongSoSV.setBounds(1400, 11, 174, 32);
-		pnlContent.add(txtTongSoSV);
+		txtTongSoSP = new JTextField();
+		txtTongSoSP.setForeground(Color.BLACK);
+		txtTongSoSP.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtTongSoSP.setEnabled(false);
+		txtTongSoSP.setColumns(10);
+		txtTongSoSP.setBounds(1400, 11, 174, 32);
+		pnlContent.add(txtTongSoSP);
 
 		// JLable Tong so Nhan Vien
-		lblTongSoNV = new JLabel("Tổng số nhân viên:");
-		lblTongSoNV.setForeground(Color.WHITE);
-		lblTongSoNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTongSoNV.setBounds(1180, 11, 210, 34);
-		pnlContent.add(lblTongSoNV);
+		lblTongSoSP = new JLabel("Tổng số sản phẩm:");
+		lblTongSoSP.setForeground(Color.WHITE);
+		lblTongSoSP.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblTongSoSP.setBounds(1180, 11, 210, 34);
+		pnlContent.add(lblTongSoSP);
 
 		/*
 		 * Bang thong tin Nhan Vien
@@ -235,7 +239,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		scrollPane.setBounds(0, 47, 1585, 818);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "MSNV", "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương" };
+		String headerTitle[] = { "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành"};
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50);
 		// Table
@@ -256,31 +260,27 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		btnTimKiem.addActionListener(this);
 		cmbLoaiTimKiem.addItemListener(this);
 
-		/*
-		 * Get Class NhanVien
-		 */
-		daoNV = new NhanVienDao();
-		listNV = daoNV.getAllNhanVien();
-
-		// Load Data To Table and JTextField Tong So NhanVien
-		LoadThongTinNhanVien(listNV);
+		daoSP = new SanPhamDao();
+		listSP = daoSP.getAllSanPham();
+		
+		LoadThongTinSanPham(listSP);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnThemNV)) {
-			Gui_ThemNhanVien frm = new Gui_ThemNhanVien();
-			frm.setVisible(true);
+//			Gui_ThemNhanVien frm = new Gui_ThemNhanVien();
+//			frm.setVisible(true);
 
 		} else if (o.equals(btnSuaNV)) {
-			if (table.getSelectedRowCount() == 0) {
-				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
-			} else {
-				String maNV = model.getValueAt(table.getSelectedRow(), 0).toString();
-				NhanVien nv = daoNV.getNhanVien(maNV);
-				new Gui_SuaNhanVien(nv).setVisible(true);
-			}
+//			if (table.getSelectedRowCount() == 0) {
+//				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
+//			} else {
+//				String maNV = model.getValueAt(table.getSelectedRow(), 0).toString();
+//				NhanVien nv = daoNV.getNhanVien(maNV);
+//				new Gui_SuaNhanVien(nv).setVisible(true);
+//			}
 
 		} else if (o.equals(btnXoa)) {
 			if (table.getSelectedRowCount() == 0) {
@@ -292,92 +292,92 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 					boolean rs = false;
 					while (table.getSelectedRowCount() > 0) {
 						int index = table.getSelectedRow();
-						rs = daoNV.xoaNhanVienTheoMa(model.getValueAt(table.getSelectedRow(), 0).toString());
+						rs = daoSP.xoaSanPhamTheoMa(model.getValueAt(table.getSelectedRow(), 0).toString());
 						model.removeRow(index);
 					}
 					if (rs == true)
-						JOptionPane.showMessageDialog(this, "Bạn đã xóa thành công");
+						JOptionPane.showMessageDialog(this, "Xóa thành công");
 					else
-						JOptionPane.showMessageDialog(this, "Bạn đã xóa không thành công");
+						JOptionPane.showMessageDialog(this, "Xóa không thành công");
 				}
 
 			}
 		} else if (o.equals(btnLamMoi)) {
-			LoadThongTinNhanVien(daoNV.getAllNhanVien());
+			LoadThongTinSanPham(daoSP.getAllSanPham());
 		} else if (o.equals(btnTimKiem)) {
-			String data = txtTImKiem.getText();
-			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
-			if (loaiTK.equals("Tìm theo tên")) {
-				List<NhanVien> list = daoNV.getListNhanVienTheoTen(data);
-				LoadThongTinNhanVien(list);
-			} else if (loaiTK.equals("Tìm theo mã")) {
-				NhanVien nv = daoNV.getNhanVien(data);
-				if (nv == null)
-					LoadThongTinNhanVien(listNV);
-				else {
-					ChucNang.clearDataTable(model);
-					load1ThongTinNhanVien(nv);
-				}
-			} else if (loaiTK.equals("Tìm theo tuổi")) {
-				ChucNang.clearDataTable(model);
-				try {
-					if (!data.equals("")) {
-						int tuoi = Integer.parseInt(data);
-						for (NhanVien nhanVien : listNV) {
-							int namHienTai = LocalDate.now().getYear();
-							int namSinh = nhanVien.getNgaySinh().getYear();
-							if (tuoi == namHienTai - namSinh) {
-								load1ThongTinNhanVien(nhanVien);
-							}
-						}
-					} else {
-						LoadThongTinNhanVien(listNV);
-					}
-				} catch (NumberFormatException e2) {
-					LoadThongTinNhanVien(listNV);
-					JOptionPane.showMessageDialog(this,
-							"Lỗi nhập dữ liệu!\nKhông nhận kiểu dữ liệu ký tự\nHãy nhập số tuổi cần tìm\n");
-				}
-			} else if (loaiTK.equals("Đang làm việc")) {
-
-			} else if (loaiTK.equals("Đã nghĩ việc")) {
-
-			}
+//			String data = txtTImKiem.getText();
+//			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
+//			if (loaiTK.equals("Tìm theo tên")) {
+//				List<NhanVien> list = daoNV.getListNhanVienTheoTen(data);
+//				LoadThongTinNhanVien(list);
+//			} else if (loaiTK.equals("Tìm theo mã")) {
+//				NhanVien nv = daoNV.getNhanVien(data);
+//				if (nv == null)
+//					LoadThongTinNhanVien(listNV);
+//				else {
+//					ChucNang.clearDataTable(model);
+//					load1ThongTinNhanVien(nv);
+//				}
+//			} else if (loaiTK.equals("Tìm theo tuổi")) {
+//				ChucNang.clearDataTable(model);
+//				try {
+//					if (!data.equals("")) {
+//						int tuoi = Integer.parseInt(data);
+//						for (NhanVien nhanVien : listNV) {
+//							int namHienTai = LocalDate.now().getYear();
+//							int namSinh = nhanVien.getNgaySinh().getYear();
+//							if (tuoi == namHienTai - namSinh) {
+//								load1ThongTinNhanVien(nhanVien);
+//							}
+//						}
+//					} else {
+//						LoadThongTinNhanVien(listNV);
+//					}
+//				} catch (NumberFormatException e2) {
+//					LoadThongTinNhanVien(listNV);
+//					JOptionPane.showMessageDialog(this,
+//							"Lỗi nhập dữ liệu!\nKhông nhận kiểu dữ liệu ký tự\nHãy nhập số tuổi cần tìm\n");
+//				}
+//			} else if (loaiTK.equals("Đang làm việc")) {
+//
+//			} else if (loaiTK.equals("Đã nghĩ việc")) {
+//
+//			}
 		}
 	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		JComboBox cmb = (JComboBox) e.getSource();
-		if (cmb.getSelectedItem().equals("Tìm theo tên")) {
-
-		} else if (cmb.getSelectedItem().equals("Tìm theo mã")) {
-
-		} else if (cmb.getSelectedItem().equals("Tìm theo tuổi")) {
-
-		} else if (cmb.getSelectedItem().equals("Đang làm việc")) {
-			int count = 0;
-			ChucNang.clearDataTable(model);
-			for (NhanVien nhanVien : listNV) {
-				if (nhanVien.gettrangThaiLamViec() == true) {
-					load1ThongTinNhanVien(nhanVien);
-					count++;
-				}
-			}
-			if (count == 0)
-				LoadThongTinNhanVien(listNV);
-		} else if (cmb.getSelectedItem().equals("Đã nghĩ việc")) {
-			int count = 0;
-			ChucNang.clearDataTable(model);
-			for (NhanVien nhanVien : listNV) {
-				if (nhanVien.gettrangThaiLamViec() == false) {
-					load1ThongTinNhanVien(nhanVien);
-					count++;
-				}
-			}
-			if (count == 0)
-				LoadThongTinNhanVien(listNV);
-		}
+//		JComboBox cmb = (JComboBox) e.getSource();
+//		if (cmb.getSelectedItem().equals("Tìm theo tên")) {
+//
+//		} else if (cmb.getSelectedItem().equals("Tìm theo mã")) {
+//
+//		} else if (cmb.getSelectedItem().equals("Tìm theo tuổi")) {
+//
+//		} else if (cmb.getSelectedItem().equals("Đang làm việc")) {
+//			int count = 0;
+//			ChucNang.clearDataTable(model);
+//			for (NhanVien nhanVien : listNV) {
+//				if (nhanVien.gettrangThaiLamViec() == true) {
+//					load1ThongTinNhanVien(nhanVien);
+//					count++;
+//				}
+//			}
+//			if (count == 0)
+//				LoadThongTinNhanVien(listNV);
+//		} else if (cmb.getSelectedItem().equals("Đã nghĩ việc")) {
+//			int count = 0;
+//			ChucNang.clearDataTable(model);
+//			for (NhanVien nhanVien : listNV) {
+//				if (nhanVien.gettrangThaiLamViec() == false) {
+//					load1ThongTinNhanVien(nhanVien);
+//					count++;
+//				}
+//			}
+//			if (count == 0)
+//				LoadThongTinNhanVien(listNV);
+//		}
 	}
 
 	/**
@@ -386,17 +386,16 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	 * 
 	 * @param list
 	 */
-	private void LoadThongTinNhanVien(List<NhanVien> list) {
+	private void LoadThongTinSanPham(List<SanPham> list) {
 		ChucNang.clearDataTable(model);
-		for (NhanVien nv : list) {
-			load1ThongTinNhanVien(nv);
+		for (SanPham sanPham : list) {
+			load1ThongTinSanPham(sanPham);
 		}
-		txtTongSoSV.setText(list.size() + "");
+		txtTongSoSP.setText(list.size() + "");
 	}
 
-	public void load1ThongTinNhanVien(NhanVien nv) {
-		String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(),
-				nv.getEmail(), vnFormat.format(nv.getMucLuong()) };
+	public void load1ThongTinSanPham(SanPham sanPham) {
+		String n[] = { sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(), vnFormat.format(sanPham.getGiaThanh()) };
 		model.addRow(n);
 	}
 

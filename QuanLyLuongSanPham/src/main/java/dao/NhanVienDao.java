@@ -49,6 +49,25 @@ public class NhanVienDao {
 		return list;
 
 	}
+	
+	public List<NhanVien> getListNhanVienTheoTen(String tenNVCanTim) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery("select * from nhanvien\r\n"
+					+ "where tenNhanVien like '%" + tenNVCanTim +"%'", NhanVien.class).getResultList();
+
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return list;
+
+	}
 
 	public boolean themNhanVien(NhanVien nhanVien) {
 		Session session = sessionFactory.openSession();

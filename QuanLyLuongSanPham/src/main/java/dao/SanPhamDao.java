@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,6 +36,7 @@ public class SanPhamDao {
 			return false;
 		}
 	}
+
 	public SanPham getSanPham(String id) {
 		SanPham sanPham;
 		Session session = sessionFactory.openSession();
@@ -41,7 +44,7 @@ public class SanPhamDao {
 
 		try {
 			tr.begin();
-			sanPham=session.find(SanPham.class, id);
+			sanPham = session.find(SanPham.class, id);
 			tr.commit();
 			return sanPham;
 		} catch (Exception e) {
@@ -50,11 +53,44 @@ public class SanPhamDao {
 		}
 		return null;
 	}
+	
+	public List<SanPham> getAllSanPham() {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery("select * from SanPham", SanPham.class).getResultList();
+
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return list;
+	}
+	
+	public boolean xoaSanPhamTheoMa(String maSPCanXoa) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.delete(session.find(SanPham.class, maSPCanXoa));
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+			return false;
+		}
+		session.close();
+		return true;
+	}
+
 	public static void main(String[] args) {
-		
-		SanPham pham= new SanPham("Iphone 14", 499999999, "Chinh nghèo", "PK", LocalDate.of(2020,9, 23));
-		SanPhamDao sanPhamDao= new SanPhamDao();
-		
+
+		SanPham pham = new SanPham("Iphone 14", 499999999, "Chinh nghèo", "PK", LocalDate.of(2020, 9, 23));
+		SanPhamDao sanPhamDao = new SanPhamDao();
+
 //		System.out.println(sanPhamDao.getNhanVien("SP21100001"));
 		System.out.println(sanPhamDao.themSanPham(pham));
 	}
