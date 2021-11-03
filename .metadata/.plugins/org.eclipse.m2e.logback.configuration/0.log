@@ -12798,3 +12798,24 @@ java.util.ConcurrentModificationException: null
 2021-11-03 10:42:33,207 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
 2021-11-03 10:42:33,211 [Worker-60: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-03 10:42:33,211 [Worker-60: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-03 11:45:16,844 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-11-03 11:45:40,157 [Worker-22: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 11:45:40,162 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-03 11:45:40,169 [Worker-22: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 11:45:40,170 [Worker-22: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-03 11:50:27,654 [Worker-18: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 11:50:27,658 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-03 11:50:27,662 [Worker-18: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 11:50:27,663 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-03 12:33:13,873 [Worker-33: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 12:33:13,884 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-03 12:33:13,887 [Worker-33: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 12:33:13,889 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-03 12:33:17,824 [Worker-33: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 12:33:17,827 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-03 12:33:17,831 [Worker-33: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 12:33:17,832 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-03 12:33:27,206 [Worker-36: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 12:33:27,208 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-03 12:33:27,210 [Worker-36: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-03 12:33:27,211 [Worker-36: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
