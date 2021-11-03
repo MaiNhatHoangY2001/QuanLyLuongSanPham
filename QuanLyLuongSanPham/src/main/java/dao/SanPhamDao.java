@@ -1,6 +1,8 @@
 package dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,6 +33,20 @@ public class SanPhamDao {
 			return false;
 		}
 	}
+	public boolean xoaSanPhamTheoMa(String maSPCanXoa) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.delete(session.find(SanPham.class, maSPCanXoa));
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+			return false;
+		}
+		session.close();
+		return true;
+	}
 	public SanPham getSanPham(String id) {
 		SanPham sanPham;
 		Session session = sessionFactory.openSession();
@@ -46,6 +62,22 @@ public class SanPhamDao {
 			tr.rollback();
 		}
 		return null;
+	}
+	public List<SanPham> getAllSanPham() {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery("select * from SanPham", SanPham.class).getResultList();
+
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return list;
 	}
 	public static void main(String[] args) {
 		
