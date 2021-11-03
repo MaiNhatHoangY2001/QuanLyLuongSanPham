@@ -199,7 +199,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
 		pnlChange.add(new Gui_QuanLyNhanVien(), "btnQuanLyNhanVien");
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
-//		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
+		pnlChange.add(new Gui_QuanLyTaiKhoan(), "btnQuanLyTaiKhoan");
 //		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
 //		pnlChange.add(new test(), "btnThoat");
 
