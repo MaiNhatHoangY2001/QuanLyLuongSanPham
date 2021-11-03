@@ -20,23 +20,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner.DateEditor;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
-import com.toedter.calendar.IDateEditor;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
 
 import gui_package.ChucNang;
 import services.QuanLyHoaDonService;
 
 public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
-	private JTextField textField;
+	private JTextField txtTimKiem;
 	private JTable tblHoaDon;
 	private JTable tblChiTiet;
 	private JLabel lblNgay;
@@ -79,8 +78,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		lblNewLabel_5.setForeground(new Color(255, 255, 255));
 		lblNewLabel_5.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_5.setIcon(new ImageIcon(
-				"D:\\workspace\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\src\\main\\resources\\images\\img_bill\\uerlogin.PNG"));
+		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/images/img_bill/uerlogin.PNG"));
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_5.setBounds(1393, 10, 192, 45);
 		panel.add(lblNewLabel_5);
@@ -129,19 +127,21 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_1.add(txtNgayLap);
 
 		cboTimKiem = new JComboBox();
-		cboTimKiem.setToolTipText("Loại tìm kiếm");
-		cboTimKiem.setModel(new DefaultComboBoxModel(new String[] { "Tìm theo mã", "Tìm theo tên", "tìm mã khách" }));
-		cboTimKiem.setSelectedIndex(1);
+		cboTimKiem.setToolTipText("Tìm kiếm hóa đơn theo các tiêu chí ");
+		cboTimKiem.setModel(new DefaultComboBoxModel(new String[] { "Mã hóa đơn" , "Số điện thoại Khách", "Theo tên khách"}));
+		cboTimKiem.setSelectedIndex(0);
 		cboTimKiem.setForeground(Color.WHITE);
 		cboTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cboTimKiem.setBackground(new Color(233, 180, 46));
-		cboTimKiem.setBounds(1400, 11, 185, 45);
+		cboTimKiem.setBounds(1360, 11, 225, 45);
 		panel_1.add(cboTimKiem);
 
-		textField = new JTextField();
-		textField.setBounds(1109, 11, 276, 45);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		txtTimKiem = new JTextField();
+		txtTimKiem.setToolTipText("Nhập vào thông tin tìm kiếm");
+		txtTimKiem.setBounds(1001, 11, 349, 45);
+		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		panel_1.add(txtTimKiem);
+		txtTimKiem.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBackground(new Color(255, 153, 0));
@@ -149,22 +149,42 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		add(scrollPane);
 
 		modelHoaDon = new DefaultTableModel(new String[] { "M\u00E3 h\u00F3a \u0111\u01A1n", "Ng\u00E0y l\u1EADp",
-				"Khuy\u1EBFn m\u00E3i", "Thu\u1EBF", "Th\u00E0nh ti\u1EC1n" }, 0);
-		tblHoaDon = new JTable();
+				"Khuy\u1EBFn m\u00E3i", "Thu\u1EBF", "Th\u00E0nh ti\u1EC1n" },10) {
+			@Override
+			public boolean isCellEditable(int row,int col) {
+				return false;
+			}
+		};
+		
+		
+		tblHoaDon = new JTable(modelHoaDon);
+		tblHoaDon.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tblHoaDon.setRowMargin(5);
+		tblHoaDon.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		tblHoaDon.setRowHeight(36);
-		tblHoaDon.setModel(modelHoaDon);
+		JTableHeader headerTable = tblHoaDon.getTableHeader();
+		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(tblHoaDon);
-
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		scrollPane_1.setBounds(0, 674, 1150, 362);
+		scrollPane_1.setBounds(0, 679, 1150, 362);
 		add(scrollPane_1);
 
 		modelChiTiet = new DefaultTableModel(new String[] { "M\u00E3 s\u1EA3n ph\u1EA9m", "T\u00EAn s\u1EA3n ph\u1EA9m",
-				"\u0110\u01A1n gi\u00E1", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng ti\u1EC1n" }, 0);
+				"\u0110\u01A1n gi\u00E1", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng ti\u1EC1n" }, 0){
+			@Override
+			public boolean isCellEditable(int row,int col) {
+				return false;
+			}
+		};
 		tblChiTiet = new JTable();
 		tblChiTiet.setRowHeight(36);
 		tblChiTiet.setModel(modelChiTiet);
+		JTableHeader headerTable1 = tblChiTiet.getTableHeader();
+		headerTable1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		headerTable1.setBackground(new Color(248, 198, 153));
 		scrollPane_1.setViewportView(tblChiTiet);
 
 		JLabel lblNewLabel = new JLabel("Bảng hóa đơn");
@@ -200,17 +220,20 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 
 		lblSdt = new JLabel("Số điện thoại: 0967127083");
 		lblSdt.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblSdt.setBounds(15, 115, 356, 35);
+		lblSdt.setBounds(15, 115, 381, 35);
 		panel_4.add(lblSdt);
 
 		lblDiaChi = new JLabel("Địa chỉ: Đăk Nông");
 		lblDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDiaChi.setBounds(15, 226, 368, 35);
+		lblDiaChi.setBounds(15, 226, 381, 35);
 		panel_4.add(lblDiaChi);
 
-		lblNgaySinh = new JLabel("Ngày sinh: 15/06/2001");
+		lblNgaySinh = new JLabel("Mã nhân viên:");
+		lblNgaySinh.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblNgaySinh.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNgaySinh.setBorder(new LineBorder(Color.WHITE));
 		lblNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNgaySinh.setBounds(15, 277, 356, 35);
+		lblNgaySinh.setBounds(0, 272, 396, 90);
 		panel_4.add(lblNgaySinh);
 
 		JLabel lblThngTinKhch = new JLabel("Thông tin khách hàng");
@@ -221,7 +244,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_4.add(lblThngTinKhch);
 
 		lblTenKhachHang = new JLabel("Ten: Hoang Van Chinh");
-		lblTenKhachHang.setBounds(15, 168, 368, 42);
+		lblTenKhachHang.setBounds(15, 168, 381, 42);
 		panel_4.add(lblTenKhachHang);
 		lblTenKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		ChucNang.setTableAlternateRow();
@@ -268,18 +291,18 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 			List<?> list = quanLyHoaDonService.getHoaDonTheoNgay(ngay, thang, nam);
 			for (Object object : list) {
 				Object[] o = (Object[]) object;
-				
-				NumberFormat format= NumberFormat.getInstance(new Locale("vi", "VN"));
-				o[4]=format.format(Double.parseDouble(o[4].toString()));
+
+				NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
+				o[4] = format.format(Double.parseDouble(o[4].toString()));
 				modelHoaDon.addRow(o);
 			}
 		} else if (temp == 1) {
 			List<?> list1 = quanLyHoaDonService.getHoaDonNhapTheoNgay(ngay, thang, nam);
 			for (Object object : list1) {
 				Object[] o = (Object[]) object;
-				NumberFormat format= NumberFormat.getInstance(new Locale("vi", "VN"));
-				o[2]=format.format(Double.parseDouble(o[2].toString()));
-				o[4]=format.format(Double.parseDouble(o[4].toString()));
+				NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
+				o[2] = format.format(Double.parseDouble(o[2].toString()));
+				o[4] = format.format(Double.parseDouble(o[4].toString()));
 				modelHoaDon.addRow(o);
 			}
 		}
@@ -308,15 +331,14 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 				if (listChiTiet.size() != 0) {
 					for (Object object : listChiTiet) {
 						Object[] o = (Object[]) object;
-						NumberFormat format= NumberFormat.getInstance(new Locale("vi", "VN"));
-						o[4]=format.format(Double.parseDouble(o[4].toString()));
-						o[2]=format.format(Double.parseDouble(o[2].toString()));
+						NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
+						o[4] = format.format(Double.parseDouble(o[4].toString()));
+						o[2] = format.format(Double.parseDouble(o[2].toString()));
 						modelChiTiet.addRow(o);
 						System.out.println(o);
 					}
 				}
-			}
-			else if(temp==1) {
+			} else if (temp == 1) {
 				modelChiTiet.getDataVector().removeAllElements();
 				tblChiTiet.removeAll();
 				int row = tblHoaDon.getSelectedRow();
@@ -325,9 +347,9 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 				if (listChiTiet.size() != 0) {
 					for (Object object : listChiTiet) {
 						Object[] o = (Object[]) object;
-						NumberFormat format= NumberFormat.getInstance(new Locale("vi", "VN"));
-						o[4]=format.format(Double.parseDouble(o[4].toString()));
-						o[2]=format.format(Double.parseDouble(o[2].toString()));
+						NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
+						o[4] = format.format(Double.parseDouble(o[4].toString()));
+						o[2] = format.format(Double.parseDouble(o[2].toString()));
 						modelChiTiet.addRow(o);
 						System.out.println(o);
 					}
@@ -336,16 +358,15 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		}
 
 	}
+
 	public void chucNangCboTimKIem() {
 		int temp = cboTimKiem.getSelectedIndex();
-		if(temp ==1) {
-			
-		}
-		else if(temp==2) {
-			
-		}
-		else if(temp==3) {
-			
+		if (temp == 1) {
+
+		} else if (temp == 2) {
+
+		} else if (temp == 3) {
+
 		}
 	}
 
