@@ -199,7 +199,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
 		pnlChange.add(new Gui_QuanLyNhanVien(), "btnQuanLyNhanVien");
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
-		pnlChange.add(new Gui_QuanLyTaiKhoan(), "btnQuanLyTaiKhoan");
+//		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
 //		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
 //		pnlChange.add(new test(), "btnThoat");
 
@@ -256,7 +256,9 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Thông báo khi muốn thoát ứng dụng
 	 */
 	public void thongBaoThoat() {
-		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
+		JOptionPane jOptionPane= new JOptionPane();
+		jOptionPane.setBackground(new Color(242, 129, 25));
+		int tl = jOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
 				JOptionPane.YES_NO_OPTION);
 		if (tl == JOptionPane.YES_OPTION) {
 			System.exit(0);
