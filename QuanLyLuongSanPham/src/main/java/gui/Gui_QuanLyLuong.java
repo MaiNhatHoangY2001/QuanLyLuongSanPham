@@ -50,7 +50,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionEvent;
-
+//dfdfsd
 public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	/**
 	 * 

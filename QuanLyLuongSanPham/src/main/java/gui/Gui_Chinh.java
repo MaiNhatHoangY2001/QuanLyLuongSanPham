@@ -56,6 +56,10 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
+		
+		
+		
+		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);
@@ -199,7 +203,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
 		pnlChange.add(new Gui_QuanLyNhanVien(), "btnQuanLyNhanVien");
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
-//		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
+		pnlChange.add(new Gui_QuanLyTaiKhoan(), "btnQuanLyTaiKhoan");
 //		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
 
 		temp = btnQuanLyHoaDon;
