@@ -23,6 +23,7 @@ public class ChiTietHoaDonNhap {
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "maSanPham")
+
 	private SanPham sanPham;
 
 	public ChiTietHoaDonNhap(double donGia, int soLoHang) {

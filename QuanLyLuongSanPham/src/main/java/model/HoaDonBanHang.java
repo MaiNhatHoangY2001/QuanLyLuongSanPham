@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class HoaDonBanHang {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
 	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "HB"), strategy = "generator.SinhMaTheoNgay")
+
 	private String maHoaDonBan;
 	private LocalDate ngayLapHoaDon;
 	private double khuyenMai;
@@ -41,11 +43,16 @@ public class HoaDonBanHang {
 	private List<ChiTietHoaDonBan> dsChiTietHoaDonBan;
 
 	public double tinhThanhTien() {
-		return 0;
+		thanhTien=0;
+		dsChiTietHoaDonBan.forEach(i->{
+			thanhTien+=i.tinhTongTien();
+		});
+		thanhTien=thanhTien-thanhTien*thue;
+		return  thanhTien;
 	}
 
 	public double tinhThue() {
-		return thue;
+		return thanhTien*thue;
 	}
 
 	public String getMaHoaDonBan() {
@@ -110,6 +117,7 @@ public class HoaDonBanHang {
 
 	public void setDsChiTietHoaDonBan(List<ChiTietHoaDonBan> dsChiTietHoaDonBan) {
 		this.dsChiTietHoaDonBan = dsChiTietHoaDonBan;
+		this.tinhThanhTien();
 	}
 
 	public HoaDonBanHang() {

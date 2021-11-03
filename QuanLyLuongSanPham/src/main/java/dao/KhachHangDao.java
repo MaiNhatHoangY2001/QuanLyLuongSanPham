@@ -66,7 +66,7 @@ public class KhachHangDao {
 	}
 	public static void main(String[] args) {
 		KhachHangDao dao = new KhachHangDao();
-		KhachHang khachHang= new KhachHang("Hoang Van Long", "Go vap", "099999997");
+		KhachHang khachHang= new KhachHang("Hoang Van Hoang", "Go vap", "099999998");
 		dao.themKhachHang(khachHang);
 		
 //		dao.getAllKhachHang().forEach(e->{

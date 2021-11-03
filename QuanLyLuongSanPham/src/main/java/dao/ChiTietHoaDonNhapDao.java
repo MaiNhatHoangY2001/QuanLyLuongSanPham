@@ -9,10 +9,8 @@ import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
 import model.ChiTietHoaDonBan;
-import model.HoaDonBanHang;
-import model.SanPham;
 
-public class ChiTietHoaDonBanDao {
+public class ChiTietHoaDonNhapDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
 	public boolean themChiHoaDonBan(ChiTietHoaDonBan chiTietHoaDonBan) {
@@ -101,10 +99,10 @@ public class ChiTietHoaDonBanDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT   p.maSanpham, p.tenSanPham,p.giaThanh, ChiTietHoaDonBan.soLuong, thanhTien=ChiTietHoaDonBan.soLuong*p.giaThanh "
-					+ "FROM         ChiTietHoaDonBan INNER JOIN "
-					+ "    SanPham AS p ON ChiTietHoaDonBan.maSanPham = p.maSanpham"
-					+ " where ChiTietHoaDonBan.maHoaDonBan= '" + maHoadon + "'";
+			String query = "SELECT   a.maSanPham, p.tenSanPham, a.soLoHang , p.giaThanh, tongTien=p.giaThanh*a.soLoHang "
+					+ "FROM     ChiTietHoaDonNhap AS a INNER JOIN "
+					+ "             SanPham AS p ON a.maSanPham = p.maSanpham " + "where a.maHoaDonNhap='" + maHoadon
+					+ "'";
 			list = session.createNativeQuery(query).getResultList();
 			tr.commit();
 		} catch (Exception e) {
@@ -117,11 +115,11 @@ public class ChiTietHoaDonBanDao {
 	}
 
 	public static void main(String[] args) {
-		ChiTietHoaDonBanDao dao = new ChiTietHoaDonBanDao();
+		ChiTietHoaDonNhapDao dao = new ChiTietHoaDonNhapDao();
 		HoaDonBanHangDao daoHd = new HoaDonBanHangDao();
 		SanPhamDao sanPhamDao = new SanPhamDao();
-		ChiTietHoaDonBan hoaDonBan = new ChiTietHoaDonBan(sanPhamDao.getSanPham("SP21100001").getGiaThanh(), 5,
-				daoHd.getHoaDonBanHang("HB21110004"), sanPhamDao.getSanPham("SP21100001"));
+		ChiTietHoaDonBan hoaDonBan = new ChiTietHoaDonBan(sanPhamDao.getSanPham("SP21100002").getGiaThanh(), 5,
+				daoHd.getHoaDonBanHang("HB21100001"), sanPhamDao.getSanPham("SP21100002"));
 		dao.themChiHoaDonBan(hoaDonBan);
 	}
 }

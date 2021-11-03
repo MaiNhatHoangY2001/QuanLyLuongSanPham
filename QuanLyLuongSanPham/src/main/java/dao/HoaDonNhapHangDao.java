@@ -9,20 +9,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
-import model.HoaDonBanHang;
+import model.HoaDonNhapHang;
 import model.KhachHang;
 import model.NhanVien;
 
-public class HoaDonBanHangDao {
+public class HoaDonNhapHangDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
-	public HoaDonBanHang getHoaDonBanHang(String maHoaDon) {
-		HoaDonBanHang hoaDonBanHang = null;
+	public HoaDonNhapHang getHoaDonNhapHang(String maHoaDon) {
+		HoaDonNhapHang HoaDonNhapHang = null;
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			hoaDonBanHang = session.get(HoaDonBanHang.class, maHoaDon);
+			HoaDonNhapHang = session.get(HoaDonNhapHang.class, maHoaDon);
 			tr.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,16 +30,16 @@ public class HoaDonBanHangDao {
 		}
 		session.close();
 
-		return hoaDonBanHang;
+		return HoaDonNhapHang;
 
 	}
 
-	public boolean themHoaDonBan(HoaDonBanHang hoaDonBanHang) {
+	public boolean themHoaDonBan(HoaDonNhapHang HoaDonNhapHang) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			session.save(hoaDonBanHang);
+			session.save(HoaDonNhapHang);
 			tr.commit();
 			return true;
 		} catch (Exception e) {
@@ -50,14 +50,14 @@ public class HoaDonBanHangDao {
 		return false;
 	}
 
-	public List<HoaDonBanHang> getAllHoaDonBanHang() {
-		List<HoaDonBanHang> list = new ArrayList<HoaDonBanHang>();
+	public List<HoaDonNhapHang> getAllHoaDonNhapHang() {
+		List<HoaDonNhapHang> list = new ArrayList<HoaDonNhapHang>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
 
-			list = session.createNativeQuery("select * from HoaDonBanHang", HoaDonBanHang.class).getResultList();
+			list = session.createNativeQuery("select * from HoaDonNhapHang", HoaDonNhapHang.class).getResultList();
 
 			tr.commit();
 		} catch (Exception e) {
@@ -81,11 +81,11 @@ public class HoaDonBanHangDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT        d.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
-					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
-					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan "
-					+ "where day(o.ngayLapHoaDon)="+ngay+" and year(o.ngayLapHoaDon)="+nam+" and MONTH(o.ngayLapHoaDon)="+thang+" "
-					+ "group by d.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+			String query = "SELECT   b.maHoaDonNhap, b.ngayLapHoaDon, khuyenMai=0, b.thue, b.thanhTien "
+					+ "FROM         HoaDonNhapHang AS b INNER JOIN "
+					+ "                         NhanVien AS e ON b.maNhanVien = e.maNhanVien "
+					+ "where day(b.ngayLapHoaDon)=" + ngay + " and MONTH(b.ngayLapHoaDon)=" + thang
+					+ " and YEAR(ngayLapHoaDon)=" + nam;
 			List<?> list = session.createNativeQuery(query).getResultList();
 			
 			tr.commit();
@@ -100,23 +100,15 @@ public class HoaDonBanHangDao {
 	}
 
 	public static void main(String[] args) {
-		HoaDonBanHangDao banHangDao = new HoaDonBanHangDao();
-//		ChiTietHoaDonBanDao chiTietHoaDonBanDao= new ChiTietHoaDonBanDao();
-//		
-		HoaDonBanHang hoaDonBanHang= new HoaDonBanHang(0.1, 0.1);
-//		
-		KhachHang khachHang= new KhachHang();
-		khachHang.setMaKhachHang("KH21100001");
-		hoaDonBanHang.setKhachHang(khachHang);
-		
+		HoaDonNhapHangDao nhapHangDao = new HoaDonNhapHangDao();
 		NhanVien nhanVien= new NhanVien();
 		nhanVien.setMaNhanVien("NV21100002");
+		HoaDonNhapHang HoaDonNhapHang= new HoaDonNhapHang(0.2,nhanVien);
 		
-		hoaDonBanHang.setKhachHang(khachHang);
-		hoaDonBanHang.setNhanVien(nhanVien);
+		HoaDonNhapHang.setNhanVien(nhanVien);
 
-		System.out.println(hoaDonBanHang.toString());
-		banHangDao.themHoaDonBan(hoaDonBanHang);
+		System.out.println(HoaDonNhapHang.toString());
+		nhapHangDao.themHoaDonBan(HoaDonNhapHang);
 	
 //		banHangDao.getHoaDonTheoNgay(5, 6, 2020);
 	}

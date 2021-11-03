@@ -22,6 +22,7 @@ public class HoaDonNhapHang {
 	@Id
 	@GeneratedValue(generator = "sinhMaTheoNgay")
 	@GenericGenerator(name = "sinhMaTheoNgay", parameters = @Parameter(name = "prefix", value = "HN"), strategy = "generator.SinhMaTheoNgay")
+	
 	private String maHoaDonNhap;
 	private LocalDate ngayLapHoaDon;
 	private double thue;
@@ -35,10 +36,12 @@ public class HoaDonNhapHang {
 	@Column(columnDefinition = "money")
 	private double thanhTien;
 
-	public HoaDonNhapHang(LocalDate ngayLapHoaDon, double thue) {
+	
+	public HoaDonNhapHang(double thue, NhanVien nhanVien) {
 		super();
-		this.ngayLapHoaDon = ngayLapHoaDon;
+		this.ngayLapHoaDon=LocalDate.now();
 		this.thue = thue;
+		this.nhanVien = nhanVien;
 	}
 
 	public double tinhThanhTien() {
@@ -48,6 +51,11 @@ public class HoaDonNhapHang {
 		});
 		this.thanhTien = this.thanhTien - this.thanhTien * thue;
 		return this.thanhTien;
+	}
+
+	public HoaDonNhapHang(double thue) {
+		super();
+		this.thue = thue;
 	}
 
 	public double tinhThue() {
