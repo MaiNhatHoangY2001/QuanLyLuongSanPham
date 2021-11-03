@@ -269,18 +269,14 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		if (o.equals(btnThemNV)) {
-//			Gui_ThemNhanVien frm = new Gui_ThemNhanVien();
-//			frm.setVisible(true);
-
-		} else if (o.equals(btnSuaNV)) {
-//			if (table.getSelectedRowCount() == 0) {
-//				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
-//			} else {
-//				String maNV = model.getValueAt(table.getSelectedRow(), 0).toString();
-//				NhanVien nv = daoNV.getNhanVien(maNV);
-//				new Gui_SuaNhanVien(nv).setVisible(true);
-//			}
+		if (o.equals(btnSuaNV)) {
+			if (table.getSelectedRowCount() == 0) {
+				JOptionPane.showMessageDialog(this, "Hãy chọn sản phâm cần sửa");
+			} else {
+				String maSP = model.getValueAt(table.getSelectedRow(), 0).toString();
+				SanPham sp = daoSP.getSanPham(maSP);
+				new Gui_SuaThongTinSanPham().setVisible(true);
+			}
 
 		} else if (o.equals(btnXoa)) {
 			if (table.getSelectedRowCount() == 0) {

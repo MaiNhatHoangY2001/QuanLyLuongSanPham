@@ -132,7 +132,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		lblMaNV = new JLabel("Mã Nhân Viên: ");
 		lblMaNV.setForeground(Color.WHITE);
 		lblMaNV.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblMaNV.setBounds(184, 48, 339, 37);
+		lblMaNV.setBounds(184, 48, 484, 37);
 		pnlContent.add(lblMaNV);
 
 		// Hiện trạng thái nhân viên làm việc
@@ -370,6 +370,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 	}
 	
 	private void loadDuLieuLen(NhanVien nv) {
+		lblMaNV.setText("Mã Nhân Viên: " + nhanVien.getMaNhanVien());
 		txtTen.setText(nhanVien.getTenNhanVien());
 		txtDiaChi.setText(nhanVien.getDiaChi());
 		txtCMND.setText(nhanVien.getcCCD());
@@ -387,6 +388,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 			lblTTNhanVien.setText("Trang thái: Nghĩ việc");
 			btnXaThai.setText("Nhận");
 		}
+		
 	}
 
 	public boolean kiemTraRegex() {

@@ -57,7 +57,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 	private JButton btnThemNV;
 	private JButton btnSuaNV;
-	private JButton btnXoa;
+	private JButton btnXaThai;
 	private JButton btnTimKiem;
 
 	private JComboBox cmbLoaiTimKiem;
@@ -155,12 +155,12 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnSuaNV);
 
 		// JButton Xoa Nhan Vien
-		btnXoa = new CircleBtn("Xóa");
-		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setBounds(330, 15, 150, 50);
-		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlNgang.add(btnXoa);
+		btnXaThai = new CircleBtn("Xa Thải");
+		btnXaThai.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnXaThai.setBackground(new Color(233, 180, 46));
+		btnXaThai.setBounds(330, 15, 150, 50);
+		btnXaThai.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		pnlNgang.add(btnXaThai);
 
 		// Làm mới
 		btnLamMoi = new CircleBtn("Làm mới");
@@ -235,7 +235,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		scrollPane.setBounds(0, 47, 1585, 818);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "MSNV", "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương" };
+		String headerTitle[] = { "MSNV", "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái" };
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50);
 		// Table
@@ -250,7 +250,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// Thêm sự kiện cho các chức năng
 		btnThemNV.addActionListener(this);
-		btnXoa.addActionListener(this);
+		btnXaThai.addActionListener(this);
 		btnSuaNV.addActionListener(this);
 		btnLamMoi.addActionListener(this);
 		btnTimKiem.addActionListener(this);
@@ -264,6 +264,8 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// Load Data To Table and JTextField Tong So NhanVien
 		LoadThongTinNhanVien(listNV);
+		ChucNang.addNullDataTable(model);
+		ChucNang.addNullDataTable(model);
 	}
 
 	@Override
@@ -282,23 +284,22 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 				new Gui_SuaNhanVien(nv).setVisible(true);
 			}
 
-		} else if (o.equals(btnXoa)) {
+		} else if (o.equals(btnXaThai)) {
 			if (table.getSelectedRowCount() == 0) {
-				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần xóa");
+				JOptionPane.showMessageDialog(this, "Bạn chưa chọn nhân viên để xa thải");
 			} else {
-				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa Nhân viên này không ?",
+				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xa thải Nhân viên này không ?",
 						"Cảnh báo", JOptionPane.YES_NO_OPTION);
 				if (tl == JOptionPane.YES_OPTION) {
 					boolean rs = false;
 					while (table.getSelectedRowCount() > 0) {
-						int index = table.getSelectedRow();
-						rs = daoNV.xoaNhanVienTheoMa(model.getValueAt(table.getSelectedRow(), 0).toString());
-						model.removeRow(index);
+						NhanVien nv = daoNV.getNhanVien(model.getValueAt(table.getSelectedRow(), 0).toString());
+						rs = daoNV.suaNhanVienTheoMa(nv);
 					}
 					if (rs == true)
-						JOptionPane.showMessageDialog(this, "Bạn đã xóa thành công");
+						JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên thành công");
 					else
-						JOptionPane.showMessageDialog(this, "Bạn đã xóa không thành công");
+						JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên không thành công");
 				}
 
 			}
@@ -396,7 +397,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 	public void load1ThongTinNhanVien(NhanVien nv) {
 		String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(),
-				nv.getEmail(), vnFormat.format(nv.getMucLuong()) };
+				nv.getEmail(), vnFormat.format(nv.getMucLuong()), nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ" };
 		model.addRow(n);
 	}
 
