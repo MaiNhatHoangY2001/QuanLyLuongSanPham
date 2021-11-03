@@ -59,7 +59,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);
-		setTitle("Chương trình quản lý lương sản phẩm");
+		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		getContentPane().setLayout(null);
 
@@ -201,7 +201,6 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
 //		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
 //		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
-//		pnlChange.add(new test(), "btnThoat");
 
 		temp = btnQuanLyHoaDon;
 		activeButton(btnQuanLyHoaDon);
