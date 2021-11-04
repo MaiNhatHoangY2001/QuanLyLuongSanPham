@@ -35,15 +35,14 @@ import javax.swing.table.TableColumn;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
 
-import dao.BangLuongDao;
-import dao.ChiTietHoaDonBanDao;
-import dao.NhanVienDao;
 import gui_package.ChucNang;
 import gui_package.CustomTable;
 import gui_package.RoundedPanel;
 import model.BangLuong;
 import model.ChiTietHoaDonBan;
 import model.NhanVien;
+import services.QuanLyLuongService;
+
 import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -51,7 +50,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionEvent;
-
+//dfdfsdfdsfsd
 public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	/**
 	 * 
@@ -350,11 +349,11 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnIn.setBackground(new Color(233, 180, 46));
 		btnIn.setBounds(1533, 14, 44, 47);
 		panel_1_1.add(btnIn);
-		//Sự kiện
+		// Sự kiện
 		btnIn.addActionListener(e -> {
 			new Gui_In().setVisible(true);
 		});
-		
+
 		/**
 		 * Bảng lương của các nhân viên trong tháng (cột số ngày công có thể chỉnh sửa)
 		 */
@@ -431,7 +430,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 							int month = cboMonth.getMonth() + 1;
 							int year = spnYear.getYear();
 
-							BangLuongDao bangLuongDao = new BangLuongDao();
+							QuanLyLuongService bangLuongDao = new QuanLyLuongService();
 							System.out.println(bangLuongDao.updateSoNgayCong(maNhanVien, month, year, newValue));
 
 							setDataTableBangLuong(month, year);
@@ -559,15 +558,14 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	public void setDataTableBangLuong(int month, int year) {
 		ChucNang.clearDataTable(modelTinhLuong);
 
-		BangLuongDao bangLuongDao = new BangLuongDao();
-		NhanVienDao nhanVienDao = new NhanVienDao();
+		QuanLyLuongService banLuongService = new QuanLyLuongService();
 
 		List<NhanVien> listNhanVien = new ArrayList<>();
 
-		listNhanVien = nhanVienDao.getAllNhanVien();
+		listNhanVien = banLuongService.getAllNhanVien();
 
 		for (NhanVien nhanVien : listNhanVien) {
-			BangLuong bangLuong = bangLuongDao.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
+			BangLuong bangLuong = banLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
 			if (bangLuong != null) {
 				modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
 						vnFormat.format(nhanVien.getMucLuong()), bangLuong.getHeSoLuong(),
@@ -586,9 +584,9 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	 */
 	public void setDataTableSanPham(Object maNhanVien, int month, int year) {
 		ChucNang.clearDataTable(modelSanPham);
-		ChiTietHoaDonBanDao chiTietHoaDonBanDao = new ChiTietHoaDonBanDao();
+		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
 		if (maNhanVien != null) {
-			List<ChiTietHoaDonBan> list = chiTietHoaDonBanDao.getChiTietTheoMaNV(maNhanVien.toString(), month, year);
+			List<ChiTietHoaDonBan> list = quanLyLuongService.getChiTietTheoMaNV(maNhanVien.toString(), month, year);
 			for (ChiTietHoaDonBan chiTietHoaDonBan : list) {
 				modelSanPham.addRow(new Object[] { chiTietHoaDonBan.getSanPham().getTenSanPham(),
 						chiTietHoaDonBan.getSoLuong(), vnFormat.format(chiTietHoaDonBan.tinhTongTien()) });
@@ -605,10 +603,10 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	 * @param maNhanVien
 	 */
 	public void setDataPanelThongTinNV(Object maNhanVien) {
-		NhanVienDao nhanVienDao = new NhanVienDao();
+		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
 		NhanVien nhanVien = new NhanVien();
 		if (maNhanVien != null) {
-			nhanVien = nhanVienDao.getNhanVien(maNhanVien.toString());
+			nhanVien = quanLyLuongService.getNhanVien(maNhanVien.toString());
 			lblTenNhanVien.setText(nhanVien.getTenNhanVien());
 			lblMaNhanVien.setText("Mã Nhân viên: " + nhanVien.getMaNhanVien());
 			lblSdt.setText("Số điện thoại: " + nhanVien.getsDT());
@@ -638,17 +636,16 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	 */
 	public void themBangLuong() {
 
-		BangLuongDao bangLuongDao = new BangLuongDao();
-		NhanVienDao nhanVienDao = new NhanVienDao();
+		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
 
-		List<NhanVien> nhanViens = nhanVienDao.getAllNhanVien();
+		List<NhanVien> nhanViens = quanLyLuongService.getAllNhanVien();
 
 		int month = cboMonth.getMonth() + 1;
 		int year = spnYear.getYear();
 
 		for (NhanVien nhanVien : nhanViens) {
 			if (nhanVien.gettrangThaiLamViec()) {
-				Double tienSanPham = bangLuongDao.getTienSanPham(nhanVien.getMaNhanVien(), month, year);
+				Double tienSanPham = quanLyLuongService.getTienSanPham(nhanVien.getMaNhanVien(), month, year);
 				Double heSoLuong = (double) (tienSanPham == 0 ? 2 : 1);
 				LocalDate thoiGian;
 				int soNgayCong;
@@ -663,7 +660,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				BangLuong bangLuong = new BangLuong(thoiGian, heSoLuong, tienSanPham, soNgayCong);
 				bangLuong.setNhanVien(nhanVien);
 
-				bangLuongDao.themBangLuong(bangLuong);
+				quanLyLuongService.themBangLuong(bangLuong);
 			}
 		}
 		ChucNang.clearDataTable(modelTinhLuong);
@@ -677,7 +674,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 					"Bạn có chắc muốn tạo lại bảng lương không?\n(Lưu ý: những bảng hiện có trong tháng này sẽ bị xóa)",
 					"Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (rs == JOptionPane.YES_OPTION) {
-				new BangLuongDao().deleteAllBangLuongInTime(cboMonth.getMonth() + 1, spnYear.getYear());
+				new QuanLyLuongService().deleteAllBangLuongInTime(cboMonth.getMonth() + 1, spnYear.getYear());
 				themBangLuong();
 			}
 		} else

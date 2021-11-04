@@ -56,10 +56,14 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
+		
+		
+		
+		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);
-		setTitle("Chương trình quản lý lương sản phẩm");
+		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		getContentPane().setLayout(null);
 
@@ -201,7 +205,6 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
 //		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
 //		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
-//		pnlChange.add(new test(), "btnThoat");
 
 		temp = btnQuanLyHoaDon;
 		activeButton(btnQuanLyHoaDon);
@@ -256,7 +259,9 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Thông báo khi muốn thoát ứng dụng
 	 */
 	public void thongBaoThoat() {
-		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
+		JOptionPane jOptionPane= new JOptionPane();
+		jOptionPane.setBackground(new Color(242, 129, 25));
+		int tl = jOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
 				JOptionPane.YES_NO_OPTION);
 		if (tl == JOptionPane.YES_OPTION) {
 			System.exit(0);

@@ -7,18 +7,13 @@
     <fullyQualifiedTypeName name="java.text.NumberFormat"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
-    <fullyQualifiedTypeName name="dao.NhanVienDao"/>
-    <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="org.hibernate.SQLQuery"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
-    <fullyQualifiedTypeName name="model.BangLuong"/>
-    <fullyQualifiedTypeName name="dao.BangLuongDao"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="javax.swing.event.DocumentListener"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
-    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
@@ -26,7 +21,6 @@
     <fullyQualifiedTypeName name="javax.swing.InputMap"/>
     <fullyQualifiedTypeName name="javax.swing.KeyStroke"/>
     <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
@@ -40,4 +34,15 @@
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
     <fullyQualifiedTypeName name="gui.Gui_In"/>
+    <fullyQualifiedTypeName name="org.hibernate.persister.walking.spi.MetamodelGraphWalker"/>
+    <fullyQualifiedTypeName name="dao.ChiTietHoaDonBanDao"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="dao.BangLuongDao"/>
+    <fullyQualifiedTypeName name="model.BangLuong"/>
+    <fullyQualifiedTypeName name="services.QuanLyHoaDonService"/>
+    <fullyQualifiedTypeName name="dao.NhanVienDao"/>
+    <fullyQualifiedTypeName name="model.NhanVien"/>
+    <fullyQualifiedTypeName name="model.ChiTietHoaDonBan"/>
+    <fullyQualifiedTypeName name="services.QuanLyLuongService"/>
 </qualifiedTypeNameHistroy>
