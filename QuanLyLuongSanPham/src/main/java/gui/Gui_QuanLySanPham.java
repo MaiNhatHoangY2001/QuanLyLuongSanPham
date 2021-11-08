@@ -57,6 +57,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private JButton btnSuaNV;
 	private JButton btnXoa;
 	private JButton btnTimKiem;
+	private JButton btnLamMoi;
 
 	private JComboBox cmbLoaiTimKiem;
 
@@ -64,10 +65,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private JScrollPane scrollPane;
 	private DefaultTableModel model;
 
-	private List<NhanVien> listNV;
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	private CircleBtn btnLamMoi;
 	private SanPhamDao daoSP;
 	private List<SanPham> listSP;
 
@@ -184,7 +183,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.add(txtTImKiem);
 
 		// JCombobox Tim kiem
-		String loai[] = { "Tìm theo tên", "Tìm theo mã", "Tìm theo tuổi", "Đang làm việc", "Đã nghĩ việc" };
+		String loai[] = { "Tìm theo tên", "Tìm theo mã", "Giá dưới 10 triệu", "Giá dưới 20 triệu",
+				"Giá dưới 50 triệu" };
 		cmbLoaiTimKiem = new JComboBox(loai);
 		cmbLoaiTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cmbLoaiTimKiem.setBounds(1062, 20, 193, 40);
@@ -234,7 +234,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		scrollPane.setBounds(0, 47, 1585, 818);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "Mã Sản Phẩm", "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành"};
+		String headerTitle[] = { "Mã Sản Phẩm", "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành" };
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50);
 		// Table
@@ -256,7 +256,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 
 		daoSP = new SanPhamDao();
 		listSP = daoSP.getAllSanPham();
-		
+
 		LoadThongTinSanPham(listSP);
 	}
 
@@ -267,7 +267,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 			if (table.getSelectedRowCount() == 0) {
 				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
 			} else {
-				
+
 				String maSP = model.getValueAt(table.getSelectedRow(), 0).toString();
 				SanPham sp = daoSP.getSanPham(maSP);
 				new Gui_SuaThongTinSanPham(sp).setVisible(true);
@@ -296,79 +296,55 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		} else if (o.equals(btnLamMoi)) {
 			LoadThongTinSanPham(daoSP.getAllSanPham());
 		} else if (o.equals(btnTimKiem)) {
-//			String data = txtTImKiem.getText();
-//			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
-//			if (loaiTK.equals("Tìm theo tên")) {
-//				List<NhanVien> list = daoNV.getListNhanVienTheoTen(data);
-//				LoadThongTinNhanVien(list);
-//			} else if (loaiTK.equals("Tìm theo mã")) {
-//				NhanVien nv = daoNV.getNhanVien(data);
-//				if (nv == null)
-//					LoadThongTinNhanVien(listNV);
-//				else {
-//					ChucNang.clearDataTable(model);
-//					load1ThongTinNhanVien(nv);
-//				}
-//			} else if (loaiTK.equals("Tìm theo tuổi")) {
-//				ChucNang.clearDataTable(model);
-//				try {
-//					if (!data.equals("")) {
-//						int tuoi = Integer.parseInt(data);
-//						for (NhanVien nhanVien : listNV) {
-//							int namHienTai = LocalDate.now().getYear();
-//							int namSinh = nhanVien.getNgaySinh().getYear();
-//							if (tuoi == namHienTai - namSinh) {
-//								load1ThongTinNhanVien(nhanVien);
-//							}
-//						}
-//					} else {
-//						LoadThongTinNhanVien(listNV);
-//					}
-//				} catch (NumberFormatException e2) {
-//					LoadThongTinNhanVien(listNV);
-//					JOptionPane.showMessageDialog(this,
-//							"Lỗi nhập dữ liệu!\nKhông nhận kiểu dữ liệu ký tự\nHãy nhập số tuổi cần tìm\n");
-//				}
-//			} else if (loaiTK.equals("Đang làm việc")) {
-//
-//			} else if (loaiTK.equals("Đã nghĩ việc")) {
-//
-//			}
+			String data = txtTImKiem.getText();
+			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
+			if (loaiTK.equals("Tìm theo tên")) {
+				ChucNang.clearDataTable(model);
+				List<SanPham> list = daoSP.getSanPhamThoTen(data);
+				LoadThongTinSanPham(list);
+			} else if (loaiTK.equals("Tìm theo mã")) {
+				SanPham sanPham = daoSP.getSanPham(data);
+				if (sanPham == null)
+					LoadThongTinSanPham(listSP);
+				else {
+					ChucNang.clearDataTable(model);
+					load1ThongTinSanPham(sanPham);
+					ChucNang.addNullDataTable(model);
+					ChucNang.addNullDataTable(model);
+				}
+			}
 		}
 	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-//		JComboBox cmb = (JComboBox) e.getSource();
-//		if (cmb.getSelectedItem().equals("Tìm theo tên")) {
-//
-//		} else if (cmb.getSelectedItem().equals("Tìm theo mã")) {
-//
-//		} else if (cmb.getSelectedItem().equals("Tìm theo tuổi")) {
-//
-//		} else if (cmb.getSelectedItem().equals("Đang làm việc")) {
-//			int count = 0;
-//			ChucNang.clearDataTable(model);
-//			for (NhanVien nhanVien : listNV) {
-//				if (nhanVien.gettrangThaiLamViec() == true) {
-//					load1ThongTinNhanVien(nhanVien);
-//					count++;
-//				}
-//			}
-//			if (count == 0)
-//				LoadThongTinNhanVien(listNV);
-//		} else if (cmb.getSelectedItem().equals("Đã nghĩ việc")) {
-//			int count = 0;
-//			ChucNang.clearDataTable(model);
-//			for (NhanVien nhanVien : listNV) {
-//				if (nhanVien.gettrangThaiLamViec() == false) {
-//					load1ThongTinNhanVien(nhanVien);
-//					count++;
-//				}
-//			}
-//			if (count == 0)
-//				LoadThongTinNhanVien(listNV);
-//		}
+		JComboBox cmb = (JComboBox) e.getSource();
+		if (cmb.getSelectedItem().equals("Giá dưới 10 triệu")) {
+			ChucNang.clearDataTable(model);
+			for (SanPham sanPham : listSP) {
+				if (sanPham.getGiaThanh() < 10000000) {
+					load1ThongTinSanPham(sanPham);
+				}
+			}
+			ChucNang.addNullDataTable(model);
+			ChucNang.addNullDataTable(model);
+		} else if (cmb.getSelectedItem().equals("Giá dưới 20 triệu")) {
+			ChucNang.clearDataTable(model);
+			for (SanPham sanPham : listSP) {
+				if (sanPham.getGiaThanh() < 20000000);
+				load1ThongTinSanPham(sanPham);
+			}
+			ChucNang.addNullDataTable(model);
+			ChucNang.addNullDataTable(model);
+		} else if (cmb.getSelectedItem().equals("Giá dưới 50 triệu")) {
+			ChucNang.clearDataTable(model);
+			for (SanPham sanPham : listSP) {
+				if (sanPham.getGiaThanh() < 50000000);
+				load1ThongTinSanPham(sanPham);
+			}
+			ChucNang.addNullDataTable(model);
+			ChucNang.addNullDataTable(model);
+		}
 	}
 
 	/**
@@ -383,10 +359,13 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 			load1ThongTinSanPham(sanPham);
 		}
 		txtTongSoSP.setText(list.size() + "");
+		ChucNang.addNullDataTable(model);
+		ChucNang.addNullDataTable(model);
 	}
 
 	public void load1ThongTinSanPham(SanPham sanPham) {
-		String n[] = { sanPham.getMaSanpham(), sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(), vnFormat.format(sanPham.getGiaThanh()) };
+		String n[] = { sanPham.getMaSanpham(), sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(),
+				vnFormat.format(sanPham.getGiaThanh()) };
 		model.addRow(n);
 	}
 

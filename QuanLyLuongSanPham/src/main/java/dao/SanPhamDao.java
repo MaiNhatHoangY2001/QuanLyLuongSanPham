@@ -80,6 +80,28 @@ public class SanPhamDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
+	public List<SanPham> getSanPhamThoTen(String tenSanPham) {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from SanPham\r\n"
+					+ "where tenSanPham like '%"+tenSanPham+"%'";
+			list = session.createNativeQuery(query, SanPham.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
 		}
 		return null;
 	}
