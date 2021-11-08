@@ -43,8 +43,11 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Gui_Chinh frame = new Gui_Chinh();
-					frame.setVisible(true);
+					new Gui_Chinh();
+					
+					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
+					gui_DangNhap.setVisible(true);
+					gui_DangNhap.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,9 +59,6 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
-		
-		
-		
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
@@ -203,7 +203,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
 		pnlChange.add(new Gui_QuanLyNhanVien(), "btnQuanLyNhanVien");
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
-//		pnlChange.add(new test(), "btnQuanLyTaiKhoan");
+		pnlChange.add(new Gui_QuanLyTaiKhoan(), "btnQuanLyTaiKhoan");
 //		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
 
 		temp = btnQuanLyHoaDon;

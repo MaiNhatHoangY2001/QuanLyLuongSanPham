@@ -292,7 +292,7 @@ public class PnlTinhLuong extends JPanel implements MouseListener {
 
 		List<NhanVien> listNhanVien = new ArrayList<>();
 
-		listNhanVien = nhanVienDao.getAllNhanVien();
+		listNhanVien = nhanVienDao.getDsNhanVien();
 
 		for (NhanVien nhanVien : listNhanVien) {
 			BangLuong bangLuong = bangLuongDao.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);

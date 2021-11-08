@@ -260,7 +260,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		 * Get Class NhanVien
 		 */
 		daoNV = new NhanVienDao();
-		listNV = daoNV.getAllNhanVien();
+		listNV = daoNV.getDsNhanVien();
 
 		// Load Data To Table and JTextField Tong So NhanVien
 		LoadThongTinNhanVien(listNV);
@@ -280,7 +280,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
 			} else {
 				String maNV = model.getValueAt(table.getSelectedRow(), 0).toString();
-				NhanVien nv = daoNV.getNhanVien(maNV);
+				NhanVien nv = daoNV.getNhanVienTheoMa(maNV);
 				new Gui_SuaNhanVien(nv).setVisible(true);
 			}
 
@@ -292,27 +292,28 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 						"Cảnh báo", JOptionPane.YES_NO_OPTION);
 				if (tl == JOptionPane.YES_OPTION) {
 					boolean rs = false;
-					while (table.getSelectedRowCount() > 0) {
-						NhanVien nv = daoNV.getNhanVien(model.getValueAt(table.getSelectedRow(), 0).toString());
-						rs = daoNV.suaNhanVienTheoMa(nv);
-					}
-					if (rs == true)
+					NhanVien nv = daoNV.getNhanVienTheoMa(model.getValueAt(table.getSelectedRow(), 0).toString());
+					nv.settrangThaiLamViec(false);
+					rs = daoNV.capNhatNhanVien(nv);
+					if (rs == true) {
 						JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên thành công");
-					else
+						List<NhanVien> list = daoNV.getDsNhanVien();
+						LoadThongTinNhanVien(list);
+					} else
 						JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên không thành công");
 				}
 
 			}
 		} else if (o.equals(btnLamMoi)) {
-			LoadThongTinNhanVien(daoNV.getAllNhanVien());
+			LoadThongTinNhanVien(daoNV.getDsNhanVien());
 		} else if (o.equals(btnTimKiem)) {
 			String data = txtTImKiem.getText();
 			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
 			if (loaiTK.equals("Tìm theo tên")) {
-				List<NhanVien> list = daoNV.getListNhanVienTheoTen(data);
+				List<NhanVien> list = daoNV.getDsNhanVienTheoTen(data);
 				LoadThongTinNhanVien(list);
 			} else if (loaiTK.equals("Tìm theo mã")) {
-				NhanVien nv = daoNV.getNhanVien(data);
+				NhanVien nv = daoNV.getNhanVienTheoMa(data);
 				if (nv == null)
 					LoadThongTinNhanVien(listNV);
 				else {
@@ -393,11 +394,14 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			load1ThongTinNhanVien(nv);
 		}
 		txtTongSoSV.setText(list.size() + "");
+		ChucNang.addNullDataTable(model);
+		ChucNang.addNullDataTable(model);
 	}
 
 	public void load1ThongTinNhanVien(NhanVien nv) {
 		String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(),
-				nv.getEmail(), vnFormat.format(nv.getMucLuong()), nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ" };
+				nv.getEmail(), vnFormat.format(nv.getMucLuong()),
+				nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ" };
 		model.addRow(n);
 	}
 

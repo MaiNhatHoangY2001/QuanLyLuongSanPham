@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +17,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -34,7 +32,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import dao.NhanVienDao;
 import dao.SanPhamDao;
 
 public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemListener {
@@ -57,7 +54,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private JLabel lblThongTinSP;
 	private JLabel lblTongSoSP;
 
-	private JButton btnThemNV;
 	private JButton btnSuaNV;
 	private JButton btnXoa;
 	private JButton btnTimKiem;
@@ -68,7 +64,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private JScrollPane scrollPane;
 	private DefaultTableModel model;
 
-	private NhanVienDao daoNV;
 	private List<NhanVien> listNV;
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -142,19 +137,19 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.setBounds(0, 100, 1600, 80);
 		add(pnlNgang);
 
-		// JButton Them Nhan Vien
-		btnThemNV = new CircleBtn("Thêm");
-		btnThemNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnThemNV.setBackground(new Color(233, 180, 46));
-		btnThemNV.setBounds(10, 15, 150, 50);
-		btnThemNV.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlNgang.add(btnThemNV);
+//		// JButton Them Nhan Vien
+//		btnThemNV = new CircleBtn("S");
+//		btnThemNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
+//		btnThemNV.setBackground(new Color(233, 180, 46));
+//		btnThemNV.setBounds(10, 15, 150, 50);
+//		btnThemNV.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//		pnlNgang.add(btnThemNV);
 
 		// JButton Sua Nhan Vien
 		btnSuaNV = new CircleBtn("Sửa");
 		btnSuaNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSuaNV.setBackground(new Color(233, 180, 46));
-		btnSuaNV.setBounds(170, 15, 150, 50);
+		btnSuaNV.setBounds(10, 15, 150, 50);
 		btnSuaNV.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnSuaNV);
 
@@ -162,7 +157,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnXoa = new CircleBtn("Xóa");
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setBounds(330, 15, 150, 50);
+		btnXoa.setBounds(170, 15, 150, 50);
 		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnXoa);
 
@@ -239,7 +234,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		scrollPane.setBounds(0, 47, 1585, 818);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành"};
+		String headerTitle[] = { "Mã Sản Phẩm", "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành"};
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50);
 		// Table
@@ -253,7 +248,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		scrollPane.setViewportView(table);
 
 		// Thêm sự kiện cho các chức năng
-		btnThemNV.addActionListener(this);
 		btnXoa.addActionListener(this);
 		btnSuaNV.addActionListener(this);
 		btnLamMoi.addActionListener(this);
@@ -271,13 +265,14 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		Object o = e.getSource();
 		if (o.equals(btnSuaNV)) {
 			if (table.getSelectedRowCount() == 0) {
-				JOptionPane.showMessageDialog(this, "Hãy chọn sản phâm cần sửa");
+				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
 			} else {
+				
 				String maSP = model.getValueAt(table.getSelectedRow(), 0).toString();
 				SanPham sp = daoSP.getSanPham(maSP);
-				new Gui_SuaThongTinSanPham().setVisible(true);
-			}
+				new Gui_SuaThongTinSanPham(sp).setVisible(true);
 
+			}
 		} else if (o.equals(btnXoa)) {
 			if (table.getSelectedRowCount() == 0) {
 				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần xóa");
@@ -391,7 +386,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	}
 
 	public void load1ThongTinSanPham(SanPham sanPham) {
-		String n[] = { sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(), vnFormat.format(sanPham.getGiaThanh()) };
+		String n[] = { sanPham.getMaSanpham(), sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(), vnFormat.format(sanPham.getGiaThanh()) };
 		model.addRow(n);
 	}
 

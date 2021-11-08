@@ -40,26 +40,13 @@ public class Gui_DangNhap extends JFrame {
 	private JTextField txtTaiKhoan;
 	private JTextField txtMatKhau;
 	private JLabel lblMatKhau;
-	private JLabel lblTTTK;
+	private JLabel lbTieuDe;
 	private CircleBtn btnXoa;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Gui_DangNhap frame = new Gui_DangNhap();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JPanel panelNgang;
+	private JLabel lblHD;
+	private JLabel lblDB;
+	private JLabel lblTK;
+	private JLabel lblLuong;
 
 	/**
 	 * Create the frame.
@@ -83,7 +70,7 @@ public class Gui_DangNhap extends JFrame {
 		});
 		
 		setUndecorated(true);
-		setBounds(100, 100, 440, 345);
+		setBounds(100, 100, 1200, 800);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(245	, 129, 25));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -91,52 +78,51 @@ public class Gui_DangNhap extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon("img\\dtNho.png"));
+		lblLogo.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\dt2.png"));
 		lblLogo.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setBounds(0, 0, 72, 44);
+		lblLogo.setBounds(440, 79, 320, 224);
 		contentPane.add(lblLogo);
-		
-		lblDangNhap = new JLabel("ĐĂNG NHẬP");
-		lblDangNhap.setForeground(Color.WHITE);
-		lblDangNhap.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDangNhap.setFont(new Font("Calibri", Font.BOLD, 36));
-		lblDangNhap.setBounds(114, 22, 206, 61);
-		contentPane.add(lblDangNhap);
 		
 		panelThongTinDN = new RoundedPanel();
 		panelThongTinDN.setBackground(new Color(248, 198, 153));
-		panelThongTinDN.setBounds(26, 94, 389, 164);
+		panelThongTinDN.setBounds(40, 336, 1124, 434);
 		contentPane.add(panelThongTinDN);
 		panelThongTinDN.setLayout(null);
 		
 		lblTaiKhoan = new JLabel("Tài Khoản:");
+		lblTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblTaiKhoan.setForeground(Color.WHITE);
 		lblTaiKhoan.setIconTextGap(-20);
-		lblTaiKhoan.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTaiKhoan.setBounds(20, 30, 345, 35);
+		lblTaiKhoan.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblTaiKhoan.setBounds(30, 124, 109, 50);
 		panelThongTinDN.add(lblTaiKhoan);
 		
 		txtTaiKhoan = new JTextField();
-		txtTaiKhoan.setBounds(85, 32, 282, 30);
+		txtTaiKhoan.setBounds(149, 124, 827, 50);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 		
 		txtMatKhau = new JPasswordField();
 		txtMatKhau.setColumns(10);
-		txtMatKhau.setBounds(85, 92, 282, 30);
+		txtMatKhau.setBounds(149, 224, 827, 50);
 		panelThongTinDN.add(txtMatKhau);
 		
 		lblMatKhau = new JLabel("Mật Khẩu:");
+		lblMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblMatKhau.setForeground(Color.WHITE);
 		lblMatKhau.setIconTextGap(-20);
-		lblMatKhau.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMatKhau.setBounds(20, 90, 345, 35);
+		lblMatKhau.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblMatKhau.setBounds(20, 232, 119, 35);
 		panelThongTinDN.add(lblMatKhau);
 		
 		btnDangNhap = new CircleBtn("Đăng Nhập");
+		btnDangNhap.setBounds(149, 320, 204, 60);
+		panelThongTinDN.add(btnDangNhap);
 		btnDangNhap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				close();	
-				Gui_TrangChu s = new Gui_TrangChu();
+				Gui_Chinh s = new Gui_Chinh();
 				s.setVisible(true);
 				
 			}
@@ -145,29 +131,10 @@ public class Gui_DangNhap extends JFrame {
 		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
 		btnDangNhap.setBackground(new Color(233, 180, 46));
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnDangNhap.setBounds(62, 275, 90, 45);
-		contentPane.add(btnDangNhap);
-		
-		btnThoat = new CircleBtn("Thoát");
-		btnThoat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		btnThoat.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnThoat.setBorder(new LineBorder(new Color(1, 242, 233)));
-		btnThoat.setBackground(new Color(233, 180, 46));
-		btnThoat.setBounds(306, 275, 90, 45);
-		contentPane.add(btnThoat);
-		
-		lblTTTK = new JLabel("Thông Tin Tài Khoản");
-		lblTTTK.setFont(new Font("Calibri", Font.BOLD, 12));
-		lblTTTK.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTTTK.setForeground(Color.WHITE);
-		lblTTTK.setBounds(38, 69, 157, 30);
-		contentPane.add(lblTTTK);
 		
 		btnXoa = new CircleBtn("Xóa");
+		btnXoa.setBounds(460, 320, 204, 60);
+		panelThongTinDN.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtTaiKhoan.setText("");
@@ -176,14 +143,72 @@ public class Gui_DangNhap extends JFrame {
 		});
 		btnXoa.setBackground(new Color(233, 180, 46));
 		btnXoa.setFont(new Font("Calibri", Font.BOLD, 16));
-		btnXoa.setBounds(183, 275, 90, 45);
-		contentPane.add(btnXoa);
+		
+		btnThoat = new CircleBtn("Thoát");
+		btnThoat.setBounds(772, 320, 204, 60);
+		panelThongTinDN.add(btnThoat);
+		btnThoat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnThoat.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnThoat.setBorder(new LineBorder(new Color(1, 242, 233)));
+		btnThoat.setBackground(new Color(233, 180, 46));
+		
+		lblDangNhap = new JLabel("ĐĂNG NHẬP");
+		lblDangNhap.setBounds(460, 37, 206, 61);
+		panelThongTinDN.add(lblDangNhap);
+		lblDangNhap.setForeground(Color.WHITE);
+		lblDangNhap.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDangNhap.setFont(new Font("Calibri", Font.BOLD, 40));
+		
+		lbTieuDe = new JLabel("ỨNG DỤNG QUẢN LÝ CỬA HÀNG ĐIỆN THOẠI 17");
+		lbTieuDe.setVerticalAlignment(SwingConstants.BOTTOM);
+		lbTieuDe.setFont(new Font("Calibri", Font.BOLD, 48));
+		lbTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lbTieuDe.setForeground(Color.WHITE);
+		lbTieuDe.setBounds(0, 0, 1200, 75);
+		contentPane.add(lbTieuDe);
+		
+		panelNgang = new JPanel();
+		panelNgang.setBounds(0, 75, 1200, 230);
+		panelNgang.setBackground(new Color(194, 93, 0));
+		contentPane.add(panelNgang);
+		panelNgang.setLayout(null);
+		
+		lblHD = new JLabel("");
+		lblHD.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\l.png"));
+		lblHD.setBounds(41, 43, 148, 154);
+		panelNgang.add(lblHD);
+		lblHD.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblHD.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblTK = new JLabel("");
+		lblTK.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\tk.png"));
+		lblTK.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblTK.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTK.setBounds(237, 43, 148, 154);
+		panelNgang.add(lblTK);
+		
+		lblDB = new JLabel("");
+		lblDB.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\database.png"));
+		lblDB.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblDB.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDB.setBounds(812, 43, 148, 154);
+		panelNgang.add(lblDB);
+		
+		lblLuong = new JLabel("");
+		lblLuong.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\sp.png"));
+		lblLuong.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblLuong.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLuong.setBounds(1012, 43, 148, 154);
+		panelNgang.add(lblLuong);
+		
 	}
 	private void close() {
 		// TODO Auto-generated method stub
 		WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
 	}
-	
-
 }
