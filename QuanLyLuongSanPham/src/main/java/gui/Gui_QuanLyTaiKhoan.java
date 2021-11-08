@@ -15,6 +15,7 @@ import gui_package.ChucNang;
 import gui_package.RoundedPanel;
 
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 
 public class Gui_QuanLyTaiKhoan extends JPanel {
@@ -31,6 +32,10 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 	private JTable tblTaiKhoan;
 	private JScrollPane scrollPane;
 	private JPanel panelThongTin;
+	private JLabel lblTTNV;
+	private JLabel lblMa;
+	private JLabel lblSDT;
+	private JLabel lblEmail;
 
 
 	public Gui_QuanLyTaiKhoan() {
@@ -139,10 +144,47 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 	panelXoa.setLayout(null);
 	
 	panelThongTin = new RoundedPanel();
-	panelThongTin.setBounds(0, 541, 955, 332);
+	panelThongTin.setBounds(25, 541, 930, 290);
 	panelThongTin.setBackground(new Color(248, 198, 153));
 	panelTable.add(panelThongTin);
 	panelThongTin.setLayout(null);
+	
+	JLabel lblHinhNhanVien = new JLabel("");
+	lblHinhNhanVien.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\src\\main\\resources\\img\\nv.png"));
+	lblHinhNhanVien.setBounds(84, 71, 187, 166);
+	panelThongTin.add(lblHinhNhanVien);
+	
+	lblTTNV = new JLabel("THÔNG TIN NHÂN VIÊN");
+	lblTTNV.setForeground(Color.WHITE);
+	lblTTNV.setFont(new Font("Tahoma", Font.PLAIN, 25));
+	lblTTNV.setHorizontalAlignment(SwingConstants.CENTER);
+	lblTTNV.setBounds(341, 11, 421, 46);
+	panelThongTin.add(lblTTNV);
+	
+	lblMa = new JLabel("Mã Nhân Viên:");
+	lblMa.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblMa.setBounds(341, 54, 421, 29);
+	panelThongTin.add(lblMa);
+	
+	JLabel lblTen = new JLabel("Tên Nhân Viên:");
+	lblTen.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblTen.setBounds(341, 94, 421, 29);
+	panelThongTin.add(lblTen);
+	
+	JLabel lblDC = new JLabel("Địa Chỉ:");
+	lblDC.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblDC.setBounds(341, 134, 421, 29);
+	panelThongTin.add(lblDC);
+	
+	lblSDT = new JLabel("Số Điện Thoại:");
+	lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblSDT.setBounds(341, 174, 421, 29);
+	panelThongTin.add(lblSDT);
+	
+	lblEmail = new JLabel("Email:");
+	lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblEmail.setBounds(341, 214, 421, 29);
+	panelThongTin.add(lblEmail);
 
 	}
 }
