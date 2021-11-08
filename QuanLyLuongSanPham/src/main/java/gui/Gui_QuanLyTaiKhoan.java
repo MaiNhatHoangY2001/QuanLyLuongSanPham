@@ -7,18 +7,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import dao.TaiKhoanDao;
 import gui_package.ChucNang;
+import gui_package.CircleBtn;
 import gui_package.RoundedPanel;
+import model.TaiKhoan;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 
-public class Gui_QuanLyTaiKhoan extends JPanel {
+public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private String[] colsnameLK = { "Tên Nhân Viên", "Tên Tài Khoản", "Mật Khẩu" };
 	private DefaultTableModel modelTaiKhoan;
 	private JPanel panel;
@@ -36,6 +45,20 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 	private JLabel lblMa;
 	private JLabel lblSDT;
 	private JLabel lblEmail;
+	private JLabel lblThemTaiKhoan;
+	private JLabel lblSuaTaiKhoan;
+	private JLabel lblTen_1;
+	private JLabel lblTen_2;
+	private JLabel lblTen_3;
+	private JLabel lblTen_4;
+	private JTextField txtMa;
+	private JTextField txtTenNV;
+	private JTextField txtTenTK;
+	private JTextField txtMK;
+	private JButton btnXoaRong;
+	private JButton btnThem;
+	
+	private TaiKhoanDao daoTK;
 
 
 	public Gui_QuanLyTaiKhoan() {
@@ -77,7 +100,7 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 		lblLogoNV.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblLogoNV.setForeground(Color.WHITE);
 		lblLogoNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLogoNV.setBounds(1393, 10, 192, 45);
+		lblLogoNV.setBounds(1371, 10, 192, 45);
 		panel.add(lblLogoNV);
 
 		/**
@@ -89,14 +112,73 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 		add(panelTable);
 		panelTable.setLayout(null);
 
-		panelThem = new JPanel();
+		panelThem = new RoundedPanel();
+		panelThem.setBackground(getBackground());
 		panelThem.setLayout(null);
-		panelThem.setBounds(975, 20, 625, 415);
+		panelThem.setBounds(975, 45, 600, 373);
 		panelTable.add(panelThem);
+		
+		lblThemTaiKhoan = new JLabel("THÊM TÀI KHOẢN MỚI");
+		lblThemTaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
+		lblThemTaiKhoan.setForeground(Color.WHITE);
+		lblThemTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblThemTaiKhoan.setBounds(99, 0, 421, 46);
+		panelThem.add(lblThemTaiKhoan);
+		
+		lblTen_1 = new JLabel("Tên Nhân Viên:");
+		lblTen_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTen_1.setBounds(27, 128, 116, 29);
+		panelThem.add(lblTen_1);
+		
+		lblTen_2 = new JLabel("Mã Nhân Viên:");
+		lblTen_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTen_2.setBounds(27, 58, 116, 29);
+		panelThem.add(lblTen_2);
+		
+		lblTen_3 = new JLabel("Mật Khẩu:");
+		lblTen_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTen_3.setBounds(27, 268, 116, 29);
+		panelThem.add(lblTen_3);
+		
+		lblTen_4 = new JLabel("Tên Tài Khoản:");
+		lblTen_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTen_4.setBounds(27, 198, 116, 29);
+		panelThem.add(lblTen_4);
+		
+		txtMa = new JTextField();
+		txtMa.setBounds(146, 59, 405, 30);
+		panelThem.add(txtMa);
+		txtMa.setColumns(10);
+		
+		txtTenNV = new JTextField();
+		txtTenNV.setColumns(10);
+		txtTenNV.setBounds(146, 127, 405, 30);
+		panelThem.add(txtTenNV);
+		
+		txtTenTK = new JTextField();
+		txtTenTK.setColumns(10);
+		txtTenTK.setBounds(146, 199, 405, 30);
+		panelThem.add(txtTenTK);
+		
+		txtMK = new JTextField();
+		txtMK.setColumns(10);
+		txtMK.setBounds(146, 268, 405, 30);
+		panelThem.add(txtMK);
+		
+		btnThem = new CircleBtn("Tạo Tài Khoản");
+		btnThem.setBackground(new Color(233, 180, 46));
+		btnThem.setBounds(400, 317, 120, 40);
+		panelThem.add(btnThem);
+		
+		btnXoaRong = new CircleBtn("Xóa Rỗng");
+		btnXoaRong.setBackground(new Color(233, 180, 46));
+		btnXoaRong.setBounds(167, 317, 120, 40);
+		panelThem.add(btnXoaRong);
 		
 		new DefaultTableModel(colsnameLK, 0);
 		
-		tblTaiKhoan = new JTable(new DefaultTableModel(new Object[][] { { null, null, null }, { null, null, null },
+		tblTaiKhoan = new JTable(new DefaultTableModel(new Object[][] { 
+			{ null, null, null }, { null, null, null },{ null, null, null },{ null, null, null },
 			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
 			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
 			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null } }, colsnameLK)) {
@@ -138,10 +220,18 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 	
 	modelTaiKhoan = (DefaultTableModel) tblTaiKhoan.getModel();
 	
-	panelXoa = new JPanel();
-	panelXoa.setBounds(975, 458, 625, 415);
+	panelXoa = new RoundedPanel();
+	panelXoa.setBackground(getBackground());
+	panelXoa.setBounds(975, 458, 600, 373);
 	panelTable.add(panelXoa);
 	panelXoa.setLayout(null);
+	
+	lblSuaTaiKhoan = new JLabel("SỬA TÀI KHOẢN");
+	lblSuaTaiKhoan.setHorizontalAlignment(SwingConstants.CENTER);
+	lblSuaTaiKhoan.setForeground(Color.WHITE);
+	lblSuaTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 25));
+	lblSuaTaiKhoan.setBounds(89, 23, 421, 46);
+	panelXoa.add(lblSuaTaiKhoan);
 	
 	panelThongTin = new RoundedPanel();
 	panelThongTin.setBounds(25, 541, 930, 290);
@@ -185,6 +275,35 @@ public class Gui_QuanLyTaiKhoan extends JPanel {
 	lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	lblEmail.setBounds(341, 214, 421, 29);
 	panelThongTin.add(lblEmail);
+	
+	/**
+	 * các chức năng
+	 * 
+	 */
+	btnThem.addActionListener(this);
+	
+	daoTK = new TaiKhoanDao();
 
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object o = e.getSource();
+		if(o.equals(btnThem)) {
+			TaiKhoan tk = getTaiKhoanTuTextfield();
+			if(daoTK.themTaiKhoan(tk)) {
+				JOptionPane.showMessageDialog(this, "Thêm thành công");
+			}else 
+				JOptionPane.showMessageDialog(this, "Thêm thất bại");
+		}
+	}
+	private TaiKhoan getTaiKhoanTuTextfield() {
+		
+		String tenNV = txtTenNV.getText();
+		String tenTK = txtTenTK.getText();
+		String mk = txtMK.getText();
+		return new TaiKhoan(tenNV,tenTK,mk);
+	}
+	
 }

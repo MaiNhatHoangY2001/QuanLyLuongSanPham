@@ -340,7 +340,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 				}
 			} else if (loaiTK.equals("Đang làm việc")) {
 
-			} else if (loaiTK.equals("Đã nghĩ việc")) {
+			} else if (loaiTK.equals("Đã nghỉ việc")) {
 
 			}
 		}
@@ -366,7 +366,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			}
 			if (count == 0)
 				LoadThongTinNhanVien(listNV);
-		} else if (cmb.getSelectedItem().equals("Đã nghĩ việc")) {
+		} else if (cmb.getSelectedItem().equals("Đã nghỉ việc")) {
 			int count = 0;
 			ChucNang.clearDataTable(model);
 			for (NhanVien nhanVien : listNV) {
