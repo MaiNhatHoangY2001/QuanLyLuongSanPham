@@ -1,6 +1,5 @@
 package dao;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,26 @@ public class SanPhamDao {
 			return false;
 		}
 	}
+	
+	public boolean capNhatSanPham(SanPham sp) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		
+		try {
+			tr.begin();
+			session.update(sp);
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		
+		return false;
+	}
+	
 	public boolean xoaSanPhamTheoMa(String maSPCanXoa) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -47,6 +66,7 @@ public class SanPhamDao {
 		session.close();
 		return true;
 	}
+	
 	public SanPham getSanPham(String id) {
 		SanPham sanPham;
 		Session session = sessionFactory.openSession();
@@ -60,9 +80,32 @@ public class SanPhamDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
+		} finally {
+			session.close();
 		}
 		return null;
 	}
+	
+	public List<SanPham> getSanPhamThoTen(String tenSanPham) {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from SanPham\r\n"
+					+ "where tenSanPham like '%"+tenSanPham+"%'";
+			list = session.createNativeQuery(query, SanPham.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+	
 	public List<SanPham> getAllSanPham() {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.openSession();
@@ -78,14 +121,6 @@ public class SanPhamDao {
 		}
 		session.close();
 		return list;
-	}
-	public static void main(String[] args) {
-		
-		SanPham pham= new SanPham("Iphone 8", 199999999, "Apple", "DT", LocalDate.of(2017,9, 20));
-		SanPhamDao sanPhamDao= new SanPhamDao();
-		
-//		System.out.println(sanPhamDao.getNhanVien("SP21100001"));
-		System.out.println(sanPhamDao.themSanPham(pham));
 	}
 
 }

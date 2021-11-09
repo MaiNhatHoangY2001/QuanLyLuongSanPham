@@ -19,11 +19,11 @@ public class QuanLyLuongService {
 	}
 
 	public List<NhanVien> getAllNhanVien() {
-		return nhanVienDao.getAllNhanVien();
+		return nhanVienDao.getDsNhanVien();
 	}
 
 	public NhanVien getNhanVien(String maNhanVien) {
-		return nhanVienDao.getNhanVien(maNhanVien);
+		return nhanVienDao.getNhanVienTheoMa(maNhanVien);
 	}
 
 	public boolean deleteAllBangLuongInTime(int month, int year) {

@@ -1,8 +1,6 @@
 package services;
 
-import dao.ChiTietHoaDonBanDao;
 import dao.HoaDonBanHangDao;
-
 
 public class ThongKeService {
 	private HoaDonBanHangDao hoaDonBanHang = new HoaDonBanHangDao();

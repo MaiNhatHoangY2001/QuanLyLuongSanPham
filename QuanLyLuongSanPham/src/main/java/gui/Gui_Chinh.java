@@ -60,9 +60,6 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 */
 	public Gui_Chinh() {
 		
-		
-		
-		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);

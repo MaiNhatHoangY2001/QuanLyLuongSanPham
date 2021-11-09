@@ -132,7 +132,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		lblMaNV = new JLabel("Mã Nhân Viên: ");
 		lblMaNV.setForeground(Color.WHITE);
 		lblMaNV.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblMaNV.setBounds(184, 48, 339, 37);
+		lblMaNV.setBounds(184, 48, 484, 37);
 		pnlContent.add(lblMaNV);
 
 		// Hiện trạng thái nhân viên làm việc
@@ -305,9 +305,6 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		txtHeSoLuong.setBounds(316, 195, 801, 45);
 		pnlInput.add(txtHeSoLuong);
 
-		// GroundButton
-		ButtonGroup btnGroupGioiTinh = new ButtonGroup();
-
 		/*
 		 * Thiêt lập Sự kiện cho nút
 		 */
@@ -328,11 +325,24 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnHuyBo)) {
-			int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không?", "Thông báo thoát",
-					JOptionPane.YES_NO_OPTION);
-			if (tl == JOptionPane.YES_OPTION) {
-				this.dispose();
+			NhanVien nv = getNhanVienTuTextfield();
+			nv.setMaNhanVien(nhanVien.getMaNhanVien());
+			if (nhanVien == nv) {
+				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không?", "Thông báo thoát",
+						JOptionPane.YES_NO_OPTION);
+				if (tl == JOptionPane.YES_OPTION) {
+					this.dispose();
+				}
+			} else {
+				int tl = JOptionPane.showConfirmDialog(this, "Bạn có muốn lưu thông tin Nhân Viên trước khi thoát không?", "Thông báo lưu",
+						JOptionPane.YES_NO_OPTION);
+				if (tl == JOptionPane.YES_OPTION) {
+					daoNV.capNhatNhanVien(nv);
+					this.dispose();
+				}
 			}
+			
+			
 		} else if (o.equals(btnXoaRong)) {
 			xoaRongText();
 		} else if (o.equals(btnXaThai)) {
@@ -357,7 +367,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 			if (kiemTraRegex()) {
 				NhanVien nv = getNhanVienTuTextfield();
 				nv.setMaNhanVien(nhanVien.getMaNhanVien());
-				boolean rs = daoNV.suaNhanVienTheoMa(nv);
+				boolean rs = daoNV.capNhatNhanVien(nv);
 				if (rs) {
 					JOptionPane.showMessageDialog(this, "Sửa thành công");
 				} else {
@@ -370,6 +380,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 	}
 	
 	private void loadDuLieuLen(NhanVien nv) {
+		lblMaNV.setText("Mã Nhân Viên: " + nhanVien.getMaNhanVien());
 		txtTen.setText(nhanVien.getTenNhanVien());
 		txtDiaChi.setText(nhanVien.getDiaChi());
 		txtCMND.setText(nhanVien.getcCCD());
@@ -387,6 +398,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 			lblTTNhanVien.setText("Trang thái: Nghĩ việc");
 			btnXaThai.setText("Nhận");
 		}
+		
 	}
 
 	public boolean kiemTraRegex() {
