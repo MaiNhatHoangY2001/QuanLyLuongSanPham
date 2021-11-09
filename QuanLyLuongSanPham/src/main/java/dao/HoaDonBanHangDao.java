@@ -1,5 +1,6 @@
 package dao;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,10 +85,11 @@ public class HoaDonBanHangDao {
 			String query = "SELECT        d.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
 					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
 					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan "
-					+ "where day(o.ngayLapHoaDon)="+ngay+" and year(o.ngayLapHoaDon)="+nam+" and MONTH(o.ngayLapHoaDon)="+thang+" "
+					+ "where day(o.ngayLapHoaDon)=" + ngay + " and year(o.ngayLapHoaDon)=" + nam
+					+ " and MONTH(o.ngayLapHoaDon)=" + thang + " "
 					+ "group by d.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
 			List<?> list = session.createNativeQuery(query).getResultList();
-			
+
 			tr.commit();
 			return list;
 		} catch (Exception e) {
@@ -99,25 +101,50 @@ public class HoaDonBanHangDao {
 
 	}
 
+	/**
+	 * Lấy tổng tiền đã bán theo tháng năm
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public double getThanhTienTheoThoiGian(int month, int year) {
+
+		BigDecimal tongTien = null;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT SUM(thanhTien) AS tongtien FROM HoaDonBanHang WHERE (MONTH(ngayLapHoaDon) = " + month
+					+ ") AND (YEAR(ngayLapHoaDon) = " + year + ")";
+			tongTien = (BigDecimal) session.createSQLQuery(query).getSingleResult();
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return tongTien == null ? 0 : tongTien.doubleValue();
+	}
+
 	public static void main(String[] args) {
 		HoaDonBanHangDao banHangDao = new HoaDonBanHangDao();
 //		ChiTietHoaDonBanDao chiTietHoaDonBanDao= new ChiTietHoaDonBanDao();
 //		
-		HoaDonBanHang hoaDonBanHang= new HoaDonBanHang(0.1, 0.1);
+		HoaDonBanHang hoaDonBanHang = new HoaDonBanHang(0.1, 0.1);
 //		
-		KhachHang khachHang= new KhachHang();
+		KhachHang khachHang = new KhachHang();
 		khachHang.setMaKhachHang("KH21100001");
 		hoaDonBanHang.setKhachHang(khachHang);
-		
-		NhanVien nhanVien= new NhanVien();
+
+		NhanVien nhanVien = new NhanVien();
 		nhanVien.setMaNhanVien("NV21100002");
-		
+
 		hoaDonBanHang.setKhachHang(khachHang);
 		hoaDonBanHang.setNhanVien(nhanVien);
 
 		System.out.println(hoaDonBanHang.toString());
 		banHangDao.themHoaDonBan(hoaDonBanHang);
-	
+
 //		banHangDao.getHoaDonTheoNgay(5, 6, 2020);
 	}
 }

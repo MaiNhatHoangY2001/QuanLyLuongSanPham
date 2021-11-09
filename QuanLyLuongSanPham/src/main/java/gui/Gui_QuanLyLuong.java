@@ -172,6 +172,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		 */
 		cboMonth = new JMonthChooser();
 		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
+		cboMonth.setLocale(new Locale("vi"));
 		cboMonth.setBounds(525, 14, 140, 47);
 		panel_1_1.add(cboMonth);
 

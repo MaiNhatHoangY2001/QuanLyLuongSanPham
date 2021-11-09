@@ -5,7 +5,6 @@
     <fullyQualifiedTypeName name="java.awt.event.WindowListener"/>
     <fullyQualifiedTypeName name="gui_package.CustomTable"/>
     <fullyQualifiedTypeName name="java.text.NumberFormat"/>
-    <fullyQualifiedTypeName name="java.util.Locale"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="org.hibernate.SQLQuery"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
@@ -13,7 +12,6 @@
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="javax.swing.event.DocumentListener"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
@@ -23,20 +21,15 @@
     <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="gui_package.CircleBtn"/>
     <fullyQualifiedTypeName name="gui_package.RoundTextField"/>
     <fullyQualifiedTypeName name="gui_package.RoundedPanel"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.awt.Desktop"/>
-    <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
     <fullyQualifiedTypeName name="gui.Gui_In"/>
     <fullyQualifiedTypeName name="org.hibernate.persister.walking.spi.MetamodelGraphWalker"/>
-    <fullyQualifiedTypeName name="dao.ChiTietHoaDonBanDao"/>
-    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="dao.BangLuongDao"/>
     <fullyQualifiedTypeName name="model.BangLuong"/>
@@ -45,4 +38,18 @@
     <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="model.ChiTietHoaDonBan"/>
     <fullyQualifiedTypeName name="services.QuanLyLuongService"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
+    <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="javax.swing.JPanel"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKeThuChi"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
+    <fullyQualifiedTypeName name="org.hibernate.boot.model.naming.ImplicitNameSource"/>
+    <fullyQualifiedTypeName name="services.ThongKeService"/>
+    <fullyQualifiedTypeName name="dao.ChiTietHoaDonBanDao"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.util.Locale"/>
+    <fullyQualifiedTypeName name="model.HoaDonBanHang"/>
+    <fullyQualifiedTypeName name="dao.HoaDonBanHangDao"/>
 </qualifiedTypeNameHistroy>

@@ -26,13 +26,15 @@ public class BangLuongDao {
 			tr.begin();
 			bangLuong = session.get(BangLuong.class, maBangLuong);
 			tr.commit();
+			return bangLuong;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.commit();
+		} finally {
+			session.close();
 		}
-		session.close();
 
-		return bangLuong;
+		return null;
 
 	}
 
@@ -49,11 +51,14 @@ public class BangLuongDao {
 					.getSingleResult();
 
 			tr.commit();
+			return bangLuong;
 		} catch (Exception e) {
 			tr.rollback();
+		} finally {
+			session.close();
 		}
-		session.close();
-		return bangLuong;
+		return null;
+
 	}
 
 	public boolean themBangLuong(BangLuong bangLuong) {
@@ -159,9 +164,10 @@ public class BangLuongDao {
 		return list;
 
 	}
-	
+
 	/**
-	 * Tạo tiền sản phẩm 
+	 * Tạo tiền sản phẩm
+	 * 
 	 * @param maNhanVien
 	 * @param month
 	 * @param year
@@ -175,7 +181,7 @@ public class BangLuongDao {
 			tr.begin();
 			String query = "SELECT sum(thanhTien) as tienSanPham FROM HoaDonBanHang where " + "maNhanVien = '"
 					+ maNhanVien + "'" + " and MONTH(ngayLapHoaDon) = " + month + " and YEAR(ngayLapHoaDon) = " + year;
-			tienSanPham = (BigDecimal)session.createSQLQuery(query).getSingleResult();
+			tienSanPham = (BigDecimal) session.createSQLQuery(query).getSingleResult();
 			tr.commit();
 		} catch (Exception e) {
 			tr.rollback();
@@ -184,9 +190,10 @@ public class BangLuongDao {
 		return tienSanPham == null ? 0 : tienSanPham.doubleValue();
 
 	}
-	
+
 	/**
 	 * Xóa tất cả bảng lương theo thời gian
+	 * 
 	 * @param month
 	 * @param year
 	 */
@@ -196,8 +203,7 @@ public class BangLuongDao {
 
 		try {
 			tr.begin();
-			String query = "DELETE from BangLuong where MONTH(thoiGian) = "+ month
-					+ " and YEAR(thoiGian) = "+ year;
+			String query = "DELETE from BangLuong where MONTH(thoiGian) = " + month + " and YEAR(thoiGian) = " + year;
 			session.createSQLQuery(query).executeUpdate();
 			tr.commit();
 
@@ -210,7 +216,7 @@ public class BangLuongDao {
 		}
 		return false;
 	}
-	
+
 	public static void main(String[] args) {
 		BangLuongDao bangLuongDao = new BangLuongDao();
 //		NhanVien nhanVien = new NhanVien("NV0001");

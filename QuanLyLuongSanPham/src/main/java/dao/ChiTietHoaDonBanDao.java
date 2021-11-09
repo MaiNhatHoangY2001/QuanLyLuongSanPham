@@ -115,13 +115,16 @@ public class ChiTietHoaDonBanDao {
 
 		return list;
 	}
+	
+
 
 	public static void main(String[] args) {
 		ChiTietHoaDonBanDao dao = new ChiTietHoaDonBanDao();
-		HoaDonBanHangDao daoHd = new HoaDonBanHangDao();
-		SanPhamDao sanPhamDao = new SanPhamDao();
-		ChiTietHoaDonBan hoaDonBan = new ChiTietHoaDonBan(sanPhamDao.getSanPham("SP21100001").getGiaThanh(), 5,
-				daoHd.getHoaDonBanHang("HB21110004"), sanPhamDao.getSanPham("SP21100001"));
-		dao.themChiHoaDonBan(hoaDonBan);
+//		HoaDonBanHangDao daoHd = new HoaDonBanHangDao();
+//		SanPhamDao sanPhamDao = new SanPhamDao();
+//		ChiTietHoaDonBan hoaDonBan = new ChiTietHoaDonBan(sanPhamDao.getSanPham("SP21100001").getGiaThanh(), 5,
+//				daoHd.getHoaDonBanHang("HB21110004"), sanPhamDao.getSanPham("SP21100001"));
+//		dao.themChiHoaDonBan(hoaDonBan);
+		
 	}
 }

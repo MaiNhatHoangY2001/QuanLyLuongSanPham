@@ -202,15 +202,16 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 		cardLayout = (CardLayout) pnlChange.getLayout();
 
+		pnlChange.add(new Gui_ThongKeThuChi(), "btnThongKe");
 		pnlChange.add(new Gui_QuanLyHoaDon(), "btnQuanLyHoaDon");
 		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
 		pnlChange.add(new Gui_QuanLyNhanVien(), "btnQuanLyNhanVien");
 		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
 		pnlChange.add(new Gui_QuanLyTaiKhoan(), "btnQuanLyTaiKhoan");
-//		pnlChange.add(new PnlTinhDoanhThu(), "btnThongKe");
-
-		temp = btnQuanLyHoaDon;
-		activeButton(btnQuanLyHoaDon);
+		
+		//set active khi bắt đầu vào
+		temp = btnThongKe;
+		activeButton(btnThongKe);
 	}
 
 	@Override
@@ -264,7 +265,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	public void thongBaoThoat() {
 		JOptionPane jOptionPane= new JOptionPane();
 		jOptionPane.setBackground(new Color(242, 129, 25));
-		int tl = jOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
+		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
 				JOptionPane.YES_NO_OPTION);
 		if (tl == JOptionPane.YES_OPTION) {
 			System.exit(0);
