@@ -13,11 +13,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.DimensionUIResource;
@@ -31,11 +27,8 @@ import model.NhanVien;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
-import java.awt.Dimension;
 import javax.swing.DefaultComboBoxModel;
 
 public class Gui_ThemNhanVien extends JFrame implements ActionListener {
@@ -195,7 +188,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 
 		// Ngày
 		cmbNgay = new JComboBox<String>();
-		cmbNgay.setModel(new DefaultComboBoxModel(
+		cmbNgay.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
 						"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -205,8 +198,8 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 
 		// Tháng
 		cmbThang = new JComboBox<String>();
-		cmbThang.setModel(new DefaultComboBoxModel(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
-				"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
+		cmbThang.setModel(new DefaultComboBoxModel<String>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4",
+				"Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
 		cmbThang.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbThang.setBackground(Color.WHITE);
 		cmbThang.setBounds(590, 116, 250, 45);
@@ -214,9 +207,9 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 
 		// Năm
 		int namTu18Tuoi = LocalDate.now().getYear() - 18;
-		DefaultComboBoxModel modelNam = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelNam = new DefaultComboBoxModel<String>();
 		for (int i = namTu18Tuoi; i >= 1900; i--) {
-			modelNam.addElement(i);
+			modelNam.addElement(i + "");
 		}
 		cmbNam = new JComboBox<String>();
 		cmbNam.setModel(modelNam);
@@ -229,7 +222,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 		 * Input HeSoLuong
 		 */
 		// JLable HeSoLuong
-		JLabel lblHeSoLuong = new JLabel("Hệ số lương");
+		JLabel lblHeSoLuong = new JLabel("Mức Lương:");
 		lblHeSoLuong.setForeground(Color.BLACK);
 		lblHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblHeSoLuong.setBounds(81, 197, 225, 40);
@@ -240,9 +233,6 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 		txtHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtHeSoLuong.setBounds(316, 195, 801, 45);
 		pnlInput.add(txtHeSoLuong);
-
-		// Thiết lập: Chi cho phép chọn 1 button radio
-		ButtonGroup btnGroupGioiTinh = new ButtonGroup();
 
 		/*
 		 * Các nút

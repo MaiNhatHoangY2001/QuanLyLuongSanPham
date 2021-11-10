@@ -22,12 +22,12 @@ public class NhanVienDao {
 	 * @return null: Trả về null nếu không tìm thấy thông tin Nhân Viên
 	 */
 	public NhanVien getNhanVienTheoMa(String maNhanVien) {
-		NhanVien nhanVien = null;
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			nhanVien = session.get(NhanVien.class, maNhanVien);
+			NhanVien nhanVien = session.find(NhanVien.class, maNhanVien);
+			System.out.println(nhanVien);
 			tr.commit();
 			return nhanVien;
 		} catch (Exception e) {
@@ -52,6 +52,30 @@ public class NhanVienDao {
 		try {
 			tr.begin();
 			list = session.createNativeQuery("select * from NhanVien", NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	/**
+	 * Gọi 50 Nhân Viên đươc sắp xếp theo tên
+	 * 
+	 * @return list<NhanVien> : Danh sách nhân viên
+	 */
+	public List<NhanVien> get50NhanVienSapXepTheoTenNhanVien() {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			list = session
+					.createNativeQuery("select top 50 * from NhanVien\r\n" + "order by tenNhanVien asc", NhanVien.class)
+					.getResultList();
 			tr.commit();
 			return list;
 		} catch (Exception e) {

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.NumberFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +22,6 @@ import javax.swing.JTextField;
 import gui_package.ChucNang;
 import gui_package.CircleBtn;
 import gui_package.RoundTextField;
-import model.NhanVien;
 import model.SanPham;
 
 import javax.swing.JComboBox;
@@ -66,7 +64,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private DefaultTableModel model;
 
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
-	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private SanPhamDao daoSP;
 	private List<SanPham> listSP;
 
@@ -85,7 +82,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlHeader = new JPanel();
 		pnlHeader.setLayout(null);
 		pnlHeader.setBackground(new Color(242, 129, 25));
-		pnlHeader.setBounds(0, 0, 1600, 100);
+		pnlHeader.setBounds(0, 0, 1600, 92);
 		add(pnlHeader);
 
 		// Jlable Title Header
@@ -133,7 +130,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		JPanel pnlNgang = new JPanel();
 		pnlNgang.setLayout(null);
 		pnlNgang.setBackground(new Color(194, 93, 0));
-		pnlNgang.setBounds(0, 100, 1600, 80);
+		pnlNgang.setBounds(0, 92, 1600, 72);
 		add(pnlNgang);
 
 //		// JButton Them Nhan Vien
@@ -148,7 +145,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnSuaNV = new CircleBtn("Sửa");
 		btnSuaNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSuaNV.setBackground(new Color(233, 180, 46));
-		btnSuaNV.setBounds(10, 15, 150, 50);
+		btnSuaNV.setBounds(10, 13, 150, 45);
 		btnSuaNV.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnSuaNV);
 
@@ -156,7 +153,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnXoa = new CircleBtn("Xóa");
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setBounds(170, 15, 150, 50);
+		btnXoa.setBounds(170, 13, 150, 45);
 		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnXoa);
 
@@ -164,7 +161,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnLamMoi = new CircleBtn("Làm mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnLamMoi.setBackground(new Color(233, 180, 46));
-		btnLamMoi.setBounds(1424, 15, 150, 50);
+		btnLamMoi.setBounds(1424, 13, 150, 45);
 		btnLamMoi.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnLamMoi);
 
@@ -172,14 +169,14 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnTimKiem = new CircleBtn("Tìm");
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnTimKiem.setBackground(new Color(233, 180, 46));
-		btnTimKiem.setBounds(1265, 15, 150, 50);
+		btnTimKiem.setBounds(1265, 13, 150, 45);
 		btnTimKiem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnTimKiem);
 
 		// JTextField Tim Kiem
 		txtTImKiem = new RoundTextField("", 100);
 		txtTImKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTImKiem.setBounds(613, 20, 439, 40);
+		txtTImKiem.setBounds(330, 16, 505, 40);
 		pnlNgang.add(txtTImKiem);
 
 		// JCombobox Tim kiem
@@ -187,7 +184,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 				"Giá dưới 50 triệu" };
 		cmbLoaiTimKiem = new JComboBox(loai);
 		cmbLoaiTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cmbLoaiTimKiem.setBounds(1062, 20, 193, 40);
+		cmbLoaiTimKiem.setBounds(845, 16, 410, 40);
 		pnlNgang.add(cmbLoaiTimKiem);
 
 		/*
@@ -197,7 +194,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlContent = new JPanel();
 		pnlContent.setLayout(null);
 		pnlContent.setBackground(new Color(242, 129, 25));
-		pnlContent.setBounds(0, 180, 1600, 866);
+		pnlContent.setBounds(0, 164, 1600, 882);
 		add(pnlContent);
 
 		// JLable title Bang
@@ -231,7 +228,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		 */
 		// Thanh Cuon
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 47, 1585, 818);
+		scrollPane.setBounds(10, 47, 1564, 730);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
 		String headerTitle[] = { "Mã Sản Phẩm", "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành" };
@@ -331,7 +328,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		} else if (cmb.getSelectedItem().equals("Giá dưới 20 triệu")) {
 			ChucNang.clearDataTable(model);
 			for (SanPham sanPham : listSP) {
-				if (sanPham.getGiaThanh() < 20000000);
+				if (sanPham.getGiaThanh() < 20000000)
+					;
 				load1ThongTinSanPham(sanPham);
 			}
 			ChucNang.addNullDataTable(model);
@@ -339,7 +337,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		} else if (cmb.getSelectedItem().equals("Giá dưới 50 triệu")) {
 			ChucNang.clearDataTable(model);
 			for (SanPham sanPham : listSP) {
-				if (sanPham.getGiaThanh() < 50000000);
+				if (sanPham.getGiaThanh() < 50000000)
+					;
 				load1ThongTinSanPham(sanPham);
 			}
 			ChucNang.addNullDataTable(model);

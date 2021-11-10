@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,12 +7,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.Locale;
 
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.DimensionUIResource;
@@ -25,6 +19,7 @@ import gui_package.Regex;
 import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
 import model.NhanVien;
+import model.SanPham;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,11 +29,9 @@ import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 
 public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 
@@ -49,35 +42,36 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JPanel pnlInput;
 
-	private JLabel lblMaNV;
+	private JLabel lblTitleMaNV;
 	private JLabel lblTTNhanVien;
 	private JLabel lblHoTen;
 	private JLabel lblDiaChi;
 	private JLabel lblCMND;
 	private JLabel lblSDT;
-	private JTextField txtHeSoLuong;
 	private JLabel lblEmail;
 	private JLabel lblNgaySinh;
+	private JLabel lblHeSoLuong;
 
 	private JButton btnLuu;
 	private JButton btnXoaRong;
 	private JButton btnHuyBo;
 	private JButton btnXaThai;
-	private JLabel lblHeSoLuong;
 
-	private NhanVien nhanVien;
 	private JTextField txtTen;
 	private JTextField txtDiaChi;
 	private JTextField txtSDT;
 	private JTextField txtCMND;
 	private JTextField txtEmail;
+	private JTextField txtHeSoLuong;
 
 	private JComboBox<String> cmbNgay;
 	private JComboBox<String> cmbThang;
 	private JComboBox<String> cmbNam;
-	
+
 	private NhanVienDao daoNV;
+	private NhanVien nhanVien;
 	private DecimalFormat fm = new DecimalFormat("#");
+	private JLabel lblMaNV;
 
 	/**
 	 * Create the frame.
@@ -129,11 +123,11 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		contentPane.add(pnlContent);
 
 		// Hiện mã nhân viên
-		lblMaNV = new JLabel("Mã Nhân Viên: ");
-		lblMaNV.setForeground(Color.WHITE);
-		lblMaNV.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblMaNV.setBounds(184, 48, 484, 37);
-		pnlContent.add(lblMaNV);
+		lblTitleMaNV = new JLabel("Mã Nhân Viên: ");
+		lblTitleMaNV.setForeground(Color.WHITE);
+		lblTitleMaNV.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblTitleMaNV.setBounds(184, 48, 206, 37);
+		pnlContent.add(lblTitleMaNV);
 
 		// Hiện trạng thái nhân viên làm việc
 		lblTTNhanVien = new JLabel();
@@ -179,7 +173,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		pnlContent.add(btnXaThai);
 
 		/*
-		 * Phần Nhập thông tin 
+		 * Phần Nhập thông tin
 		 */
 		// Background Nhập thông tin
 		pnlInput = new RoundedPanel();
@@ -258,9 +252,9 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 
 		// Ngày
 		cmbNgay = new JComboBox<String>();
-		DefaultComboBoxModel modelNgay = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelNgay = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 31; i++) {
-			modelNgay.addElement(i);
+			modelNgay.addElement(i + "");
 		}
 		cmbNgay.setModel(modelNgay);
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -270,7 +264,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 
 		// Tháng
 		cmbThang = new JComboBox<String>();
-		DefaultComboBoxModel modelThang = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelThang = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 12; i++) {
 			modelThang.addElement("Tháng " + i);
 		}
@@ -282,9 +276,9 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 
 		// Năm
 		int namTu18Tuoi = LocalDate.now().getYear() - 18;
-		DefaultComboBoxModel modelNam = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelNam = new DefaultComboBoxModel<String>();
 		for (int i = namTu18Tuoi; i >= 1900; i--) {
-			modelNam.addElement(i);
+			modelNam.addElement(i + "");
 		}
 		cmbNam = new JComboBox<String>();
 		cmbNam.setModel(modelNam);
@@ -294,7 +288,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		pnlInput.add(cmbNam);
 
 		// Nhập hệ số lương
-		lblHeSoLuong = new JLabel("Hệ số lương");
+		lblHeSoLuong = new JLabel("Mức Lương:");
 		lblHeSoLuong.setForeground(Color.BLACK);
 		lblHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblHeSoLuong.setBounds(81, 197, 225, 40);
@@ -304,6 +298,12 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		txtHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtHeSoLuong.setBounds(316, 195, 801, 45);
 		pnlInput.add(txtHeSoLuong);
+		
+		lblMaNV = new JLabel("");
+		lblMaNV.setForeground(Color.WHITE);
+		lblMaNV.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblMaNV.setBounds(400, 48, 206, 37);
+		pnlContent.add(lblMaNV);
 
 		/*
 		 * Thiêt lập Sự kiện cho nút
@@ -325,24 +325,27 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnHuyBo)) {
-			NhanVien nv = getNhanVienTuTextfield();
-			nv.setMaNhanVien(nhanVien.getMaNhanVien());
-			if (nhanVien == nv) {
+			NhanVien nhanVien1 = daoNV.getNhanVienTheoMa(lblMaNV.getText());
+			NhanVien nhanVien2 = getNhanVienTuTextfield();
+			nhanVien2.setMaNhanVien(lblMaNV.getText());
+			if (kiemTraHaiSanPham(nhanVien1, nhanVien2)) {
 				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không?", "Thông báo thoát",
 						JOptionPane.YES_NO_OPTION);
 				if (tl == JOptionPane.YES_OPTION) {
 					this.dispose();
 				}
 			} else {
-				int tl = JOptionPane.showConfirmDialog(this, "Bạn có muốn lưu thông tin Nhân Viên trước khi thoát không?", "Thông báo lưu",
+				int tl = JOptionPane.showConfirmDialog(this,
+						"Bạn có muốn lưu thông tin Nhân Viên trước khi thoát không?", "Thông báo lưu",
 						JOptionPane.YES_NO_OPTION);
 				if (tl == JOptionPane.YES_OPTION) {
-					daoNV.capNhatNhanVien(nv);
+					daoNV.capNhatNhanVien(nhanVien2);
+					this.dispose();
+				} else {
 					this.dispose();
 				}
 			}
-			
-			
+
 		} else if (o.equals(btnXoaRong)) {
 			xoaRongText();
 		} else if (o.equals(btnXaThai)) {
@@ -373,14 +376,32 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 				} else {
 					JOptionPane.showMessageDialog(this, "Sửa không thành công");
 				}
-				
+
 			}
 		}
 
 	}
-	
+
+	private boolean kiemTraHaiSanPham(NhanVien nhanVien1, NhanVien nhanVien2) {
+		if (!nhanVien1.getTenNhanVien().equals(nhanVien2.getTenNhanVien()))
+			return false;
+		if (!nhanVien1.getcCCD().equals(nhanVien2.getcCCD()))
+			return false;
+		if (!nhanVien1.getDiaChi().equals(nhanVien2.getDiaChi()))
+			return false;
+		if (!nhanVien1.getEmail().equals(nhanVien2.getEmail()))
+			return false;
+		if (nhanVien1.getMucLuong() != nhanVien2.getMucLuong())
+			return false;
+		if (!nhanVien1.getsDT().equals(nhanVien2.getsDT()))
+			return false;
+		if (!nhanVien1.getNgaySinh().equals(nhanVien2.getNgaySinh()))
+			return false;
+		return true;
+	}
+
 	private void loadDuLieuLen(NhanVien nv) {
-		lblMaNV.setText("Mã Nhân Viên: " + nhanVien.getMaNhanVien());
+		lblMaNV.setText(nhanVien.getMaNhanVien());
 		txtTen.setText(nhanVien.getTenNhanVien());
 		txtDiaChi.setText(nhanVien.getDiaChi());
 		txtCMND.setText(nhanVien.getcCCD());
@@ -398,7 +419,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 			lblTTNhanVien.setText("Trang thái: Nghĩ việc");
 			btnXaThai.setText("Nhận");
 		}
-		
+
 	}
 
 	public boolean kiemTraRegex() {
@@ -453,7 +474,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Lấy ngày trong combobox
 	 * 
@@ -467,7 +488,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		LocalDate date = LocalDate.of(year, month, day);
 		return date;
 	}
-	
+
 	public void setDate(int ngay, int thang, int nam) {
 		cmbNgay.setSelectedItem(ngay);
 		cmbThang.setSelectedItem("Tháng " + thang);

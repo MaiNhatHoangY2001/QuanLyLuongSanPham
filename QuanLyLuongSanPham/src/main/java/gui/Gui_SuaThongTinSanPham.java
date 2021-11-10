@@ -50,7 +50,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	private JComboBox<String> cmbNgay;
 	private JComboBox<String> cmbThang;
 	private JComboBox<String> cmbNam;
-	private JComboBox cmbLoai;
+	private JComboBox<String> cmbLoai;
 	
 	private SanPham sp;
 	private DecimalFormat fm = new DecimalFormat("#");
@@ -168,9 +168,9 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 
 		// Ngày
 		cmbNgay = new JComboBox<String>();
-		DefaultComboBoxModel modelNgay = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelNgay = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 31; i++) {
-			modelNgay.addElement(i);
+			modelNgay.addElement(i+"");
 		}
 		cmbNgay.setModel(modelNgay);
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -180,7 +180,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 
 		// Tháng
 		cmbThang = new JComboBox<String>();
-		DefaultComboBoxModel modelThang = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelThang = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 12; i++) {
 			modelThang.addElement("Tháng " + i);
 		}
@@ -191,10 +191,9 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		pnlInput.add(cmbThang);
 
 		// Năm
-		int namTu18Tuoi = LocalDate.now().getYear() - 18;
-		DefaultComboBoxModel modelNam = new DefaultComboBoxModel();
+		DefaultComboBoxModel<String> modelNam = new DefaultComboBoxModel<String>();
 		for (int i = LocalDate.now().getYear(); i >= 2000; i--) {
-			modelNam.addElement(i);
+			modelNam.addElement(i+"");
 		}
 		cmbNam = new JComboBox<String>();
 		cmbNam.setModel(modelNam);
@@ -205,7 +204,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 
 		// Loai
 		String[] dsLoai = { "Dien Thoai", "ipad", "Loa", "Linh kien dien tu" };
-		cmbLoai = new JComboBox(dsLoai);
+		cmbLoai = new JComboBox<String>(dsLoai);
 		cmbLoai.setBackground(Color.WHITE);
 		cmbLoai.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbLoai.setBounds(316, 252, 800, 50);
@@ -345,13 +344,13 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	 * @return false: 2 Sản Phẩm không giống nhau
 	 */
 	private boolean kiemTraHaiSanPham(SanPham sanp, SanPham sp2) {
-		if (!sanp.getTenSanPham().equalsIgnoreCase(sp2.getTenSanPham())) {
+		if (!sanp.getTenSanPham().equals(sp2.getTenSanPham())) {
 			return false;
-		} else if (!sanp.getnCC().equalsIgnoreCase(sp2.getnCC())) {
+		} else if (!sanp.getnCC().equals(sp2.getnCC())) {
 			return false;
 		} else if (!sanp.getNgaySanXuat().equals(sp2.getNgaySanXuat())) {
 			return false;
-		} else if (!sanp.getLoai().equalsIgnoreCase(sp2.getLoai())) {
+		} else if (!sanp.getLoai().equals(sp2.getLoai())) {
 			return false;
 		} else if (sanp.getGiaThanh() != sp2.getGiaThanh()) {
 			return false;
