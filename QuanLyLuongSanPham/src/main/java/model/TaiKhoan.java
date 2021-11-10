@@ -21,20 +21,43 @@ public class TaiKhoan {
 	@MapsId
 	@JoinColumn(name = "tenTaiKhoan")
 	private NhanVien nhanVien;
-	private String tenNV;
+	
+	
+	
 
-	public TaiKhoan(String tenNV, String tenTK, String mk) {
+	public String getTenTaiKhoan() {
+		return tenTaiKhoan;
+	}
+	public void setTenTaiKhoan(String tenTaiKhoan) {
+		this.tenTaiKhoan = tenTaiKhoan;
+	}
+	public String getMatKhau() {
+		return matKhau;
+	}
+
+
+
+
+	public void setMatKhau(String matKhau) {
+		this.matKhau = matKhau;
+	}
+
+
+	
+
+	public TaiKhoan() {
 		super();
-		this.tenNV = tenNV;
+	}
+	public TaiKhoan(String tenTK, String mk) {
+		super();
 		this.tenTaiKhoan = tenTK;
 		this.matKhau = mk;
 	}
-
 	@Override
 	public String toString() {
-		return "TaiKhoan [tenTaiKhoan=" + tenTaiKhoan + ", matKhau=" + matKhau + ", nhanVien=" + nhanVien + ", tenNV="
-				+ tenNV + "]";
+		return "TaiKhoan [tenTaiKhoan=" + tenTaiKhoan + ", matKhau=" + matKhau + ", nhanVien=" + nhanVien + "]";
 	}
+	
 
 	
 }

@@ -217,6 +217,8 @@ public class BangLuongDao {
 		return false;
 	}
 
+	
+	
 	public static void main(String[] args) {
 		BangLuongDao bangLuongDao = new BangLuongDao();
 //		NhanVien nhanVien = new NhanVien("NV0001");

@@ -21,6 +21,7 @@ import model.TaiKhoan;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -39,7 +40,6 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private JPanel panelTable;
 	private JPanel panelThem;
 	private JTable tblTaiKhoan;
-	private JScrollPane scrollPane;
 	private JPanel panelThongTin;
 	private JLabel lblTTNV;
 	private JLabel lblMa;
@@ -59,6 +59,7 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private JButton btnThem;
 	
 	private TaiKhoanDao daoTK;
+	private List<TaiKhoan> listTK;
 
 
 	public Gui_QuanLyTaiKhoan() {
@@ -282,28 +283,43 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	 */
 	btnThem.addActionListener(this);
 	
+	
+	
+	//load data
 	daoTK = new TaiKhoanDao();
-
+	listTK = daoTK.getDsTaiKhoan();
+	LoadTaiKhoan(listTK);
 	}
 
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { 
 		Object o = e.getSource();
 		if(o.equals(btnThem)) {
 			TaiKhoan tk = getTaiKhoanTuTextfield();
 			if(daoTK.themTaiKhoan(tk)) {
-				JOptionPane.showMessageDialog(this, "Thêm thành công");
+				JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
 			}else 
 				JOptionPane.showMessageDialog(this, "Thêm thất bại");
 		}
 	}
 	private TaiKhoan getTaiKhoanTuTextfield() {
 		
-		String tenNV = txtTenNV.getText();
 		String tenTK = txtTenTK.getText();
 		String mk = txtMK.getText();
-		return new TaiKhoan(tenNV,tenTK,mk);
+		return new TaiKhoan(tenTK,mk);
 	}
-	
+	private void LoadTaiKhoan(List<TaiKhoan> list) {
+		ChucNang.clearDataTable(modelTaiKhoan);
+		for (TaiKhoan tk : list) {
+			load1TaiKhoan(tk);
+		}
+	}
+	private void load1TaiKhoan(TaiKhoan tk) {
+		String n[]= {
+			tk.getTenTaiKhoan(),tk.getMatKhau()
+		};
+		modelTaiKhoan.addRow(n);
+	}
 }
+

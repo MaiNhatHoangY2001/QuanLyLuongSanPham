@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,6 +44,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
 
@@ -55,6 +63,11 @@ import model.BangLuong;
 import model.NhanVien;
 import services.QuanLyLuongService;
 import services.ThongKeService;
+import gui_package.RoundedPanel;
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import javax.swing.JSplitPane;
+import java.awt.Component;
 
 public class Gui_ThongKeThuChi extends JPanel {
 
@@ -75,12 +88,18 @@ public class Gui_ThongKeThuChi extends JPanel {
 	private JButton btnXoaRong;
 	private JButton btnIn;
 	private JButton btnHienTai;
-	private String[] colsname = { "Tháng", "Tổng Tiền bán sản phẩm", "Tiền nhập sản phẩm", "Tiền Lương nhân viên",
-			"Tổng Tiền Thu", "Lợi nhuận" };
+	private String[] colsThongKe = { "Tháng", "Tổng Tiền bán sản phẩm", "Tiền nhập sản phẩm", "Tiền Lương nhân viên" };
+	private String[] colsSanPham = { "STT", "Tên sản phẩm", "Số lượng bán" };
 	private JTable tblThongKe;
 	private DefaultTableModel modelThongKe;
+	private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	// Format tiền theo VND
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
+	private JLabel lblTongDoanhThu;
+	private JLabel lblTongTienChi;
+	private JLabel lblTongTienThu;
+	private JTable tblSanPham;
+	private DefaultTableModel modelSanPham;
 
 	/**
 	 * Create the frame.
@@ -160,7 +179,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 
 		/**
 		 * 
-		 * sự kiện cboMonth và spnYear
+		 * spnYear
 		 */
 
 		spnYear = new JYearChooser();
@@ -168,125 +187,14 @@ public class Gui_ThongKeThuChi extends JPanel {
 		spnYear.setBounds(628, 14, 112, 47);
 		panel_1_1.add(spnYear);
 
-//		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
-//
-//			@Override
-//			public void propertyChange(PropertyChangeEvent evt) {
-//				setDataTableBangLuong(cboMonth.getMonth() + 1, (Integer) evt.getNewValue());
-//
-//				Boolean bool = spnYear.getYear() <= LocalDate.now().getYear() ? true : false;
-//				btnTao.setEnabled(bool);
-//
-//				clearThongTinNhanVien();
-//				ChucNang.clearDataTable(modelSanPham);
-//				ChucNang.addNullDataTable(modelSanPham);
-//			}
-//		});
-
-		/**
-		 * Chức năng tìm kiếm
-		 */
-		cboTimKiem = new JComboBox<String>();
-		cboTimKiem.setFocusTraversalKeysEnabled(false);
-		cboTimKiem.getEditor().setItem("test");
-		cboTimKiem.setName("Loại tìm kiếm");
-		cboTimKiem.setBounds(1327, 14, 185, 47);
-		cboTimKiem.setToolTipText("Loại tìm kiếm");
-		cboTimKiem.setForeground(Color.WHITE);
-		cboTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		cboTimKiem.setBackground(new Color(233, 180, 46));
-		cboTimKiem.setModel(new DefaultComboBoxModel<String>(new String[] { "Tìm theo mã", "Tìm theo tên" }));
-		cboTimKiem.setSelectedIndex(-1);
-		// sự kiện cbo
-		cboTimKiem.addActionListener(e -> {
-			if (!txtTimKiem.getText().equals("")) {
-				btnTim.setEnabled(true);
-			}
-		});
-		panel_1_1.add(cboTimKiem);
-
-		txtTimKiem = new JTextField();
-		txtTimKiem.setToolTipText("Nhập thông tin tìm kiếm");
-		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTimKiem.setBounds(1000, 14, 220, 47);
-		txtTimKiem.setColumns(10);
-		panel_1_1.add(txtTimKiem);
-		// sự kiên txt
-		txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
 
 			@Override
-			public void removeUpdate(DocumentEvent e) {
-				change();
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				change();
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				change();
-			}
-
-			public void change() {
-				btnXoaRong.setEnabled(true);
-				if (cboTimKiem.getSelectedIndex() != -1) {
-					btnTim.setEnabled(true);
-				}
-				if (txtTimKiem.getText().equals("")) {
-					btnTim.setEnabled(false);
-//					clearAllData();
-//					setDataTableBangLuong(cboMonth.getMonth() + 1, spnYear.getYear());
-					btnXoaRong.setEnabled(false);
-				}
+			public void propertyChange(PropertyChangeEvent evt) {
+				setDataThongKe(spnYear.getYear());
 			}
 		});
 
-		btnTim = new JButton("");
-		btnTim.setToolTipText("Nút tìm kiếm (kết quả xuất hiện ở bảng lương)");
-		btnTim.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnTim.setFocusPainted(false);
-		btnTim.setBorderPainted(false);
-		btnTim.setBackground(new Color(233, 180, 46));
-		btnTim.setIcon(new ImageIcon("img\\icons8-search-24.png"));
-		btnTim.setBounds(1273, 14, 44, 47);
-		btnTim.setEnabled(false);
-		panel_1_1.add(btnTim);
-		// sự kiện btn
-		// btnTim.addActionListener(e -> eventTimKiem());
-
-		// set Phím enter
-		txtTimKiem.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "pressed");
-		txtTimKiem.getActionMap().put("pressed", new AbstractAction() {
-
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btnTim.doClick();
-			}
-		});
-
-		btnXoaRong = new JButton("");
-		btnXoaRong.setToolTipText("Xóa rỗng và tắt tìm kiếm");
-		btnXoaRong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnXoaRong.setIcon(new ImageIcon("img\\icons8-delete-30.png"));
-		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnXoaRong.setFocusPainted(false);
-		btnXoaRong.setBorderPainted(false);
-		btnXoaRong.setBackground(new Color(233, 180, 46));
-		btnXoaRong.setBounds(1219, 14, 44, 47);
-		panel_1_1.add(btnXoaRong);
-		btnXoaRong.setEnabled(false);
-		btnXoaRong.addActionListener(e -> {
-			txtTimKiem.setText("");
-			ChucNang.clearDataTable(modelThongKe);
-//			setDataTableBangLuong(cboMonth.getMonth() + 1, spnYear.getYear());
-		});
 		btnHienTai = new JButton("Hiện tại");
 		btnHienTai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHienTai.setForeground(Color.WHITE);
@@ -300,28 +208,14 @@ public class Gui_ThongKeThuChi extends JPanel {
 			spnYear.setYear(LocalDate.now().getYear());
 		});
 
-		btnIn = new JButton("");
-		btnIn.setToolTipText("In bảng lương trong tháng");
-		btnIn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnIn.setIcon(new ImageIcon("img\\icons8-print-24.png"));
-		btnIn.setFocusPainted(false);
-		btnIn.setBorderPainted(false);
-		btnIn.setBackground(new Color(233, 180, 46));
-		btnIn.setBounds(1533, 14, 44, 47);
-		panel_1_1.add(btnIn);
-		// Sự kiện
-		btnIn.addActionListener(e -> {
-			new Gui_In().setVisible(true);
-		});
-
 		/**
 		 * Thống kê dữ liệu trong tháng
 		 */
-		new DefaultTableModel(colsname, 0);
+		new DefaultTableModel(colsThongKe, 0);
 		tblThongKe = new JTable(new DefaultTableModel(
 				new Object[][] { { null, null, null, null, null, null, null },
 						{ null, null, null, null, null, null, null }, { null, null, null, null, null, null, null } },
-				colsname)) {
+				colsThongKe)) {
 
 			/**
 			 * 
@@ -350,7 +244,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		headerTable.setBackground(new Color(248, 198, 153));
 		JScrollPane thanhCuon = new JScrollPane(tblThongKe);
-		thanhCuon.setBounds(0, 570, 1584, 440);
+		thanhCuon.setBounds(10, 797, 750, 205);
 		thanhCuon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		thanhCuon.setToolTipText("Thống kê dữ liệu trong tháng");
 
@@ -358,17 +252,145 @@ public class Gui_ThongKeThuChi extends JPanel {
 		modelThongKe = (DefaultTableModel) tblThongKe.getModel();
 
 		// Căn chữ của cột sang phải
-		int[] listCanPhaiTblThongKe = { 1, 2, 3, 4, 5 };
+		int[] listCanPhaiTblThongKe = { 1, 2, 3 };
 		ChucNang.setRightAlignmentTable(listCanPhaiTblThongKe, tblThongKe);
 
 		// Căn chữ của cột sang giua
 		int[] listCanGiuaTblThongKe = { 0 };
 		ChucNang.setCenterAlignmentTable(listCanGiuaTblThongKe, tblThongKe);
 
-		// Đổ dữ liệu vào bảng lương
+		/**
+		 * Bảng sản phẩm
+		 */
+		new DefaultTableModel(colsThongKe, 0);
+		tblSanPham = new JTable(new DefaultTableModel(new Object[][] { { null, null, null }, { null, null, null },
+				{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+				{ null, null, null }, { null, null, null }, { null, null, null } }, colsSanPham)) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				case 5:
+					if (modelThongKe.getValueAt(row, col) != null) {
+						return true;
+					}
+					return false;
+				default:
+					return false;
+				}
+			}
+		};
+		tblSanPham.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tblSanPham.setRowMargin(5);
+		tblSanPham.setRowHeight(30);
+		tblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		tblSanPham.setToolTipText("Bảng xếp hạng những sản phẩm bán chạy");
+		JTableHeader headerTable1 = tblSanPham.getTableHeader();
+		headerTable1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		headerTable1.setBackground(new Color(248, 198, 153));
+		JScrollPane thanhCuon1 = new JScrollPane(tblSanPham);
+		thanhCuon1.setBounds(770, 797, 794, 205);
+		thanhCuon1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		thanhCuon1.setToolTipText("Thống kê dữ liệu trong tháng");
+
+		add(thanhCuon1);
+		modelSanPham = (DefaultTableModel) tblSanPham.getModel();
+
+		// Căn chữ của cột sang phải
+		int[] listCanPhaiTblSanPham = { 2 };
+		ChucNang.setRightAlignmentTable(listCanPhaiTblSanPham, tblSanPham);
+
+		// Căn chữ của cột sang giua
+		int[] listCanGiuaTblSanPham = { 0 };
+		ChucNang.setCenterAlignmentTable(listCanGiuaTblSanPham, tblSanPham);
+
+		/**
+		 * panel thu chi
+		 */
+		RoundedPanel panel_2 = new RoundedPanel();
+		panel_2.setBackground(new Color(248, 198, 153));
+		panel_2.setBounds(78, 172, 428, 92);
+		add(panel_2);
+		panel_2.setLayout(null);
+
+		JLabel lblNewLabel_1 = new JLabel("Tổng tiền thu");
+		lblNewLabel_1.setBounds(0, 11, 428, 22);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblNewLabel_1);
+
+		lblTongTienThu = new JLabel("10.000.000đ");
+		lblTongTienThu.setBounds(0, 40, 428, 37);
+		lblTongTienThu.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblTongTienThu.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblTongTienThu);
+
+		RoundedPanel panel_2_1 = new RoundedPanel();
+		panel_2_1.setBackground(new Color(248, 198, 153));
+		panel_2_1.setLayout(null);
+		panel_2_1.setBounds(585, 172, 428, 92);
+		add(panel_2_1);
+
+		JLabel lblNewLabel_1_1 = new JLabel("Tổng tiền chi");
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1_1.setBounds(0, 11, 428, 22);
+		panel_2_1.add(lblNewLabel_1_1);
+
+		lblTongTienChi = new JLabel("10.000.000đ");
+		lblTongTienChi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTongTienChi.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblTongTienChi.setBounds(0, 44, 428, 37);
+		panel_2_1.add(lblTongTienChi);
+
+		RoundedPanel panel_2_2 = new RoundedPanel();
+		panel_2_2.setBackground(new Color(248, 198, 153));
+		panel_2_2.setLayout(null);
+		panel_2_2.setBounds(1092, 172, 428, 92);
+		add(panel_2_2);
+
+		JLabel lblNewLabel_1_2 = new JLabel("Tổng doanh thu");
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1_2.setBounds(10, 11, 408, 22);
+		panel_2_2.add(lblNewLabel_1_2);
+
+		lblTongDoanhThu = new JLabel("10.000.000đ");
+		lblTongDoanhThu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTongDoanhThu.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblTongDoanhThu.setBounds(20, 44, 398, 37);
+		panel_2_2.add(lblTongDoanhThu);
+
+		// Đổ dữ liệu
 		if (spnYear != null) {
-			setDataTableThongKe(spnYear.getYear());
+			setDataThongKe(spnYear.getYear());
 		}
+
+		/**
+		 * Biểu đồ doanh thu
+		 */
+		ChartPanel chartPanel = new ChartPanel(createChart());
+		chartPanel.setBounds(10, 275, 1554, 479);
+		add(chartPanel);
+		chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+
+		JLabel lblChiTit = new JLabel("Chi tiết");
+		lblChiTit.setForeground(Color.WHITE);
+		lblChiTit.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblChiTit.setBounds(22, 765, 201, 29);
+		add(lblChiTit);
+
+		JLabel lblGio_1_1 = new JLabel("Sản phẩm bán chạy");
+		lblGio_1_1.setForeground(Color.WHITE);
+		lblGio_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblGio_1_1.setBounds(785, 765, 228, 29);
+		add(lblGio_1_1);
+
 	}
 
 	/**
@@ -377,17 +399,67 @@ public class Gui_ThongKeThuChi extends JPanel {
 	 * @param month
 	 * @param year
 	 */
-	public void setDataTableThongKe(int year) {
+	public void setDataThongKe(int year) {
 		ChucNang.clearDataTable(modelThongKe);
+		dataset.clear();
 
 		ThongKeService thongKeService = new ThongKeService();
 
+		double tongTienThu = 0.0;
+		double tongTienChi = 0.0;
+
 		for (int i = 1; i <= 12; i++) {
 			int month = i;
-			double tongTienDaBan = thongKeService.getThanhTienTheoThoiGian(month, year);
+			double tongTienDaBan = thongKeService.getTongBanTheoThoiGian(month, year);
+			double tongTienNhap = thongKeService.getTongNhapTheoThoiGian(month, year);
 
-			modelThongKe.addRow(new Object[] { month, vnFormat.format(tongTienDaBan) });
+			double tongTienLuong = 0.0;
+			List<NhanVien> dsNhanViens = thongKeService.getDsNhanVien();
+
+			for (NhanVien nhanVien : dsNhanViens) {
+				if (nhanVien.gettrangThaiLamViec() == true) {
+					BangLuong bangLuong = thongKeService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year,
+							month);
+					if (bangLuong != null)
+						tongTienLuong += bangLuong.tinhLuong();
+				}
+			}
+
+			modelThongKe.addRow(new Object[] { month, vnFormat.format(tongTienDaBan), vnFormat.format(tongTienNhap),
+					vnFormat.format(tongTienLuong) });
+
+			dataset.addValue(tongTienDaBan / 1000000, "Tiền thu", month + "/" + year);
+			dataset.addValue((tongTienLuong + tongTienNhap) / 1000000, "Tiền vốn", month + "/" + year);
+
+			tongTienThu += tongTienDaBan;
+			tongTienChi += tongTienLuong + tongTienNhap;
 		}
+
+		// set Text on label Thu Chi
+		lblTongTienChi.setText(vnFormat.format(BigDecimal.valueOf(tongTienChi)) + "đ");
+		lblTongTienThu.setText(vnFormat.format(BigDecimal.valueOf(tongTienThu)) + "đ");
+		lblTongDoanhThu.setText(
+				(tongTienThu - tongTienChi < 0 ? 0 : vnFormat.format(BigDecimal.valueOf(tongTienThu - tongTienChi)))
+						+ "đ");
+
+		// set data table sản phẩm
+
+		ChucNang.clearDataTable(modelSanPham);
+		List<?> listSP = thongKeService.getListSoLuongBanChay(year);
+		int STT = 1;
+		for (Object object : listSP) {
+			Object[] o = (Object[]) object;
+			modelSanPham.addRow(new Object[] { STT, o[0], o[1] });
+			STT++;
+		}
+		
+		ChucNang.addNullDataTable(modelSanPham);
+		ChucNang.addNullDataTable(modelThongKe);
 	}
 
+	public JFreeChart createChart() {
+		JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU", "Tháng", "Số tiền (triệu/VNĐ)",
+				dataset, PlotOrientation.VERTICAL, true, true, false);
+		return barChart;
+	}
 }

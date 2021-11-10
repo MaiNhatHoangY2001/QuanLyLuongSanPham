@@ -7,10 +7,8 @@
     <fullyQualifiedTypeName name="java.text.NumberFormat"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="org.hibernate.SQLQuery"/>
-    <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
     <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
-    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="javax.swing.event.DocumentListener"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
@@ -30,7 +28,6 @@
     <fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
     <fullyQualifiedTypeName name="gui.Gui_In"/>
     <fullyQualifiedTypeName name="org.hibernate.persister.walking.spi.MetamodelGraphWalker"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="dao.BangLuongDao"/>
     <fullyQualifiedTypeName name="model.BangLuong"/>
     <fullyQualifiedTypeName name="services.QuanLyHoaDonService"/>
@@ -43,13 +40,17 @@
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="gui.Gui_ThongKeThuChi"/>
-    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
     <fullyQualifiedTypeName name="org.hibernate.boot.model.naming.ImplicitNameSource"/>
     <fullyQualifiedTypeName name="services.ThongKeService"/>
     <fullyQualifiedTypeName name="dao.ChiTietHoaDonBanDao"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
     <fullyQualifiedTypeName name="model.HoaDonBanHang"/>
     <fullyQualifiedTypeName name="dao.HoaDonBanHangDao"/>
+    <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
+    <fullyQualifiedTypeName name="dao.SanPhamDao"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
 </qualifiedTypeNameHistroy>

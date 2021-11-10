@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="dao"/>
+		<item key="selection" value="getHoaDonTheoNgay"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="getHoaDonTheoNgay"/>
+			<item value="tblThongKe"/>
 			<item value="dao"/>
 			<item value="addNullDataTable"/>
 			<item value="th"/>
@@ -21,10 +23,9 @@
 			<item value="modelTinhLuong"/>
 			<item value="ChucNang"/>
 			<item value="//Căn chữ của cột sang phải"/>
-			<item value="monthChooser"/>
-			<item value="yearChooser"/>
 		</list>
 		<list key="replacehistory">
+			<item value="tblSanPham"/>
 			<item value=""/>
 			<item value="242, 129,25"/>
 			<item value="320, 115"/>
@@ -32,7 +33,6 @@
 			<item value="320, 110"/>
 			<item value="320, 100"/>
 			<item value="tblTienThu"/>
-			<item value="tblSanPham"/>
 			<item value="tblTKChi"/>
 			<item value="tblTKThu"/>
 			<item value="tblTienChi"/>

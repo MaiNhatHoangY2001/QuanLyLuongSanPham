@@ -155,7 +155,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnSuaNV);
 
 		// JButton Xoa Nhan Vien
-		btnXaThai = new CircleBtn("Xa Thải");
+		btnXaThai = new CircleBtn("Sa Thải");
 		btnXaThai.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnXaThai.setBackground(new Color(233, 180, 46));
 		btnXaThai.setBounds(330, 15, 150, 50);

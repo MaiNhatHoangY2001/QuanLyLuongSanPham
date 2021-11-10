@@ -32,11 +32,11 @@ public class SanPhamDao {
 			return false;
 		}
 	}
-	
+
 	public boolean capNhatSanPham(SanPham sp) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
-		
+
 		try {
 			tr.begin();
 			session.update(sp);
@@ -48,10 +48,10 @@ public class SanPhamDao {
 		} finally {
 			session.close();
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean xoaSanPhamTheoMa(String maSPCanXoa) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -66,7 +66,7 @@ public class SanPhamDao {
 		session.close();
 		return true;
 	}
-	
+
 	public SanPham getSanPham(String id) {
 		SanPham sanPham;
 		Session session = sessionFactory.openSession();
@@ -74,7 +74,7 @@ public class SanPhamDao {
 
 		try {
 			tr.begin();
-			sanPham=session.find(SanPham.class, id);
+			sanPham = session.find(SanPham.class, id);
 			tr.commit();
 			return sanPham;
 		} catch (Exception e) {
@@ -85,15 +85,14 @@ public class SanPhamDao {
 		}
 		return null;
 	}
-	
+
 	public List<SanPham> getSanPhamThoTen(String tenSanPham) {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "select * from SanPham\r\n"
-					+ "where tenSanPham like '%"+tenSanPham+"%'";
+			String query = "select * from SanPham\r\n" + "where tenSanPham like '%" + tenSanPham + "%'";
 			list = session.createNativeQuery(query, SanPham.class).getResultList();
 			tr.commit();
 			return list;
@@ -105,7 +104,7 @@ public class SanPhamDao {
 		}
 		return null;
 	}
-	
+
 	public List<SanPham> getAllSanPham() {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.openSession();
@@ -121,6 +120,37 @@ public class SanPhamDao {
 		}
 		session.close();
 		return list;
+	}
+
+	/**
+	 * Lấy danh sách những sản phẩm bán chạy trong năm
+	 * 
+	 * @param year
+	 * @return
+	 */
+
+	public List<?> getListSoLuongBanChay(int year) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT TOP(30) s.tenSanPham, SUM(c.soLuong) AS tongSoLuong "
+					+ "FROM ChiTietHoaDonBan AS c INNER JOIN SanPham AS s "
+					+ "ON c.maSanPham = s.maSanpham INNER JOIN HoaDonBanHang AS h "
+					+ "ON c.maHoaDonBan = h.maHoaDonBan " + "WHERE (YEAR(h.ngayLapHoaDon) = " + year + ") "
+					+ "GROUP BY s.maSanpham, s.tenSanPham " + "ORDER BY tongSoLuong DESC";
+			List<?> list = session.createNativeQuery(query).getResultList();
+
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+
 	}
 
 }

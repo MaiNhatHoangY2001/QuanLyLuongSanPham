@@ -1,5 +1,6 @@
 package dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -156,5 +157,29 @@ public class NhanVienDao {
 			session.close();
 		}
 		return false;
+	}
+	/**
+	 * Lấy tổng tiền lương theo tháng năm
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public double getThanhTienTheoThoiGian(int month, int year) {
+
+		BigDecimal tongTien = null;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT SUM(thanhTien) AS tongtien FROM HoaDonNhapHang WHERE (MONTH(ngayLapHoaDon) = " + month
+					+ ") AND (YEAR(ngayLapHoaDon) = " + year + ")";
+			tongTien = (BigDecimal) session.createSQLQuery(query).getSingleResult();
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return tongTien == null ? 0 : tongTien.doubleValue();
 	}
 }
