@@ -42,13 +42,22 @@ public class HoaDonBanHang {
 	@OneToMany(mappedBy = "hoaDonBanHang")
 	private List<ChiTietHoaDonBan> dsChiTietHoaDonBan;
 
+	public HoaDonBanHang(double khuyenMai, double thue, NhanVien nhanVien, KhachHang khachHang) {
+		super();
+		this.ngayLapHoaDon = LocalDate.now();
+		this.khuyenMai = khuyenMai;
+		this.thue = thue;
+		this.nhanVien = nhanVien;
+		this.khachHang = khachHang;
+	}
+
 	public double tinhThanhTien() {
-		thanhTien=0;
+		this.thanhTien=0;
 		dsChiTietHoaDonBan.forEach(i->{
-			thanhTien+=i.tinhTongTien();
+			this.thanhTien+=i.tinhTongTien();
 		});
-		thanhTien=thanhTien-thanhTien*thue;
-		return  thanhTien;
+		this.thanhTien=this.thanhTien-this.thanhTien*thue+this.thanhTien*khuyenMai;
+		return  this.thanhTien;
 	}
 
 	public double tinhThue() {

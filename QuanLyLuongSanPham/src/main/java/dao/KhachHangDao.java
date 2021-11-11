@@ -64,11 +64,29 @@ public class KhachHangDao {
 		return true;
 
 	}
+
+	public KhachHang timKiemKhachHangBangSdt(String sdt) {
+		KhachHang khachHang = null;
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			khachHang = session.createNativeQuery("SELECT        * FROM            KhachHang where sDT='" + sdt + "'",
+					KhachHang.class).getSingleResult();
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+			return khachHang;
+		}
+		session.close();
+		return khachHang;
+	}
+
 	public static void main(String[] args) {
 		KhachHangDao dao = new KhachHangDao();
-		KhachHang khachHang= new KhachHang("Hoang Van Hoang", "Go vap", "099999998");
+		KhachHang khachHang = new KhachHang("Hoang Van Hoang", "Go vap", "099999998");
 		dao.themKhachHang(khachHang);
-		
+
 //		dao.getAllKhachHang().forEach(e->{
 //			System.out.println(e);
 //		});
