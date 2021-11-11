@@ -1,73 +1,42 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
 
 import gui_package.ChucNang;
-import gui_package.CustomTab;
-import gui_package.CustomTable;
-import gui_package.PnlThongKeChi;
-import gui_package.PnlThongKeThu;
 import model.BangLuong;
 import model.NhanVien;
-import services.QuanLyLuongService;
 import services.ThongKeService;
 import gui_package.RoundedPanel;
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import javax.swing.JSplitPane;
-import java.awt.Component;
 
 public class Gui_ThongKeThuChi extends JPanel {
 
@@ -80,13 +49,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 	private JLabel lblIconDX;
 	private JLabel lblNgay;
 	private JLabel lblTenDN;
-	private JMonthChooser cboMonth;
 	private JYearChooser spnYear;
-	private JComboBox<String> cboTimKiem;
-	private JTextField txtTimKiem;
-	private JButton btnTim;
-	private JButton btnXoaRong;
-	private JButton btnIn;
 	private JButton btnHienTai;
 	private String[] colsThongKe = { "Tháng", "Tổng Tiền bán sản phẩm", "Tiền nhập sản phẩm", "Tiền Lương nhân viên" };
 	private String[] colsSanPham = { "STT", "Tên sản phẩm", "Số lượng bán" };
@@ -452,7 +415,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 			modelSanPham.addRow(new Object[] { STT, o[0], o[1] });
 			STT++;
 		}
-		
+
 		ChucNang.addNullDataTable(modelSanPham);
 		ChucNang.addNullDataTable(modelThongKe);
 	}

@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="prefix"/>
 			<item value="getHoaDonTheoNgay"/>
 			<item value="tblThongKe"/>
 			<item value="dao"/>
@@ -22,7 +23,6 @@
 			<item value="320, 120"/>
 			<item value="modelTinhLuong"/>
 			<item value="ChucNang"/>
-			<item value="//Căn chữ của cột sang phải"/>
 		</list>
 		<list key="replacehistory">
 			<item value="tblSanPham"/>
