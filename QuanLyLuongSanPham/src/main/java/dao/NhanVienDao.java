@@ -27,7 +27,6 @@ public class NhanVienDao {
 		try {
 			tr.begin();
 			NhanVien nhanVien = session.find(NhanVien.class, maNhanVien);
-			System.out.println(nhanVien);
 			tr.commit();
 			return nhanVien;
 		} catch (Exception e) {

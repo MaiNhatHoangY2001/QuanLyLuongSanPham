@@ -164,7 +164,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		pnlContent.add(btnHuyBo);
 
 		// Nút Xa Thải
-		btnXaThai = new CircleBtn("Xa Thải");
+		btnXaThai = new CircleBtn("Sa Thải");
 		btnXaThai.setForeground(Color.WHITE);
 		btnXaThai.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnXaThai.setCursor(new Cursor(Cursor.HAND_CURSOR));

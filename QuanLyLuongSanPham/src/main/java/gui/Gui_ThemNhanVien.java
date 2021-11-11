@@ -238,7 +238,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 		 * Các nút
 		 */
 		// Button Lưu
-		btnLuu = new CircleBtn("Lưu");
+		btnLuu = new CircleBtn("Thêm");
 		btnLuu.setForeground(Color.WHITE);
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnLuu.setBackground(new Color(233, 180, 46));
@@ -282,7 +282,6 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 				NhanVien nv = getNhanVienTuTextfield();
 				if (daoNV.themNhanVien(nv)) {
 					JOptionPane.showMessageDialog(this, "Thêm thành công");
-					xoaRongText();
 				} else
 					JOptionPane.showMessageDialog(this, "Thêm thất bại");
 

@@ -6,7 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,6 +26,7 @@ import javax.swing.JTextField;
 import gui_package.ChucNang;
 import gui_package.CircleBtn;
 import gui_package.RoundTextField;
+import model.NhanVien;
 import model.SanPham;
 
 import javax.swing.JComboBox;
@@ -31,8 +36,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import dao.SanPhamDao;
+import javax.swing.SwingConstants;
 
-public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemListener {
+public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemListener, MouseListener {
 
 	/**
 	 * 
@@ -66,12 +72,20 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
 	private SanPhamDao daoSP;
 	private List<SanPham> listSP;
+	private List<String> listMaSp;
+	private JPanel panel;
+	private JTextField txtSoTrang;
+	private JButton btnTrai;
+	private JButton btnDoubleTrai;
+	private JButton btnPhai;
+	private JButton btnDoublePhai;
+	private List<SanPham> list50Sp;
 
 	/**
 	 * Create the panel.
 	 */
 	public Gui_QuanLySanPham() {
-		setSize(1600, 1046);
+		setSize(1600, 1006);
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
@@ -132,14 +146,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.setBackground(new Color(194, 93, 0));
 		pnlNgang.setBounds(0, 92, 1600, 72);
 		add(pnlNgang);
-
-//		// JButton Them Nhan Vien
-//		btnThemNV = new CircleBtn("S");
-//		btnThemNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
-//		btnThemNV.setBackground(new Color(233, 180, 46));
-//		btnThemNV.setBounds(10, 15, 150, 50);
-//		btnThemNV.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//		pnlNgang.add(btnThemNV);
 
 		// JButton Sua Nhan Vien
 		btnSuaNV = new CircleBtn("Sửa");
@@ -228,12 +234,27 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		 */
 		// Thanh Cuon
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 47, 1564, 730);
+		scrollPane.setBounds(10, 47, 1564, 735);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "Mã Sản Phẩm", "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành" };
+		String headerTitle[] = { "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành" };
 		// Model Table
-		model = new DefaultTableModel(headerTitle, 50);
+		model = new DefaultTableModel(headerTitle, 50) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+
+		};
 		// Table
 		table = new JTable(model);
 		table.setRowHeight(35); // set height items
@@ -244,17 +265,61 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(table);
 
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(194, 93, 0));
+		panel.setBounds(0, 785, 1600, 57);
+		pnlContent.add(panel);
+
+		txtSoTrang = new JTextField();
+		txtSoTrang.setText("");
+		txtSoTrang.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSoTrang.setFont(new Font("Tahoma", Font.BOLD, 16));
+		txtSoTrang.setColumns(10);
+		txtSoTrang.setBounds(725, 10, 150, 40);
+		panel.add(txtSoTrang);
+
+		btnTrai = new JButton("<");
+		btnTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnTrai.setBounds(626, 10, 89, 40);
+		panel.add(btnTrai);
+
+		btnDoubleTrai = new JButton("<<");
+		btnDoubleTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnDoubleTrai.setBounds(527, 10, 89, 40);
+		panel.add(btnDoubleTrai);
+
+		btnPhai = new JButton(">");
+		btnPhai.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnPhai.setBounds(885, 10, 89, 40);
+		panel.add(btnPhai);
+
+		btnDoublePhai = new JButton(">>");
+		btnDoublePhai.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnDoublePhai.setBounds(984, 10, 89, 40);
+		panel.add(btnDoublePhai);
+
 		// Thêm sự kiện cho các chức năng
 		btnXoa.addActionListener(this);
 		btnSuaNV.addActionListener(this);
 		btnLamMoi.addActionListener(this);
 		btnTimKiem.addActionListener(this);
+		btnTrai.addActionListener(this);
+		btnDoubleTrai.addActionListener(this);
+		btnPhai.addActionListener(this);
+		btnDoublePhai.addActionListener(this);
 		cmbLoaiTimKiem.addItemListener(this);
+		txtSoTrang.addActionListener(this);
+		txtTImKiem.addActionListener(this);
+		table.addMouseListener(this);
 
 		daoSP = new SanPhamDao();
 		listSP = daoSP.getAllSanPham();
+		list50Sp = daoSP.get50SanPhamSapXepTheoTenSanPham();
+		listMaSp = new ArrayList<String>();
 
 		LoadThongTinSanPham(listSP);
+
 	}
 
 	@Override
@@ -264,11 +329,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 			if (table.getSelectedRowCount() == 0) {
 				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
 			} else {
-
-				String maSP = model.getValueAt(table.getSelectedRow(), 0).toString();
-				SanPham sp = daoSP.getSanPham(maSP);
+				SanPham sp = daoSP.getSanPham(listMaSp.get(table.getSelectedRow()));
 				new Gui_SuaThongTinSanPham(sp).setVisible(true);
-
 			}
 		} else if (o.equals(btnXoa)) {
 			if (table.getSelectedRowCount() == 0) {
@@ -280,8 +342,10 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 					boolean rs = false;
 					while (table.getSelectedRowCount() > 0) {
 						int index = table.getSelectedRow();
-						rs = daoSP.xoaSanPhamTheoMa(model.getValueAt(table.getSelectedRow(), 0).toString());
+						String ma = listMaSp.get(index);
+						rs = daoSP.xoaSanPhamTheoMa(ma);
 						model.removeRow(index);
+						listMaSp.remove(index);
 					}
 					if (rs == true)
 						JOptionPane.showMessageDialog(this, "Xóa thành công");
@@ -306,8 +370,60 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 				else {
 					ChucNang.clearDataTable(model);
 					load1ThongTinSanPham(sanPham);
-					ChucNang.addNullDataTable(model);
-					ChucNang.addNullDataTable(model);
+				}
+			}
+		} else if (o.equals(btnTrai)) {
+			int index = table.getSelectedRow();
+			int count = table.getRowCount();
+			if (index == -1 || index == 0) {
+				index = count - 1;
+			} else
+				index--;
+			table.setRowSelectionInterval(index, index);
+			txtSoTrang.setText(listMaSp.get(index));
+			// Sự kiện Chọn hàng đàu tiên
+		} else if (o.equals(btnDoubleTrai)) {
+			table.setRowSelectionInterval(0, 0);
+			txtSoTrang.setText(listMaSp.get(0));
+			// Sự kiện chọn hàng cuối
+		} else if (o.equals(btnPhai)) {
+			int index = table.getSelectedRow();
+			int count = table.getRowCount();
+			if (index == -1 || index == count - 1) {
+				index = 0;
+			} else
+				index++;
+			table.setRowSelectionInterval(index, index);
+			txtSoTrang.setText(listMaSp.get(index));
+			// sự kiện chọn hàng cuối cùng
+		} else if (o.equals(btnDoublePhai)) {
+			int count = table.getRowCount();
+			count--;
+			table.setRowSelectionInterval(count, count);
+			txtSoTrang.setText(listMaSp.get(count));
+			// Sự kiện cho nút Enter cho Text Số trang
+		} else if (o.equals(txtSoTrang)) {
+			String data = txtSoTrang.getText();
+			int count = table.getRowCount();
+			for (int i = 0; i < count; i++) {
+				if (data.equalsIgnoreCase(listMaSp.get(i))) {
+					table.setRowSelectionInterval(i, i);
+				}
+			}
+			// Sự kiện cho Text Tìm kiếm
+		} else if (o.equals(txtTImKiem)) {
+			String data = txtTImKiem.getText();
+			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
+			if (loaiTK.equals("Tìm theo tên")) {
+				List<SanPham> list = daoSP.getSanPhamThoTen(data);
+				LoadThongTinSanPham(list);
+			} else if (loaiTK.equals("Tìm theo mã")) {
+				SanPham nv = daoSP.getSanPham(data);
+				if (nv == null)
+					LoadThongTinSanPham(list50Sp);
+				else {
+					ChucNang.clearDataTable(model);
+					load1ThongTinSanPham(nv);
 				}
 			}
 		}
@@ -323,8 +439,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 					load1ThongTinSanPham(sanPham);
 				}
 			}
-			ChucNang.addNullDataTable(model);
-			ChucNang.addNullDataTable(model);
 		} else if (cmb.getSelectedItem().equals("Giá dưới 20 triệu")) {
 			ChucNang.clearDataTable(model);
 			for (SanPham sanPham : listSP) {
@@ -332,8 +446,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 					;
 				load1ThongTinSanPham(sanPham);
 			}
-			ChucNang.addNullDataTable(model);
-			ChucNang.addNullDataTable(model);
 		} else if (cmb.getSelectedItem().equals("Giá dưới 50 triệu")) {
 			ChucNang.clearDataTable(model);
 			for (SanPham sanPham : listSP) {
@@ -341,8 +453,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 					;
 				load1ThongTinSanPham(sanPham);
 			}
-			ChucNang.addNullDataTable(model);
-			ChucNang.addNullDataTable(model);
 		}
 	}
 
@@ -353,19 +463,55 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	 * @param list
 	 */
 	private void LoadThongTinSanPham(List<SanPham> list) {
+		txtSoTrang.setText("");
 		ChucNang.clearDataTable(model);
 		for (SanPham sanPham : list) {
 			load1ThongTinSanPham(sanPham);
 		}
 		txtTongSoSP.setText(list.size() + "");
-		ChucNang.addNullDataTable(model);
-		ChucNang.addNullDataTable(model);
+		listMaSp = getDsMaSP(list);
 	}
 
 	public void load1ThongTinSanPham(SanPham sanPham) {
-		String n[] = { sanPham.getMaSanpham(), sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(),
+		txtSoTrang.setText("");
+		String n[] = { sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(),
 				vnFormat.format(sanPham.getGiaThanh()) };
 		model.addRow(n);
+		listMaSp = new ArrayList<String>();
+		listMaSp.add(sanPham.getMaSanpham());
+	}
+
+	private List<String> getDsMaSP(List<SanPham> list) {
+		List<String> listMa = new ArrayList<String>();
+		for (SanPham sanPham : list) {
+			listMa.add(sanPham.getMaSanpham());
+		}
+		return listMa;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		txtSoTrang.setText(listMaSp.get(table.getSelectedRow()));
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
 	}
 
 }
