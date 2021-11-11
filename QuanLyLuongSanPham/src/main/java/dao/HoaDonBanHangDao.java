@@ -17,6 +17,49 @@ import model.NhanVien;
 public class HoaDonBanHangDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
+	public List<?> timTheoSdtKhach(String sdt) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=sum(d.soLuong*d.donGia) "
+					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
+					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan INNER JOIN "
+					+ "                         KhachHang AS k ON o.maKhachHang = k.maKhachHang " + "where	 k.sDT='"
+					+ sdt + "' " + "group by o.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+			List<?> list = session.createNativeQuery(query).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		session.close();
+		return null;
+	}
+
+	public List<?> timTheoTenKhach(String tenKH) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=sum(d.soLuong*d.donGia) "
+					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
+					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan INNER JOIN "
+					+ "                         KhachHang AS k ON o.maKhachHang = k.maKhachHang "
+					+ "where	 k.tenKhachHang like '%" + tenKH + "%' "
+					+ "group by o.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+			List<?> list = session.createNativeQuery(query).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		session.close();
+		return null;
+	}
+
 	public HoaDonBanHang getHoaDonBanHang(String maHoaDon) {
 		HoaDonBanHang hoaDonBanHang = null;
 		Session session = sessionFactory.openSession();
@@ -99,6 +142,27 @@ public class HoaDonBanHangDao {
 		session.close();
 		return null;
 
+	}
+
+	public Object timKiemTheoMa(String maHoaDon) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
+					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
+					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan "
+					+ "where o.maHoaDonBan='" + maHoaDon + "' "
+					+ "group by o.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+			Object o = session.createNativeQuery(query).getSingleResult();
+			tr.commit();
+			return o;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		session.close();
+		return null;
 	}
 
 	/**

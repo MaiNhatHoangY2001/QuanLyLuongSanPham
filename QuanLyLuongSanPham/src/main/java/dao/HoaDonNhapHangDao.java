@@ -17,6 +17,27 @@ import model.NhanVien;
 public class HoaDonNhapHangDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
+	public Object timKiemTheoMa(String maHoaDon) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT        o.maHoaDonNhap, o.ngayLapHoaDon, khuyenMai=0, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
+					+ "FROM            ChiTietHoaDonNhap AS d INNER JOIN "
+					+ "                         HoaDonNhapHang AS o ON d.maHoaDonNhap = o.maHoaDonNhap "
+					+ "where o.maHoaDonNhap='"+maHoaDon+"' "
+					+ "group by o.maHoaDonNhap,o.ngayLapHoaDon, khuyenMai,o.thue";
+			Object o = session.createNativeQuery(query).getSingleResult();
+			tr.commit();
+			return o;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		session.close();
+		return null;
+	}
+	
 	public HoaDonNhapHang getHoaDonNhapHang(String maHoaDon) {
 		HoaDonNhapHang HoaDonNhapHang = null;
 		Session session = sessionFactory.openSession();

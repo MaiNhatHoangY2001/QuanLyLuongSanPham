@@ -12,28 +12,41 @@ import org.hibernate.id.IdentifierGenerator;
 import org.hibernate.service.ServiceRegistry;
 
 public class SinhMaTheoNgay implements IdentifierGenerator, Configurable {
-	private String prefix;
+
+	/**
+	 * Mã viết tắt của bảng VD: Nhân viên là NV
+	 */
+	private String maVietTat;
 
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
 		LocalDate date = LocalDate.now();
-		String s = "" + date.getYear() % 100
+		String dateString = "" + date.getYear() % 100
 				+ (date.getMonthValue() >= 10 ? date.getMonthValue() : "0" + date.getMonthValue());
-		String query = String.format("select %s from %s",
-				session.getEntityPersister(object.getClass().getName(), object).getIdentifierPropertyName(),
-				object.getClass().getSimpleName());
+		// Lấy mã trong bảng VD:bảng NhanVien thì lấy maNhanVien
+		String maSQLSelect = session.getEntityPersister(object.getClass().getName(), object)
+				.getIdentifierPropertyName();
+		// Lấy tên bảng trong SQL
+		String tenBangSQL = object.getClass().getSimpleName();
+
+		String query = String.format("select %s from %s where %s like '%s'", maSQLSelect, tenBangSQL, maSQLSelect,
+				maVietTat + dateString + "%");
 
 		Stream<String> ids = session.createQuery(query).stream();
-		Long max = ids.map(o -> o.replace(o.substring(0,6), "")).mapToLong(Long::parseLong).max().orElse(0L);
 
-		return prefix + s + (String.format("%04d", max + 1));
+		if (ids == null) {
+			return maVietTat + dateString + (String.format("%04d", 1));
+		} else {
+			Long max = ids.map(o -> o.replace(o.substring(0, 6), "")).mapToLong(Long::parseLong).max().orElse(0L);
+			return maVietTat + dateString + (String.format("%04d", max + 1));
+		}
+
 	}
 
 	@Override
 	public void configure(org.hibernate.type.Type type, java.util.Properties params, ServiceRegistry serviceRegistry)
 			throws org.hibernate.MappingException {
-		// TODO Auto-generated method stub
-		prefix = params.getProperty("prefix");
+		maVietTat = params.getProperty("prefix");
 	}
 
 }

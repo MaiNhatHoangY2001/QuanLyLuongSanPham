@@ -44,7 +44,6 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 			public void run() {
 				try {
 					new Gui_Chinh();
-					
 					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
 					gui_DangNhap.setVisible(true);
 					gui_DangNhap.setLocationRelativeTo(null);
@@ -229,8 +228,10 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 			cardLayout.show(pnlChange, "btnQuanLySanPham");
 		else if (key == btnQuanLyTaiKhoan)
 			cardLayout.show(pnlChange, "btnQuanLyTaiKhoan");
-		else if (key == btnThongKe)
+		else if (key == btnThongKe) {
 			cardLayout.show(pnlChange, "btnThongKe");
+		}
+			
 	}
 
 	/**
