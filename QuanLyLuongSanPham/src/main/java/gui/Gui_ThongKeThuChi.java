@@ -37,6 +37,8 @@ import model.BangLuong;
 import model.NhanVien;
 import services.ThongKeService;
 import gui_package.RoundedPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Gui_ThongKeThuChi extends JPanel {
 
@@ -147,7 +149,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 
 		spnYear = new JYearChooser();
 		spnYear.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		spnYear.setBounds(628, 14, 112, 47);
+		spnYear.setBounds(605, 14, 112, 47);
 		panel_1_1.add(spnYear);
 
 		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
@@ -165,8 +167,21 @@ public class Gui_ThongKeThuChi extends JPanel {
 		btnHienTai.setFocusPainted(false);
 		btnHienTai.setBorderPainted(false);
 		btnHienTai.setBackground(new Color(233, 180, 46));
-		btnHienTai.setBounds(750, 14, 112, 47);
+		btnHienTai.setBounds(727, 14, 112, 47);
 		panel_1_1.add(btnHienTai);
+		
+		JButton btnLamMoi = new JButton("Làm mới");
+		btnLamMoi.addActionListener(e ->{
+			setDataThongKe(spnYear.getYear());
+		});
+		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLamMoi.setForeground(Color.WHITE);
+		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnLamMoi.setFocusPainted(false);
+		btnLamMoi.setBorderPainted(false);
+		btnLamMoi.setBackground(new Color(233, 180, 46));
+		btnLamMoi.setBounds(849, 14, 112, 47);
+		panel_1_1.add(btnLamMoi);
 		btnHienTai.addActionListener(e -> {
 			spnYear.setYear(LocalDate.now().getYear());
 		});

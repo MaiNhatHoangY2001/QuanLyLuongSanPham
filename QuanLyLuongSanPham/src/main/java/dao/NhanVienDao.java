@@ -182,6 +182,7 @@ public class NhanVienDao {
 		}
 		return false;
 	}
+
 	/**
 	 * Lấy tổng tiền lương theo tháng năm
 	 * 
@@ -196,8 +197,8 @@ public class NhanVienDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT SUM(thanhTien) AS tongtien FROM HoaDonNhapHang WHERE (MONTH(ngayLapHoaDon) = " + month
-					+ ") AND (YEAR(ngayLapHoaDon) = " + year + ")";
+			String query = "SELECT SUM(thanhTien) AS tongtien FROM HoaDonNhapHang WHERE (MONTH(ngayLapHoaDon) = "
+					+ month + ") AND (YEAR(ngayLapHoaDon) = " + year + ")";
 			tongTien = (BigDecimal) session.createSQLQuery(query).getSingleResult();
 			tr.commit();
 		} catch (Exception e) {
@@ -205,5 +206,31 @@ public class NhanVienDao {
 		}
 		session.close();
 		return tongTien == null ? 0 : tongTien.doubleValue();
+	}
+
+	/**
+	 *  get 10 Nhân Viên theo khoảng
+	 * @param from
+	 * @return
+	 */
+	public List<NhanVien> get10NhanVienTheoKhoang(int from) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session
+					.createNativeQuery("SELECT * FROM [QuanLyLuongSanPham].[dbo].[NhanVien] Order by maNhanVien OFFSET "
+							+ from + " ROWS FETCH NEXT 10 ROWS ONLY", NhanVien.class)
+					.getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
 	}
 }

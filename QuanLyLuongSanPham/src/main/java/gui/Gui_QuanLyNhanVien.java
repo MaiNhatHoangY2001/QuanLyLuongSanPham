@@ -323,6 +323,9 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		if (o.equals(btnThemNV)) {
 			Gui_ThemNhanVien frm = new Gui_ThemNhanVien();
 			frm.setVisible(true);
+			if (frm.isVisible() == false) {
+				System.out.println("test");
+			}
 			// Sự kiện sử nhân viên
 		} else if (o.equals(btnSuaNV)) {
 			if (table.getSelectedRowCount() == 0) {

@@ -147,14 +147,23 @@ public class BangLuongDao {
 		return false;
 	}
 
-	public List<BangLuong> getAllBangLuong() {
+	/**
+	 * Lấy bảng lương theo tháng năm
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public List<BangLuong> getAllBangLuong(int month, int year) {
 		List<BangLuong> list = new ArrayList<BangLuong>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
 
-			list = session.createNativeQuery("select * from BangLuong", BangLuong.class).getResultList();
+			list = session.createNativeQuery(
+					"select * from BangLuong where MONTH(thoiGian) = " + month + " and YEAR(thoiGian) = " + year,
+					BangLuong.class).getResultList();
 
 			tr.commit();
 		} catch (Exception e) {
@@ -217,8 +226,6 @@ public class BangLuongDao {
 		return false;
 	}
 
-	
-	
 	public static void main(String[] args) {
 		BangLuongDao bangLuongDao = new BangLuongDao();
 //		NhanVien nhanVien = new NhanVien("NV0001");
