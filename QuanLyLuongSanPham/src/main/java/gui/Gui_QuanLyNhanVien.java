@@ -2,14 +2,11 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.*;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,7 +34,7 @@ import javax.swing.table.JTableHeader;
 import dao.NhanVienDao;
 import javax.swing.SwingConstants;
 
-public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemListener {
+public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemListener, MouseListener {
 
 	/**
 	 * 
@@ -79,6 +76,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	private JButton btnPhai;
 	private JButton btnDoublePhai;
 	private List<NhanVien> list50NV;
+	private List<String> listMaNV;
 
 	/**
 	 * Create the panel.
@@ -241,21 +239,38 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		 */
 		// Thanh Cuon
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 47, 1585, 735);
+		scrollPane.setBounds(10, 47, 1564, 735);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "MSNV", "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái" };
+		String headerTitle[] = { "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái", "Địa chỉ" };
 		// Model Table
-		model = new DefaultTableModel(headerTitle, 50);
+		model = new DefaultTableModel(headerTitle, 50) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				switch (col) {
+				default:
+					return false;
+				}
+			}
+
+		};
 		// Table
 		table = new JTable(model);
 		table.setRowHeight(35); // set height items
 		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// Set Font title table
 		JTableHeader headerTable = table.getTableHeader();
 		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(table);
+		scrollPane.setEnabled(false);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 785, 1600, 57);
@@ -304,6 +319,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		cmbLoaiTimKiem.addItemListener(this);
 		txtSoTrang.addActionListener(this);
 		txtTImKiem.addActionListener(this);
+		table.addMouseListener(this);
 
 		/*
 		 * Get Class NhanVien
@@ -331,9 +347,11 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			if (table.getSelectedRowCount() == 0) {
 				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
 			} else {
-				String maNV = model.getValueAt(table.getSelectedRow(), 0).toString();
-				NhanVien nv = daoNV.getNhanVienTheoMa(maNV);
-				new Gui_SuaNhanVien(nv).setVisible(true);
+//				String maNV = model.getValueAt(table.getSelectedRow(), 0).toString();
+				int index = table.getSelectedRow();
+				NhanVien nv = daoNV.getNhanVienTheoMa(listMaNV.get(index));
+				Gui_SuaNhanVien frm = new Gui_SuaNhanVien(nv);
+				frm.setVisible(true);
 			}
 			// Sự kiện sa thải nhân viên
 		} else if (o.equals(btnXaThai)) {
@@ -344,7 +362,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 						"Cảnh báo", JOptionPane.YES_NO_OPTION);
 				if (tl == JOptionPane.YES_OPTION) {
 					boolean rs = false;
-					NhanVien nv = daoNV.getNhanVienTheoMa(model.getValueAt(table.getSelectedRow(), 0).toString());
+					NhanVien nv = daoNV.getNhanVienTheoMa(listMaNV.get(table.getSelectedRow()));
 					nv.settrangThaiLamViec(false);
 					rs = daoNV.capNhatNhanVien(nv);
 					if (rs == true) {
@@ -358,7 +376,8 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			}
 			// SỰ kiện Làm mới bản
 		} else if (o.equals(btnLamMoi)) {
-			LoadThongTinNhanVien(daoNV.get50NhanVienSapXepTheoTenNhanVien());
+			List<NhanVien> list = daoNV.get50NhanVienSapXepTheoTenNhanVien();
+			LoadThongTinNhanVien(list);
 			// Sự kiện chó nút tìm kiếm
 		} else if (o.equals(btnTimKiem)) {
 			String data = txtTImKiem.getText();
@@ -405,13 +424,11 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			} else
 				index--;
 			table.setRowSelectionInterval(index, index);
-			String ma = model.getValueAt(index, 0).toString();
-			txtSoTrang.setText(ma);
+			txtSoTrang.setText(listMaNV.get(index));
 			// Sự kiện Chọn hàng đàu tiên
 		} else if (o.equals(btnDoubleTrai)) {
 			table.setRowSelectionInterval(0, 0);
-			String ma = model.getValueAt(0, 0).toString();
-			txtSoTrang.setText(ma);
+			txtSoTrang.setText(listMaNV.get(0));
 			// Sự kiện chọn hàng cuối
 		} else if (o.equals(btnPhai)) {
 			int index = table.getSelectedRow();
@@ -421,22 +438,19 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			} else
 				index++;
 			table.setRowSelectionInterval(index, index);
-			String ma = model.getValueAt(index, 0).toString();
-			txtSoTrang.setText(ma);
+			txtSoTrang.setText(listMaNV.get(index));
 			// sự kiện chọn hàng cuối cùng
 		} else if (o.equals(btnDoublePhai)) {
 			int count = table.getRowCount();
 			count--;
 			table.setRowSelectionInterval(count, count);
-			String ma = model.getValueAt(count, 0).toString();
-			txtSoTrang.setText(ma);
+			txtSoTrang.setText(listMaNV.get(count));
 			// Sự kiện cho nút Enter cho Text Số trang
 		} else if (o.equals(txtSoTrang)) {
 			String data = txtSoTrang.getText();
 			int count = table.getRowCount();
 			for (int i = 0; i < count; i++) {
-				String ma = model.getValueAt(i, 0).toString();
-				if (data.equalsIgnoreCase(ma)) {
+				if (data.equalsIgnoreCase(listMaNV.get(i))) {
 					table.setRowSelectionInterval(i, i);
 				}
 			}
@@ -518,17 +532,55 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	 * @param list
 	 */
 	private void LoadThongTinNhanVien(List<NhanVien> list) {
+		txtSoTrang.setText("");
 		ChucNang.clearDataTable(model);
 		for (NhanVien nv : list) {
 			load1ThongTinNhanVien(nv);
 		}
 		txtTongSoSV.setText(list.size() + "");
+		listMaNV = getDsMaNV(list);
 	}
 
 	public void load1ThongTinNhanVien(NhanVien nv) {
-		String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(),
-				nv.getEmail(), vnFormat.format(nv.getMucLuong()),
-				nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ" };
+		txtSoTrang.setText("");
+		String n[] = { nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(), nv.getEmail(),
+				vnFormat.format(nv.getMucLuong()), nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ",
+				nv.getDiaChi() };
 		model.addRow(n);
+		listMaNV = new ArrayList<String>();
+		listMaNV.add(nv.getMaNhanVien());
+	}
+
+	private List<String> getDsMaNV(List<NhanVien> list) {
+		List<String> listMa = new ArrayList<String>();
+		for (NhanVien nv : list) {
+			listMa.add(nv.getMaNhanVien());
+		}
+		return listMa;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		txtSoTrang.setText(listMaNV.get(table.getSelectedRow()));
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
 	}
 }

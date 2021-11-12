@@ -34,7 +34,7 @@ public class Gui_DangNhap extends JFrame {
 	private JLabel lblLogo;
 	private JLabel lblDangNhap;
 	private JPanel panelThongTinDN;
-	private JButton btnDangNhap;
+	protected JButton btnDangNhap;
 	private JButton btnThoat;
 	private JLabel lblTaiKhoan;
 	private JTextField txtTaiKhoan;
@@ -119,15 +119,7 @@ public class Gui_DangNhap extends JFrame {
 		btnDangNhap = new CircleBtn("Đăng Nhập");
 		btnDangNhap.setBounds(149, 320, 204, 60);
 		panelThongTinDN.add(btnDangNhap);
-		btnDangNhap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				close();	
-				Gui_Chinh s = new Gui_Chinh();
-				s.setVisible(true);
-				
-			}
-
-		});
+		
 		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
 		btnDangNhap.setBackground(new Color(233, 180, 46));
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
     <fullyQualifiedTypeName name="net.bytebuddy.dynamic.DynamicType.Builder.InnerTypeDefinition"/>
     <fullyQualifiedTypeName name="java.awt.event.WindowListener"/>
     <fullyQualifiedTypeName name="gui_package.CustomTable"/>
@@ -13,7 +12,6 @@
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
-    <fullyQualifiedTypeName name="gui.Gui_Chinh"/>
     <fullyQualifiedTypeName name="javax.swing.InputMap"/>
     <fullyQualifiedTypeName name="javax.swing.KeyStroke"/>
     <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
@@ -29,7 +27,6 @@
     <fullyQualifiedTypeName name="gui.Gui_In"/>
     <fullyQualifiedTypeName name="org.hibernate.persister.walking.spi.MetamodelGraphWalker"/>
     <fullyQualifiedTypeName name="dao.BangLuongDao"/>
-    <fullyQualifiedTypeName name="model.BangLuong"/>
     <fullyQualifiedTypeName name="services.QuanLyHoaDonService"/>
     <fullyQualifiedTypeName name="dao.NhanVienDao"/>
     <fullyQualifiedTypeName name="model.ChiTietHoaDonBan"/>
@@ -47,11 +44,19 @@
     <fullyQualifiedTypeName name="dao.SanPhamDao"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="gui.Gui_ThongKeThuChi"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="services.QuanLyLuongService"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="gui_package.ChucNang"/>
+    <fullyQualifiedTypeName name="model.BangLuong"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKeThuChi"/>
+    <fullyQualifiedTypeName name="gui.Gui_DangNhap"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyLuong"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyNhanVien"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLySanPham"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyTaiKhoan"/>
+    <fullyQualifiedTypeName name="gui.Gui_Chinh"/>
 </qualifiedTypeNameHistroy>

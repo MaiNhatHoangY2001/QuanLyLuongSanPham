@@ -287,8 +287,8 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	
 	//load data
 	daoTK = new TaiKhoanDao();
-	listTK = daoTK.getDsTaiKhoan();
-	LoadTaiKhoan(listTK);
+	//listTK = daoTK.getDsTaiKhoan();
+	//LoadTaiKhoan(listTK);
 	}
 
 

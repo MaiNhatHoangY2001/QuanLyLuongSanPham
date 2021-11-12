@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
+import model.NhanVien;
 import model.SanPham;
 
 public class SanPhamDao {
@@ -120,6 +121,25 @@ public class SanPhamDao {
 		}
 		session.close();
 		return list;
+	}
+	
+	public List<SanPham> get50SanPhamSapXepTheoTenSanPham() {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			list = session
+					.createNativeQuery("select top 50 * from SanPham\r\n" + "order by tenSanPham asc", SanPham.class)
+					.getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
 	}
 
 	/**
