@@ -188,7 +188,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			public void propertyChange(PropertyChangeEvent evt) {
 				setDataTableBangLuong((Integer) evt.getNewValue() + 1, spnYear.getYear());
 
-				Boolean bool = cboMonth.getMonth() + 1 <= LocalDate.now().getMonthValue() ? true : false;
+				Boolean bool = cboMonth.getMonth() + 1 == LocalDate.now().getMonthValue() ? true : false;
 				btnTao.setEnabled(bool);
 				txtTrang.setText("1");
 				clearThongTinNhanVien();
@@ -202,7 +202,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			public void propertyChange(PropertyChangeEvent evt) {
 				setDataTableBangLuong(cboMonth.getMonth() + 1, (Integer) evt.getNewValue());
 
-				Boolean bool = spnYear.getYear() <= LocalDate.now().getYear() ? true : false;
+				Boolean bool = spnYear.getYear() == LocalDate.now().getYear() ? true : false;
 				btnTao.setEnabled(bool);
 				txtTrang.setText("1");
 				clearThongTinNhanVien();
