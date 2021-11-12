@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -122,7 +124,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		lblUser = new JLabel("Chinh");
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblUser.setBounds(1383, 11, 81, 29);
+		lblUser.setBounds(1445, 10, 81, 30);
 		pnlHeader.add(lblUser);
 		// Jlable User Icon
 
@@ -130,8 +132,24 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		lblDangXuat = new JLabel("Đăng Xuất");
 		lblDangXuat.setForeground(Color.WHITE);
 		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDangXuat.setBounds(1383, 51, 112, 29);
+		lblDangXuat.setBounds(1414, 50, 112, 30);
 		pnlHeader.add(lblDangXuat);
+
+		JLabel lblIconUser = new JLabel("");
+		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
+		lblIconUser.setIcon(new ImageIcon(imgUser));
+		lblIconUser.setForeground(Color.WHITE);
+		lblIconUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblIconUser.setBounds(1536, 10, 38, 30);
+		pnlHeader.add(lblIconUser);
+
+		JLabel lblIconDangXuat = new JLabel("");
+		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
+		lblIconDangXuat.setIcon(new ImageIcon(imgDX));
+		lblIconDangXuat.setForeground(Color.WHITE);
+		lblIconDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblIconDangXuat.setBounds(1536, 50, 38, 30);
+		pnlHeader.add(lblIconDangXuat);
 		// JLable Icon Logout
 
 		/*
@@ -245,7 +263,6 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		String headerTitle[] = { "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái", "Địa chỉ" };
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50) {
-
 			/**
 			 * 
 			 */
@@ -289,21 +306,25 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		btnTrai = new JButton("<");
 		btnTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnTrai.setBounds(626, 10, 89, 40);
+		btnTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnTrai);
 
 		btnDoubleTrai = new JButton("<<");
 		btnDoubleTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDoubleTrai.setBounds(527, 10, 89, 40);
+		btnDoubleTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnDoubleTrai);
 
 		btnPhai = new JButton(">");
 		btnPhai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnPhai.setBounds(885, 10, 89, 40);
+		btnPhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnPhai);
 
 		btnDoublePhai = new JButton(">>");
 		btnDoublePhai.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnDoublePhai.setBounds(984, 10, 89, 40);
+		btnDoublePhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnDoublePhai);
 
 		// Thêm sự kiện cho các chức năng

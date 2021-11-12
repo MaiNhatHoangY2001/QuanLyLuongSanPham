@@ -19,7 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -136,6 +138,21 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		lblDangXuat.setBounds(1383, 57, 112, 29);
 		pnlHeader.add(lblDangXuat);
 		// JLable Icon Logout
+		JLabel lblIconUser = new JLabel("");
+		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
+		lblIconUser.setIcon(new ImageIcon(imgUser));
+		lblIconUser.setForeground(Color.WHITE);
+		lblIconUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblIconUser.setBounds(1536, 10, 38, 30);
+		pnlHeader.add(lblIconUser);
+		
+		JLabel lblIconDangXuat = new JLabel("");
+		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
+		lblIconDangXuat.setIcon(new ImageIcon(imgDX));
+		lblIconDangXuat.setForeground(Color.WHITE);
+		lblIconDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblIconDangXuat.setBounds(1536, 50, 38, 30);
+		pnlHeader.add(lblIconDangXuat);
 
 		/*
 		 * Phan: Chuc Nang
@@ -282,21 +299,25 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnTrai = new JButton("<");
 		btnTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnTrai.setBounds(626, 10, 89, 40);
+		btnTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnTrai);
 
 		btnDoubleTrai = new JButton("<<");
 		btnDoubleTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDoubleTrai.setBounds(527, 10, 89, 40);
+		btnDoubleTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnDoubleTrai);
 
 		btnPhai = new JButton(">");
 		btnPhai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnPhai.setBounds(885, 10, 89, 40);
+		btnPhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnPhai);
 
 		btnDoublePhai = new JButton(">>");
 		btnDoublePhai.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnDoublePhai.setBounds(984, 10, 89, 40);
+		btnDoublePhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnDoublePhai);
 
 		// Thêm sự kiện cho các chức năng
