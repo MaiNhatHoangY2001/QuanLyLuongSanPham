@@ -37,21 +37,21 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
+
 	private JTextField txtTenSanPham;
 	private JTextField txtGiaThanh;
 	private JTextField txtNCC;
 	private JTextField txtSanPham;
-	
+
 	private JButton btnLuu;
 	private JButton btnXoaRong;
 	private JButton btnHuyBo;
-	
+
 	private JComboBox<String> cmbNgay;
 	private JComboBox<String> cmbThang;
 	private JComboBox<String> cmbNam;
 	private JComboBox<String> cmbLoai;
-	
+
 	private SanPham sp;
 	private DecimalFormat fm = new DecimalFormat("#");
 	private SanPhamDao daoSP;
@@ -170,7 +170,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		cmbNgay = new JComboBox<String>();
 		DefaultComboBoxModel<String> modelNgay = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 31; i++) {
-			modelNgay.addElement(i+"");
+			modelNgay.addElement(i + "");
 		}
 		cmbNgay.setModel(modelNgay);
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -193,7 +193,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		// Năm
 		DefaultComboBoxModel<String> modelNam = new DefaultComboBoxModel<String>();
 		for (int i = LocalDate.now().getYear(); i >= 2000; i--) {
-			modelNam.addElement(i+"");
+			modelNam.addElement(i + "");
 		}
 		cmbNam = new JComboBox<String>();
 		cmbNam.setModel(modelNam);
@@ -314,6 +314,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 
 	/**
 	 * Kiểm tra JtextField Chưa nhập dữ liệu
+	 * 
 	 * @return true: các JtextField nhập đầy đủ dữ liệu
 	 * @return false: có 1 JtextField chưa nhập dữ liệu
 	 */
@@ -338,8 +339,9 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 
 	/**
 	 * Kiểm trả 2 Sản Phẩm có giống nhay hay không
+	 * 
 	 * @param sanp: Sản Phẩm 1
-	 * @param sp2: Sản Phẩm 2
+	 * @param sp2:  Sản Phẩm 2
 	 * @return true: 2 Sản Phẩm giống nhau
 	 * @return false: 2 Sản Phẩm không giống nhau
 	 */
@@ -359,7 +361,8 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Láy thông tin từ các JtextField 
+	 * Láy thông tin từ các JtextField
+	 * 
 	 * @return SanPham: Sản Phẩm
 	 * @return null: JtextField Giá Thành nhập chữ
 	 */
@@ -370,7 +373,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		LocalDate date = getDate();
 		try {
 			double gia = Double.parseDouble(txtGiaThanh.getText());
-			return new SanPham(ten, gia, NCC, loai, date);
+			return new SanPham(ten, gia, NCC, loai, date, true);
 		} catch (NumberFormatException e) {
 			txtGiaThanh.requestFocus();
 			JOptionPane.showMessageDialog(this, "Giá thành chỉ cho phép nhập số");
@@ -393,8 +396,8 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Xóa rỗng các JtextField và Focus vào JtextField Tên sản phẩm
-	 * Các Jcombobox trờ về index đầu tiên
+	 * Xóa rỗng các JtextField và Focus vào JtextField Tên sản phẩm Các Jcombobox
+	 * trờ về index đầu tiên
 	 */
 	public void XoaRongTextField() {
 		txtTenSanPham.setText("");
@@ -408,7 +411,8 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Hiển thị thông tin Sản Phẩm liên các JtextField 
+	 * Hiển thị thông tin Sản Phẩm liên các JtextField
+	 * 
 	 * @param sp1: Thông tin sản phẩm
 	 */
 	public void hienThongTinSanPham(SanPham sp1) {

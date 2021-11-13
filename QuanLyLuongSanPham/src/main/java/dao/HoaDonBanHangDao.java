@@ -1,7 +1,6 @@
 package dao;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +42,11 @@ public class HoaDonBanHangDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=sum(d.soLuong*d.donGia) "
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=o.thanhTien  "
 					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
 					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan INNER JOIN "
 					+ "                         KhachHang AS k ON o.maKhachHang = k.maKhachHang "
-					+ "where	 k.tenKhachHang like '%" + tenKH + "%' "
-					+ "group by o.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+					+ "where	 k.tenKhachHang like '%" + tenKH + "%' ";
 			List<?> list = session.createNativeQuery(query).getResultList();
 			tr.commit();
 			return list;
@@ -125,14 +123,11 @@ public class HoaDonBanHangDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT        d.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
-					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
-					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan "
-					+ "where day(o.ngayLapHoaDon)=" + ngay + " and year(o.ngayLapHoaDon)=" + nam
-					+ " and MONTH(o.ngayLapHoaDon)=" + thang + " "
-					+ "group by d.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=o.thanhTien "
+					+ " FROM HoaDonBanHang o "
+					+ " where day(o.ngayLapHoaDon)="+ngay+" and year(o.ngayLapHoaDon)="+nam+" and MONTH(o.ngayLapHoaDon)="+thang;
 			List<?> list = session.createNativeQuery(query).getResultList();
-
+			
 			tr.commit();
 			return list;
 		} catch (Exception e) {
@@ -149,11 +144,9 @@ public class HoaDonBanHangDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
-					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
-					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan "
-					+ "where o.maHoaDonBan='" + maHoaDon + "' "
-					+ "group by o.maHoaDonBan,o.ngayLapHoaDon, o.khuyenMai,o.thue";
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, o.thanhTien "
+					+ "FROM            HoaDonBanHang o "
+					+ "where o.maHoaDonBan='" + maHoaDon + "'";
 			Object o = session.createNativeQuery(query).getSingleResult();
 			tr.commit();
 			return o;
