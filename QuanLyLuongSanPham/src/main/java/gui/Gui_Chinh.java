@@ -227,6 +227,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		activeButton(btnThongKe);
 	}
 
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object key = e.getSource();

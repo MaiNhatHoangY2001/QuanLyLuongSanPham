@@ -81,5 +81,32 @@ public class QuanLyHoaDonService {
 	public boolean themChiTietBan(ChiTietHoaDonBan chiTietHoaDonBan) {
 		return chiTietHoaDonBanDao.themChiHoaDonBan(chiTietHoaDonBan);
 	}
-	
+	public boolean themKhachHang(KhachHang khachHang) {
+		if(khachHang!=null)
+			return khachHangDao.themKhachHang(khachHang);
+		return false;
+	}
+	public KhachHang timKhachHangBySdt(String sdt) {
+		if(sdt!= null)
+			return khachHangDao.timKiemKhachHangBangSdt(sdt);
+		return null;
+	}
+	public List<SanPham> timSanPhamTheoNhaCungCap(String ncc) {
+		if(ncc!=null) {
+			return sanPhamDao.timTheoNhaCungCap(ncc);
+		}
+		else return null;
+	}
+	public List<SanPham> timSanPhamTheoTen(String ten) {
+		if(ten!=null) {
+			return sanPhamDao.getSanPhamThoTen(ten);
+		}
+		else return null;
+	}
+	public SanPham timSanPhamTheoMa(String ma) {
+		if(ma!=null) {
+			return sanPhamDao.getSanPham(ma);
+		}
+		else return null;
+	}
 }

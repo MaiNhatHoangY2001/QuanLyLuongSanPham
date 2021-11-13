@@ -76,7 +76,6 @@ public class KhachHangDao {
 			tr.commit();
 		} catch (Exception e) {
 			tr.rollback();
-			return khachHang;
 		}
 		session.close();
 		return khachHang;

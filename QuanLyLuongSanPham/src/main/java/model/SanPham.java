@@ -28,6 +28,7 @@ public class SanPham {
 	private String nCC;
 	private String loai;
 	private LocalDate ngaySanXuat;
+	private boolean trangThai ;
 
 	@OneToMany(mappedBy = "sanPham")
 	private List<ChiTietHoaDonNhap> dsChiTietHoaDonNhap;
@@ -42,12 +43,7 @@ public class SanPham {
 		this.maSanpham = maSanpham;
 	}
 
-	@Override
-	public String toString() {
-		return "SanPham [maSanpham=" + maSanpham + ", tenSanPham=" + tenSanPham + ", giaThanh=" + giaThanh + ", nCC="
-				+ nCC + ", loai=" + loai + ", ngaySanXuat=" + ngaySanXuat + "]";
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -137,12 +133,30 @@ public class SanPham {
 		this.dsChiTietHoaDonBan = dsChiTietHoaDonBan;
 	}
 
-	public SanPham(String tenSanPham, double giaThanh, String nCC, String loai, LocalDate ngaySanXuat) {
+	public boolean isTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(boolean trangThai) {
+		this.trangThai = trangThai;
+	}
+
+	public SanPham(String tenSanPham, double giaThanh, String nCC, String loai, LocalDate ngaySanXuat,
+			boolean trangThai) {
 		super();
 		this.tenSanPham = tenSanPham;
 		this.giaThanh = giaThanh;
 		this.nCC = nCC;
 		this.loai = loai;
 		this.ngaySanXuat = ngaySanXuat;
+		this.trangThai = trangThai;
 	}
+
+	@Override
+	public String toString() {
+		return "SanPham [maSanpham=" + maSanpham + ", tenSanPham=" + tenSanPham + ", giaThanh=" + giaThanh + ", nCC="
+				+ nCC + ", loai=" + loai + ", ngaySanXuat=" + ngaySanXuat + ", trangThai=" + trangThai + "]";
+	}
+
+	
 }

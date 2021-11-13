@@ -9,16 +9,17 @@ import org.hibernate.Transaction;
 
 import hibernateCfg.HibernateConfig;
 import model.ChiTietHoaDonBan;
+import model.ChiTietHoaDonNhap;
 
 public class ChiTietHoaDonNhapDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
-	public boolean themChiHoaDonBan(ChiTietHoaDonBan chiTietHoaDonBan) {
+	public boolean themChiHoaDonBan(ChiTietHoaDonNhap chiTietHoaDonNhap) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			session.save(chiTietHoaDonBan);
+			session.save(chiTietHoaDonNhap);
 			tr.commit();
 			return true;
 		} catch (Exception e) {
@@ -29,13 +30,13 @@ public class ChiTietHoaDonNhapDao {
 		return false;
 	}
 
-	public ChiTietHoaDonBan getChiTietHoaDonBan(String maChiTietHoaDonBan) {
-		ChiTietHoaDonBan chiTietHoaDonBan = null;
+	public ChiTietHoaDonNhap getChiTietHoaDonNhap(String maChiTietHoaDonNhap) {
+		ChiTietHoaDonNhap chiTietHoaDonNhap = null;
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			chiTietHoaDonBan = session.get(ChiTietHoaDonBan.class, maChiTietHoaDonBan);
+			chiTietHoaDonNhap = session.get(ChiTietHoaDonNhap.class, maChiTietHoaDonNhap);
 			tr.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,7 +44,7 @@ public class ChiTietHoaDonNhapDao {
 		}
 		session.close();
 
-		return chiTietHoaDonBan;
+		return chiTietHoaDonNhap;
 
 	}
 
@@ -53,17 +54,17 @@ public class ChiTietHoaDonNhapDao {
 	 * @param maSanPham
 	 * @return
 	 */
-	public List<ChiTietHoaDonBan> getChiTietTheoMaNV(String maNhanVien, int month, int year) {
-		List<ChiTietHoaDonBan> list = new ArrayList<>();
+	public List<ChiTietHoaDonNhap> getChiTietTheoMaNV(String maNhanVien, int month, int year) {
+		List<ChiTietHoaDonNhap> list = new ArrayList<>();
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
 
-			list = session.createNativeQuery("SELECT  c.* " + "FROM ChiTietHoaDonBan AS c "
-					+ "INNER JOIN HoaDonBanHang AS h ON c.maHoaDonBan = h.maHoaDonBan " + "WHERE h.maNhanVien = '"
+			list = session.createNativeQuery("SELECT  c.* " + "FROM ChiTietHoaDonNhap AS c "
+					+ "INNER JOIN HoaDonNhapHang AS h ON c.maHoaDonNhap= h.maHoaDonNhap " + "WHERE h.maNhanVien = '"
 					+ maNhanVien + "'" + " and MONTH(h.ngayLapHoaDon) = " + month + " and YEAR(h.ngayLapHoaDon) = "
-					+ year, ChiTietHoaDonBan.class).getResultList();
+					+ year, ChiTietHoaDonNhap.class).getResultList();
 
 			tr.commit();
 		} catch (Exception e) {
@@ -76,14 +77,14 @@ public class ChiTietHoaDonNhapDao {
 
 	}
 
-	public List<ChiTietHoaDonBan> getAllHoaDonBanHang() {
-		List<ChiTietHoaDonBan> list = new ArrayList<ChiTietHoaDonBan>();
+	public List<ChiTietHoaDonNhap> getAllHoaDonBanHang() {
+		List<ChiTietHoaDonNhap> list = new ArrayList<ChiTietHoaDonNhap>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-
-			list = session.createNativeQuery("select * from ChiTietHoaDonBan", ChiTietHoaDonBan.class).getResultList();
+			list = session.createNativeQuery("select * from ChiTietHoaDonNhap", ChiTietHoaDonNhap.class)
+					.getResultList();
 			tr.commit();
 		} catch (Exception e) {
 			tr.rollback();
@@ -94,7 +95,6 @@ public class ChiTietHoaDonNhapDao {
 	}
 
 	public List<?> getChiTietTheoMaHoaDon(String maHoadon) {
-		List<?> list = new ArrayList<ChiTietHoaDonBan>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
@@ -103,23 +103,23 @@ public class ChiTietHoaDonNhapDao {
 					+ "FROM     ChiTietHoaDonNhap AS a INNER JOIN "
 					+ "             SanPham AS p ON a.maSanPham = p.maSanpham " + "where a.maHoaDonNhap='" + maHoadon
 					+ "'";
-			list = session.createNativeQuery(query).getResultList();
+			List<?> list = session.createNativeQuery(query).getResultList();
 			tr.commit();
+			return list;
 		} catch (Exception e) {
 			tr.rollback();
 			e.printStackTrace();
 		}
 		session.close();
-
-		return list;
+		return null;
 	}
 
 	public static void main(String[] args) {
-		ChiTietHoaDonNhapDao dao = new ChiTietHoaDonNhapDao();
-		HoaDonBanHangDao daoHd = new HoaDonBanHangDao();
-		SanPhamDao sanPhamDao = new SanPhamDao();
-		ChiTietHoaDonBan hoaDonBan = new ChiTietHoaDonBan(sanPhamDao.getSanPham("SP21100002").getGiaThanh(), 5,
-				daoHd.getHoaDonBanHang("HB21100001"), sanPhamDao.getSanPham("SP21100002"));
-		dao.themChiHoaDonBan(hoaDonBan);
+//		ChiTietHoaDonNhapDao dao = new ChiTietHoaDonNhapDao();
+//		HoaDonBanHangDao daoHd = new HoaDonBanHangDao();
+//		SanPhamDao sanPhamDao = new SanPhamDao();
+//		ChiTietHoaDonBan hoaDonBan = new ChiTietHoaDonBan(sanPhamDao.getSanPham("SP21100002").getGiaThanh(), 5,
+//				daoHd.getHoaDonBanHang("HB21100001"), sanPhamDao.getSanPham("SP21100002"));
+//		dao.themChiHoaDonNhap(hoaDonBan);
 	}
 }
