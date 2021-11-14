@@ -208,21 +208,23 @@ public class NhanVienDao {
 	}
 
 	/**
-	 *  get 10 Nhân Viên theo khoảng
+	 * get 10 Nhân Viên theo khoảng
+	 * 
 	 * @param from
 	 * @return
 	 */
-	public List<NhanVien> get10NhanVienTheoKhoang(int from) {
+	public List<NhanVien> get10NhanVienTheoKhoang(int from, int month, int year) {
 		List<NhanVien> list = new ArrayList<NhanVien>();
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
 
-			list = session
-					.createNativeQuery("SELECT * FROM [QuanLyLuongSanPham].[dbo].[NhanVien] Order by maNhanVien OFFSET "
-							+ from + " ROWS FETCH NEXT 10 ROWS ONLY", NhanVien.class)
-					.getResultList();
+			list = session.createNativeQuery(
+					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
+							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month
+							+ " Order by maNhanVien OFFSET " + from + " ROWS FETCH NEXT 10 ROWS ONLY",
+					NhanVien.class).getResultList();
 			tr.commit();
 			return list;
 		} catch (Exception e) {
@@ -232,4 +234,29 @@ public class NhanVienDao {
 		}
 		return null;
 	}
+
+	/**
+	 * kiểm tra có phải nhân viên hành chanh không
+	 * 
+	 * @param maNhanVien
+	 * @return
+	 */
+	public boolean kiemTraNhanVien(String maNhanVien) {
+		Session session = sessionFactory.getCurrentSession();
+		String ma = "";
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select maNhanVien from NhanVien where maNhanVien not in (SELECT hd.maNhanVien FROM NhanVien AS nv INNER JOIN HoaDonBanHang AS hd ON nv.maNhanVien = hd.maNhanVien GROUP BY hd.maNhanVien) and maNhanVien = "
+					+ "'" + maNhanVien + "'";
+			ma = (String) session.createSQLQuery(query).getSingleResult();
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return ma.equals(maNhanVien);
+
+	}
+
 }

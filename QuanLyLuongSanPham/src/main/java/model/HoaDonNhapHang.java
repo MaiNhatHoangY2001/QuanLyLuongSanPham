@@ -49,13 +49,17 @@ public class HoaDonNhapHang {
 		dsChiTietHoaDonNhap.forEach(ct -> {
 			this.thanhTien += ct.tinhTongTien();
 		});
-		this.thanhTien = this.thanhTien - this.thanhTien * thue;
+		this.thanhTien = this.thanhTien + this.thanhTien * thue;
 		return this.thanhTien;
 	}
 
 	public HoaDonNhapHang(double thue) {
 		super();
 		this.thue = thue;
+	}
+
+	public HoaDonNhapHang() {
+		super();
 	}
 
 	public double tinhThue() {
@@ -100,6 +104,7 @@ public class HoaDonNhapHang {
 
 	public void setDsChiTietHoaDonNhap(List<ChiTietHoaDonNhap> dsChiTietHoaDonNhap) {
 		this.dsChiTietHoaDonNhap = dsChiTietHoaDonNhap;
+		tinhThanhTien();
 	}
 
 	public double getThanhTien() {

@@ -188,7 +188,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			public void propertyChange(PropertyChangeEvent evt) {
 				setDataTableBangLuong((Integer) evt.getNewValue() + 1, spnYear.getYear());
 
-				Boolean bool = cboMonth.getMonth() + 1 <= LocalDate.now().getMonthValue() ? true : false;
+				Boolean bool = cboMonth.getMonth() + 1 == LocalDate.now().getMonthValue() ? true : false;
 				btnTao.setEnabled(bool);
 				txtTrang.setText("1");
 				clearThongTinNhanVien();
@@ -202,7 +202,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			public void propertyChange(PropertyChangeEvent evt) {
 				setDataTableBangLuong(cboMonth.getMonth() + 1, (Integer) evt.getNewValue());
 
-				Boolean bool = spnYear.getYear() <= LocalDate.now().getYear() ? true : false;
+				Boolean bool = spnYear.getYear() == LocalDate.now().getYear() ? true : false;
 				btnTao.setEnabled(bool);
 				txtTrang.setText("1");
 				clearThongTinNhanVien();
@@ -646,17 +646,20 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		List<NhanVien> listNhanVien = new ArrayList<>();
 
 		int trangTable = Integer.parseInt(txtTrang.getText()) - 1;
-		listNhanVien = banLuongService.get10NhanVienTheoKhoang(trangTable * 10);
+		listNhanVien = banLuongService.get10NhanVienTheoKhoang(trangTable * 10, month, year);
 
-		for (NhanVien nhanVien : listNhanVien) {
-			BangLuong bangLuong = banLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
-			if (bangLuong != null) {
-				modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
-						vnFormat.format(nhanVien.getMucLuong()), bangLuong.getHeSoLuong(),
-						vnFormat.format(bangLuong.getTienSanPham()), bangLuong.getSoNgayCong(),
-						vnFormat.format(bangLuong.tinhLuong()) });
+		if (!listNhanVien.isEmpty()) {
+			for (NhanVien nhanVien : listNhanVien) {
+				BangLuong bangLuong = banLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
+				if (bangLuong != null) {
+					modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
+							vnFormat.format(nhanVien.getMucLuong()), bangLuong.getHeSoLuong(),
+							vnFormat.format(bangLuong.getTienSanPham()), bangLuong.getSoNgayCong(),
+							vnFormat.format(bangLuong.tinhLuong()) });
+				}
 			}
 		}
+
 		if (tblTinhLuong.getRowCount() == 0) {
 			ChucNang.addNullDataTable(modelTinhLuong);
 		}
@@ -732,7 +735,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		for (NhanVien nhanVien : nhanViens) {
 			if (nhanVien.gettrangThaiLamViec()) {
 				Double tienSanPham = quanLyLuongService.getTienSanPham(nhanVien.getMaNhanVien(), month, year);
-				Double heSoLuong = (double) (tienSanPham == 0 ? 2 : 1);
+				Double heSoLuong = (double) (quanLyLuongService.kiemTraNhanVien(nhanVien.getMaNhanVien()) ? 2 : 1);
 				LocalDate thoiGian;
 				int soNgayCong;
 				if (month == LocalDate.now().getMonthValue() && year == LocalDate.now().getYear()) {
@@ -755,7 +758,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	}
 
 	public void eventTaoBangLuong() {
-		if (tblTinhLuong.getRowCount() != 0) {
+		if (tblTinhLuong.getValueAt(0, 0) != null) {
 			int rs = JOptionPane.showConfirmDialog(null,
 					"Bạn có chắc muốn tạo lại bảng lương không?\n(Lưu ý: những bảng hiện có trong tháng này sẽ bị xóa)",
 					"Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);

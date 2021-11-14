@@ -36,6 +36,13 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	private CardLayout cardLayout;
 	private JButton temp;
 
+	private Gui_ThongKeThuChi trangTK = new Gui_ThongKeThuChi();
+	private Gui_QuanLyHoaDon trangHD = new Gui_QuanLyHoaDon();
+	private Gui_QuanLyLuong trangLuong = new Gui_QuanLyLuong();
+	private Gui_QuanLyNhanVien trangNV = new Gui_QuanLyNhanVien();
+	private Gui_QuanLySanPham trangSP = new Gui_QuanLySanPham();
+	private Gui_QuanLyTaiKhoan trangtaiKhoan = new Gui_QuanLyTaiKhoan();
+
 	/**
 	 * Launch the application.
 	 */
@@ -43,10 +50,20 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new Gui_Chinh();
+					Gui_Chinh gui_Chinh = new Gui_Chinh();
 					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
+
 					gui_DangNhap.setVisible(true);
 					gui_DangNhap.setLocationRelativeTo(null);
+
+					gui_DangNhap.btnDangNhap.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							gui_DangNhap.setVisible(false);
+							gui_Chinh.setVisible(true);
+
+						}
+
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,7 +75,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
-		
+
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setSize(1920, 1046);
 		setResizable(false);
@@ -198,17 +215,18 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 		cardLayout = (CardLayout) pnlChange.getLayout();
 
-		pnlChange.add(new Gui_ThongKeThuChi(), "btnThongKe");
-		pnlChange.add(new Gui_QuanLyHoaDon(), "btnQuanLyHoaDon");
-		pnlChange.add(new Gui_QuanLyLuong(), "btnQuanLyLuong");
-		pnlChange.add(new Gui_QuanLyNhanVien(), "btnQuanLyNhanVien");
-		pnlChange.add(new Gui_QuanLySanPham(), "btnQuanLySanPham");
-		pnlChange.add(new Gui_QuanLyTaiKhoan(), "btnQuanLyTaiKhoan");
-		
-		//set active khi bắt đầu vào
+		pnlChange.add(trangTK, "btnThongKe");
+		pnlChange.add(trangHD, "btnQuanLyHoaDon");
+		pnlChange.add(trangLuong, "btnQuanLyLuong");
+		pnlChange.add(trangNV, "btnQuanLyNhanVien");
+		pnlChange.add(trangSP, "btnQuanLySanPham");
+		pnlChange.add(trangtaiKhoan, "btnQuanLyTaiKhoan");
+
+		// set active khi bắt đầu vào
 		temp = btnThongKe;
 		activeButton(btnThongKe);
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -231,7 +249,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		else if (key == btnThongKe) {
 			cardLayout.show(pnlChange, "btnThongKe");
 		}
-			
+
 	}
 
 	/**
@@ -261,7 +279,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	 * Thông báo khi muốn thoát ứng dụng
 	 */
 	public void thongBaoThoat() {
-		JOptionPane jOptionPane= new JOptionPane();
+		JOptionPane jOptionPane = new JOptionPane();
 		jOptionPane.setBackground(new Color(242, 129, 25));
 		int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không", "Thông báo thoát",
 				JOptionPane.YES_NO_OPTION);
@@ -278,6 +296,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	@Override
 	public void windowOpened(WindowEvent e) {
 	}
+
 	@Override
 	public void windowClosed(WindowEvent e) {
 	}

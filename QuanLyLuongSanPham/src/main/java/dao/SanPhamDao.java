@@ -33,7 +33,25 @@ public class SanPhamDao {
 			return false;
 		}
 	}
-
+	public List<SanPham> timTheoNhaCungCap(String ncc) {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from SanPham\r\n" + "where nCC like '%" + ncc+ "%'";
+			list = session.createNativeQuery(query, SanPham.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+		
+	}
 	public boolean capNhatSanPham(SanPham sp) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();

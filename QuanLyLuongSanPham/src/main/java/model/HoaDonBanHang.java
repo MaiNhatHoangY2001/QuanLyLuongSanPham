@@ -52,16 +52,16 @@ public class HoaDonBanHang {
 	}
 
 	public double tinhThanhTien() {
-		this.thanhTien=0;
-		dsChiTietHoaDonBan.forEach(i->{
-			this.thanhTien+=i.tinhTongTien();
+		this.thanhTien = 0;
+		dsChiTietHoaDonBan.forEach(i -> {
+			this.thanhTien += i.tinhTongTien();
 		});
-		this.thanhTien=this.thanhTien-this.thanhTien*thue+this.thanhTien*khuyenMai;
-		return  this.thanhTien;
+		this.thanhTien = this.thanhTien + this.thanhTien * thue / 100 - this.thanhTien * khuyenMai / 100;
+		return this.thanhTien;
 	}
 
 	public double tinhThue() {
-		return thanhTien*thue;
+		return thanhTien * thue;
 	}
 
 	public String getMaHoaDonBan() {

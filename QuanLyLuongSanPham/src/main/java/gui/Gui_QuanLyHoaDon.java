@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -60,11 +61,13 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private DefaultTableModel modelChiTiet;
 	private JDateChooser txtNgayLap;
 	private JComboBox cboLoaiHoaDon;
+	public static CountDownLatch latch = new CountDownLatch(1);;
 
 	/**
 	 * Create the panel.
 	 */
 	public Gui_QuanLyHoaDon() {
+
 		setBounds(new Rectangle(0, 0, 1600, 1046));
 
 		setBackground(new Color(242, 129, 25));
@@ -297,6 +300,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 			if (i == 0) {
 				Gui_ThemHoaDonBan themHoaDonBan = new Gui_ThemHoaDonBan();
 				themHoaDonBan.setVisible(getFocusTraversalKeysEnabled());
+
 			} else {
 				Gui_ThemHoaDonNhap themHoaDonNhap = new Gui_ThemHoaDonNhap();
 				themHoaDonNhap.setVisible(getFocusTraversalKeysEnabled());
@@ -418,7 +422,8 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		if (!vanBanTim.equals("")) {
 			if (temp == 0) {
 				Object list = quanLyHoaDonService.timHoaDonTheoMa(temp1, vanBanTim);
-				loadTableHoaDon(Arrays.asList(list));
+				if (list != null)
+					loadTableHoaDon(Arrays.asList(list));
 			} else if (temp == 1) {
 				List<?> listKetQua = quanLyHoaDonService.timHoaDonTheoSdt(vanBanTim);
 				loadTableHoaDon(listKetQua);
@@ -431,8 +436,10 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		ChucNang.addNullDataTable(modelHoaDon);
 
 	}
+
 	/**
 	 * chèn danh sách chi tiết hóa đơn vào table chi tiết hóa đơn
+	 * 
 	 * @param list
 	 * @param model
 	 */

@@ -27,7 +27,7 @@ public class ChiTietHoaDonBan {
 	private SanPham sanPham;
 
 	public double tinhTongTien() {
-		return donGia * soLuong;
+		return donGia * soLuong + 100000;
 	}
 
 	public ChiTietHoaDonBan(double donGia, int soLuong, HoaDonBanHang hoaDonBanHang, SanPham sanPham) {

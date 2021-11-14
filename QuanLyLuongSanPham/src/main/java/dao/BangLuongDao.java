@@ -200,6 +200,8 @@ public class BangLuongDao {
 
 	}
 
+	
+
 	/**
 	 * Xóa tất cả bảng lương theo thời gian
 	 * 
@@ -233,7 +235,7 @@ public class BangLuongDao {
 //		bangLuong.setNhanVien(nhanVien);
 //		System.out.println(bangLuongDao.themBangLuong(bangLuong));
 
-		System.out.println(bangLuongDao.getTienSanPham("NV0003", 10, 2021));
+	
 
 	}
 }

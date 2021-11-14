@@ -14,18 +14,22 @@ public class QuanLyLuongService {
 	private BangLuongDao bangLuongDao = new BangLuongDao();
 	private NhanVienDao nhanVienDao = new NhanVienDao();
 
+	public boolean kiemTraNhanVien(String maNhanVien) {
+		return nhanVienDao.kiemTraNhanVien(maNhanVien);
+	}
+
 	public boolean updateSoNgayCong(String maNhanVien, int month, int year, int soNgayCong) {
 		return bangLuongDao.updateSoNgayCong(maNhanVien, month, year, soNgayCong);
 	}
 
-	public List<NhanVien> get10NhanVienTheoKhoang(int from) {
-		return nhanVienDao.get10NhanVienTheoKhoang(from);
+	public List<NhanVien> get10NhanVienTheoKhoang(int from, int month, int year) {
+		return nhanVienDao.get10NhanVienTheoKhoang(from, month, year);
 	}
 
 	public List<NhanVien> getAllNhanVien() {
 		return nhanVienDao.getDsNhanVien();
 	}
-	
+
 	public NhanVien getNhanVien(String maNhanVien) {
 		return nhanVienDao.getNhanVienTheoMa(maNhanVien);
 	}
@@ -50,7 +54,7 @@ public class QuanLyLuongService {
 	public List<ChiTietHoaDonBan> getChiTietTheoMaNV(String maNhanVien, int month, int year) {
 		return chiTietHoaDonBanDao.getChiTietTheoMaNV(maNhanVien, month, year);
 	}
-	
+
 	public List<BangLuong> getAllBangLuong(int month, int year) {
 		return bangLuongDao.getAllBangLuong(month, year);
 	}

@@ -406,8 +406,8 @@ public class Gui_ThongKeThuChi extends JPanel {
 			modelThongKe.addRow(new Object[] { month, vnFormat.format(tongTienDaBan), vnFormat.format(tongTienNhap),
 					vnFormat.format(tongTienLuong) });
 
-			dataset.addValue(tongTienDaBan / 1000000, "Tiền thu", month + "/" + year);
-			dataset.addValue((tongTienLuong + tongTienNhap) / 1000000, "Tiền vốn", month + "/" + year);
+			dataset.addValue(tongTienDaBan / 1000000000, "Tiền thu", month + "/" + year);
+			dataset.addValue((tongTienLuong + tongTienNhap) / 1000000000, "Tiền vốn", month + "/" + year);
 
 			tongTienThu += tongTienDaBan;
 			tongTienChi += tongTienLuong + tongTienNhap;
@@ -436,7 +436,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 	}
 
 	public JFreeChart createChart() {
-		JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU", "Tháng", "Số tiền (triệu/VNĐ)",
+		JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU", "Tháng", "Số tiền (tỷ/VNĐ)",
 				dataset, PlotOrientation.VERTICAL, true, true, false);
 		return barChart;
 	}

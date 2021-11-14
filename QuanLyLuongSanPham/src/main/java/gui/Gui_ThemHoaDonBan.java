@@ -1,13 +1,9 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -31,11 +27,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.plaf.OptionPaneUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -45,9 +40,7 @@ import model.HoaDonBanHang;
 import model.KhachHang;
 import model.NhanVien;
 import model.SanPham;
-import net.bytebuddy.asm.Advice.This;
 import services.QuanLyHoaDonService;
-import javax.swing.border.EtchedBorder;
 
 public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	private JTable tblSanPham;
@@ -61,7 +54,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	private JComboBox cboTimSp;
 	private JLabel lblTong;
 	private JTextField txtChietKhau;
-	private JTextField textField_2;
+	private JTextField txtTimSp;
 	private JButton btnThemKh;
 	private JComboBox cboLocTheoGia;
 	private JComboBox cboLocCuThe;
@@ -75,6 +68,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	private JComboBox cboKhachHang;
 	private JTextField txtMaNV;
 	private JTextField txtThue;
+	private List<SanPham> tempListSp;
 
 	/**
 	 * Launch the application.
@@ -135,11 +129,11 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 		cboTimSp.setBounds(1190, 11, 224, 44);
 		panel_1.add(cboTimSp);
 
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		textField_2.setBounds(788, 11, 360, 44);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		txtTimSp = new JTextField();
+		txtTimSp.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtTimSp.setBounds(788, 11, 378, 44);
+		panel_1.add(txtTimSp);
+		txtTimSp.setColumns(10);
 
 		cboLocTheoGia = new JComboBox();
 		cboLocTheoGia.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -153,7 +147,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 				new String[] { "Mức giá", "<200.000", "200.000 -1.000.000", ">1.000.000-3.000.000", ">3.000.000" }));
 		cboLocCuThe.setSelectedIndex(0);
 		cboLocCuThe.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		cboLocCuThe.setBounds(990, 65, 277, 44);
+		cboLocCuThe.setBounds(984, 65, 283, 44);
 		panel_1.add(cboLocCuThe);
 
 		btnXoaLoc = new JButton("Xóa lọc");
@@ -361,6 +355,25 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 			}
 		});
 
+		cboTimSp.addActionListener(e -> {
+			int i = cboTimSp.getSelectedIndex();
+			String value = txtTimSp.getText().trim();
+			if (i == 0) {
+				timTheoMa(value);
+			}
+			if (i == 1) {
+				timTheoTenSanPham(value);
+
+			}
+			if (i == 2) {
+				timTheoNhaCungCap(value);
+			}
+		});
+		btnThemKh.addActionListener(e -> {
+			SwingUtilities.invokeLater(() -> {
+				new Gui_ThemKhachHang().setVisible(true);
+			});
+		});
 		btnHuyBo.addActionListener(e -> {
 			int temp = JOptionPane.showConfirmDialog(null, "Bạn có muốn hủy?", "Thông báo", JOptionPane.YES_NO_OPTION);
 			if (JOptionPane.YES_OPTION == temp) {
@@ -378,12 +391,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					NhanVien nhanVien = quanLyHoaDonService.getNhanVienTheoMa(txtMaNV.getText().trim());
-					if (nhanVien == null) {
-						JOptionPane.showMessageDialog(null,
-								"Không tồn tại nhân viên nào có mã:" + txtMaNV.getText().trim(), "Cảnh báo",
-								JOptionPane.WARNING_MESSAGE);
-					}
+					capNhatTongTien();
 				}
 
 			}
@@ -422,6 +430,9 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 								}
 								JOptionPane.showMessageDialog(this, "Mua hàng thành công", "Thông báo",
 										JOptionPane.INFORMATION_MESSAGE);
+								if (Gui_QuanLyHoaDon.latch == null) {
+									Gui_QuanLyHoaDon.latch.countDown();
+								}
 								this.dispose();
 							} catch (Exception e2) {
 								JOptionPane.showMessageDialog(this, "Thêm thất bại \nVui lòng kiểm tra lại thông tin:",
@@ -566,6 +577,22 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 			}
 
 		});
+		cboLocCuThe.addActionListener(e -> {
+			int temp = cboLocCuThe.getSelectedIndex();
+			if (temp == 1) {
+				locTheoMucGia(0, 200000);
+			}
+			if (temp == 2) {
+				locTheoMucGia(200000, 1000000);
+			}
+			if (temp == 3) {
+				locTheoMucGia(1000000, 3000000);
+			}
+			if (temp == 4) {
+				locTheoMucGia(3000000, 2000000000);
+			}
+		});
+
 		/**
 		 * hiện thực chức năng cho comboBox sắp xếp theo giá
 		 *
@@ -695,7 +722,49 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 			i++;
 		}
 		NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
-		lblTong.setText("Tổng cộng: " + format.format(thanhTien - thanhTien * (km)));
+		lblTong.setText("Tổng cộng: " + format.format(thanhTien - thanhTien * (km) + thanhTien * thue));
+	}
+
+	public void locTheoMucGia(double from, double to) {
+		tempListSp = new ArrayList<SanPham>();
+		for (SanPham sanPham : listSp) {
+			if (sanPham.getGiaThanh() >= from && sanPham.getGiaThanh() <= to)
+				tempListSp.add(sanPham);
+		}
+		System.out.println(tempListSp + "Chinh");
+		ChucNang.clearDataTable(modelSanPham);
+		addSp(tempListSp);
+		ChucNang.addNullDataTable(modelSanPham);
+	}
+
+	public void timTheoNhaCungCap(String ncc) {
+		tempListSp = new ArrayList<SanPham>();
+//		listSp= new ArrayList<SanPham>();
+		
+		tempListSp = quanLyHoaDonService.timSanPhamTheoNhaCungCap(ncc);
+		listSp=tempListSp;
+		ChucNang.clearDataTable(modelSanPham);
+		addSp(tempListSp);
+		ChucNang.addNullDataTable(modelSanPham);
+	}
+
+	public void timTheoTenSanPham(String ten) {
+		tempListSp = new ArrayList<SanPham>();
+		tempListSp = quanLyHoaDonService.timSanPhamTheoTen(ten);
+		listSp=tempListSp;
+		ChucNang.clearDataTable(modelSanPham);
+		addSp(tempListSp);
+		ChucNang.addNullDataTable(modelSanPham);
+	}
+
+	public void timTheoMa(String ma) {
+		tempListSp = new ArrayList<SanPham>();
+		SanPham sp = quanLyHoaDonService.timSanPhamTheoMa(ma);
+		if (sp != null)
+			tempListSp.add(sp);
+		ChucNang.clearDataTable(modelSanPham);
+		addSp(tempListSp);
+		ChucNang.addNullDataTable(modelSanPham);
 	}
 
 	@Override

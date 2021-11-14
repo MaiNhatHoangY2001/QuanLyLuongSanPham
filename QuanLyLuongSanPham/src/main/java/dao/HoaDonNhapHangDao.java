@@ -21,13 +21,12 @@ public class HoaDonNhapHangDao {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
+			Object o=null;
 			tr.begin();
-			String query = "SELECT        o.maHoaDonNhap, o.ngayLapHoaDon, khuyenMai=0, o.thue, thanhTien=Sum(d.soLuong*d.donGia) "
-					+ "FROM            ChiTietHoaDonNhap AS d INNER JOIN "
-					+ "                         HoaDonNhapHang AS o ON d.maHoaDonNhap = o.maHoaDonNhap "
-					+ "where o.maHoaDonNhap='"+maHoaDon+"' "
-					+ "group by o.maHoaDonNhap,o.ngayLapHoaDon, khuyenMai,o.thue";
-			Object o = session.createNativeQuery(query).getSingleResult();
+			String query = "SELECT        o.maHoaDonNhap, o.ngayLapHoaDon, khuyenMai=0, o.thue, thanhTien=o.thanhTien "
+					+ "FROM           HoaDonNhapHang o "
+					+ "where o.maHoaDonNhap='"+maHoaDon+"' ";
+			o = session.createNativeQuery(query).getSingleResult();
 			tr.commit();
 			return o;
 		} catch (Exception e) {
