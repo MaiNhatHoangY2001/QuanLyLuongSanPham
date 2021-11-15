@@ -77,7 +77,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	public Gui_Chinh() {
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setSize(1920, 1046);
+		setSize(1920, 1037);
 		setResizable(false);
 		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
@@ -131,7 +131,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLyTaiKhoan = new JButton("Quản lý tài khoản");
 		btnQuanLyTaiKhoan.setFocusPainted(false);
 		btnQuanLyTaiKhoan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnQuanLyTaiKhoan.setIcon(new ImageIcon("img\\taikhoan.png"));
+		btnQuanLyTaiKhoan.setIcon(new ImageIcon("img\\ta2ikhoan.png"));
 		btnQuanLyTaiKhoan.setBounds(0, 575, 320, 115);
 		panel_1.add(btnQuanLyTaiKhoan);
 		btnQuanLyTaiKhoan.setIconTextGap(10);

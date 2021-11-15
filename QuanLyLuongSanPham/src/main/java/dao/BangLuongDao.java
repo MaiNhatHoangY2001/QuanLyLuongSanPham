@@ -200,8 +200,6 @@ public class BangLuongDao {
 
 	}
 
-	
-
 	/**
 	 * Xóa tất cả bảng lương theo thời gian
 	 * 
@@ -228,6 +226,37 @@ public class BangLuongDao {
 		return false;
 	}
 
+	/**
+	 * Lấy tổng lương nhân viên theo tháng năm
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public double getTongLuongNhanVien(int month, int year) {
+		double tienLuong = 0.0;
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT sum( bl.heSoLuong * bl.soNgayCong * nv.mucLuong + bl.tienSanPham * 0.1 ) AS tong"
+					+ " FROM BangLuong AS bl INNER JOIN" + " NhanVien AS nv ON bl.maNhanVien = nv.maNhanVien"
+					+ " where MONTH(bl.thoiGian) = " + month + " and YEAR(bl.thoiGian) = " + year
+					+ " and nv.trangThaiLamViec = 1";
+			tienLuong = (Double) session.createSQLQuery(query).getSingleResult();
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		
+		
+
+		return tienLuong;
+
+	}
+
 	public static void main(String[] args) {
 		BangLuongDao bangLuongDao = new BangLuongDao();
 //		NhanVien nhanVien = new NhanVien("NV0001");
@@ -235,7 +264,7 @@ public class BangLuongDao {
 //		bangLuong.setNhanVien(nhanVien);
 //		System.out.println(bangLuongDao.themBangLuong(bangLuong));
 
-	
+		System.out.println(bangLuongDao.getTongLuongNhanVien(10, 2021));
 
 	}
 }
