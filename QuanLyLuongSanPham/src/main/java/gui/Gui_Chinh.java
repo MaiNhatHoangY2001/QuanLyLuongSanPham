@@ -77,7 +77,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	public Gui_Chinh() {
 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setSize(1920, 1046);
+		setSize(1920, 1037);
 		setResizable(false);
 		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());

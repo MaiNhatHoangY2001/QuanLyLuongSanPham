@@ -86,7 +86,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	private JLabel lblNhanVien;
 	private JButton btnTao;
 	private JButton btnHienTai;
-	private JButton btnIn;
+	private JButton btnXuatFile;
 	private int oldValue;
 	private JComboBox<String> cboTimKiem;
 	// Format tiền theo VND
@@ -176,7 +176,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		cboMonth = new JMonthChooser();
 		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cboMonth.setLocale(new Locale("vi"));
-		cboMonth.setBounds(525, 14, 140, 47);
+		cboMonth.setBounds(477, 14, 202, 47);
 		panel_1_1.add(cboMonth);
 
 		spnYear = new JYearChooser();
@@ -344,18 +344,18 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			spnYear.setYear(LocalDate.now().getYear());
 		});
 
-		btnIn = new JButton("");
-		btnIn.setToolTipText("In bảng lương trong tháng");
-		btnIn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnIn.setIcon(new ImageIcon("img\\icons8-print-24.png"));
-		btnIn.setFocusPainted(false);
-		btnIn.setBorderPainted(false);
-		btnIn.setBackground(new Color(233, 180, 46));
-		btnIn.setBounds(1533, 14, 44, 47);
-		panel_1_1.add(btnIn);
+		btnXuatFile = new JButton("");
+		btnXuatFile.setToolTipText("Xuất file bảng lương trong tháng");
+		btnXuatFile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXuatFile.setIcon(new ImageIcon("img\\icons8-file-24.png"));
+		btnXuatFile.setFocusPainted(false);
+		btnXuatFile.setBorderPainted(false);
+		btnXuatFile.setBackground(new Color(233, 180, 46));
+		btnXuatFile.setBounds(1533, 14, 44, 47);
+		panel_1_1.add(btnXuatFile);
 		// Sự kiện
-		btnIn.addActionListener(e -> {
-			new Gui_In().setVisible(true);
+		btnXuatFile.addActionListener(e -> {
+			new Gui_XuatFile(cboMonth.getMonth() + 1, spnYear.getYear()).setVisible(true);
 		});
 
 		/**
