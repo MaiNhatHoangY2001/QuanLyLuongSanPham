@@ -236,34 +236,6 @@ public class NhanVienDao {
 	}
 
 	/**
-	 * get danh sách Nhân Viên theo tháng năm
-	 * 
-	 * @param month
-	 * @param year
-	 * @return
-	 */
-	public List<NhanVien> getNhanVienTheoThangNam(int month, int year) {
-		List<NhanVien> list = new ArrayList<NhanVien>();
-		Session session = sessionFactory.openSession();
-		Transaction tr = session.getTransaction();
-		try {
-			tr.begin();
-
-			list = session.createNativeQuery(
-					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
-							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month,
-					NhanVien.class).getResultList();
-			tr.commit();
-			return list;
-		} catch (Exception e) {
-			tr.rollback();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
-
-	/**
 	 * kiểm tra có phải nhân viên hành chanh không
 	 * 
 	 * @param maNhanVien

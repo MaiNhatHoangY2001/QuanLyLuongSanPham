@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+<<<<<<< HEAD
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
@@ -28,4 +29,66 @@
     <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.CellStyle"/>
     <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.HorizontalAlignment"/>
     <fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Cell"/>
+=======
+    <fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
+    <fullyQualifiedTypeName name="gui.Gui_Chinh"/>
+    <fullyQualifiedTypeName name="javax.swing.InputMap"/>
+    <fullyQualifiedTypeName name="javax.swing.KeyStroke"/>
+    <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="gui_package.CircleBtn"/>
+    <fullyQualifiedTypeName name="gui_package.RoundTextField"/>
+    <fullyQualifiedTypeName name="gui_package.RoundedPanel"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.awt.Desktop"/>
+    <fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
+    <fullyQualifiedTypeName name="gui.Gui_In"/>
+    <fullyQualifiedTypeName name="org.hibernate.persister.walking.spi.MetamodelGraphWalker"/>
+    <fullyQualifiedTypeName name="dao.BangLuongDao"/>
+    <fullyQualifiedTypeName name="model.BangLuong"/>
+    <fullyQualifiedTypeName name="dao.NhanVienDao"/>
+    <fullyQualifiedTypeName name="model.NhanVien"/>
+    <fullyQualifiedTypeName name="model.ChiTietHoaDonBan"/>
+    <fullyQualifiedTypeName name="services.QuanLyLuongService"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKeThuChi"/>
+    <fullyQualifiedTypeName name="org.hibernate.boot.model.naming.ImplicitNameSource"/>
+    <fullyQualifiedTypeName name="services.ThongKeService"/>
+    <fullyQualifiedTypeName name="dao.ChiTietHoaDonBanDao"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.util.Locale"/>
+    <fullyQualifiedTypeName name="model.HoaDonBanHang"/>
+    <fullyQualifiedTypeName name="dao.HoaDonBanHangDao"/>
+    <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
+    <fullyQualifiedTypeName name="dao.SanPhamDao"/>
+    <fullyQualifiedTypeName name="javax.swing.JDialog"/>
+    <fullyQualifiedTypeName name="javax.swing.JPanel"/>
+    <fullyQualifiedTypeName name="java.awt.Image"/>
+    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
+    <fullyQualifiedTypeName name="javax.swing.Box"/>
+    <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+    <fullyQualifiedTypeName name="javax.swing.plaf.basic.BasicBorders.MarginBorder"/>
+    <fullyQualifiedTypeName name="javax.swing.border.Border"/>
+    <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="model.KhachHang"/>
+    <fullyQualifiedTypeName name="services.QuanLyHoaDonService"/>
+    <fullyQualifiedTypeName name="javax.swing.SwingUtilities"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThemKhachHang"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.CountDownLatch"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
+    <fullyQualifiedTypeName name="model.ChiTietHoaDonNhap"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThemHoaDonBan"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
+    <fullyQualifiedTypeName name="model.SanPham"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+>>>>>>> a695879 (Chinh)
 </qualifiedTypeNameHistroy>

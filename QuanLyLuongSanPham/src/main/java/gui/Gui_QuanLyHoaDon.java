@@ -3,9 +3,9 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Time;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -41,7 +41,6 @@ import model.HoaDonBanHang;
 import model.HoaDonNhapHang;
 import model.KhachHang;
 import services.QuanLyHoaDonService;
-import java.awt.Rectangle;
 
 public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private JTextField txtTimKiem;
@@ -61,7 +60,13 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private DefaultTableModel modelChiTiet;
 	private JDateChooser txtNgayLap;
 	private JComboBox cboLoaiHoaDon;
-	public static CountDownLatch latch = new CountDownLatch(1);;
+	public static CountDownLatch latch = new CountDownLatch(1);
+	private JTextField txtMaKh;
+	private JTextField txtSdt;
+	private JTextField txtTen;
+	private JTextField txtDiaChi;
+	private JTextField txtMaNv;
+	private JTextField txtTenNv;;
 
 	/**
 	 * Create the panel.
@@ -199,7 +204,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		lblNewLabel.setBounds(0, 170, 161, 20);
 		add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Chi tiết hóa đơn");
+		JLabel lblNewLabel_1 = new JLabel("Bảng chi tiết hóa đơn");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(0, 648, 268, 20);
@@ -219,40 +224,86 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_4.setBounds(1177, 674, 396, 362);
 		add(panel_4);
 
-		lblMaKhachHang = new JLabel("Mã Khách Hàng: ");
+		lblMaKhachHang = new JLabel("Mã Khách: ");
 		lblMaKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblMaKhachHang.setBounds(15, 64, 345, 35);
+		lblMaKhachHang.setBounds(15, 64, 147, 35);
 		panel_4.add(lblMaKhachHang);
 
 		lblSdt = new JLabel("Số điện thoại: ");
 		lblSdt.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblSdt.setBounds(15, 115, 381, 35);
+		lblSdt.setBounds(15, 110, 155, 35);
 		panel_4.add(lblSdt);
 
 		lblDiaChi = new JLabel("Địa chỉ: ");
 		lblDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDiaChi.setBounds(15, 226, 381, 35);
+		lblDiaChi.setBounds(15, 202, 147, 35);
 		panel_4.add(lblDiaChi);
 
 		lblMaNhanVien = new JLabel("Mã nhân viên:");
 		lblMaNhanVien.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblMaNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMaNhanVien.setBorder(new LineBorder(Color.WHITE));
+		lblMaNhanVien.setBorder(new LineBorder(new Color(255, 0, 0)));
 		lblMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblMaNhanVien.setBounds(0, 272, 396, 90);
+		lblMaNhanVien.setBounds(8, 248, 155, 35);
 		panel_4.add(lblMaNhanVien);
 
-		JLabel lblThngTinKhch = new JLabel("Thông tin khách hàng");
+		JLabel lblThngTinKhch = new JLabel("Thông tin thêm");
 		lblThngTinKhch.setBorder(new LineBorder(new Color(255, 255, 255)));
 		lblThngTinKhch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblThngTinKhch.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblThngTinKhch.setBounds(0, 0, 396, 51);
 		panel_4.add(lblThngTinKhch);
 
-		lblTenKhachHang = new JLabel("Ten:");
-		lblTenKhachHang.setBounds(15, 168, 381, 42);
+		lblTenKhachHang = new JLabel("Tên: ");
+		lblTenKhachHang.setBounds(15, 156, 147, 35);
 		panel_4.add(lblTenKhachHang);
 		lblTenKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		
+		txtMaKh = new JTextField();
+		txtMaKh.setEditable(false);
+		txtMaKh.setBounds(172, 64, 214, 35);
+		panel_4.add(txtMaKh);
+		txtMaKh.setColumns(10);
+		
+		txtSdt = new JTextField();
+		txtSdt.setEditable(false);
+		txtSdt.setColumns(10);
+		txtSdt.setBounds(172, 110, 214, 35);
+		panel_4.add(txtSdt);
+		
+		txtTen = new JTextField();
+		txtTen.setEditable(false);
+		txtTen.setColumns(10);
+		txtTen.setBounds(172, 156, 214, 35);
+		panel_4.add(txtTen);
+		
+		txtDiaChi = new JTextField();
+		txtDiaChi.setEditable(false);
+		txtDiaChi.setColumns(10);
+		txtDiaChi.setBounds(172, 202, 214, 35);
+		panel_4.add(txtDiaChi);
+		
+		txtMaNv = new JTextField();
+		txtMaNv.setBorder(new LineBorder(new Color(255, 0, 0)));
+		txtMaNv.setEditable(false);
+		txtMaNv.setColumns(10);
+		txtMaNv.setBounds(172, 248, 214, 35);
+		panel_4.add(txtMaNv);
+		
+		JLabel lblTnNhnVin = new JLabel("Nhân viên: ");
+		lblTnNhnVin.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblTnNhnVin.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblTnNhnVin.setBorder(new LineBorder(new Color(255, 0, 0)));
+		lblTnNhnVin.setBounds(8, 294, 154, 35);
+		panel_4.add(lblTnNhnVin);
+		
+		txtTenNv = new JTextField();
+		txtTenNv.setBorder(new LineBorder(new Color(255, 0, 0)));
+		txtTenNv.setEditable(false);
+		txtTenNv.setColumns(10);
+		txtTenNv.setBounds(172, 294, 214, 35);
+		panel_4.add(txtTenNv);
 		ChucNang.setTableAlternateRow();
 		tblHoaDon.addMouseListener(this);
 
@@ -371,11 +422,12 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 					HoaDonBanHang hd = quanLyHoaDonService.getHoaDonBanHang(maHoaDon);
 					KhachHang khachHang = quanLyHoaDonService.getKhachHang(hd.getKhachHang().getMaKhachHang());
 					System.out.println(khachHang);
-					lblMaKhachHang.setText("Mã Khách Hàng: " + khachHang.getMaKhachHang());
-					lblSdt.setText("Số điện thoại: " + khachHang.getsDT());
-					lblDiaChi.setText("Địa chỉ: " + khachHang.getDiaChi());
-					lblTenKhachHang.setText("Tên khách hàng: " + khachHang.getTenKhachHang());
-					lblMaNhanVien.setText("Mã nhân viên: " + hd.getNhanVien().getMaNhanVien());
+					txtMaKh.setText(khachHang.getMaKhachHang());
+					txtSdt.setText(khachHang.getsDT());
+					txtDiaChi.setText(khachHang.getDiaChi());
+					txtTen.setText(khachHang.getTenKhachHang());
+					txtMaNv.setText(hd.getNhanVien().getMaNhanVien());
+					txtTenNv.setText(hd.getNhanVien().getTenNhanVien());
 				}
 				ChucNang.addNullDataTable(modelChiTiet);
 			} else if (temp == 1) {
@@ -388,7 +440,8 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 					duaDuLieuVaoTable(listChiTiet, modelChiTiet);
 					HoaDonNhapHang hd = quanLyHoaDonService.getHoaDonNhapHang(maHoaDon);
 					this.xoaRongKhachHang();
-					lblMaNhanVien.setText("Mã nhân viên: " + hd.getNhanVien().getMaNhanVien());
+					txtMaNv.setText(hd.getNhanVien().getMaNhanVien());
+					txtTenNv.setText(hd.getNhanVien().getTenNhanVien());
 				}
 				ChucNang.addNullDataTable(modelChiTiet);
 			}
@@ -400,11 +453,12 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	 * xóa rỗng tất cả thông tin của khách hàng
 	 */
 	public void xoaRongKhachHang() {
-		lblMaKhachHang.setText("Mã Khách Hàng: ");
-		lblSdt.setText("Số điện thoại: ");
-		lblDiaChi.setText("Địa chỉ: ");
-		lblTenKhachHang.setText("Tên khách hàng: ");
-		lblMaNhanVien.setText("Mã Nhân viên: ");
+		txtMaKh.setText("");
+		txtSdt.setText("");
+		txtDiaChi.setText("");
+		txtTen.setText("");
+		txtMaNv.setText("");
+		txtTenNv.setText("");
 	}
 
 	/**

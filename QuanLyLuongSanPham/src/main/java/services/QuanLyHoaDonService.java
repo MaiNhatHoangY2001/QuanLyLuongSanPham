@@ -109,4 +109,19 @@ public class QuanLyHoaDonService {
 		}
 		else return null;
 	}
+	public boolean themHoaDonNhap(HoaDonNhapHang hoaDonNhapHang) {
+		if(hoaDonNhapHang!= null)
+			return hoaDonNhapHangDao.themHoaDonNhap(hoaDonNhapHang);
+		return false;
+	}
+	public boolean themChiTietNhap(ChiTietHoaDonNhap chiTietHoaDonNhap) {
+		if(chiTietHoaDonNhap!= null)
+			return chiTietHoaDonNhapDao.themChiHoaDonNhap(chiTietHoaDonNhap);
+		return false;
+	}
+	public boolean  themSanPham(SanPham sanPham) {
+		if(sanPham!= null)
+			return sanPhamDao.themSanPham(sanPham);
+		return false;
+	}
 }
