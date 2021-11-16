@@ -15,6 +15,7 @@ public class ChiTietHoaDonNhapDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
 	public boolean themChiHoaDonNhap(ChiTietHoaDonNhap chiTietHoaDonNhap) {
+
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {

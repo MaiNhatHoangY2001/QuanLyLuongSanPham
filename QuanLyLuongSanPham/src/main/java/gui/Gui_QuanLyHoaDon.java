@@ -60,7 +60,6 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private DefaultTableModel modelChiTiet;
 	private JDateChooser txtNgayLap;
 	private JComboBox cboLoaiHoaDon;
-	public static CountDownLatch latch = new CountDownLatch(1);
 	private JTextField txtMaKh;
 	private JTextField txtSdt;
 	private JTextField txtTen;

@@ -170,34 +170,35 @@ public class Gui_DangNhap extends JFrame {
 		panelNgang.setLayout(null);
 		
 		lblHD = new JLabel("");
-		lblHD.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\l.png"));
+		lblHD.setIcon(new ImageIcon("img\\l.png"));
 		lblHD.setBounds(41, 43, 148, 154);
 		panelNgang.add(lblHD);
 		lblHD.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblHD.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		lblTK = new JLabel("");
-		lblTK.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\tk.png"));
+		lblTK.setIcon(new ImageIcon("img\\tk.png"));
 		lblTK.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTK.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTK.setBounds(237, 43, 148, 154);
 		panelNgang.add(lblTK);
 		
 		lblDB = new JLabel("");
-		lblDB.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\database.png"));
+		lblDB.setIcon(new ImageIcon("img\\database.png"));
 		lblDB.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblDB.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDB.setBounds(812, 43, 148, 154);
 		panelNgang.add(lblDB);
 		
 		lblLuong = new JLabel("");
-		lblLuong.setIcon(new ImageIcon("D:\\gitfolder\\QuanLyLuongSanPham\\QuanLyLuongSanPham\\img\\sp.png"));
+		lblLuong.setIcon(new ImageIcon("img\\sp.png"));
 		lblLuong.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblLuong.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLuong.setBounds(1012, 43, 148, 154);
 		panelNgang.add(lblLuong);
 		
 	}
+	
 	private void close() {
 		// TODO Auto-generated method stub
 		WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);

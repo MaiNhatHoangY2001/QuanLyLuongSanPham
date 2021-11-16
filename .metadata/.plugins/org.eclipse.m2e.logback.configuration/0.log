@@ -14729,6 +14729,7 @@ java.util.ConcurrentModificationException: null
 2021-11-11 09:41:43,545 [Worker-51: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 2021-11-11 09:54:44,748 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2021-11-11 09:58:08,091 [Worker-29: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-11 09:58:08,099 [Worker-29: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
@@ -19322,6 +19323,8 @@ java.util.ConcurrentModificationException: null
 =======
 =======
 >>>>>>> a695879 (Chinh)
+=======
+>>>>>>> a695879 (Chinh)
 2021-11-11 13:53:46,901 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2021-11-11 13:54:17,755 [Worker-15: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: DeTaiPTUD:DeTaiPTUD:0.0.1-SNAPSHOT @ D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\pom.xml.
 2021-11-11 13:54:19,288 [Worker-15: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
@@ -21127,6 +21130,7 @@ java.util.ConcurrentModificationException: null
 2021-11-13 13:11:09,185 [Worker-8: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-13 13:11:09,186 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> a695879 (Chinh)
 >>>>>>> 9f8a5f19e44a41c2e431d540093492ace77f2539
 2021-11-13 14:16:05,265 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
@@ -22088,6 +22092,7 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.po
 2021-11-15 14:36:03,979 [Worker-51: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
 2021-11-15 14:36:03,982 [Worker-51: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-15 14:36:03,983 [Worker-51: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+<<<<<<< HEAD
 >>>>>>> 3b5e8cfa364aea339e4b34f1bdc0f9c296c2610c
 2021-11-16 19:35:09,885 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2021-11-16 19:35:14,337 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
@@ -22113,3 +22118,92 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.po
 2021-11-16 20:36:07,407 [Worker-6: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
 2021-11-16 20:36:07,707 [Worker-6: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-16 20:36:07,708 [Worker-6: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+=======
+=======
+>>>>>>> a695879 (Chinh)
+2021-11-16 20:26:29,899 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-11-16 20:26:55,622 [Worker-11: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: DeTaiPTUD:DeTaiPTUD:0.0.1-SNAPSHOT @ D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\pom.xml.
+2021-11-16 20:26:59,322 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:26:59,329 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:26:59,402 [Worker-14: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:26:59,403 [Worker-14: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:27:09,415 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2021-11-16 20:27:10,134 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: DeTaiPTUD:DeTaiPTUD:0.0.1-SNAPSHOT @ D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\pom.xml.
+2021-11-16 20:27:10,634 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /QuanLyLuongSanPham/src/main/java
+2021-11-16 20:27:10,634 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /QuanLyLuongSanPham/src/main/resources
+2021-11-16 20:27:10,636 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /QuanLyLuongSanPham/src/test/java
+2021-11-16 20:27:11,040 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2021-11-16 20:27:12,276 [Worker-18: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:27:12,278 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:27:12,316 [Worker-18: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:27:12,317 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:28:03,292 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:28:03,297 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:28:03,300 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:28:03,301 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:28:06,178 [Worker-7: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:28:06,180 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:28:06,183 [Worker-7: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:28:06,185 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:28:55,874 [Worker-8: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:28:55,876 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:28:55,880 [Worker-8: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:28:55,882 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:29:06,198 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:06,199 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:29:06,202 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:06,203 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:29:20,527 [Worker-1: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:20,529 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:29:20,532 [Worker-1: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:20,532 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:29:52,071 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:52,074 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:29:52,080 [Worker-3: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:52,081 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:29:56,144 [Worker-7: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:56,147 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:29:56,151 [Worker-7: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:29:56,152 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:30:12,241 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:12,242 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:30:12,244 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:12,245 [Worker-2: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:30:16,518 [Worker-19: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:16,520 [Worker-19: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:30:16,522 [Worker-19: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:16,523 [Worker-19: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:30:22,331 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:22,333 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:30:22,336 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:22,337 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:30:46,365 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:46,368 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:30:46,372 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:30:46,372 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:35:59,518 [Worker-20: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:35:59,521 [Worker-20: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:35:59,524 [Worker-20: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:35:59,525 [Worker-20: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:38:12,143 [Worker-20: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:12,144 [Worker-20: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:38:12,146 [Worker-20: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:12,147 [Worker-20: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:38:23,694 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:23,696 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:38:23,700 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:23,701 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:38:29,162 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:29,164 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:38:29,167 [Worker-0: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:29,168 [Worker-0: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+2021-11-16 20:38:34,209 [Worker-19: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:34,210 [Worker-19: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:38:34,213 [Worker-19: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:38:34,213 [Worker-19: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
+>>>>>>> 3c659ef9c56ece9c79485cb3130d608d48440e94
+2021-11-16 20:41:02,972 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-11-16 20:41:09,784 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:41:09,789 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 20:41:09,846 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 20:41:09,847 [Worker-9: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources
