@@ -47,14 +47,12 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	private JTextField txtTongSoSV;
 	private JTextField txtSoTrang;
 
-	private JPanel pnlHeader;
+	protected JPanel pnlHead;
 	private JPanel pnlContent;
 
 	private JLabel lblNgay;
 	private JLabel lblGio;
 	private JLabel lblTitleHeader;
-	private JLabel lblUser;
-	private JLabel lblDangXuat;
 	private JLabel lblThongTinNV;
 	private JLabel lblTongSoNV;
 
@@ -96,66 +94,37 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		 * Phan: Header
 		 */
 		// Background header
-		pnlHeader = new JPanel();
-		pnlHeader.setLayout(null);
-		pnlHeader.setBackground(new Color(242, 129, 25));
-		pnlHeader.setBounds(0, 0, 1600, 92);
-		add(pnlHeader);
+		pnlHead = new JPanel();
+		pnlHead.setLayout(null);
+		pnlHead.setBackground(new Color(242, 129, 25));
+		pnlHead.setBounds(0, 0, 1600, 92);
+		add(pnlHead);
 
 		// Jlable Title Header
 		lblTitleHeader = new JLabel("QUẢN LÝ NHÂN VIÊN");
 		lblTitleHeader.setForeground(Color.WHITE);
 		lblTitleHeader.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblTitleHeader.setBounds(519, 0, 535, 92);
-		pnlHeader.add(lblTitleHeader);
+		pnlHead.add(lblTitleHeader);
 
 		// Jlable Date
 		lblNgay = new JLabel("17/10/2021");
 		lblNgay.setForeground(Color.WHITE);
 		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNgay.setBounds(10, 11, 122, 29);
-		pnlHeader.add(lblNgay);
+		pnlHead.add(lblNgay);
 
 		// Jlable Time
 		lblGio = new JLabel("7:27:50");
 		lblGio.setForeground(Color.WHITE);
 		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblGio.setBounds(10, 51, 81, 29);
-		pnlHeader.add(lblGio);
-		ChucNang.setGio(lblGio, lblNgay); // Setup run time
 
-		// JLable User Name
-		lblUser = new JLabel("Chinh");
-		lblUser.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblUser.setForeground(Color.WHITE);
-		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblUser.setBounds(1255, 10, 271, 30);
-		pnlHeader.add(lblUser);
-		// Jlable User Icon
+		pnlHead.add(lblGio);
+		ChucNang.setGio(lblGio, lblNgay);
 
-		// JLable Logout
-		lblDangXuat = new JLabel("Đăng Xuất");
-		lblDangXuat.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblDangXuat.setForeground(Color.WHITE);
-		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDangXuat.setBounds(1255, 50, 271, 30);
-		pnlHeader.add(lblDangXuat);
-
-		JLabel lblIconUser = new JLabel("");
 		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
-		lblIconUser.setIcon(new ImageIcon(imgUser));
-		lblIconUser.setForeground(Color.WHITE);
-		lblIconUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblIconUser.setBounds(1536, 10, 38, 30);
-		pnlHeader.add(lblIconUser);
-
-		JLabel lblIconDangXuat = new JLabel("");
 		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
-		lblIconDangXuat.setIcon(new ImageIcon(imgDX));
-		lblIconDangXuat.setForeground(Color.WHITE);
-		lblIconDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblIconDangXuat.setBounds(1536, 50, 38, 30);
-		pnlHeader.add(lblIconDangXuat);
 		// JLable Icon Logout
 
 		/*

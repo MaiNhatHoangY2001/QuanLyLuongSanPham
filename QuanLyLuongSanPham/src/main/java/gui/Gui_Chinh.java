@@ -56,6 +56,17 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
 				trangHD.pnlHead, this, Gui_DangNhap.getInstance());
+		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+				trangLuong.pnlHead, this, Gui_DangNhap.getInstance());
+		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+				trangNV.pnlHead, this, Gui_DangNhap.getInstance());
+		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+				trangTK.pnlHead, this, Gui_DangNhap.getInstance());
+		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+				trangSP.pnlHead, this, Gui_DangNhap.getInstance());
+		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+				trangtaiKhoan.pnlHead, this, Gui_DangNhap.getInstance());
+
 		phanQuyen();
 		System.out.println(taiKhoan.getTenTaiKhoan());
 	}
