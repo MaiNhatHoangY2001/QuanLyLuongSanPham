@@ -245,6 +245,7 @@ public class NhanVienDao {
 			return true;
 		} catch (Exception e) {
 			tr.rollback();
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}

@@ -21,12 +21,15 @@ public class TaiKhoanDao {
 			tr.begin();
 			session.save(taiKhoan);
 			tr.commit();
+			return true;
 		} catch (Exception e) {
 			tr.rollback();
-			return false;
+			e.printStackTrace();
 		}
-		session.close();
-		return true;
+		finally {
+			session.close();
+		}
+		return false;
 	}
 
 	public TaiKhoan getTaiKhoan(String tenTaiKhoan) {

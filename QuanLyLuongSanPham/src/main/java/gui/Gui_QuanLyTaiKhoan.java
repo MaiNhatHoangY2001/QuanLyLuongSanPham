@@ -272,7 +272,8 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	
 	modelTaiKhoan = (DefaultTableModel) tblTaiKhoan.getModel();
 	
-	
+	//Su kien
+	btnThem.addActionListener(this);
 	
 	//load data
 	daoTK = new TaiKhoanDao();
