@@ -21966,3 +21966,4 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.po
 2021-11-14 22:22:21,594 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped Server@532ecde3{STOPPING}[10.0.6,sto=0]
 2021-11-14 22:22:21,628 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@156b46a9{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
 2021-11-14 22:22:21,636 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@77291eab{/help,null,STOPPED}
+2021-11-16 17:49:55,261 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
