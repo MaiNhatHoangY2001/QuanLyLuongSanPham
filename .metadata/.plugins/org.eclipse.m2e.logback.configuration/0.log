@@ -22980,3 +22980,8 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.po
 2021-11-16 23:16:43,052 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped Server@64d8c6c7{STOPPING}[10.0.6,sto=0]
 2021-11-16 23:16:43,058 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@a65b570{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
 2021-11-16 23:16:43,070 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@55c40f57{/help,null,STOPPED}
+2021-11-16 23:18:09,611 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-11-16 23:18:14,573 [Worker-1: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 23:18:14,585 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 26 resources
+2021-11-16 23:18:14,843 [Worker-1: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-16 23:18:14,844 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\HOC_TAP\Nam 3-HK1\PTUD\BaiTapLon\QuanLyLuongSanPham\QuanLyLuongSanPham\src\test\resources

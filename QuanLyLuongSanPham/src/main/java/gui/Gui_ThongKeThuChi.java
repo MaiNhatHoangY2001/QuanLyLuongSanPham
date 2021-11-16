@@ -47,10 +47,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel lblGio;
-	private JLabel lblIconUser;
-	private JLabel lblIconDX;
 	private JLabel lblNgay;
-	private JLabel lblTenDN;
 	private JYearChooser spnYear;
 	private JButton btnHienTai;
 	private String[] colsThongKe = { "Tháng", "Tổng Tiền bán sản phẩm", "Tiền nhập sản phẩm", "Tiền Lương nhân viên" };
@@ -65,6 +62,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 	private JLabel lblTongTienThu;
 	private JTable tblSanPham;
 	private DefaultTableModel modelSanPham;
+	protected JPanel pnlHead;
 
 	/**
 	 * Create the frame.
@@ -74,11 +72,11 @@ public class Gui_ThongKeThuChi extends JPanel {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(new Color(242, 129, 25));
-		panel.setBounds(0, 0, 1600, 92);
-		add(panel);
+		pnlHead = new JPanel();
+		pnlHead.setLayout(null);
+		pnlHead.setBackground(new Color(242, 129, 25));
+		pnlHead.setBounds(0, 0, 1600, 92);
+		add(pnlHead);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setPreferredSize(new Dimension(1600, 72));
@@ -91,7 +89,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblNewLabel.setBounds(491, 0, 531, 92);
-		panel.add(lblNewLabel);
+		pnlHead.add(lblNewLabel);
 
 		/**
 		 * set Ngày giờ
@@ -100,47 +98,17 @@ public class Gui_ThongKeThuChi extends JPanel {
 		lblNgay.setForeground(Color.WHITE);
 		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNgay.setBounds(0, 16, 233, 33);
-		panel.add(lblNgay);
+		pnlHead.add(lblNgay);
 
 		lblGio = new JLabel("New label");
 		lblGio.setForeground(Color.WHITE);
 		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblGio.setBounds(0, 50, 201, 42);
-		panel.add(lblGio);
+		pnlHead.add(lblGio);
 
 		ChucNang.setGio(lblGio, lblNgay);
-
-		/**
-		 * Tên đăng nhập
-		 */
-		lblTenDN = new JLabel("Hoàng Văn Chinh");
-		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTenDN.setForeground(Color.WHITE);
-		lblTenDN.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTenDN.setBounds(1272, 11, 260, 33);
-		panel.add(lblTenDN);
-
-		lblIconUser = new JLabel("");
 		Image imgUser = new ImageIcon("img\\user1.png").getImage();
-		lblIconUser.setIcon(new ImageIcon(imgUser));
-		lblIconUser.setBounds(1539, 11, 40, 40);
-		panel.add(lblIconUser);
-
-		/**
-		 * Đăng xuất
-		 */
-		JLabel lblDangXuat = new JLabel("Đăng xuất");
-		lblDangXuat.setForeground(Color.WHITE);
-		lblDangXuat.setFont(new Font("Arial", Font.PLAIN, 24));
-		lblDangXuat.setBounds(1419, 55, 110, 24);
-		panel.add(lblDangXuat);
-
-		lblIconDX = new JLabel("");
 		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
-		lblIconDX.setIcon(new ImageIcon(imgDX));
-		lblIconDX.setBounds(1539, 54, 25, 25);
-		panel.add(lblIconDX);
 
 		/**
 		 * 

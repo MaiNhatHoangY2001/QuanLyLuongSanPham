@@ -213,30 +213,29 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		cmbLoai.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbLoai.setBounds(316, 224, 800, 40);
 		pnlInput.add(cmbLoai);
-		
+
 		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("Trạng Thái:");
 		lblNewLabel_1_1_1_1_1_1.setForeground(Color.BLACK);
 		lblNewLabel_1_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_1_1_1_1_1_1.setBounds(81, 488, 225, 40);
 		pnlInput.add(lblNewLabel_1_1_1_1_1_1);
-		
+
 		radConBan = new JRadioButton("Còn Bán");
 		radConBan.setSelected(true);
 		radConBan.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		radConBan.setBounds(316, 488, 250, 40);
 		radConBan.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlInput.add(radConBan);
-		
+
 		radHetBan = new JRadioButton("Hết Bán");
 		radHetBan.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		radHetBan.setBounds(590, 488, 250, 40);
 		radHetBan.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlInput.add(radHetBan);
-		
-		 ButtonGroup group = new ButtonGroup();
-		 group.add(radConBan);
-		 group.add(radHetBan);
-		
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(radConBan);
+		group.add(radHetBan);
 
 		/*
 		 * Cac nut
@@ -449,17 +448,24 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	 * @param sp1: Thông tin sản phẩm
 	 */
 	public void hienThongTinSanPham(SanPham sp1) {
+		System.out.println(sp1.getNgaySanXuat());
 		txtTenSanPham.setText(sp1.getTenSanPham());
 		txtGiaThanh.setText(fm.format(sp1.getGiaThanh()));
 		txtNCC.setText(sp1.getnCC());
 		txtSanPham.setText(sp1.getMaSanpham());
+
 		int ngay = sp1.getNgaySanXuat().getDayOfMonth();
-		cmbNgay.setSelectedItem(ngay);
+		System.out.println(ngay);
+		cmbNgay.setSelectedItem(ngay + "");
 		int thang = sp1.getNgaySanXuat().getMonthValue();
+		System.out.println(thang);
 		cmbThang.setSelectedItem("Tháng " + thang);
 		int nam = sp1.getNgaySanXuat().getYear();
-		cmbNam.setSelectedItem(nam);
+		System.out.println(nam);
+		cmbNam.setSelectedItem(nam + "");
+
 		cmbLoai.setSelectedItem(sp1.getLoai());
+
 		if (sp1.isTrangThai() == true)
 			radConBan.setSelected(true);
 		else

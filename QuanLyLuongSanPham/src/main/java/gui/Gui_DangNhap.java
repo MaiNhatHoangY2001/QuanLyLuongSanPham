@@ -59,6 +59,7 @@ public class Gui_DangNhap extends JFrame {
 	public Gui_DangNhap() {
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -74,9 +75,10 @@ public class Gui_DangNhap extends JFrame {
 				setLocation(x - xClicked, y - yClicked);
 			}
 		});
-
+		
 		setUndecorated(true);
 		setBounds(100, 100, 1200, 800);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(245, 129, 25));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -104,12 +106,14 @@ public class Gui_DangNhap extends JFrame {
 		lblTaiKhoan.setBounds(30, 124, 109, 50);
 		panelThongTinDN.add(lblTaiKhoan);
 
-		txtTaiKhoan = new JTextField();
+		txtTaiKhoan = new JTextField("NV19020001");
+		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTaiKhoan.setBounds(149, 124, 827, 50);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 
 		txtMatKhau = new JPasswordField();
+		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMatKhau.setColumns(10);
 		txtMatKhau.setBounds(149, 224, 827, 50);
 		panelThongTinDN.add(txtMatKhau);
@@ -207,17 +211,21 @@ public class Gui_DangNhap extends JFrame {
 			String ten = txtTaiKhoan.getText().trim();
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
-			if (taiKhoan != null)
-				if (mk.equals(taiKhoan.getMatKhau())) {
-					chinh.setTaiKhoan(taiKhoan);
-					chinh.setVisible(true);
-					this.setVisible(false);
-				}
+			if (!(KiemTraRongText(txtTaiKhoan))) {
+				if(taiKhoan != null)
+					if (mk.equals(taiKhoan.getMatKhau())) {
+						chinh.setTaiKhoan(taiKhoan);
+						chinh.setVisible(true);
+						this.setVisible(false);
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+					}
 				else {
-					JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+					JOptionPane.showMessageDialog(this, "Sai tên tài khoản");
 				}
-			else {
-				JOptionPane.showMessageDialog(this, "Sai tên tài khoản");
+			}else {
+				JOptionPane.showMessageDialog(this, "Tên tài khoản không được bỏ trống");
 			}
 		});
 
@@ -229,9 +237,7 @@ public class Gui_DangNhap extends JFrame {
 	public static Gui_DangNhap getInstance() {
 		return new Gui_DangNhap();
 	}
-	private void close() {
-		// TODO Auto-generated method stub
-		WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	public boolean KiemTraRongText(JTextField txt) {
+		return txt.getText().equals("") ? true : false;
 	}
 }

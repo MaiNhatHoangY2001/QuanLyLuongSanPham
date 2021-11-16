@@ -45,15 +45,14 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	private static final long serialVersionUID = 1L;
 	private JTextField txtTImKiem;
 	private JTextField txtTongSoSV;
+	private JTextField txtSoTrang;
 
-	private JPanel pnlHeader;
+	protected JPanel pnlHead;
 	private JPanel pnlContent;
 
 	private JLabel lblNgay;
 	private JLabel lblGio;
 	private JLabel lblTitleHeader;
-	private JLabel lblUser;
-	private JLabel lblDangXuat;
 	private JLabel lblThongTinNV;
 	private JLabel lblTongSoNV;
 
@@ -61,6 +60,11 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	private JButton btnSuaNV;
 	private JButton btnXaThai;
 	private JButton btnTimKiem;
+	private JButton btnDoubleTrai;
+	private JButton btnTrai;
+	private JButton btnPhai;
+	private JButton btnDoublePhai;
+	private JButton btnLamMoi;
 
 	private JComboBox cmbLoaiTimKiem;
 
@@ -70,12 +74,6 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	private CircleBtn btnLamMoi;
-	private JTextField txtSoTrang;
-	private JButton btnDoubleTrai;
-	private JButton btnTrai;
-	private JButton btnPhai;
-	private JButton btnDoublePhai;
 	private List<NhanVien> list50NV;
 	private List<String> listMaNV;
 	private QuanLyNhanVienService nvSV;
@@ -88,7 +86,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	 * Create the panel.
 	 */
 	public Gui_QuanLyNhanVien() {
-		setSize(1600, 1007);
+		setSize(1600, 1002);
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
@@ -96,64 +94,37 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		 * Phan: Header
 		 */
 		// Background header
-		pnlHeader = new JPanel();
-		pnlHeader.setLayout(null);
-		pnlHeader.setBackground(new Color(242, 129, 25));
-		pnlHeader.setBounds(0, 0, 1600, 92);
-		add(pnlHeader);
+		pnlHead = new JPanel();
+		pnlHead.setLayout(null);
+		pnlHead.setBackground(new Color(242, 129, 25));
+		pnlHead.setBounds(0, 0, 1600, 92);
+		add(pnlHead);
 
 		// Jlable Title Header
 		lblTitleHeader = new JLabel("QUẢN LÝ NHÂN VIÊN");
 		lblTitleHeader.setForeground(Color.WHITE);
 		lblTitleHeader.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblTitleHeader.setBounds(519, 0, 535, 92);
-		pnlHeader.add(lblTitleHeader);
+		pnlHead.add(lblTitleHeader);
 
 		// Jlable Date
 		lblNgay = new JLabel("17/10/2021");
 		lblNgay.setForeground(Color.WHITE);
 		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNgay.setBounds(10, 11, 122, 29);
-		pnlHeader.add(lblNgay);
+		pnlHead.add(lblNgay);
 
 		// Jlable Time
 		lblGio = new JLabel("7:27:50");
 		lblGio.setForeground(Color.WHITE);
 		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblGio.setBounds(10, 51, 81, 29);
-		pnlHeader.add(lblGio);
-		ChucNang.setGio(lblGio, lblNgay); // Setup run time
 
-		// JLable User Name
-		lblUser = new JLabel("Chinh");
-		lblUser.setForeground(Color.WHITE);
-		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblUser.setBounds(1445, 10, 81, 30);
-		pnlHeader.add(lblUser);
-		// Jlable User Icon
+		pnlHead.add(lblGio);
+		ChucNang.setGio(lblGio, lblNgay);
 
-		// JLable Logout
-		lblDangXuat = new JLabel("Đăng Xuất");
-		lblDangXuat.setForeground(Color.WHITE);
-		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDangXuat.setBounds(1414, 50, 112, 30);
-		pnlHeader.add(lblDangXuat);
-
-		JLabel lblIconUser = new JLabel("");
 		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
-		lblIconUser.setIcon(new ImageIcon(imgUser));
-		lblIconUser.setForeground(Color.WHITE);
-		lblIconUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblIconUser.setBounds(1536, 10, 38, 30);
-		pnlHeader.add(lblIconUser);
-
-		JLabel lblIconDangXuat = new JLabel("");
 		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
-		lblIconDangXuat.setIcon(new ImageIcon(imgDX));
-		lblIconDangXuat.setForeground(Color.WHITE);
-		lblIconDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblIconDangXuat.setBounds(1536, 50, 38, 30);
-		pnlHeader.add(lblIconDangXuat);
 		// JLable Icon Logout
 
 		/*
@@ -167,7 +138,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		add(pnlNgang);
 
 		// JButton Them Nhan Vien
-		btnThemNV = new CircleBtn("Thêm");
+		btnThemNV = new JButton("Thêm");
 		btnThemNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThemNV.setBackground(new Color(233, 180, 46));
 		btnThemNV.setBounds(10, 13, 150, 45);
@@ -175,7 +146,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnThemNV);
 
 		// JButton Sua Nhan Vien
-		btnSuaNV = new CircleBtn("Sửa");
+		btnSuaNV = new JButton("Sửa");
 		btnSuaNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSuaNV.setBackground(new Color(233, 180, 46));
 		btnSuaNV.setBounds(170, 13, 150, 45);
@@ -183,7 +154,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnSuaNV);
 
 		// JButton Xoa Nhan Vien
-		btnXaThai = new CircleBtn("Sa Thải");
+		btnXaThai = new JButton("Sa Thải");
 		btnXaThai.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnXaThai.setBackground(new Color(233, 180, 46));
 		btnXaThai.setBounds(330, 13, 150, 45);
@@ -191,7 +162,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnXaThai);
 
 		// Làm mới
-		btnLamMoi = new CircleBtn("Làm mới");
+		btnLamMoi = new JButton("Làm mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnLamMoi.setBackground(new Color(233, 180, 46));
 		btnLamMoi.setBounds(1424, 13, 150, 45);
@@ -199,7 +170,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnLamMoi);
 
 		// JButton Tim Kiem
-		btnTimKiem = new CircleBtn("Tìm");
+		btnTimKiem = new JButton("Tìm");
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnTimKiem.setBackground(new Color(233, 180, 46));
 		btnTimKiem.setBounds(1265, 13, 150, 45);
@@ -207,9 +178,9 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		pnlNgang.add(btnTimKiem);
 
 		// JTextField Tim Kiem
-		txtTImKiem = new RoundTextField("", 100);
+		txtTImKiem = new JTextField("", 100);
 		txtTImKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTImKiem.setBounds(490, 18, 439, 40);
+		txtTImKiem.setBounds(490, 16, 439, 40);
 		pnlNgang.add(txtTImKiem);
 
 		// JCombobox Tim kiem
@@ -241,9 +212,8 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		 */
 		// JTextField Tong so Nhan Vien
 		txtTongSoSV = new JTextField();
-		txtTongSoSV.setForeground(Color.BLACK);
 		txtTongSoSV.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTongSoSV.setEnabled(false);
+		txtTongSoSV.setEditable(false);
 		txtTongSoSV.setColumns(10);
 		txtTongSoSV.setBounds(1400, 11, 174, 32);
 		pnlContent.add(txtTongSoSV);
@@ -260,7 +230,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		 */
 		// Thanh Cuon
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 47, 1564, 735);
+		scrollPane.setBounds(10, 47, 1564, 723);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
 		String headerTitle[] = { "Mã","Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái", "Địa chỉ" };
@@ -291,9 +261,12 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(table);
 		scrollPane.setEnabled(false);
+		
+		int[] i = {5};
+		ChucNang.setRightAlignmentTable(i, table);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 785, 1600, 57);
+		panel.setBounds(0, 780, 1600, 57);
 		panel.setBackground(new Color(194, 93, 0));
 		pnlContent.add(panel);
 		panel.setLayout(null);
@@ -301,30 +274,39 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		txtSoTrang = new JTextField();
 		txtSoTrang.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSoTrang.setFont(new Font("Tahoma", Font.BOLD, 16));
-		txtSoTrang.setBounds(725, 10, 150, 40);
+		txtSoTrang.setEditable(false);
+		txtSoTrang.setBounds(725, 8, 150, 40);
 		panel.add(txtSoTrang);
 
 		btnTrai = new JButton("<");
+		btnTrai.setForeground(Color.WHITE);
 		btnTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnTrai.setBounds(626, 10, 89, 40);
+		btnTrai.setBounds(626, 8, 89, 40);
+		btnTrai.setBackground(new Color(233, 180, 46));
 		btnTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnTrai);
 
 		btnDoubleTrai = new JButton("<<");
+		btnDoubleTrai.setForeground(Color.WHITE);
 		btnDoubleTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnDoubleTrai.setBounds(527, 10, 89, 40);
+		btnDoubleTrai.setBounds(527, 8, 89, 40);
+		btnDoubleTrai.setBackground(new Color(233, 180, 46));
 		btnDoubleTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnDoubleTrai);
 
 		btnPhai = new JButton(">");
+		btnPhai.setForeground(Color.WHITE);
 		btnPhai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnPhai.setBounds(885, 10, 89, 40);
+		btnPhai.setBounds(885, 8, 89, 40);
+		btnPhai.setBackground(new Color(233, 180, 46));
 		btnPhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnPhai);
 
 		btnDoublePhai = new JButton(">>");
+		btnDoublePhai.setForeground(Color.WHITE);
 		btnDoublePhai.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnDoublePhai.setBounds(984, 10, 89, 40);
+		btnDoublePhai.setBounds(984, 8, 89, 40);
+		btnDoublePhai.setBackground(new Color(233, 180, 46));
 		btnDoublePhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnDoublePhai);
 

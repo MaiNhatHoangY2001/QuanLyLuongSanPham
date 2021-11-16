@@ -19,6 +19,7 @@ import gui_package.RoundedPanel;
 import model.TaiKhoan;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -33,11 +34,10 @@ import javax.swing.border.EtchedBorder;
 public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private String[] colsnameLK = { "Tên Tài Khoản", "Mật Khẩu" };
 	private DefaultTableModel modelTaiKhoan;
-	private JPanel panel;
+	JPanel pnlHead;
 	private JLabel lblQLTK;
 	private JLabel lblNgay;
 	private JLabel lblGio;
-	private JLabel lblLogoNV;
 	private JPanel panelTable;
 	private JPanel panelThem;
 	private JTable tblTaiKhoan;
@@ -73,40 +73,34 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		/**
 		 * Phần Trên chứa thanh menu và thanh bar ngang
 		 */
-		panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(new Color(242, 129, 25));
-		panel.setBounds(0, 0, 1600, 100);
-		add(panel);
+		pnlHead = new JPanel();
+		pnlHead.setLayout(null);
+		pnlHead.setBackground(new Color(242, 129, 25));
+		pnlHead.setBounds(0, 0, 1600, 100);
+		add(pnlHead);
 
 		lblQLTK = new JLabel("QUẢN LÝ TÀI KHOẢN");
 		lblQLTK.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblQLTK.setForeground(Color.WHITE);
 		lblQLTK.setHorizontalAlignment(SwingConstants.CENTER);
 		lblQLTK.setBounds(499, 0, 601, 100);
-		panel.add(lblQLTK);
+		pnlHead.add(lblQLTK);
 
 		lblNgay = new JLabel("New label");
 		lblNgay.setForeground(Color.WHITE);
 		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNgay.setBounds(0, 16, 233, 33);
-		panel.add(lblNgay);
+		pnlHead.add(lblNgay);
 
 		lblGio = new JLabel("New label");
 		lblGio.setForeground(Color.WHITE);
 		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblGio.setBounds(0, 50, 201, 42);
-		panel.add(lblGio);
+		pnlHead.add(lblGio);
 
 		ChucNang.setGio(lblGio, lblNgay);
-
-		lblLogoNV = new JLabel("Chinh");
-		lblLogoNV.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblLogoNV.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblLogoNV.setForeground(Color.WHITE);
-		lblLogoNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblLogoNV.setBounds(1371, 10, 192, 45);
-		panel.add(lblLogoNV);
+		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
+		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
 
 		/**
 		 * Phần dưới chứa bảng

@@ -155,9 +155,9 @@ public class ChucNang {
 		panel.add(lblTenDN);
 
 		JLabel lblIconUser = new JLabel("");
-		Image imgUser = new ImageIcon("img\\user1.png").getImage();
+		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
 		lblIconUser.setIcon(new ImageIcon(imgUser));
-		lblIconUser.setBounds(1539, 11, 40, 40);
+		lblIconUser.setBounds(1536, 10, 38, 30);
 		panel.add(lblIconUser);
 
 		/**
@@ -170,9 +170,9 @@ public class ChucNang {
 		panel.add(lblDangXuat);
 
 		JLabel lblIconDX = new JLabel("");
-		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
+		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
 		lblIconDX.setIcon(new ImageIcon(imgDX));
-		lblIconDX.setBounds(1539, 54, 25, 25);
+		lblIconDX.setBounds(1536, 50, 38, 30);
 		panel.add(lblIconDX);
 		lblDangXuat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		

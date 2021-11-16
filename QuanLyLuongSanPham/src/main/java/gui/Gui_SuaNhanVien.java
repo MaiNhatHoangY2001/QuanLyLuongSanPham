@@ -298,7 +298,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		txtHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtHeSoLuong.setBounds(316, 195, 801, 45);
 		pnlInput.add(txtHeSoLuong);
-		
+
 		lblMaNV = new JLabel("");
 		lblMaNV.setForeground(Color.WHITE);
 		lblMaNV.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -490,9 +490,9 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 	}
 
 	public void setDate(int ngay, int thang, int nam) {
-		cmbNgay.setSelectedItem(ngay);
+		cmbNgay.setSelectedItem(ngay + "");
 		cmbThang.setSelectedItem("Tháng " + thang);
-		cmbNam.setSelectedItem(nam);
+		cmbNam.setSelectedItem(nam + "");
 	}
 
 	public boolean KiemTraRongText(JTextField txt) {

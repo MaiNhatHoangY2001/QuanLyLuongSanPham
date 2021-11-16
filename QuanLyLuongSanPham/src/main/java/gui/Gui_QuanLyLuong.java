@@ -63,7 +63,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	private DefaultTableModel modelTinhLuong, modelSanPham;
 
 	private static final int CURRENT_DAY = LocalDateTime.now().getDayOfMonth();
-	private JPanel panel;
+	protected JPanel pnlHead;
 	private JLabel lblNewLabel;
 
 	private JLabel lblNgay;
@@ -96,11 +96,11 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
 
-		panel = new JPanel();
-		panel.setBounds(0, 0, 1600, 92);
-		panel.setLayout(null);
-		panel.setBackground(new Color(242, 129, 25));
-		add(panel);
+		pnlHead = new JPanel();
+		pnlHead.setBounds(0, 0, 1600, 92);
+		pnlHead.setLayout(null);
+		pnlHead.setBackground(new Color(242, 129, 25));
+		add(pnlHead);
 
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(0, 89, 1600, 72);
@@ -113,7 +113,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblNewLabel.setBounds(491, 0, 531, 92);
-		panel.add(lblNewLabel);
+		pnlHead.add(lblNewLabel);
 
 		/**
 		 * set Ngày giờ
@@ -122,13 +122,13 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		lblNgay.setForeground(Color.WHITE);
 		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNgay.setBounds(0, 16, 233, 33);
-		panel.add(lblNgay);
+		pnlHead.add(lblNgay);
 
 		lblGio = new JLabel("New label");
 		lblGio.setForeground(Color.WHITE);
 		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblGio.setBounds(0, 50, 201, 42);
-		panel.add(lblGio);
+		pnlHead.add(lblGio);
 
 		ChucNang.setGio(lblGio, lblNgay);
 
