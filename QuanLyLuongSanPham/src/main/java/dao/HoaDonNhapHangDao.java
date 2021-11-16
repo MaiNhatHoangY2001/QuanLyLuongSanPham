@@ -55,7 +55,7 @@ public class HoaDonNhapHangDao {
 
 	}
 
-	public boolean themHoaDonBan(HoaDonNhapHang HoaDonNhapHang) {
+	public boolean themHoaDonNhap(HoaDonNhapHang HoaDonNhapHang) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
@@ -154,7 +154,7 @@ public class HoaDonNhapHangDao {
 		HoaDonNhapHang.setNhanVien(nhanVien);
 
 		System.out.println(HoaDonNhapHang.toString());
-		nhapHangDao.themHoaDonBan(HoaDonNhapHang);
+		nhapHangDao.themHoaDonNhap(HoaDonNhapHang);
 	
 //		banHangDao.getHoaDonTheoNgay(5, 6, 2020);
 	}

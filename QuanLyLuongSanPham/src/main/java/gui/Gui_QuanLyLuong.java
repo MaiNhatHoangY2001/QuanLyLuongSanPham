@@ -3,7 +3,6 @@ package gui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
@@ -50,8 +49,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
+
 
 public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	/**
@@ -68,14 +66,12 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	private static final int CURRENT_DAY = LocalDateTime.now().getDayOfMonth();
 	private JPanel panel;
 	private JLabel lblNewLabel;
-	private JLabel lblTenDN;
+
 	private JLabel lblNgay;
 	private JLabel lblGio;
 	private JTextField txtTimKiem;
 	private JMonthChooser cboMonth;
 	private JYearChooser spnYear;
-	private JLabel lblIconDX;
-	private JLabel lblIconUser;
 	private JPanel panel_2;
 	private JLabel lblTenNhanVien;
 	private JLabel lblMaNhanVien;
@@ -86,7 +82,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	private JLabel lblNhanVien;
 	private JButton btnTao;
 	private JButton btnHienTai;
-	private JButton btnIn;
+	private JButton btnXuatFile;
 	private int oldValue;
 	private JComboBox<String> cboTimKiem;
 	// Format tiền theo VND
@@ -138,36 +134,9 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		ChucNang.setGio(lblGio, lblNgay);
 
 		/**
-		 * Tên đăng nhập
+		 * Tên label nhân viên
 		 */
-		lblTenDN = new JLabel("Chinh");
-		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTenDN.setForeground(Color.WHITE);
-		lblTenDN.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTenDN.setBounds(1459, 11, 73, 33);
-		panel.add(lblTenDN);
-
-		lblIconUser = new JLabel("");
-		Image imgUser = new ImageIcon("img\\user1.png").getImage();
-		lblIconUser.setIcon(new ImageIcon(imgUser));
-		lblIconUser.setBounds(1539, 11, 40, 40);
-		panel.add(lblIconUser);
-
-		/**
-		 * Đăng xuất
-		 */
-		JLabel lblDangXuat = new JLabel("Đăng xuất");
-		lblDangXuat.setForeground(Color.WHITE);
-		lblDangXuat.setFont(new Font("Arial", Font.PLAIN, 24));
-		lblDangXuat.setBounds(1419, 55, 110, 24);
-		panel.add(lblDangXuat);
-
-		lblIconDX = new JLabel("");
-		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
-		lblIconDX.setIcon(new ImageIcon(imgDX));
-		lblIconDX.setBounds(1539, 54, 25, 25);
-		panel.add(lblIconDX);
+		ChucNang.setLabelName("Hoàng Văn Chinh", panel);
 
 		/**
 		 * 
@@ -176,7 +145,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		cboMonth = new JMonthChooser();
 		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cboMonth.setLocale(new Locale("vi"));
-		cboMonth.setBounds(525, 14, 140, 47);
+		cboMonth.setBounds(477, 14, 202, 47);
 		panel_1_1.add(cboMonth);
 
 		spnYear = new JYearChooser();
@@ -344,18 +313,18 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			spnYear.setYear(LocalDate.now().getYear());
 		});
 
-		btnIn = new JButton("");
-		btnIn.setToolTipText("In bảng lương trong tháng");
-		btnIn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnIn.setIcon(new ImageIcon("img\\icons8-print-24.png"));
-		btnIn.setFocusPainted(false);
-		btnIn.setBorderPainted(false);
-		btnIn.setBackground(new Color(233, 180, 46));
-		btnIn.setBounds(1533, 14, 44, 47);
-		panel_1_1.add(btnIn);
+		btnXuatFile = new JButton("");
+		btnXuatFile.setToolTipText("Xuất file bảng lương trong tháng");
+		btnXuatFile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXuatFile.setIcon(new ImageIcon("img\\icons8-file-24.png"));
+		btnXuatFile.setFocusPainted(false);
+		btnXuatFile.setBorderPainted(false);
+		btnXuatFile.setBackground(new Color(233, 180, 46));
+		btnXuatFile.setBounds(1533, 14, 44, 47);
+		panel_1_1.add(btnXuatFile);
 		// Sự kiện
-		btnIn.addActionListener(e -> {
-			new Gui_In().setVisible(true);
+		btnXuatFile.addActionListener(e -> {
+			new Gui_XuatFile(cboMonth.getMonth() + 1, spnYear.getYear()).setVisible(true);
 		});
 
 		/**

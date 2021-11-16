@@ -14,7 +14,7 @@ import model.ChiTietHoaDonNhap;
 public class ChiTietHoaDonNhapDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 
-	public boolean themChiHoaDonBan(ChiTietHoaDonNhap chiTietHoaDonNhap) {
+	public boolean themChiHoaDonNhap(ChiTietHoaDonNhap chiTietHoaDonNhap) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
@@ -99,7 +99,7 @@ public class ChiTietHoaDonNhapDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT   a.maSanPham, p.tenSanPham, a.soLoHang , p.giaThanh, tongTien=p.giaThanh*a.soLoHang "
+			String query = "SELECT   a.maSanPham, p.tenSanPham,p.giaThanh, a.soLoHang ,  tongTien=p.giaThanh*a.soLoHang "
 					+ "FROM     ChiTietHoaDonNhap AS a INNER JOIN "
 					+ "             SanPham AS p ON a.maSanPham = p.maSanpham " + "where a.maHoaDonNhap='" + maHoadon
 					+ "'";

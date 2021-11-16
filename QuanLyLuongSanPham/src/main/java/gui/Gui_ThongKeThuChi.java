@@ -113,12 +113,12 @@ public class Gui_ThongKeThuChi extends JPanel {
 		/**
 		 * Tên đăng nhập
 		 */
-		lblTenDN = new JLabel("Chinh");
+		lblTenDN = new JLabel("Hoàng Văn Chinh");
 		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTenDN.setForeground(Color.WHITE);
 		lblTenDN.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTenDN.setBounds(1459, 11, 73, 33);
+		lblTenDN.setBounds(1272, 11, 260, 33);
 		panel.add(lblTenDN);
 
 		lblIconUser = new JLabel("");
@@ -169,9 +169,9 @@ public class Gui_ThongKeThuChi extends JPanel {
 		btnHienTai.setBackground(new Color(233, 180, 46));
 		btnHienTai.setBounds(727, 14, 112, 47);
 		panel_1_1.add(btnHienTai);
-		
+
 		JButton btnLamMoi = new JButton("Làm mới");
-		btnLamMoi.addActionListener(e ->{
+		btnLamMoi.addActionListener(e -> {
 			setDataThongKe(spnYear.getYear());
 		});
 		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -390,18 +390,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 			int month = i;
 			double tongTienDaBan = thongKeService.getTongBanTheoThoiGian(month, year);
 			double tongTienNhap = thongKeService.getTongNhapTheoThoiGian(month, year);
-
-			double tongTienLuong = 0.0;
-			List<NhanVien> dsNhanViens = thongKeService.getDsNhanVien();
-
-			for (NhanVien nhanVien : dsNhanViens) {
-				if (nhanVien.gettrangThaiLamViec() == true) {
-					BangLuong bangLuong = thongKeService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year,
-							month);
-					if (bangLuong != null)
-						tongTienLuong += bangLuong.tinhLuong();
-				}
-			}
+			double tongTienLuong = thongKeService.getTongLuongNhanVien(month, year);
 
 			modelThongKe.addRow(new Object[] { month, vnFormat.format(tongTienDaBan), vnFormat.format(tongTienNhap),
 					vnFormat.format(tongTienLuong) });
