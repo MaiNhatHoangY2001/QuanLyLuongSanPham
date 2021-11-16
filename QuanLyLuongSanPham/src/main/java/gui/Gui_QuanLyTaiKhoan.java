@@ -47,15 +47,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private JPanel panelThemTK;
 	private JLabel lblTen_1;
 	private JLabel lblTen_2;
-	private JTextField txtTenTK;
-	private JTextField txtMK;
+	private JTextField txt1;
+	private JTextField txt2;
 	private CircleBtn btnThem;
 	private CircleBtn btnXoaRong;
 	private JPanel panelSuaTK;
 	private JLabel lblTen_3;
 	private JLabel lblTen_4;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtTenTK;
+	private JTextField txtMK;
 	private CircleBtn btnThem_1;
 	private CircleBtn btnXoaRong_1;
 	private JPanel panelTTNV;
@@ -142,15 +142,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		lblTen_2.setBounds(23, 36, 116, 29);
 		panelThemTK.add(lblTen_2);
 		
-		txtTenTK = new JTextField();
-		txtTenTK.setColumns(10);
-		txtTenTK.setBounds(149, 37, 380, 30);
-		panelThemTK.add(txtTenTK);
+		txt1 = new JTextField();
+		txt1.setColumns(10);
+		txt1.setBounds(149, 37, 380, 30);
+		panelThemTK.add(txt1);
 		
-		txtMK = new JTextField();
-		txtMK.setColumns(10);
-		txtMK.setBounds(149, 107, 380, 30);
-		panelThemTK.add(txtMK);
+		txt2 = new JTextField();
+		txt2.setColumns(10);
+		txt2.setBounds(149, 107, 380, 30);
+		panelThemTK.add(txt2);
 		
 		btnThem = new CircleBtn("Tạo Tài Khoản");
 		btnThem.setBounds(168, 168, 120, 40);
@@ -179,15 +179,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		lblTen_4.setBounds(23, 36, 116, 29);
 		panelSuaTK.add(lblTen_4);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(149, 37, 380, 30);
-		panelSuaTK.add(textField_2);
+		txtTenTK = new JTextField();
+		txtTenTK.setColumns(10);
+		txtTenTK.setBounds(149, 37, 380, 30);
+		panelSuaTK.add(txtTenTK);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(149, 107, 380, 30);
-		panelSuaTK.add(textField_3);
+		txtMK = new JTextField();
+		txtMK.setColumns(10);
+		txtMK.setBounds(149, 107, 380, 30);
+		panelSuaTK.add(txtMK);
 		
 		btnThem_1 = new CircleBtn("Tạo Tài Khoản");
 		btnThem_1.setBounds(168, 168, 120, 40);
