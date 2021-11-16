@@ -235,8 +235,7 @@ public class Gui_ThemHoaDonNhap extends JFrame {
 		String loai = (String) cboLoai.getSelectedItem();
 		String ncc = txtNhaCungCap.getText().trim();
 		Date date = txtNgaySanXuat.getDate();
-//		LocalDate nsx = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
-		LocalDate nsx = LocalDate.now(); // Cái này t them để không bị lỗi. Lỗi tại ofInstant();
+		LocalDate nsx = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
 		SanPham sanPham = new SanPham(tenSp, Double.parseDouble(gia), ncc, loai, nsx, true);
 		quanLyHoaDonService.themSanPham(sanPham);
 		return sanPham;

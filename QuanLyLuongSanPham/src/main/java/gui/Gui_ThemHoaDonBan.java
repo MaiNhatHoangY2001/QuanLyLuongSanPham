@@ -665,10 +665,9 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	public void clearNullRow(DefaultTableModel model) {
 		int row = model.getDataVector().size();
 		for (int i = row - 1; i >= 0; i--) {
-//			if (model.getDataVector().get(i).elementAt(0) == null) {
-//				model.getDataVector().remove(i);
-//			}
-			// Lỗi tại elementAt(0)
+			if (model.getDataVector().get(i).elementAt(0) == null) {
+				model.getDataVector().remove(i);
+			}
 		}
 	}
 

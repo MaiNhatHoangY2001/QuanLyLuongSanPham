@@ -128,17 +128,19 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 
 		// JLable User Name
 		lblUser = new JLabel("Chinh");
+		lblUser.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblUser.setBounds(1383, 14, 81, 29);
+		lblUser.setBounds(1276, 11, 250, 29);
 		pnlHeader.add(lblUser);
 		// Jlable User Icon
 
 		// JLable Logout
 		lblDangXuat = new JLabel("Đăng Xuất");
+		lblDangXuat.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblDangXuat.setForeground(Color.WHITE);
 		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDangXuat.setBounds(1383, 57, 112, 29);
+		lblDangXuat.setBounds(1276, 51, 250, 29);
 		pnlHeader.add(lblDangXuat);
 		// JLable Icon Logout
 		JLabel lblIconUser = new JLabel("");
@@ -168,7 +170,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		add(pnlNgang);
 
 		// JButton Sua Nhan Vien
-		btnSuaNV = new CircleBtn("Sửa");
+		btnSuaNV = new JButton("Sửa");
 		btnSuaNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSuaNV.setBackground(new Color(233, 180, 46));
 		btnSuaNV.setBounds(10, 13, 150, 45);
@@ -176,7 +178,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.add(btnSuaNV);
 
 		// Làm mới
-		btnLamMoi = new CircleBtn("Làm mới");
+		btnLamMoi = new JButton("Làm mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnLamMoi.setBackground(new Color(233, 180, 46));
 		btnLamMoi.setBounds(1424, 13, 150, 45);
@@ -184,7 +186,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.add(btnLamMoi);
 
 		// JButton Tim Kiem
-		btnTimKiem = new CircleBtn("Tìm");
+		btnTimKiem = new JButton("Tìm");
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnTimKiem.setBackground(new Color(233, 180, 46));
 		btnTimKiem.setBounds(1265, 13, 150, 45);
@@ -192,7 +194,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.add(btnTimKiem);
 
 		// JTextField Tim Kiem
-		txtTImKiem = new RoundTextField("", 100);
+		txtTImKiem = new JTextField("", 100);
 		txtTImKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTImKiem.setBounds(330, 16, 505, 40);
 		pnlNgang.add(txtTImKiem);
@@ -246,7 +248,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		 */
 		// Thanh Cuon
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 47, 1564, 735);
+		scrollPane.setBounds(10, 47, 1564, 723);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
 		String headerTitle[] = { "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành", "Trạng Thái" };
@@ -280,7 +282,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(194, 93, 0));
-		panel.setBounds(0, 785, 1600, 57);
+		panel.setBounds(0, 780, 1600, 57);
 		pnlContent.add(panel);
 
 		txtSoTrang = new JTextField();
@@ -289,33 +291,37 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		txtSoTrang.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtSoTrang.setColumns(10);
 		txtSoTrang.setEditable(false);
-		txtSoTrang.setBounds(725, 10, 150, 40);
+		txtSoTrang.setBounds(725, 8, 150, 40);
 		panel.add(txtSoTrang);
 
 		btnTrai = new JButton("<");
+		btnTrai.setForeground(Color.WHITE);
 		btnTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnTrai.setBounds(626, 10, 89, 40);
+		btnTrai.setBounds(626, 8, 89, 40);
 		btnTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnTrai.setBackground(new Color(233, 180, 46));
 		panel.add(btnTrai);
 
 		btnDoubleTrai = new JButton("<<");
+		btnDoubleTrai.setForeground(Color.WHITE);
 		btnDoubleTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnDoubleTrai.setBounds(527, 10, 89, 40);
+		btnDoubleTrai.setBounds(527, 8, 89, 40);
 		btnDoubleTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnDoubleTrai.setBackground(new Color(233, 180, 46));
 		panel.add(btnDoubleTrai);
 
 		btnPhai = new JButton(">");
+		btnPhai.setForeground(Color.WHITE);
 		btnPhai.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnPhai.setBounds(885, 10, 89, 40);
+		btnPhai.setBounds(885, 8, 89, 40);
 		btnPhai.setBackground(new Color(233, 180, 46));
 		btnPhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnPhai);
 
 		btnDoublePhai = new JButton(">>");
+		btnDoublePhai.setForeground(Color.WHITE);
 		btnDoublePhai.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnDoublePhai.setBounds(984, 10, 89, 40);
+		btnDoublePhai.setBounds(984, 8, 89, 40);
 		btnDoublePhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnDoublePhai.setBackground(new Color(233, 180, 46));
 		panel.add(btnDoublePhai);
