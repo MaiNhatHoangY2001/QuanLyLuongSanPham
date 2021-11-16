@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 
 import hibernateCfg.HibernateConfig;
 import model.NhanVien;
@@ -86,6 +87,55 @@ public class NhanVienDao {
 	}
 
 	/**
+	 * Lấy 50 Nhân viên từ vị trí from trờ về sau 10 đơn vị và được sắp xếp theo tên
+	 * nhân viên
+	 * 
+	 * @param from
+	 * @return
+	 */
+	public List<NhanVien> get50NhanVienTheoViTri(int from) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from NhanVien\r\n" + "where maNhanVien in (select maNhanVien from NhanVien\r\n"
+					+ "order by maNhanVien offset " + from + " rows fetch next 50 rows only)\r\n"
+					+ "order by tenNhanVien asc";
+			list = session.createNativeQuery(query, NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	/**
+	 * Lấy tổng số lượng nhân viên có trong danh sách
+	 * 
+	 * @return
+	 */
+	public int getNhanvienCount() {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select COUNT(*) as count from NhanVien";
+			List<?> count = session.createNativeQuery(query).getResultList();
+			tr.commit();
+			return (int) count.get(0);
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return -1;
+	}
+
+	/**
 	 * Gọi danh sách Nhân Viên theo tên Nhân Viên
 	 * 
 	 * @param tenNVCanTim: Tên Nhân Viên cần tìm
@@ -98,11 +148,53 @@ public class NhanVienDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
+			String query = "select * from NhanVien\r\n" + "where tenNhanVien like N'%" + tenNVCanTim + "%'\r\n"
+					+ "order by tenNhanVien asc";
+			list = session.createNativeQuery(query, NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
 
-			list = session
-					.createNativeQuery("select * from nhanvien\r\n" + "where tenNhanVien like '%" + tenNVCanTim + "%'",
-							NhanVien.class)
-					.getResultList();
+	/**
+	 * get Danh sách Nhân Viên theo tuổi
+	 * 
+	 * @param tuoi
+	 * @return List<NhanVien>
+	 */
+	public List<NhanVien> getDsNhanVienTheoTuoi(int tuoi) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from NhanVien\r\n" + "where YEAR(GETDATE()) - YEAR(ngaySinh) = " + tuoi;
+			list = session.createNativeQuery(query, NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	public List<NhanVien> getDsNhanVienTheoTrangThaiLamViec(boolean traithai) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			int i = (traithai == true) ? 1 : 0;
+			String query = "select * from NhanVien\r\n" + "where trangThaiLamViec = " + i + "\r\n"
+					+ "order by tenNhanVien asc";
+			list = session.createNativeQuery(query, NhanVien.class).getResultList();
 			tr.commit();
 			return list;
 		} catch (Exception e) {
@@ -208,7 +300,7 @@ public class NhanVienDao {
 	}
 
 	/**
-	 * get 10 Nhân Viên theo khoảng
+	 * get 10 Nhân Viên theo khoảng và theo thời gian
 	 * 
 	 * @param from
 	 * @return

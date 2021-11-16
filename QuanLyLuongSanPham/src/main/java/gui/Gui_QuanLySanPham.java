@@ -30,6 +30,7 @@ import gui_package.CircleBtn;
 import gui_package.RoundTextField;
 import model.NhanVien;
 import model.SanPham;
+import services.QuanlySanPhamService;
 
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -61,7 +62,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private JLabel lblTongSoSP;
 
 	private JButton btnSuaNV;
-	private JButton btnXoa;
 	private JButton btnTimKiem;
 	private JButton btnLamMoi;
 
@@ -72,8 +72,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private DefaultTableModel model;
 
 	private NumberFormat vnFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
-	private SanPhamDao daoSP;
-	private List<SanPham> listSP;
 	private List<String> listMaSp;
 	private JPanel panel;
 	private JTextField txtSoTrang;
@@ -82,6 +80,11 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 	private JButton btnPhai;
 	private JButton btnDoublePhai;
 	private List<SanPham> list50Sp;
+	private QuanlySanPhamService sv;
+	private int index;
+	private int tongSP;
+	private int soTrang;
+	private int tongSoTrang;
 
 	/**
 	 * Create the panel.
@@ -145,7 +148,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		lblIconUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblIconUser.setBounds(1536, 10, 38, 30);
 		pnlHeader.add(lblIconUser);
-		
+
 		JLabel lblIconDangXuat = new JLabel("");
 		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
 		lblIconDangXuat.setIcon(new ImageIcon(imgDX));
@@ -172,14 +175,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnSuaNV.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlNgang.add(btnSuaNV);
 
-		// JButton Xoa Nhan Vien
-		btnXoa = new CircleBtn("Xóa");
-		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setBounds(170, 13, 150, 45);
-		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		pnlNgang.add(btnXoa);
-
 		// Làm mới
 		btnLamMoi = new CircleBtn("Làm mới");
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -203,8 +198,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlNgang.add(txtTImKiem);
 
 		// JCombobox Tim kiem
-		String loai[] = { "Tìm theo tên", "Tìm theo mã", "Giá dưới 10 triệu", "Giá dưới 20 triệu",
-				"Giá dưới 50 triệu" };
+		String loai[] = { "Tìm theo tên", "Tìm theo mã", "Giá dưới 10 triệu", "Giá 10 - 20 triệu",
+				"Giá 20 - 50 triệu" };
 		cmbLoaiTimKiem = new JComboBox(loai);
 		cmbLoaiTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cmbLoaiTimKiem.setBounds(845, 16, 410, 40);
@@ -254,7 +249,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		scrollPane.setBounds(10, 47, 1564, 735);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành" };
+		String headerTitle[] = { "Tên Sản Phẩm", "Loại", "Nhà Cung Cấp", "Giá Thành", "Trạng Thái" };
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50) {
 
@@ -293,6 +288,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		txtSoTrang.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSoTrang.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtSoTrang.setColumns(10);
+		txtSoTrang.setEditable(false);
 		txtSoTrang.setBounds(725, 10, 150, 40);
 		panel.add(txtSoTrang);
 
@@ -300,17 +296,20 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnTrai.setBounds(626, 10, 89, 40);
 		btnTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnTrai.setBackground(new Color(233, 180, 46));
 		panel.add(btnTrai);
 
 		btnDoubleTrai = new JButton("<<");
 		btnDoubleTrai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnDoubleTrai.setBounds(527, 10, 89, 40);
 		btnDoubleTrai.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnDoubleTrai.setBackground(new Color(233, 180, 46));
 		panel.add(btnDoubleTrai);
 
 		btnPhai = new JButton(">");
 		btnPhai.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnPhai.setBounds(885, 10, 89, 40);
+		btnPhai.setBackground(new Color(233, 180, 46));
 		btnPhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(btnPhai);
 
@@ -318,10 +317,9 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		btnDoublePhai.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnDoublePhai.setBounds(984, 10, 89, 40);
 		btnDoublePhai.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnDoublePhai.setBackground(new Color(233, 180, 46));
 		panel.add(btnDoublePhai);
-
-		// Thêm sự kiện cho các chức năng
-		btnXoa.addActionListener(this);
+		
 		btnSuaNV.addActionListener(this);
 		btnLamMoi.addActionListener(this);
 		btnTimKiem.addActionListener(this);
@@ -334,12 +332,14 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		txtTImKiem.addActionListener(this);
 		table.addMouseListener(this);
 
-		daoSP = new SanPhamDao();
-		listSP = daoSP.getAllSanPham();
-		list50Sp = daoSP.get50SanPhamSapXepTheoTenSanPham();
-		listMaSp = new ArrayList<String>();
+		tongSP = 0;
+		tongSoTrang = 0;
+		soTrang = 0;
+		index = 0;
+		sv = new QuanlySanPhamService();
+		list50Sp = sv.get50SanPhamTheoViTri(0);
 
-		LoadThongTinSanPham(listSP);
+		loadMacDinh();
 
 	}
 
@@ -350,101 +350,99 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 			if (table.getSelectedRowCount() == 0) {
 				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần sửa");
 			} else {
-				SanPham sp = daoSP.getSanPham(listMaSp.get(table.getSelectedRow()));
+				SanPham sp = sv.getSanPhamTheoMa(listMaSp.get(table.getSelectedRow()));
 				new Gui_SuaThongTinSanPham(sp).setVisible(true);
 			}
-		} else if (o.equals(btnXoa)) {
-			if (table.getSelectedRowCount() == 0) {
-				JOptionPane.showMessageDialog(this, "Hãy chọn Nhân Viên cần xóa");
-			} else {
-				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa Nhân viên này không ?",
-						"Cảnh báo", JOptionPane.YES_NO_OPTION);
-				if (tl == JOptionPane.YES_OPTION) {
-					boolean rs = false;
-					while (table.getSelectedRowCount() > 0) {
-						int index = table.getSelectedRow();
-						String ma = listMaSp.get(index);
-						rs = daoSP.xoaSanPhamTheoMa(ma);
-						model.removeRow(index);
-						listMaSp.remove(index);
-					}
-					if (rs == true)
-						JOptionPane.showMessageDialog(this, "Xóa thành công");
-					else
-						JOptionPane.showMessageDialog(this, "Xóa không thành công");
-				}
-
-			}
 		} else if (o.equals(btnLamMoi)) {
-			LoadThongTinSanPham(daoSP.getAllSanPham());
+			loadMacDinh();
 		} else if (o.equals(btnTimKiem)) {
 			String data = txtTImKiem.getText();
 			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
-			if (loaiTK.equals("Tìm theo tên")) {
-				ChucNang.clearDataTable(model);
-				List<SanPham> list = daoSP.getSanPhamThoTen(data);
-				LoadThongTinSanPham(list);
-			} else if (loaiTK.equals("Tìm theo mã")) {
-				SanPham sanPham = daoSP.getSanPham(data);
-				if (sanPham == null)
-					LoadThongTinSanPham(listSP);
-				else {
+			if (data.endsWith("")) {
+				loadMacDinh();
+			} else {
+				if (loaiTK.equals("Tìm theo tên")) {
 					ChucNang.clearDataTable(model);
-					load1ThongTinSanPham(sanPham);
+					List<SanPham> list = sv.getDsSanPhamTheoTenSanPham(data);
+					index = 0;
+					tongSP = list.size();
+					soTrang = 1;
+					tongSoTrang = 1;
+					loadTableCustom(list, soTrang, tongSP);
+				} else if (loaiTK.equals("Tìm theo mã")) {
+					SanPham sanPham = sv.getSanPhamTheoMa(data);
+					if (sanPham == null)
+						loadMacDinh();
+					else {
+						index = 0;
+						tongSP = 1;
+						soTrang = 1;
+						tongSoTrang = 1;
+						ChucNang.clearDataTable(model);
+						load1ThongTinSanPham(sanPham);
+					}
 				}
 			}
 		} else if (o.equals(btnTrai)) {
-			int index = table.getSelectedRow();
-			int count = table.getRowCount();
-			if (index == -1 || index == 0) {
-				index = count - 1;
-			} else
-				index--;
-			table.setRowSelectionInterval(index, index);
-			txtSoTrang.setText(listMaSp.get(index));
+			if (1 < soTrang) {
+				index -= 50;
+				list50Sp = sv.get50SanPhamTheoViTri(index);
+				soTrang--;
+				loadTableCustom(list50Sp, soTrang, tongSP);
+			}
 			// Sự kiện Chọn hàng đàu tiên
 		} else if (o.equals(btnDoubleTrai)) {
-			table.setRowSelectionInterval(0, 0);
-			txtSoTrang.setText(listMaSp.get(0));
+			if (1 < soTrang) {
+				index = 0;
+				list50Sp = sv.get50SanPhamTheoViTri(index);
+				soTrang = 1;
+				loadTableCustom(list50Sp, soTrang, tongSP);
+			}
 			// Sự kiện chọn hàng cuối
 		} else if (o.equals(btnPhai)) {
-			int index = table.getSelectedRow();
-			int count = table.getRowCount();
-			if (index == -1 || index == count - 1) {
-				index = 0;
-			} else
-				index++;
-			table.setRowSelectionInterval(index, index);
-			txtSoTrang.setText(listMaSp.get(index));
+			if (soTrang < tongSoTrang) {
+				index += 50;
+				list50Sp = sv.get50SanPhamTheoViTri(index);
+				soTrang++;
+				loadTableCustom(list50Sp, soTrang, tongSP);
+			}
 			// sự kiện chọn hàng cuối cùng
 		} else if (o.equals(btnDoublePhai)) {
-			int count = table.getRowCount();
-			count--;
-			table.setRowSelectionInterval(count, count);
-			txtSoTrang.setText(listMaSp.get(count));
-			// Sự kiện cho nút Enter cho Text Số trang
-		} else if (o.equals(txtSoTrang)) {
-			String data = txtSoTrang.getText();
-			int count = table.getRowCount();
-			for (int i = 0; i < count; i++) {
-				if (data.equalsIgnoreCase(listMaSp.get(i))) {
-					table.setRowSelectionInterval(i, i);
+			if (soTrang < tongSoTrang) {
+				for (int i = soTrang; soTrang < tongSoTrang; i++) {
+					index += 50;
+					soTrang++;
 				}
+				list50Sp = sv.get50SanPhamTheoViTri(index);
+				loadTableCustom(list50Sp, soTrang, tongSP);
 			}
-			// Sự kiện cho Text Tìm kiếm
+			// Sự kiện cho nút Enter cho Text Số trang
 		} else if (o.equals(txtTImKiem)) {
 			String data = txtTImKiem.getText();
 			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
-			if (loaiTK.equals("Tìm theo tên")) {
-				List<SanPham> list = daoSP.getSanPhamThoTen(data);
-				LoadThongTinSanPham(list);
-			} else if (loaiTK.equals("Tìm theo mã")) {
-				SanPham nv = daoSP.getSanPham(data);
-				if (nv == null)
-					LoadThongTinSanPham(list50Sp);
-				else {
+			if (data.endsWith("")) {
+				loadMacDinh();
+			} else {
+				if (loaiTK.equals("Tìm theo tên")) {
 					ChucNang.clearDataTable(model);
-					load1ThongTinSanPham(nv);
+					List<SanPham> list = sv.getDsSanPhamTheoTenSanPham(data);
+					index = 0;
+					tongSP = list.size();
+					soTrang = 1;
+					tongSoTrang = 1;
+					loadTableCustom(list, soTrang, tongSP);
+				} else if (loaiTK.equals("Tìm theo mã")) {
+					SanPham sanPham = sv.getSanPhamTheoMa(data);
+					if (sanPham == null)
+						loadMacDinh();
+					else {
+						index = 0;
+						tongSP = 1;
+						soTrang = 1;
+						tongSoTrang = 1;
+						ChucNang.clearDataTable(model);
+						load1ThongTinSanPham(sanPham);
+					}
 				}
 			}
 		}
@@ -455,26 +453,49 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		JComboBox cmb = (JComboBox) e.getSource();
 		if (cmb.getSelectedItem().equals("Giá dưới 10 triệu")) {
 			ChucNang.clearDataTable(model);
-			for (SanPham sanPham : listSP) {
-				if (sanPham.getGiaThanh() < 10000000) {
-					load1ThongTinSanPham(sanPham);
-				}
-			}
-		} else if (cmb.getSelectedItem().equals("Giá dưới 20 triệu")) {
+			List<SanPham> list = sv.getDsSanPhamTheoGiaThanh(0, 10000000);
+			index = 0;
+			tongSP = list.size();
+			soTrang = 1;
+			tongSoTrang = 1;
+			loadTableCustom(list, soTrang, tongSP);
+		} else if (cmb.getSelectedItem().equals("Giá 10 - 20 triệu")) {
 			ChucNang.clearDataTable(model);
-			for (SanPham sanPham : listSP) {
-				if (sanPham.getGiaThanh() < 20000000)
-					;
-				load1ThongTinSanPham(sanPham);
-			}
-		} else if (cmb.getSelectedItem().equals("Giá dưới 50 triệu")) {
+			List<SanPham> list = sv.getDsSanPhamTheoGiaThanh(10000000, 20000000);
+			index = 0;
+			tongSP = list.size();
+			soTrang = 1;
+			tongSoTrang = 1;
+			loadTableCustom(list, soTrang, tongSP);
+		} else if (cmb.getSelectedItem().equals("Giá 20 - 50 triệu")) {
 			ChucNang.clearDataTable(model);
-			for (SanPham sanPham : listSP) {
-				if (sanPham.getGiaThanh() < 50000000)
-					;
-				load1ThongTinSanPham(sanPham);
-			}
+			List<SanPham> list = sv.getDsSanPhamTheoGiaThanh(20000000, 50000000);
+			index = 0;
+			tongSP = list.size();
+			soTrang = 1;
+			tongSoTrang = 1;
+			loadTableCustom(list, soTrang, tongSP);
 		}
+	}
+
+	private void loadMacDinh() {
+		index = 0;
+		soTrang = 1;
+		tongSP = sv.getTongSoSanPham();
+		tongSoTrang = getTongSoTrangTheoTongSanPham(tongSP);
+		List<SanPham> list = sv.get50SanPhamTheoViTri(0);
+		LoadThongTinSanPham(list);
+		txtSoTrang.setText(soTrang + "");
+		txtTongSoSP.setText(tongSP + "");
+	}
+
+	public int getTongSoTrangTheoTongSanPham(int tongsv) {
+		double rs = (double) tongsv / (double) 50;
+		double rs2 = tongsv / 50;
+		if (rs == rs2)
+			return (int) rs2;
+		else
+			return (int) rs2 + 1;
 	}
 
 	/**
@@ -493,10 +514,16 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		listMaSp = getDsMaSP(list);
 	}
 
+	private void loadTableCustom(List<SanPham> list, int st, int tongsp) {
+		LoadThongTinSanPham(list);
+		txtSoTrang.setText(st + "");
+		txtTongSoSP.setText(tongsp + "");
+	}
+
 	public void load1ThongTinSanPham(SanPham sanPham) {
 		txtSoTrang.setText("");
 		String n[] = { sanPham.getTenSanPham(), sanPham.getLoai(), sanPham.getnCC(),
-				vnFormat.format(sanPham.getGiaThanh()) };
+				vnFormat.format(sanPham.getGiaThanh()), sanPham.isTrangThai() == true ? "Còn bán" : "Hết bán" };
 		model.addRow(n);
 		listMaSp = new ArrayList<String>();
 		listMaSp.add(sanPham.getMaSanpham());
@@ -517,7 +544,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		txtSoTrang.setText(listMaSp.get(table.getSelectedRow()));
+		
 	}
 
 	@Override

@@ -25,10 +25,12 @@ import gui_package.RoundedPanel;
 import model.SanPham;
 
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 
@@ -47,14 +49,16 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	private JButton btnXoaRong;
 	private JButton btnHuyBo;
 
-	private JComboBox<String> cmbNgay;
-	private JComboBox<String> cmbThang;
-	private JComboBox<String> cmbNam;
-	private JComboBox<String> cmbLoai;
+	private JComboBox cmbNgay;
+	private JComboBox cmbThang;
+	private JComboBox cmbNam;
+	private JComboBox cmbLoai;
 
 	private SanPham sp;
 	private DecimalFormat fm = new DecimalFormat("#");
 	private SanPhamDao daoSP;
+	private JRadioButton radConBan;
+	private JRadioButton radHetBan;
 
 	/**
 	 * Create the frame.
@@ -105,7 +109,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		JPanel pnlInput = new RoundedPanel();
 		((RoundedPanel) pnlInput).setArcs(new DimensionUIResource(50, 50));
 		pnlInput.setBackground(new Color(248, 198, 153));
-		pnlInput.setBounds(113, 115, 1200, 556);
+		pnlInput.setBounds(113, 113, 1200, 581);
 		pnlContent.add(pnlInput);
 		pnlInput.setLayout(null);
 
@@ -114,32 +118,32 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		 */
 		JLabel lblNewLabel_1 = new JLabel("Tên Sản Phẩm:");
 		lblNewLabel_1.setForeground(Color.BLACK);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_1.setBounds(81, 59, 225, 40);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1.setBounds(81, 48, 225, 40);
 		pnlInput.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Giá Thành:");
 		lblNewLabel_1_1.setForeground(Color.BLACK);
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_1_1.setBounds(78, 158, 225, 40);
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1_1.setBounds(81, 136, 225, 40);
 		pnlInput.add(lblNewLabel_1_1);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Loại:");
 		lblNewLabel_1_1_1.setForeground(Color.BLACK);
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_1_1_1.setBounds(78, 257, 225, 40);
+		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1_1_1.setBounds(81, 224, 225, 40);
 		pnlInput.add(lblNewLabel_1_1_1);
 
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Nhà Cung Cấp:");
 		lblNewLabel_1_1_1_1.setForeground(Color.BLACK);
-		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_1_1_1_1.setBounds(78, 356, 225, 40);
+		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1_1_1_1.setBounds(81, 312, 225, 40);
 		pnlInput.add(lblNewLabel_1_1_1_1);
 
 		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Ngày Sản Xuất:");
 		lblNewLabel_1_1_1_1_1.setForeground(Color.BLACK);
-		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_1_1_1_1_1.setBounds(78, 455, 225, 40);
+		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1_1_1_1_1.setBounds(81, 400, 225, 40);
 		pnlInput.add(lblNewLabel_1_1_1_1_1);
 
 		/*
@@ -148,7 +152,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		// Ten San Pham
 		txtTenSanPham = new RoundTextField("", 1000);
 		txtTenSanPham.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		txtTenSanPham.setBounds(316, 54, 800, 50);
+		txtTenSanPham.setBounds(316, 48, 800, 40);
 		pnlInput.add(txtTenSanPham);
 		txtTenSanPham.setColumns(10);
 
@@ -156,18 +160,18 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		txtGiaThanh = new RoundTextField("", 1000);
 		txtGiaThanh.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtGiaThanh.setColumns(10);
-		txtGiaThanh.setBounds(316, 158, 800, 50);
+		txtGiaThanh.setBounds(316, 136, 800, 40);
 		pnlInput.add(txtGiaThanh);
 
 		// Nha cung cap
 		txtNCC = new RoundTextField("", 1000);
 		txtNCC.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtNCC.setColumns(10);
-		txtNCC.setBounds(316, 351, 800, 50);
+		txtNCC.setBounds(316, 312, 800, 40);
 		pnlInput.add(txtNCC);
 
 		// Ngày
-		cmbNgay = new JComboBox<String>();
+		cmbNgay = new JComboBox();
 		DefaultComboBoxModel<String> modelNgay = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 31; i++) {
 			modelNgay.addElement(i + "");
@@ -175,11 +179,11 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		cmbNgay.setModel(modelNgay);
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbNgay.setBackground(Color.WHITE);
-		cmbNgay.setBounds(316, 450, 250, 45);
+		cmbNgay.setBounds(316, 400, 250, 40);
 		pnlInput.add(cmbNgay);
 
 		// Tháng
-		cmbThang = new JComboBox<String>();
+		cmbThang = new JComboBox();
 		DefaultComboBoxModel<String> modelThang = new DefaultComboBoxModel<String>();
 		for (int i = 1; i <= 12; i++) {
 			modelThang.addElement("Tháng " + i);
@@ -187,7 +191,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		cmbThang.setModel(modelThang);
 		cmbThang.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbThang.setBackground(Color.WHITE);
-		cmbThang.setBounds(590, 450, 250, 45);
+		cmbThang.setBounds(590, 400, 250, 40);
 		pnlInput.add(cmbThang);
 
 		// Năm
@@ -195,20 +199,44 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		for (int i = LocalDate.now().getYear(); i >= 2000; i--) {
 			modelNam.addElement(i + "");
 		}
-		cmbNam = new JComboBox<String>();
+		cmbNam = new JComboBox();
 		cmbNam.setModel(modelNam);
 		cmbNam.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbNam.setBackground(Color.WHITE);
-		cmbNam.setBounds(867, 450, 250, 45);
+		cmbNam.setBounds(867, 400, 250, 40);
 		pnlInput.add(cmbNam);
 
 		// Loai
-		String[] dsLoai = { "Dien Thoai", "ipad", "Loa", "Linh kien dien tu" };
-		cmbLoai = new JComboBox<String>(dsLoai);
+		String[] dsLoai = { "Điện thoại", "ipad", "Loa", "Linh kiện điện tử" };
+		cmbLoai = new JComboBox(dsLoai);
 		cmbLoai.setBackground(Color.WHITE);
 		cmbLoai.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		cmbLoai.setBounds(316, 252, 800, 50);
+		cmbLoai.setBounds(316, 224, 800, 40);
 		pnlInput.add(cmbLoai);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("Trạng Thái:");
+		lblNewLabel_1_1_1_1_1_1.setForeground(Color.BLACK);
+		lblNewLabel_1_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewLabel_1_1_1_1_1_1.setBounds(81, 488, 225, 40);
+		pnlInput.add(lblNewLabel_1_1_1_1_1_1);
+		
+		radConBan = new JRadioButton("Còn Bán");
+		radConBan.setSelected(true);
+		radConBan.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		radConBan.setBounds(316, 488, 250, 40);
+		radConBan.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		pnlInput.add(radConBan);
+		
+		radHetBan = new JRadioButton("Hết Bán");
+		radHetBan.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		radHetBan.setBounds(590, 488, 250, 40);
+		radHetBan.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		pnlInput.add(radHetBan);
+		
+		 ButtonGroup group = new ButtonGroup();
+		 group.add(radConBan);
+		 group.add(radHetBan);
+		
 
 		/*
 		 * Cac nut
@@ -218,7 +246,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		btnLuu.setForeground(Color.WHITE);
 		btnLuu.setBackground(new Color(233, 180, 46));
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnLuu.setBounds(168, 707, 250, 90);
+		btnLuu.setBounds(168, 729, 250, 70);
 		btnLuu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnLuu);
 
@@ -227,7 +255,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		btnXoaRong.setForeground(Color.WHITE);
 		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnXoaRong.setBackground(new Color(233, 180, 46));
-		btnXoaRong.setBounds(586, 707, 250, 90);
+		btnXoaRong.setBounds(586, 729, 250, 70);
 		btnXoaRong.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnXoaRong);
 
@@ -236,13 +264,13 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		btnHuyBo.setForeground(Color.WHITE);
 		btnHuyBo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnHuyBo.setBackground(new Color(233, 180, 46));
-		btnHuyBo.setBounds(1004, 707, 250, 90);
+		btnHuyBo.setBounds(1004, 729, 250, 70);
 		btnHuyBo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnHuyBo);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(233, 180, 46));
-		panel.setBounds(113, 36, 279, 43);
+		panel.setBounds(113, 35, 279, 43);
 		pnlContent.add(panel);
 		panel.setLayout(null);
 
@@ -304,6 +332,8 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 				if (tl == JOptionPane.YES_OPTION) {
 					daoSP.capNhatSanPham(sanPham2);
 					this.dispose();
+				} else {
+					this.dispose();
 				}
 			}
 		} else if (o.equals(btnXoaRong)) {
@@ -356,7 +386,8 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 			return false;
 		} else if (sanp.getGiaThanh() != sp2.getGiaThanh()) {
 			return false;
-		}
+		} else if (sanp.isTrangThai() != sp2.isTrangThai())
+			return false;
 		return true;
 	}
 
@@ -371,9 +402,10 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		String NCC = txtNCC.getText();
 		String loai = cmbLoai.getSelectedItem().toString();
 		LocalDate date = getDate();
+		boolean trangthai = radConBan.isSelected() == true;
 		try {
 			double gia = Double.parseDouble(txtGiaThanh.getText());
-			return new SanPham(ten, gia, NCC, loai, date, true);
+			return new SanPham(ten, gia, NCC, loai, date, trangthai);
 		} catch (NumberFormatException e) {
 			txtGiaThanh.requestFocus();
 			JOptionPane.showMessageDialog(this, "Giá thành chỉ cho phép nhập số");
@@ -407,6 +439,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		cmbNgay.setSelectedIndex(0);
 		cmbThang.setSelectedIndex(0);
 		cmbNam.setSelectedIndex(0);
+		radConBan.setSelected(true);
 		txtTenSanPham.requestFocus();
 	}
 
@@ -427,6 +460,9 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 		int nam = sp1.getNgaySanXuat().getYear();
 		cmbNam.setSelectedItem(nam);
 		cmbLoai.setSelectedItem(sp1.getLoai());
+		if (sp1.isTrangThai() == true)
+			radConBan.setSelected(true);
+		else
+			radHetBan.setSelected(true);
 	}
-
 }
