@@ -22,9 +22,6 @@ public class TaiKhoan {
 	@JoinColumn(name = "tenTaiKhoan")
 	private NhanVien nhanVien;
 	
-	
-	
-
 	public String getTenTaiKhoan() {
 		return tenTaiKhoan;
 	}
@@ -34,17 +31,9 @@ public class TaiKhoan {
 	public String getMatKhau() {
 		return matKhau;
 	}
-
-
-
-
 	public void setMatKhau(String matKhau) {
 		this.matKhau = matKhau;
 	}
-
-
-	
-
 	public TaiKhoan() {
 		super();
 	}
