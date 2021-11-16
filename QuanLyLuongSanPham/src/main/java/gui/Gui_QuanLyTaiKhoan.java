@@ -31,7 +31,7 @@ import javax.swing.border.EtchedBorder;
 
 
 public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
-	private String[] colsnameLK = { "Tên Nhân Viên", "Tên Tài Khoản", "Mật Khẩu" };
+	private String[] colsnameLK = { "Tên Tài Khoản", "Mật Khẩu" };
 	private DefaultTableModel modelTaiKhoan;
 	private JPanel panel;
 	private JLabel lblQLTK;
@@ -56,8 +56,8 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private JLabel lblTen_4;
 	private JTextField txtTenTK;
 	private JTextField txtMK;
-	private CircleBtn btnThem_1;
-	private CircleBtn btnXoaRong_1;
+	private CircleBtn btnSua;
+	private CircleBtn btnXoaRong2;
 	private JPanel panelTTNV;
 	private JLabel lblMa;
 	private JLabel lblTen;
@@ -153,10 +153,12 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		panelThemTK.add(txt2);
 		
 		btnThem = new CircleBtn("Tạo Tài Khoản");
+		btnThem.setBackground(new Color(233, 180, 46));
 		btnThem.setBounds(168, 168, 120, 40);
 		panelThemTK.add(btnThem);
 		
 		btnXoaRong = new CircleBtn("Xóa Rỗng");
+		btnXoaRong.setBackground(new Color(233, 180, 46));
 		btnXoaRong.setBounds(364, 168, 120, 40);
 		panelThemTK.add(btnXoaRong);
 		
@@ -189,13 +191,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		txtMK.setBounds(149, 107, 380, 30);
 		panelSuaTK.add(txtMK);
 		
-		btnThem_1 = new CircleBtn("Tạo Tài Khoản");
-		btnThem_1.setBounds(168, 168, 120, 40);
-		panelSuaTK.add(btnThem_1);
+		btnSua = new CircleBtn("Tạo Tài Khoản");
+		btnSua.setBounds(168, 168, 120, 40);
+		btnSua.setBackground(new Color(233, 180, 46));
+		panelSuaTK.add(btnSua);
 		
-		btnXoaRong_1 = new CircleBtn("Xóa Rỗng");
-		btnXoaRong_1.setBounds(364, 168, 120, 40);
-		panelSuaTK.add(btnXoaRong_1);
+		btnXoaRong2 = new CircleBtn("Xóa Rỗng");
+		btnXoaRong2.setBounds(364, 168, 120, 40);
+		btnXoaRong2.setBackground(new Color(233, 180, 46));
+		panelSuaTK.add(btnXoaRong2);
 		
 		panelTTNV = new JPanel();
 		panelTTNV.setLayout(null);
@@ -232,10 +236,10 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		new DefaultTableModel(colsnameLK, 0);
 		
 		tblTaiKhoan = new JTable(new DefaultTableModel(new Object[][] { 
-			{ null, null, null }, { null, null, null },{ null, null, null },{ null, null, null },
-			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null } }, colsnameLK)) {
+			{ null, null }, { null, null },{ null, null },{ null, null},
+			{ null, null }, { null, null },{ null, null },{ null, null},
+			{ null, null }, { null, null },{ null, null },{ null, null},
+			{ null, null }, { null, null },{ null, null },{ null, null} }, colsnameLK)) {
 
 		/**
 		 * 
