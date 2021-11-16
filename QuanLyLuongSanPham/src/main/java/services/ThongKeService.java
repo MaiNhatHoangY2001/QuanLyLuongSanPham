@@ -17,9 +17,9 @@ public class ThongKeService {
 	private NhanVienDao nhanVienDao = new NhanVienDao();
 	private SanPhamDao sanPhamDao = new SanPhamDao();
 
-	public List<NhanVien> getNhanVienTheoThangNam(int month, int year) {
-		return nhanVienDao.getNhanVienTheoThangNam(month, year);
-	}
+//	public List<NhanVien> getNhanVienTheoThangNam(int month, int year) {
+//		return nhanVienDao.getNhanVienTheoThangNam(month, year);
+//	}
 
 	public double getTongLuongNhanVien(int month, int year) {
 		return bangLuongDao.getTongLuongNhanVien(month, year);

@@ -131,7 +131,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLyTaiKhoan = new JButton("Quản lý tài khoản");
 		btnQuanLyTaiKhoan.setFocusPainted(false);
 		btnQuanLyTaiKhoan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnQuanLyTaiKhoan.setIcon(new ImageIcon("img\\taikhoan.png"));
+		btnQuanLyTaiKhoan.setIcon(new ImageIcon("img\\ta2ikhoan.png"));
 		btnQuanLyTaiKhoan.setBounds(0, 575, 320, 115);
 		panel_1.add(btnQuanLyTaiKhoan);
 		btnQuanLyTaiKhoan.setIconTextGap(10);

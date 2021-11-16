@@ -33,13 +33,14 @@ public class SanPhamDao {
 			return false;
 		}
 	}
+
 	public List<SanPham> timTheoNhaCungCap(String ncc) {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "select * from SanPham\r\n" + "where nCC like '%" + ncc+ "%'";
+			String query = "select * from SanPham\r\n" + "where nCC like '%" + ncc + "%'";
 			list = session.createNativeQuery(query, SanPham.class).getResultList();
 			tr.commit();
 			return list;
@@ -50,8 +51,9 @@ public class SanPhamDao {
 			session.close();
 		}
 		return null;
-		
+
 	}
+
 	public boolean capNhatSanPham(SanPham sp) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -140,15 +142,14 @@ public class SanPhamDao {
 		session.close();
 		return list;
 	}
-	
+
 	public List<SanPham> get50SanPhamSapXepTheoTenSanPham() {
 		List<SanPham> list = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			list = session
-					.createNativeQuery("select top 50 * from SanPham\r\n" + "order by tenSanPham asc", SanPham.class)
+			list = session.createNativeQuery("select * from SanPham\r\n" + "order by tenSanPham asc", SanPham.class)
 					.getResultList();
 			tr.commit();
 			return list;
@@ -158,6 +159,61 @@ public class SanPhamDao {
 			session.close();
 		}
 		return null;
+	}
+
+	public List<SanPham> getDsSanPhamTheoGia(double from, double to) {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from SanPham\r\n" + "where giaThanh >= " + from + " and giaThanh <= " + to + "\r\n"
+					+ "order by giaThanh asc";
+			list = session.createNativeQuery(query, SanPham.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	public List<SanPham> get50SanPhamTheoViTri(int from) {
+		List<SanPham> list = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select * from SanPham\r\n" + "where maSanpham in ( select maSanpham from SanPham\r\n"
+					+ "order by maSanpham offset " + from + " rows fetch next 50 rows only)\r\n"
+					+ "order by tenSanPham asc";
+			list = session.createNativeQuery(query, SanPham.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	public int getTongSoSanPham() {
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "select COUNT(*) as count from SanPham";
+			List<?> count = session.createNativeQuery(query).getResultList();
+			tr.commit();
+			return (int) count.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return -1;
 	}
 
 	/**

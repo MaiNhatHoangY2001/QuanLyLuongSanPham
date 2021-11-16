@@ -113,12 +113,12 @@ public class Gui_ThongKeThuChi extends JPanel {
 		/**
 		 * Tên đăng nhập
 		 */
-		lblTenDN = new JLabel("Chinh");
+		lblTenDN = new JLabel("Hoàng Văn Chinh");
 		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTenDN.setForeground(Color.WHITE);
 		lblTenDN.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblTenDN.setBounds(1459, 11, 73, 33);
+		lblTenDN.setBounds(1272, 11, 260, 33);
 		panel.add(lblTenDN);
 
 		lblIconUser = new JLabel("");

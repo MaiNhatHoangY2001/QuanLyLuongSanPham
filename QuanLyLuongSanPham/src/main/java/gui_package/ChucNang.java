@@ -1,6 +1,8 @@
 package gui_package;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -12,9 +14,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -129,5 +135,41 @@ public class ChucNang {
 		}
 
 	}
+	public static void setLabelName(String name,JPanel panel){
+		/**
+		 * Tên đăng nhập
+		 */
+		
+		JLabel lblTenDN = new JLabel("Chinh");
+		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTenDN.setForeground(Color.WHITE);
+		lblTenDN.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblTenDN.setBounds(1272, 11, 260, 33);
+		panel.add(lblTenDN);
 
+		JLabel lblIconUser = new JLabel("");
+		Image imgUser = new ImageIcon("img\\user1.png").getImage();
+		lblIconUser.setIcon(new ImageIcon(imgUser));
+		lblIconUser.setBounds(1539, 11, 40, 40);
+		panel.add(lblIconUser);
+
+		/**
+		 * Đăng xuất
+		 */
+		JLabel lblDangXuat = new JLabel("Đăng xuất");
+		lblDangXuat.setForeground(Color.WHITE);
+		lblDangXuat.setFont(new Font("Arial", Font.PLAIN, 24));
+		lblDangXuat.setBounds(1419, 55, 110, 24);
+		panel.add(lblDangXuat);
+
+		JLabel lblIconDX = new JLabel("");
+		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
+		lblIconDX.setIcon(new ImageIcon(imgDX));
+		lblIconDX.setBounds(1539, 54, 25, 25);
+		panel.add(lblIconDX);
+		
+
+		lblTenDN.setText(name);
+	}
 }

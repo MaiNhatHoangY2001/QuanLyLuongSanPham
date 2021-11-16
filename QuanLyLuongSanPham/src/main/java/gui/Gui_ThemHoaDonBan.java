@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -666,9 +665,10 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	public void clearNullRow(DefaultTableModel model) {
 		int row = model.getDataVector().size();
 		for (int i = row - 1; i >= 0; i--) {
-			if (((Vector) model.getDataVector().get(i)).elementAt(0) == null) {
-				model.getDataVector().remove(i);
-			}
+//			if (model.getDataVector().get(i).elementAt(0) == null) {
+//				model.getDataVector().remove(i);
+//			}
+			// Lỗi tại elementAt(0)
 		}
 	}
 
