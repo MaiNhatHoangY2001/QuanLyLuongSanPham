@@ -1,10 +1,12 @@
 package gui_package;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -25,6 +28,9 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import gui.Gui_Chinh;
+import gui.Gui_DangNhap;
 
 public class ChucNang {
 	/**
@@ -135,12 +141,12 @@ public class ChucNang {
 		}
 
 	}
-	public static void setLabelName(String name,JPanel panel){
+	public static void setLabelName(String name,JPanel panel,Gui_Chinh fChinh,Gui_DangNhap fDangNhap){
 		/**
 		 * Tên đăng nhập
 		 */
 		
-		JLabel lblTenDN = new JLabel("Chinh");
+		JLabel lblTenDN = new JLabel(name);
 		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTenDN.setForeground(Color.WHITE);
@@ -168,8 +174,44 @@ public class ChucNang {
 		lblIconDX.setIcon(new ImageIcon(imgDX));
 		lblIconDX.setBounds(1539, 54, 25, 25);
 		panel.add(lblIconDX);
+		lblDangXuat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-
-		lblTenDN.setText(name);
+		lblDangXuat.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				int temp= JOptionPane.showConfirmDialog(fChinh, "Bạn có muốn đăng xuất","Thông báo", JOptionPane.YES_NO_OPTION);
+				if(temp==JOptionPane.YES_OPTION) {
+					fDangNhap.setVisible(true);
+					fChinh.setVisible(false);
+				}
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 	}
 }

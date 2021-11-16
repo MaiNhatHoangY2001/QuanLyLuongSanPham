@@ -18,6 +18,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import gui_package.ChucNang;
+import model.TaiKhoan;
+import services.QuanLyHoaDonService;
+import services.QuanLyLuongService;
+import services.QuanLyNhanVienService;
+
 import java.awt.Cursor;
 
 public class Gui_Chinh extends JFrame implements ActionListener, WindowListener {
@@ -35,6 +41,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	private JButton btnQuanLyNhanVien;
 	private CardLayout cardLayout;
 	private JButton temp;
+	private TaiKhoan taiKhoan;
 
 	private Gui_ThongKeThuChi trangTK = new Gui_ThongKeThuChi();
 	private Gui_QuanLyHoaDon trangHD = new Gui_QuanLyHoaDon();
@@ -43,33 +50,53 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	private Gui_QuanLySanPham trangSP = new Gui_QuanLySanPham();
 	private Gui_QuanLyTaiKhoan trangtaiKhoan = new Gui_QuanLyTaiKhoan();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Gui_Chinh gui_Chinh = new Gui_Chinh();
-					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan = taiKhoan;
+		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
 
-					gui_DangNhap.setVisible(true);
-					gui_DangNhap.setLocationRelativeTo(null);
-
-					gui_DangNhap.btnDangNhap.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							gui_DangNhap.setVisible(false);
-							gui_Chinh.setVisible(true);
-
-						}
-
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+				trangHD.pnlHead, this, Gui_DangNhap.getInstance());
+		phanQuyen();
+		System.out.println(taiKhoan.getTenTaiKhoan());
 	}
+
+	private void phanQuyen() {
+		if (!(taiKhoan.getTenTaiKhoan().equals("NV19020001"))) {
+			btnQuanLyNhanVien.setEnabled(false);
+			btnQuanLyTaiKhoan.setEnabled(false);
+		}
+		else {
+			btnQuanLyNhanVien.setEnabled(true);
+			btnQuanLyTaiKhoan.setEnabled(true);
+		}
+	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Gui_Chinh gui_Chinh = new Gui_Chinh();
+//					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
+//
+//					gui_DangNhap.setVisible(true);
+//					gui_DangNhap.setLocationRelativeTo(null);
+//
+//					gui_DangNhap.btnDangNhap.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent e) {
+//							gui_DangNhap.setVisible(false);
+//							gui_Chinh.setVisible(true);
+//
+//						}
+//
+//					});
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -226,7 +253,6 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		temp = btnThongKe;
 		activeButton(btnThongKe);
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
