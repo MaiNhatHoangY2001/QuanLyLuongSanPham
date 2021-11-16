@@ -46,8 +46,7 @@ public class BangLuongDao {
 			tr.begin();
 
 			bangLuong = session
-					.createNativeQuery("select * from BangLuong where maNhanVien = '" + maNhanVien
-							+ "'and YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month, BangLuong.class)
+					.createNativeQuery("select * from BangLuong where maNhanVien = '" + maNhanVien+ "'and YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month, BangLuong.class)
 					.getSingleResult();
 
 			tr.commit();

@@ -58,4 +58,10 @@ public class QuanLyLuongService {
 	public List<BangLuong> getAllBangLuong(int month, int year) {
 		return bangLuongDao.getAllBangLuong(month, year);
 	}
+	public List<NhanVien> getNhanVienTheoMaVaThoiGian(String maNV, int month, int year) {
+		return nhanVienDao.getNhanVienTheoMaVaThoiGian(maNV, month, year);
+	}
+	public List<NhanVien> getNhanVienTheoTenVaThoiGian(String tenNV, int month, int year) {
+		return nhanVienDao.getNhanVienTheoTenVaThoiGian(tenNV, month, year);
+	}
 }

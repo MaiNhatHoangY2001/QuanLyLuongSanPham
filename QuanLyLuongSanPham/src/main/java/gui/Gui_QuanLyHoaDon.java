@@ -65,7 +65,8 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private JTextField txtTen;
 	private JTextField txtDiaChi;
 	private JTextField txtMaNv;
-	private JTextField txtTenNv;;
+	private JTextField txtTenNv;
+	protected JPanel pnlHead;;
 
 	/**
 	 * Create the panel.
@@ -77,32 +78,23 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		setBackground(new Color(242, 129, 25));
 		setSize(1600, 1046);
 		setLayout(null);
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(242, 129, 25));
-		panel.setBounds(0, 0, 1600, 92);
-		add(panel);
-		panel.setLayout(null);
+		pnlHead = new JPanel();
+		pnlHead.setBackground(new Color(242, 129, 25));
+		pnlHead.setBounds(0, 0, 1600, 92);
+		add(pnlHead);
+		pnlHead.setLayout(null);
 
 		JLabel lblNewLabel_2 = new JLabel("QUẢN LÝ HÓA ĐƠN");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblNewLabel_2.setBounds(491, 0, 531, 92);
-		panel.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_5 = new JLabel("Chinh");
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_5.setIcon(new ImageIcon("src/main/resources/images/img_bill/uerlogin.PNG"));
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_5.setBounds(1393, 10, 192, 45);
-		panel.add(lblNewLabel_5);
+		pnlHead.add(lblNewLabel_2);
 
 		lblNgay = new JLabel("New label");
 		lblNgay.setForeground(new Color(255, 255, 255));
 		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNgay.setBounds(0, 16, 233, 33);
-		panel.add(lblNgay);
+		pnlHead.add(lblNgay);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(194, 93, 0));
@@ -213,7 +205,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		lblGio.setForeground(new Color(255, 255, 255));
 		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblGio.setBounds(0, 50, 201, 42);
-		panel.add(lblGio);
+		pnlHead.add(lblGio);
 
 		ChucNang.setGio(lblGio, lblNgay);
 
@@ -530,4 +522,5 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
+
 }

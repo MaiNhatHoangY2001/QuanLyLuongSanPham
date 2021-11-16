@@ -328,6 +328,66 @@ public class NhanVienDao {
 	}
 
 	/**
+	 * Lấy danh sách nhân viên theo mã và thời gian bảng lương
+	 * 
+	 * @param maNV
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public List<NhanVien> getNhanVienTheoMaVaThoiGian(String maNV, int month, int year) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery(
+					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
+							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month
+							+ " and bl.maNhanVien = '" + maNV + "'",
+					NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	/**
+	 * Lấy danh sách nhân viên theo tên và thời gian bảng lương
+	 * 
+	 * @param maNV
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public List<NhanVien> getNhanVienTheoTenVaThoiGian(String tenNV, int month, int year) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery(
+					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
+							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month
+							+ " and nv.tenNhanVien = '" + tenNV + "'",
+					NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	/**
 	 * kiểm tra có phải nhân viên hành chanh không
 	 * 
 	 * @param maNhanVien

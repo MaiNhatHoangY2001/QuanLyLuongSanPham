@@ -13,7 +13,7 @@ import model.TaiKhoan;
 
 public class TaiKhoanDao {
 	private SessionFactory sessionFactory = HibernateConfig.getInstance().getSessionFactory();
-	
+
 	public boolean themTaiKhoan(TaiKhoan taiKhoan) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
@@ -28,6 +28,22 @@ public class TaiKhoanDao {
 		session.close();
 		return true;
 	}
+
+	public TaiKhoan getTaiKhoan(String tenTaiKhoan) {
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			TaiKhoan taikhoan = session.find(TaiKhoan.class, tenTaiKhoan);
+			tr.commit();
+			return taikhoan;
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return null;
+	}
+
 	/**
 	 * 
 	 * @return

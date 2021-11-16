@@ -50,7 +50,6 @@ import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionEvent;
 
-
 public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	/**
 	 * 
@@ -134,18 +133,13 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		ChucNang.setGio(lblGio, lblNgay);
 
 		/**
-		 * Tên label nhân viên
-		 */
-		ChucNang.setLabelName("Hoàng Văn Chinh", panel);
-
-		/**
 		 * 
 		 * sự kiện cboMonth và spnYear
 		 */
 		cboMonth = new JMonthChooser();
 		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cboMonth.setLocale(new Locale("vi"));
-		cboMonth.setBounds(477, 14, 202, 47);
+		cboMonth.setBounds(542, 14, 137, 47);
 		panel_1_1.add(cboMonth);
 
 		spnYear = new JYearChooser();
@@ -748,49 +742,57 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		String txtTim = txtTimKiem.getText().trim();
 		int rowLen = tblTinhLuong.getRowCount();
 		int colLen = tblTinhLuong.getColumnCount();
-
+		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
+		List<NhanVien> listNhanVien = new ArrayList<>();
 		List<Object[]> list = new ArrayList<>();
 		Object[] item = new Object[colLen];
 
 		switch (selectedIndex) {
 		case 0: {
-			for (int i = 0; i < rowLen; i++) {
-				Object maNV = modelTinhLuong.getValueAt(i, 0);
-				if (maNV == null)
-					break;
-				if (maNV.toString().equals(txtTim)) {
-					for (int j = 0; j < colLen; j++) {
-						item[j] = tblTinhLuong.getValueAt(i, j);
+			clearAllData();
+			listNhanVien = quanLyLuongService.getNhanVienTheoMaVaThoiGian(txtTim, cboMonth.getMonth() + 1,
+					spnYear.getYear());
+			if (!listNhanVien.isEmpty()) {
+				for (NhanVien nhanVien : listNhanVien) {
+
+					BangLuong bangLuong = quanLyLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(),
+							spnYear.getYear(), cboMonth.getMonth() + 1);
+					if (bangLuong != null) {
+						modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
+								vnFormat.format(nhanVien.getMucLuong()), bangLuong.getHeSoLuong(),
+								vnFormat.format(bangLuong.getTienSanPham()), bangLuong.getSoNgayCong(),
+								vnFormat.format(bangLuong.tinhLuong()) });
 					}
-					break;
 				}
 			}
 
-			clearAllData();
-			modelTinhLuong.addRow(item);
-			if (item[0] == null) {
+			txtTrang.setText("1");
+			if (tblTinhLuong.getRowCount() == 0) {
 				JOptionPane.showMessageDialog(null, "Không tìm thấy theo dữ liệu");
 			}
 			break;
 		}
 
 		case 1: {
-			for (int i = 0; i < rowLen; i++) {
-				Object tenNV = modelTinhLuong.getValueAt(i, 1);
-				if (tenNV == null)
-					break;
-				if (tenNV.toString().equals(txtTim)) {
-					for (int j = 0; j < colLen; j++) {
-						item[j] = tblTinhLuong.getValueAt(i, j);
+			clearAllData();
+			listNhanVien = quanLyLuongService.getNhanVienTheoTenVaThoiGian(txtTim, cboMonth.getMonth() + 1,
+					spnYear.getYear());
+			if (!listNhanVien.isEmpty()) {
+				for (NhanVien nhanVien : listNhanVien) {
+
+					BangLuong bangLuong = quanLyLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(),
+							spnYear.getYear(), cboMonth.getMonth() + 1);
+					if (bangLuong != null) {
+						modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
+								vnFormat.format(nhanVien.getMucLuong()), bangLuong.getHeSoLuong(),
+								vnFormat.format(bangLuong.getTienSanPham()), bangLuong.getSoNgayCong(),
+								vnFormat.format(bangLuong.tinhLuong()) });
 					}
-					list.add(item);
 				}
 			}
-			clearAllData();
-			for (Object[] i : list) {
-				modelTinhLuong.addRow(i);
-			}
-			if (list.size() == 0) {
+
+			txtTrang.setText("1");
+			if (tblTinhLuong.getRowCount() == 0) {
 				JOptionPane.showMessageDialog(null, "Không tìm thấy theo dữ liệu");
 			}
 			break;
