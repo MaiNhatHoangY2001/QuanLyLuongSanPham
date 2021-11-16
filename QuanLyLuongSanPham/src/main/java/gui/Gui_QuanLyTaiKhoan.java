@@ -12,16 +12,20 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import dao.NhanVienDao;
 import dao.TaiKhoanDao;
 import gui_package.ChucNang;
 import gui_package.CircleBtn;
 import gui_package.RoundedPanel;
+import model.NhanVien;
 import model.TaiKhoan;
+import services.QuanLyLuongService;
 
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -29,9 +33,11 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.MouseListener;
+import java.time.format.DateTimeFormatter;
 
 
-public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
+public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener,MouseListener  {
 	private String[] colsnameLK = { "Tên Tài Khoản", "Mật Khẩu" };
 	private DefaultTableModel modelTaiKhoan;
 	JPanel pnlHead;
@@ -56,14 +62,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	private JLabel lblTen_4;
 	private JTextField txtTenTK;
 	private JTextField txtMK;
-	private CircleBtn btnSua;
-	private CircleBtn btnXoaRong2;
+	private CircleBtn btnXoa;
+	private CircleBtn btnLuu;
 	private JPanel panelTTNV;
 	private JLabel lblMa;
 	private JLabel lblTen;
 	private JLabel lblDC;
 	private JLabel lblSDT;
 	private JLabel lblEmail;
+	private JLabel lblNS;
 
 
 	public Gui_QuanLyTaiKhoan() {
@@ -185,15 +192,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		txtMK.setBounds(149, 107, 380, 30);
 		panelSuaTK.add(txtMK);
 		
-		btnSua = new CircleBtn("Tạo Tài Khoản");
-		btnSua.setBounds(168, 168, 120, 40);
-		btnSua.setBackground(new Color(233, 180, 46));
-		panelSuaTK.add(btnSua);
+		btnXoa = new CircleBtn("Xóa Tài Khoản");
+		btnXoa.setBounds(168, 168, 120, 40);
+		btnXoa.setBackground(new Color(233, 180, 46));
+		panelSuaTK.add(btnXoa);
 		
-		btnXoaRong2 = new CircleBtn("Xóa Rỗng");
-		btnXoaRong2.setBounds(364, 168, 120, 40);
-		btnXoaRong2.setBackground(new Color(233, 180, 46));
-		panelSuaTK.add(btnXoaRong2);
+		btnLuu = new CircleBtn("Lưu Tài Khoản");
+		btnLuu.setBounds(364, 168, 120, 40);
+		btnLuu.setBackground(new Color(233, 180, 46));
+		panelSuaTK.add(btnLuu);
 		
 		panelTTNV = new JPanel();
 		panelTTNV.setLayout(null);
@@ -204,28 +211,33 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 		
 		lblMa = new JLabel("Mã Nhân Viên:");
 		lblMa.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMa.setBounds(32, 53, 492, 29);
+		lblMa.setBounds(32, 40, 492, 29);
 		panelTTNV.add(lblMa);
 		
 		lblTen = new JLabel("Tên Nhân Viên:");
 		lblTen.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTen.setBounds(32, 93, 492, 29);
+		lblTen.setBounds(32, 80, 492, 29);
 		panelTTNV.add(lblTen);
 		
 		lblDC = new JLabel("Địa Chỉ:");
 		lblDC.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDC.setBounds(32, 133, 492, 29);
+		lblDC.setBounds(32, 120, 492, 29);
 		panelTTNV.add(lblDC);
 		
 		lblSDT = new JLabel("Số Điện Thoại:");
 		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSDT.setBounds(32, 173, 492, 29);
+		lblSDT.setBounds(32, 160, 492, 29);
 		panelTTNV.add(lblSDT);
 		
 		lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEmail.setBounds(32, 213, 492, 29);
+		lblEmail.setBounds(32, 236, 492, 29);
 		panelTTNV.add(lblEmail);
+		
+		lblNS = new JLabel("Ngày Sinh:");
+		lblNS.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNS.setBounds(32, 200, 492, 29);
+		panelTTNV.add(lblNS);
 		
 		new DefaultTableModel(colsnameLK, 0);
 		
@@ -274,31 +286,54 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 	
 	//Su kien
 	btnThem.addActionListener(this);
+	btnXoa.addActionListener(this);
+	btnLuu.addActionListener(this);
+	tblTaiKhoan.addMouseListener(this);
 	
 	//load data
 	daoTK = new TaiKhoanDao();
 	listTK = daoTK.getDsTaiKhoan();
 	LoadTaiKhoan(listTK);
 	}
-
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) { 
 		Object o = e.getSource();
 		if(o.equals(btnThem)) {
-			TaiKhoan tk = getTaiKhoanTuTextfield();
-			if(daoTK.themTaiKhoan(tk)) {
+			NhanVienDao nv = new NhanVienDao();
+			NhanVien nv1 = nv.getNhanVienTheoMa(txt1.getText().trim());
+			if(daoTK.themTaiKhoan(new TaiKhoan(nv1,txt2.getText().trim()))) {
 				JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
+				listTK = daoTK.getDsTaiKhoan();
+				LoadTaiKhoan(listTK);
 			}else 
 				JOptionPane.showMessageDialog(this, "Thêm thất bại");
 		}
+		else if(o.equals(btnXoa)) {
+			if(tblTaiKhoan.getSelectedRowCount()==0) {
+				JOptionPane.showMessageDialog(this, "Chọn dòng muốn xóa");
+			}
+			else {
+				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa tài khoản này không?", "Xóa Tài Khoản",
+						JOptionPane.YES_NO_OPTION);
+				if (tl == JOptionPane.YES_OPTION) {
+					String tenTaiKhoan = modelTaiKhoan.getValueAt(tblTaiKhoan.getSelectedRow(), 0).toString();
+					boolean x = daoTK.xoaTaiKhoanTheoMa(tenTaiKhoan);
+					if(x) {
+						JOptionPane.showMessageDialog(this, "Xóa tài khoản thành công");
+						listTK = daoTK.getDsTaiKhoan();
+						LoadTaiKhoan(listTK);
+					}
+					else 
+						JOptionPane.showMessageDialog(this, "Xóa tài khoản thất bại");
+				}
+				
+			}
+			
+		}
 	}
-	private TaiKhoan getTaiKhoanTuTextfield() {
-		
-		String tenTK = txtTenTK.getText();
-		String mk = txtMK.getText();
-		return new TaiKhoan(tenTK,mk);
-	}
+
 	private void LoadTaiKhoan(List<TaiKhoan> list) {
 		ChucNang.clearDataTable(modelTaiKhoan);
 		for (TaiKhoan tk : list) {
@@ -310,6 +345,67 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener  {
 			tk.getTenTaiKhoan(),tk.getMatKhau()
 		};
 		modelTaiKhoan.addRow(n);
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Object tenTaiKhoan = modelTaiKhoan.getValueAt(tblTaiKhoan.getSelectedRow(), 0);
+		Object matKhau = modelTaiKhoan.getValueAt(tblTaiKhoan.getSelectedRow(), 1);
+		txtTenTK.setText((String) tenTaiKhoan);
+		txtMK.setText((String) matKhau);
+		setDataPanelThongTinNV(tenTaiKhoan);
+		
+	}
+	public void setDataPanelThongTinNV(Object maNhanVien) {
+		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
+		NhanVien nhanVien = new NhanVien();
+		if (maNhanVien != null) {
+			nhanVien = quanLyLuongService.getNhanVien(maNhanVien.toString());
+			lblMa.setText("Mã Nhân viên: " + nhanVien.getMaNhanVien());
+			lblTen.setText("Tên Nhân viên: " + nhanVien.getTenNhanVien());
+			lblDC.setText("Địa Chỉ: "+ nhanVien.getDiaChi());
+			lblSDT.setText("Số điện thoại: " + nhanVien.getsDT());
+			lblNS.setText("Ngày sinh: " + DateTimeFormatter.ofPattern("dd/MM/yyyy").format(nhanVien.getNgaySinh()));
+			lblEmail.setText("Email: " + nhanVien.getEmail());
+		} else {
+			clearThongTinNhanVien();
+		}
+	}
+	public void clearThongTinNhanVien() {
+		lblTen.setText("Tên Nhân Viên:");
+		lblMa.setText("Mã Nhân viên:");
+		lblSDT.setText("Số điện thoại:");
+		lblDC.setText("Địa Chỉ: ");
+		lblNS.setText("Ngày sinh:");
+		lblEmail.setText("Email: ");
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

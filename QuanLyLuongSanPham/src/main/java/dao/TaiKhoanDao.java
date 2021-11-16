@@ -68,4 +68,19 @@ public class TaiKhoanDao {
 		}
 		return null;
 	}
+	public boolean xoaTaiKhoanTheoMa(String maTKCanXoa) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.delete(session.find(TaiKhoan.class, maTKCanXoa));
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
 }
