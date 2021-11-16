@@ -430,9 +430,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 								}
 								JOptionPane.showMessageDialog(this, "Mua hàng thành công", "Thông báo",
 										JOptionPane.INFORMATION_MESSAGE);
-								if (Gui_QuanLyHoaDon.latch == null) {
-									Gui_QuanLyHoaDon.latch.countDown();
-								}
+				
 								this.dispose();
 							} catch (Exception e2) {
 								JOptionPane.showMessageDialog(this, "Thêm thất bại \nVui lòng kiểm tra lại thông tin:",
@@ -665,10 +663,9 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	public void clearNullRow(DefaultTableModel model) {
 		int row = model.getDataVector().size();
 		for (int i = row - 1; i >= 0; i--) {
-//			if (model.getDataVector().get(i).elementAt(0) == null) {
-//				model.getDataVector().remove(i);
-//			}
-			// Lỗi tại elementAt(0)
+			if (model.getDataVector().get(i).elementAt(0) == null) {
+				model.getDataVector().remove(i);
+			}
 		}
 	}
 
