@@ -133,10 +133,6 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 		ChucNang.setGio(lblGio, lblNgay);
 
-		/**
-		 * Tên label nhân viên
-		 */
-		ChucNang.setLabelName("Hoàng Văn Chinh", panel);
 
 		/**
 		 * 

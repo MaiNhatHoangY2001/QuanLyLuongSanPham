@@ -292,6 +292,9 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(table);
 		scrollPane.setEnabled(false);
+		
+		int[] i = {5};
+		ChucNang.setRightAlignmentTable(i, table);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 780, 1600, 57);

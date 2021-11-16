@@ -40,7 +40,8 @@ public class SanPhamDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "select * from SanPham\r\n" + "where nCC like '%" + ncc + "%'";
+
+			String query = "select * from SanPham\r\n" + "where nCC like '%" + ncc+ "%'";
 			list = session.createNativeQuery(query, SanPham.class).getResultList();
 			tr.commit();
 			return list;
@@ -53,6 +54,7 @@ public class SanPhamDao {
 		return null;
 
 	}
+
 
 	public boolean capNhatSanPham(SanPham sp) {
 		Session session = sessionFactory.openSession();

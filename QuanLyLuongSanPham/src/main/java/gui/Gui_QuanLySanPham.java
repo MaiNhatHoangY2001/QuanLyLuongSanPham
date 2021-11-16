@@ -278,6 +278,9 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(table);
+		
+		int[] i = {3};
+		ChucNang.setRightAlignmentTable(i, table);
 
 		panel = new JPanel();
 		panel.setLayout(null);

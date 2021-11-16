@@ -430,9 +430,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 								}
 								JOptionPane.showMessageDialog(this, "Mua hàng thành công", "Thông báo",
 										JOptionPane.INFORMATION_MESSAGE);
-								if (Gui_QuanLyHoaDon.latch == null) {
-									Gui_QuanLyHoaDon.latch.countDown();
-								}
+				
 								this.dispose();
 							} catch (Exception e2) {
 								JOptionPane.showMessageDialog(this, "Thêm thất bại \nVui lòng kiểm tra lại thông tin:",
