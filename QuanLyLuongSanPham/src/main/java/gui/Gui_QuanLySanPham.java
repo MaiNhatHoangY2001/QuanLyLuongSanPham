@@ -140,6 +140,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 
 		// JButton Sua Nhan Vien
 		btnSuaNV = new JButton("Sửa");
+		btnSuaNV.setForeground(Color.WHITE);
 		btnSuaNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSuaNV.setBackground(new Color(233, 180, 46));
 		btnSuaNV.setBounds(10, 13, 150, 45);
@@ -148,6 +149,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 
 		// Làm mới
 		btnLamMoi = new JButton("Làm mới");
+		btnLamMoi.setForeground(Color.WHITE);
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnLamMoi.setBackground(new Color(233, 180, 46));
 		btnLamMoi.setBounds(1424, 13, 150, 45);
@@ -156,6 +158,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 
 		// JButton Tim Kiem
 		btnTimKiem = new JButton("Tìm");
+		btnTimKiem.setForeground(Color.WHITE);
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnTimKiem.setBackground(new Color(233, 180, 46));
 		btnTimKiem.setBounds(1265, 13, 150, 45);
