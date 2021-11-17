@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Hung
 Build-Jdk: 16.0.1
+=======
+Built-By: PC
+Build-Jdk: 17.0.1
+>>>>>>> 47a7790886a7b71bd8a23892d312abb427eacceb
 Created-By: Maven Integration for Eclipse
 
