@@ -208,7 +208,7 @@ public class Gui_DangNhap extends JFrame {
 		panelNgang.add(lblLuong);
 
 		btnDangNhap.addActionListener(e -> {
-			String ten = txtTaiKhoan.getText().trim().equals("admin") ? "NV00000000" : txtTaiKhoan.getText().trim();
+			String ten = txtTaiKhoan.getText().trim().equals("vanchinh") ? "NV00000000" : txtTaiKhoan.getText().trim();
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
 			if (!(KiemTraRongText(txtTaiKhoan))) {

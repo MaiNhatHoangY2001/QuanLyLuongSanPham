@@ -1,3 +1,9 @@
+/**
+ * Chi tiết hóa đơn nhập
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * người tham gia chỉnh sửa, update:Ngọc Long
+ */
 package model;
 
 import javax.persistence.Column;
@@ -32,6 +38,11 @@ public class ChiTietHoaDonNhap {
 		this.soLoHang = soLoHang;
 	}
 
+	/**
+	 * tính tổng tiền
+	 * 
+	 * @return
+	 */
 	public double tinhTongTien() {
 		return donGia * soLoHang;
 	}

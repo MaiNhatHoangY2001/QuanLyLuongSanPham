@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -63,6 +64,7 @@ public class Gui_ThemHoaDonNhap extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui_ThemHoaDonNhap() {
+		setIconImage(new ImageIcon("img/logo.png").getImage());
 		quanLyHoaDonService = new QuanLyHoaDonService();
 		setMinimumSize(new Dimension(1440, 1024));
 		setResizable(false);

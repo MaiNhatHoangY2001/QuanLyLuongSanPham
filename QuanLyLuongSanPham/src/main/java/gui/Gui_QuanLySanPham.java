@@ -339,7 +339,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		} else if (o.equals(btnTimKiem)) {
 			String data = txtTImKiem.getText();
 			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
-			if (data.endsWith("")) {
+			if (data.equals("")) {
 				loadMacDinh();
 			} else {
 				if (loaiTK.equals("Tìm theo tên")) {
@@ -401,7 +401,7 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		} else if (o.equals(txtTImKiem)) {
 			String data = txtTImKiem.getText();
 			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();
-			if (data.endsWith("")) {
+			if (data.equals("")) {
 				loadMacDinh();
 			} else {
 				if (loaiTK.equals("Tìm theo tên")) {

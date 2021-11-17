@@ -1,3 +1,9 @@
+/**
+ * Chi tiết hóa đơn
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * Người tham gia chỉnh sửa, update : Mai Nhật Hoàng, Ngọc Long
+ */
 package model;
 
 import javax.persistence.Column;
@@ -26,6 +32,10 @@ public class ChiTietHoaDonBan {
 	@JoinColumn(name = "maSanPham")
 	private SanPham sanPham;
 
+	/**
+	 * Tính tổng tiền
+	 * @return
+	 */
 	public double tinhTongTien() {
 		return donGia * soLuong + 100000;
 	}

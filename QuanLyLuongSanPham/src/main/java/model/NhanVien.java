@@ -1,3 +1,8 @@
+/**
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * người tham gia chỉnh sửa, update :Nhật Hoàng, Ngọc Long, Minh Hùng
+ */
 package model;
 
 import java.time.LocalDate;

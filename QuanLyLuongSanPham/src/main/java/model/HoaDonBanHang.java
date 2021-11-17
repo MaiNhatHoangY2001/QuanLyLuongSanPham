@@ -1,3 +1,9 @@
+/**
+ * Hóa đơn bán hàng
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * người tham gia chỉnh sửa, update : Mai Nhật Hoàng, Ngọc Long
+ */
 package model;
 
 import java.time.LocalDate;
@@ -51,6 +57,11 @@ public class HoaDonBanHang {
 		this.khachHang = khachHang;
 	}
 
+	/**
+	 * Tính tổng thành tiền
+	 * 
+	 * @return
+	 */
 	public double tinhThanhTien() {
 		this.thanhTien = 0;
 		dsChiTietHoaDonBan.forEach(i -> {
@@ -60,6 +71,11 @@ public class HoaDonBanHang {
 		return this.thanhTien;
 	}
 
+	/**
+	 * Tính thuế
+	 * 
+	 * @return
+	 */
 	public double tinhThue() {
 		return thanhTien * thue;
 	}
