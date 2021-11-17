@@ -382,7 +382,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			// SỰ kiện Làm mới bản
 		} else if (o.equals(btnLamMoi)) {
 			LoadMacDinh();
-			// Sự kiện chó nút tìm kiếm
+			// Sự kiện cho nút tìm kiếm
 		} else if (o.equals(btnTimKiem)) {
 			String data = txtTImKiem.getText();
 			String loaiTK = cmbLoaiTimKiem.getSelectedItem().toString();

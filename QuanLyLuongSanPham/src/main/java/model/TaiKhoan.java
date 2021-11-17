@@ -22,6 +22,7 @@ public class TaiKhoan {
 	@JoinColumn(name = "tenTaiKhoan")
 	private NhanVien nhanVien;
 	
+
 	public String getTenTaiKhoan() {
 		return tenTaiKhoan;
 	}
@@ -41,6 +42,13 @@ public class TaiKhoan {
 		super();
 		this.tenTaiKhoan = tenTK;
 		this.matKhau = mk;
+	}
+	
+	public TaiKhoan(NhanVien nhanVien,String matKhau ) {
+		super();
+		this.nhanVien = nhanVien;
+		this.matKhau = matKhau;
+		
 	}
 	@Override
 	public String toString() {

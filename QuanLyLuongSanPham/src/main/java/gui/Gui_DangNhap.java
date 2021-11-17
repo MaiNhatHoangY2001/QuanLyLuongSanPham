@@ -59,7 +59,7 @@ public class Gui_DangNhap extends JFrame {
 	public Gui_DangNhap() {
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -75,7 +75,7 @@ public class Gui_DangNhap extends JFrame {
 				setLocation(x - xClicked, y - yClicked);
 			}
 		});
-		
+
 		setUndecorated(true);
 		setBounds(100, 100, 1200, 800);
 		setLocationRelativeTo(null);
@@ -208,23 +208,22 @@ public class Gui_DangNhap extends JFrame {
 		panelNgang.add(lblLuong);
 
 		btnDangNhap.addActionListener(e -> {
-			String ten = txtTaiKhoan.getText().trim();
+			String ten = txtTaiKhoan.getText().trim().equals("admin") ? "NV00000000" : txtTaiKhoan.getText().trim();
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
 			if (!(KiemTraRongText(txtTaiKhoan))) {
-				if(taiKhoan != null)
+				if (taiKhoan != null)
 					if (mk.equals(taiKhoan.getMatKhau())) {
 						chinh.setTaiKhoan(taiKhoan);
 						chinh.setVisible(true);
 						this.setVisible(false);
-					}
-					else {
+					} else {
 						JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
 					}
 				else {
 					JOptionPane.showMessageDialog(this, "Sai tên tài khoản");
 				}
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(this, "Tên tài khoản không được bỏ trống");
 			}
 		});
@@ -234,9 +233,11 @@ public class Gui_DangNhap extends JFrame {
 	public static void main(String[] args) {
 		getInstance().setVisible(true);
 	}
+
 	public static Gui_DangNhap getInstance() {
 		return new Gui_DangNhap();
 	}
+
 	public boolean KiemTraRongText(JTextField txt) {
 		return txt.getText().equals("") ? true : false;
 	}
