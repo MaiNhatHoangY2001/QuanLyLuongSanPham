@@ -139,6 +139,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// JButton Them Nhan Vien
 		btnThemNV = new JButton("Thêm");
+		btnThemNV.setForeground(Color.WHITE);
 		btnThemNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnThemNV.setBackground(new Color(233, 180, 46));
 		btnThemNV.setBounds(10, 13, 150, 45);
@@ -147,6 +148,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// JButton Sua Nhan Vien
 		btnSuaNV = new JButton("Sửa");
+		btnSuaNV.setForeground(Color.WHITE);
 		btnSuaNV.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnSuaNV.setBackground(new Color(233, 180, 46));
 		btnSuaNV.setBounds(170, 13, 150, 45);
@@ -155,6 +157,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// JButton Xoa Nhan Vien
 		btnXaThai = new JButton("Sa Thải");
+		btnXaThai.setForeground(Color.WHITE);
 		btnXaThai.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnXaThai.setBackground(new Color(233, 180, 46));
 		btnXaThai.setBounds(330, 13, 150, 45);
@@ -163,6 +166,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// Làm mới
 		btnLamMoi = new JButton("Làm mới");
+		btnLamMoi.setForeground(Color.WHITE);
 		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnLamMoi.setBackground(new Color(233, 180, 46));
 		btnLamMoi.setBounds(1424, 13, 150, 45);
@@ -171,6 +175,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		// JButton Tim Kiem
 		btnTimKiem = new JButton("Tìm");
+		btnTimKiem.setForeground(Color.WHITE);
 		btnTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		btnTimKiem.setBackground(new Color(233, 180, 46));
 		btnTimKiem.setBounds(1265, 13, 150, 45);
