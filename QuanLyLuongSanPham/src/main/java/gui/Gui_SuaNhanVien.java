@@ -349,8 +349,8 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		} else if (o.equals(btnXoaRong)) {
 			xoaRongText();
 		} else if (o.equals(btnXaThai)) {
-			if (btnXaThai.getText().equals("Xa Thải")) {
-				int tl = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xa thải nhân viên này không?",
+			if (btnXaThai.getText().equals("Sa Thải")) {
+				int tl = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn Sa thải nhân viên này không?",
 						"Thông báo", JOptionPane.YES_NO_OPTION);
 				if (tl == JOptionPane.YES_OPTION) {
 					lblTTNhanVien.setText("Trang thái: Nghĩ việc");
@@ -363,7 +363,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 				if (tl == JOptionPane.YES_OPTION) {
 					lblTTNhanVien.setText("Trang thái: Đang làm");
 					nhanVien.setTrangThaiLamViec(true);
-					btnXaThai.setText("Xa Thải");
+					btnXaThai.setText("Sa Thải");
 				}
 			}
 		} else if (o.equals(btnLuu)) {
@@ -397,6 +397,8 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 			return false;
 		if (!nhanVien1.getNgaySinh().equals(nhanVien2.getNgaySinh()))
 			return false;
+		if (nhanVien1.isTrangThaiLamViec() != nhanVien2.isTrangThaiLamViec())
+			return false;
 		return true;
 	}
 
@@ -414,7 +416,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		setDate(day, month, year);
 		if (nv.gettrangThaiLamViec() == true) {
 			lblTTNhanVien.setText("Trang thái: Đang làm");
-			btnXaThai.setText("Xa Thải");
+			btnXaThai.setText("Sa Thải");
 		} else if (nv.gettrangThaiLamViec() == false) {
 			lblTTNhanVien.setText("Trang thái: Nghĩ việc");
 			btnXaThai.setText("Nhận");
@@ -448,7 +450,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		String diaChi = txtDiaChi.getText();
 		String sdt = txtSDT.getText();
 		String CMND = txtCMND.getText();
-		boolean trangThai = btnXaThai.getText() == "Nhận" ? false : true;
+		boolean trangThai = btnXaThai.getText().equals("Nhận") ? false : true;
 		String email = txtEmail.getText();
 		double hsl = Double.parseDouble(txtHeSoLuong.getText());
 		return new NhanVien(ten, diaChi, sdt, CMND, trangThai, email, date, hsl);
