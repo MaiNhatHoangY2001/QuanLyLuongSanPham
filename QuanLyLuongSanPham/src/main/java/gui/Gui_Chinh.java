@@ -72,7 +72,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	}
 
 	private void phanQuyen() {
-		if (!(taiKhoan.getTenTaiKhoan().equals("admin"))) {
+		if (!(taiKhoan.getTenTaiKhoan().equals("NV00000000"))) {
 			btnQuanLyNhanVien.setEnabled(false);
 			btnQuanLyTaiKhoan.setEnabled(false);
 		} else {
