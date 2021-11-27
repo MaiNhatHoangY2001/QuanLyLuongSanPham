@@ -129,7 +129,7 @@ public class Gui_ThemKhachHang extends JDialog implements ActionListener {
 				if(quanLyHoaDonService.timKhachHangBySdt(khachHang.getsDT())==null) {
 					quanLyHoaDonService.themKhachHang(khachHang);
 					JOptionPane.showMessageDialog(this,"Đẫ thêm","Thông báo",JOptionPane.INFORMATION_MESSAGE);
-					System.exit(0);
+					this.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(this,"Khách hàng này đã tồn tại","Cảnh báo",JOptionPane.ERROR_MESSAGE);

@@ -52,6 +52,7 @@ public class Gui_DangNhap extends JFrame {
 	private JLabel lblLuong;
 	private DangNhapService dangNhapService = new DangNhapService();
 	private Gui_Chinh chinh = new Gui_Chinh();
+	private JLabel lblQuenMK;
 
 	/**
 	 * Create the frame.
@@ -94,13 +95,13 @@ public class Gui_DangNhap extends JFrame {
 
 		panelThongTinDN = new RoundedPanel();
 		panelThongTinDN.setBackground(new Color(248, 198, 153));
-		panelThongTinDN.setBounds(40, 336, 1124, 434);
+		panelThongTinDN.setBounds(38, 336, 1124, 434);
 		contentPane.add(panelThongTinDN);
 		panelThongTinDN.setLayout(null);
 
 		lblTaiKhoan = new JLabel("Tài Khoản:");
 		lblTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblTaiKhoan.setForeground(Color.WHITE);
+		lblTaiKhoan.setForeground(Color.BLACK);
 		lblTaiKhoan.setIconTextGap(-20);
 		lblTaiKhoan.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblTaiKhoan.setBounds(30, 124, 109, 50);
@@ -120,14 +121,14 @@ public class Gui_DangNhap extends JFrame {
 
 		lblMatKhau = new JLabel("Mật Khẩu:");
 		lblMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblMatKhau.setForeground(Color.WHITE);
+		lblMatKhau.setForeground(Color.BLACK);
 		lblMatKhau.setIconTextGap(-20);
 		lblMatKhau.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblMatKhau.setBounds(20, 232, 119, 35);
 		panelThongTinDN.add(lblMatKhau);
 
 		btnDangNhap = new CircleBtn("Đăng Nhập");
-		btnDangNhap.setBounds(149, 320, 204, 60);
+		btnDangNhap.setBounds(149, 334, 150, 60);
 		panelThongTinDN.add(btnDangNhap);
 
 		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -135,7 +136,7 @@ public class Gui_DangNhap extends JFrame {
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		btnXoa = new CircleBtn("Xóa");
-		btnXoa.setBounds(460, 320, 204, 60);
+		btnXoa.setBounds(486, 334, 150, 60);
 		panelThongTinDN.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,7 +148,7 @@ public class Gui_DangNhap extends JFrame {
 		btnXoa.setFont(new Font("Calibri", Font.BOLD, 16));
 
 		btnThoat = new CircleBtn("Thoát");
-		btnThoat.setBounds(772, 320, 204, 60);
+		btnThoat.setBounds(825, 334, 150, 60);
 		panelThongTinDN.add(btnThoat);
 		btnThoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,6 +165,16 @@ public class Gui_DangNhap extends JFrame {
 		lblDangNhap.setForeground(Color.WHITE);
 		lblDangNhap.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDangNhap.setFont(new Font("Calibri", Font.BOLD, 40));
+		
+		lblQuenMK = new JLabel("quên mật khẩu ?");
+		lblQuenMK.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblQuenMK.setIconTextGap(-20);
+		lblQuenMK.setHorizontalAlignment(SwingConstants.CENTER);
+		lblQuenMK.setForeground(Color.BLACK);
+		lblQuenMK.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		lblQuenMK.setBounds(840, 273, 151, 50);
+		panelThongTinDN.add(lblQuenMK);
 
 		lbTieuDe = new JLabel("ỨNG DỤNG QUẢN LÝ CỬA HÀNG ĐIỆN THOẠI 17");
 		lbTieuDe.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -208,7 +219,7 @@ public class Gui_DangNhap extends JFrame {
 		panelNgang.add(lblLuong);
 
 		btnDangNhap.addActionListener(e -> {
-			String ten = txtTaiKhoan.getText().trim().equals("admin") ? "NV00000000" : txtTaiKhoan.getText().trim();
+			String ten = txtTaiKhoan.getText().trim().equals("vanchinh") ? "NV00000000" : txtTaiKhoan.getText().trim();
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
 			if (!(KiemTraRongText(txtTaiKhoan))) {

@@ -90,6 +90,7 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	 * Create the frame.
 	 */
 	public Gui_ThemHoaDonBan() {
+		setIconImage(new ImageIcon("img/logo.png").getImage());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		quanLyHoaDonService = new QuanLyHoaDonService();
 		this.setResizable(false);
