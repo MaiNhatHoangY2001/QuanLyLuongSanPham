@@ -31,13 +31,29 @@ public class TaiKhoanDao {
 		}
 		return false;
 	}
-
+	public boolean capNhatTaiKhoan(TaiKhoan tk) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			session.update(tk);
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
 	public TaiKhoan getTaiKhoan(String tenTaiKhoan) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			TaiKhoan taikhoan = session.find(TaiKhoan.class, tenTaiKhoan);
+			String queryString =   "select * from TaiKhoan where tenTaiKhoan like '"+tenTaiKhoan+"'";
+			TaiKhoan taikhoan = session.createNativeQuery(queryString, TaiKhoan.class).getSingleResult();
+			//TaiKhoan taikhoan = session.find(TaiKhoan.class, tenTaiKhoan);
 			tr.commit();
 			return taikhoan;
 		} catch (Exception e) {
