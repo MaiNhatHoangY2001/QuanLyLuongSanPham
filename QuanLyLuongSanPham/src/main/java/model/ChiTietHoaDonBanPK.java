@@ -1,3 +1,9 @@
+/**
+ * Lớp mô tả cho khóa chính
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * 
+ */
 package model;
 
 import java.io.Serializable;
@@ -6,13 +12,14 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ChiTietHoaDonBanPK implements Serializable{
+public class ChiTietHoaDonBanPK implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3631092147376716387L;
 	private String sanPham;
 	private String hoaDonBanHang;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -21,6 +28,7 @@ public class ChiTietHoaDonBanPK implements Serializable{
 		result = prime * result + ((sanPham == null) ? 0 : sanPham.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -42,9 +50,9 @@ public class ChiTietHoaDonBanPK implements Serializable{
 			return false;
 		return true;
 	}
+
 	public ChiTietHoaDonBanPK() {
 		super();
 	}
-	
-	
+
 }

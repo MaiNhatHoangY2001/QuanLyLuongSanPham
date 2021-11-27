@@ -19,7 +19,6 @@ import gui_package.Regex;
 import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
 import model.NhanVien;
-import model.SanPham;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

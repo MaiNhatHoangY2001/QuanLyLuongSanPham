@@ -1,3 +1,9 @@
+/**
+ * Lớp mô tả cho khóa chính
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * 
+ */
 package model;
 
 import java.io.Serializable;

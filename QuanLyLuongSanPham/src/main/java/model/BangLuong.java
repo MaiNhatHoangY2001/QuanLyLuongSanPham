@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * Ngày tạo: 20/10/2021
+ * nguoi tạo: Hoàng Văn Chinh
+ * người tham gia chỉnh sửa, update : Mai Nhật Hoàng
+ */
 import java.time.LocalDate;
 
 import javax.persistence.Column;

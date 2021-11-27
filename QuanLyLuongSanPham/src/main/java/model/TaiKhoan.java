@@ -1,3 +1,9 @@
+/**
+ * Tài khoản
+ * Ngày tạo: 20/10/2021
+ * Nguoi tạo: Hoàng Văn Chinh
+ * người tham gia chỉnh sửa, update : Minh Hùng
+ */
 package model;
 
 import javax.persistence.Column;
