@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -49,6 +52,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	private Gui_QuanLyNhanVien trangNV = new Gui_QuanLyNhanVien();
 	private Gui_QuanLySanPham trangSP = new Gui_QuanLySanPham();
 	private Gui_QuanLyTaiKhoan trangtaiKhoan = new Gui_QuanLyTaiKhoan();
+	private JPanel panel_1;
 
 	public void setTaiKhoan(TaiKhoan taiKhoan) {
 		this.taiKhoan = taiKhoan;
@@ -73,48 +77,25 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 	private void phanQuyen() {
 		if (!(taiKhoan.getTenTaiKhoan().equals("NV00000000"))) {
-			btnQuanLyNhanVien.setEnabled(false);
-			btnQuanLyTaiKhoan.setEnabled(false);
+			panel_1.remove(btnQuanLyNhanVien);
+			panel_1.remove(btnQuanLyTaiKhoan);
+			btnThoat.setBounds(0, 460, 320, 115);
 		} else {
 			btnQuanLyNhanVien.setEnabled(true);
 			btnQuanLyTaiKhoan.setEnabled(true);
 		}
 	}
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Gui_Chinh gui_Chinh = new Gui_Chinh();
-//					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
-//
-//					gui_DangNhap.setVisible(true);
-//					gui_DangNhap.setLocationRelativeTo(null);
-//
-//					gui_DangNhap.btnDangNhap.addActionListener(new ActionListener() {
-//						public void actionPerformed(ActionEvent e) {
-//							gui_DangNhap.setVisible(false);
-//							gui_Chinh.setVisible(true);
-//
-//						}
-//
-//					});
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
 
+		Rectangle r = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setSize(1920, 1037);
+		setSize(r.width, r.height);
+		//1920 1040
 		setResizable(false);
 		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
@@ -141,10 +122,11 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		lblNewLabel_1.setBounds(9, 147, 294, 27);
 		panel.add(lblNewLabel_1);
 
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBounds(0, 200, 320, 807);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(242, 129, 25));
 
 		/**
 		 * các nút menu

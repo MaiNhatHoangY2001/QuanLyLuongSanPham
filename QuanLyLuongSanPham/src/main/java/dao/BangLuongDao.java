@@ -46,7 +46,8 @@ public class BangLuongDao {
 			tr.begin();
 
 			bangLuong = session
-					.createNativeQuery("select * from BangLuong where maNhanVien = '" + maNhanVien+ "'and YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month, BangLuong.class)
+					.createNativeQuery("select * from BangLuong where maNhanVien = '" + maNhanVien
+							+ "'and YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month, BangLuong.class)
 					.getSingleResult();
 
 			tr.commit();
@@ -127,6 +128,64 @@ public class BangLuongDao {
 		return false;
 	}
 
+	/**
+	 * Sửa thưởng theo mã nhân viên và tháng năm
+	 * 
+	 * @param maNhanVienString
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public boolean updateThuong(String maNhanVien, int month, int year, double thuong) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+
+		try {
+			tr.begin();
+			String query = "UPDATE BangLuong " + "SET thuong = " + thuong + " WHERE maNhanVien = '" + maNhanVien + "'"
+					+ " and MONTH(thoiGian) = " + month + " and YEAR(thoiGian) = " + year;
+			session.createSQLQuery(query).executeUpdate();
+			tr.commit();
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
+
+	/**
+	 * Sửa phạt theo mã nhân viên và tháng năm
+	 * 
+	 * @param maNhanVienString
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public boolean updatePhat(String maNhanVien, int month, int year, double phat) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+
+		try {
+			tr.begin();
+			String query = "UPDATE BangLuong " + "SET phat = " + phat + " WHERE maNhanVien = '" + maNhanVien + "'"
+					+ " and MONTH(thoiGian) = " + month + " and YEAR(thoiGian) = " + year;
+			session.createSQLQuery(query).executeUpdate();
+			tr.commit();
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return false;
+	}
+
 	public boolean xoaBangLuong(String id) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -147,13 +206,13 @@ public class BangLuongDao {
 	}
 
 	/**
-	 * Lấy bảng lương theo tháng năm
+	 * Lấy số lượng bảng lương theo tháng năm
 	 * 
 	 * @param month
 	 * @param year
 	 * @return
 	 */
-	public List<BangLuong> getAllBangLuong(int month, int year) {
+	public int getSoLuongBangLuong(int month, int year) {
 		List<BangLuong> list = new ArrayList<BangLuong>();
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
@@ -169,7 +228,59 @@ public class BangLuongDao {
 			tr.rollback();
 		}
 		session.close();
-		return list;
+		return list.size() + 1;
+
+	}
+
+	/**
+	 * Lấy số lượng bảng lương theo tháng năm và hành chính
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public int getSoLuongBangLuongHanhChinh(int month, int year) {
+		List<BangLuong> list = new ArrayList<BangLuong>();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery("select * from BangLuong where MONTH(thoiGian) = " + month
+					+ " and YEAR(thoiGian) = " + year + " and heSoLuong = 2", BangLuong.class).getResultList();
+
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return list.size() + 1;
+
+	}
+
+	/**
+	 * Lấy số lượng bảng lương theo tháng năm và bán hàng
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public int getSoLuongBangLuongBanHang(int month, int year) {
+		List<BangLuong> list = new ArrayList<BangLuong>();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery("select * from BangLuong where MONTH(thoiGian) = " + month
+					+ " and YEAR(thoiGian) = " + year + " and heSoLuong = 1", BangLuong.class).getResultList();
+
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return list.size() + 1;
 
 	}
 
@@ -249,10 +360,76 @@ public class BangLuongDao {
 		} finally {
 			session.close();
 		}
-		
-		
 
 		return tienLuong;
+
+	}
+
+	/**
+	 * Lấy số lượng sản phẩm của nhân viên trong tháng
+	 * 
+	 * @param month
+	 * @param year
+	 * @param maNV
+	 * @return
+	 */
+	public int getSoLuongSPCuaNV(int month, int year, String maNV) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		Object list = null;
+
+		try {
+			tr.begin();
+			String query = "SELECT SUM(c.soLuong) AS tongSoLuong "
+					+ "FROM ChiTietHoaDonBan AS c INNER JOIN SanPham AS s "
+					+ "ON c.maSanPham = s.maSanpham INNER JOIN HoaDonBanHang AS h "
+					+ "ON c.maHoaDonBan = h.maHoaDonBan " + "WHERE MONTH(h.ngayLapHoaDon) = " + month
+					+ " and (YEAR(h.ngayLapHoaDon) = " + year + ") and h.maNhanVien = '" + maNV + "'" + " "
+					+ "GROUP BY h.maNhanVien";
+			if (session.createNativeQuery(query).list().size() == 1) {
+				list = session.createNativeQuery(query).getSingleResult();
+			}
+
+			tr.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return list == null ? 0 : (int) list;
+
+	}
+
+	/**
+	 * lấy doanh thu theo thời gian
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public double getDoanhThu(int month, int year) {
+		BigDecimal thu = null;
+		BigDecimal chi = null;
+		BigDecimal doanhthu = null;
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query1 = "SELECT       sum(thanhTien) as thu\r\n" + "FROM              HoaDonBanHang\r\n"
+					+ "where MONTH(ngayLapHoaDon) = " + month + " and YEAR(ngayLapHoaDon) = " + year;
+			String query2 = "SELECT       sum(thanhTien) as chi\r\n" + "FROM              HoaDonNhapHang\r\n"
+					+ "where MONTH(ngayLapHoaDon) = " + month + " and YEAR(ngayLapHoaDon) = " + year;
+			thu = (BigDecimal) session.createSQLQuery(query1).getSingleResult();
+			chi = (BigDecimal) session.createSQLQuery(query2).getSingleResult();
+
+			doanhthu = BigDecimal.valueOf(thu.doubleValue() - chi.doubleValue());
+			tr.commit();
+		} catch (Exception e) {
+			tr.rollback();
+		}
+		session.close();
+		return thu == null ? 0 : doanhthu.doubleValue();
 
 	}
 

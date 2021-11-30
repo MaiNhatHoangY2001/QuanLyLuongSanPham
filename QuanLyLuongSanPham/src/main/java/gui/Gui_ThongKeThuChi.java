@@ -220,15 +220,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 
 			@Override
 			public boolean isCellEditable(int row, int col) {
-				switch (col) {
-				case 5:
-					if (modelThongKe.getValueAt(row, col) != null) {
-						return true;
-					}
-					return false;
-				default:
-					return false;
-				}
+				return false;
 			}
 		};
 		tblSanPham.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -18,7 +18,7 @@ public class CustomTable extends DefaultTableCellRenderer {
 		super();
 		this.bg = bg;
 		this.fg = fg;
-		setHorizontalAlignment(CENTER);
+		setHorizontalAlignment(RIGHT);
 	}
 	
 	public CustomTable() {

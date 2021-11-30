@@ -106,13 +106,13 @@ public class Gui_DangNhap extends JFrame {
 		lblTaiKhoan.setBounds(30, 124, 109, 50);
 		panelThongTinDN.add(lblTaiKhoan);
 
-		txtTaiKhoan = new JTextField("NV19020001");
+		txtTaiKhoan = new JTextField("vanchinh");
 		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTaiKhoan.setBounds(149, 124, 827, 50);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 
-		txtMatKhau = new JPasswordField();
+		txtMatKhau = new JPasswordField("admin");
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMatKhau.setColumns(10);
 		txtMatKhau.setBounds(149, 224, 827, 50);
@@ -128,6 +128,7 @@ public class Gui_DangNhap extends JFrame {
 
 		btnDangNhap = new CircleBtn("Đăng Nhập");
 		btnDangNhap.setBounds(149, 320, 204, 60);
+		btnDangNhap.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelThongTinDN.add(btnDangNhap);
 
 		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -136,6 +137,7 @@ public class Gui_DangNhap extends JFrame {
 
 		btnXoa = new CircleBtn("Xóa");
 		btnXoa.setBounds(460, 320, 204, 60);
+		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelThongTinDN.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,6 +149,7 @@ public class Gui_DangNhap extends JFrame {
 		btnXoa.setFont(new Font("Calibri", Font.BOLD, 16));
 
 		btnThoat = new CircleBtn("Thoát");
+		btnThoat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnThoat.setBounds(772, 320, 204, 60);
 		panelThongTinDN.add(btnThoat);
 		btnThoat.addActionListener(new ActionListener() {
