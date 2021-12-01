@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -311,7 +312,8 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnTao.addActionListener(e -> eventTaoBangLuong());
 
 		btnXemCT = new JButton("Xem chi tiết");
-		btnXemCT.setToolTipText("Xem chi tiết bảng lương của 1 nhân viên (Chọn 1 bảng lương trong thông tin bảng lương)");
+		btnXemCT.setToolTipText(
+				"Xem chi tiết bảng lương của 1 nhân viên (Chọn 1 bảng lương trong thông tin bảng lương)");
 		btnXemCT.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnXemCT.setEnabled(false);
 		btnXemCT.setForeground(Color.WHITE);
@@ -363,7 +365,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 		// Sự kiện
 		btnXuatFile.addActionListener(e -> {
-			new Gui_XuatFile(cboMonth.getMonth() + 1, spnYear.getYear()).setVisible(true);
+			new Gui_XuatFile(listAllBangLuong(), cboMonth.getMonth() + 1, spnYear.getYear()).setVisible(true);
 		});
 
 		/**
@@ -871,11 +873,12 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			for (NhanVien nhanVien : listNhanVien) {
 				BangLuong bangLuong = banLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
 				if (bangLuong != null) {
-					modelTinhLuong.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
+					Object o[] = new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
 							vnFormat.format(nhanVien.getMucLuong()), bangLuong.getHeSoLuong(),
 							vnFormat.format(bangLuong.getTienSanPham()), bangLuong.getSoNgayCong(),
 							vnFormat.format(bangLuong.getThuong()), vnFormat.format(bangLuong.getPhat()),
-							vnFormat.format(bangLuong.tinhLuong()) });
+							vnFormat.format(bangLuong.tinhLuong()) };
+					modelTinhLuong.addRow(o);
 				}
 			}
 		}
@@ -883,6 +886,44 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		if (tblTinhLuong.getRowCount() == 0) {
 			ChucNang.addNullDataTable(modelTinhLuong);
 		}
+	}
+
+	/**
+	 * Lấy danh sách tất cả nhân viên
+	 */
+	public List<Object[]> listAllBangLuong() {
+		List<Object[]> list = new ArrayList<>();
+		int cboLocIndex = cboLoc.getSelectedIndex();
+		int month = cboMonth.getMonth() + 1;
+		int year = spnYear.getYear();
+		QuanLyLuongService banLuongService = new QuanLyLuongService();
+
+		List<NhanVien> listNhanVien = new ArrayList<>();
+		switch (cboLocIndex) {
+		case 0:
+			listNhanVien = banLuongService.getNhanVienTheoThoiGian(month, year);
+			break;
+		case 1:
+			listNhanVien = banLuongService.getNhanVienHCTheoThoiGian(month, year);
+			break;
+		case 2:
+			listNhanVien = banLuongService.getNhanVienBHTheoThoiGian(month, year);
+			break;
+		}
+
+		if (!listNhanVien.isEmpty()) {
+			for (NhanVien nhanVien : listNhanVien) {
+				BangLuong bangLuong = banLuongService.getBangLuongTheoMaNhanVien(nhanVien.getMaNhanVien(), year, month);
+				if (bangLuong != null) {
+					Object o[] = new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
+							nhanVien.getMucLuong(), bangLuong.getHeSoLuong(), bangLuong.getTienSanPham(),
+							bangLuong.getSoNgayCong(), bangLuong.getThuong(), bangLuong.getPhat(),
+							bangLuong.tinhLuong() };
+					list.add(o);
+				}
+			}
+		}
+		return list;
 	}
 
 	/**

@@ -416,6 +416,66 @@ public class NhanVienDao {
 	}
 
 	/**
+	 * Lấy danh sách nhân viên hành chính theo thời gian bảng lương
+	 * 
+	 * @param maNV
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public List<NhanVien> getNhanVienHCTheoThoiGian(int month, int year) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery(
+					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
+							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month
+							+ " and heSoLuong = 2",
+					NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	/**
+	 * Lấy danh sách nhân viên bán hàng theo thời gian bảng lương
+	 * 
+	 * @param maNV
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public List<NhanVien> getNhanVienBHTheoThoiGian(int month, int year) {
+		List<NhanVien> list = new ArrayList<NhanVien>();
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+
+			list = session.createNativeQuery(
+					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
+							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month
+							+ " and heSoLuong = 1",
+					NhanVien.class).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	/**
 	 * Lấy danh sách nhân viên theo mã và thời gian bảng lương
 	 * 
 	 * @param maNV

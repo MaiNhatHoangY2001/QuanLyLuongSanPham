@@ -46,6 +46,14 @@ public class QuanLyLuongService {
 		return nhanVienDao.getNhanVienTheoThoiGian(month, year);
 	}
 
+	public List<NhanVien> getNhanVienBHTheoThoiGian(int month, int year) {
+		return nhanVienDao.getNhanVienBHTheoThoiGian(month, year);
+	}
+
+	public List<NhanVien> getNhanVienHCTheoThoiGian(int month, int year) {
+		return nhanVienDao.getNhanVienHCTheoThoiGian(month, year);
+	}
+
 	public List<NhanVien> getAllNhanVien() {
 		return nhanVienDao.getDsNhanVien();
 	}

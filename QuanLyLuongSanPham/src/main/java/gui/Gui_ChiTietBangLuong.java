@@ -54,7 +54,7 @@ public class Gui_ChiTietBangLuong extends JFrame {
 	private JLabel lblThanhTien;
 	private JLabel lblTenNV;
 	private JLabel lblChucVu;
-	private JButton btnIn;
+	private JButton btnXuatFile;
 
 	/**
 	 * Launch the application.
@@ -148,7 +148,6 @@ public class Gui_ChiTietBangLuong extends JFrame {
 		txtThanhTien = new JTextField();
 		txtThanhTien.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtThanhTien.setEditable(false);
-		txtThanhTien.setToolTipText("Nhập thông tin thưởng");
 		txtThanhTien.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtThanhTien.setColumns(10);
 		txtThanhTien.setBounds(178, 520, 289, 47);
@@ -180,15 +179,15 @@ public class Gui_ChiTietBangLuong extends JFrame {
 		lblChucVu.setBounds(10, 157, 513, 24);
 		pnlChinh.add(lblChucVu);
 
-		btnIn = new JButton("In");
-		btnIn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnIn.setForeground(Color.WHITE);
-		btnIn.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnIn.setFocusPainted(false);
-		btnIn.setBorderPainted(false);
-		btnIn.setBackground(new Color(233, 180, 46));
-		btnIn.setBounds(209, 578, 112, 47);
-		pnlChinh.add(btnIn);
+		btnXuatFile = new JButton("Xuất File");
+		btnXuatFile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXuatFile.setForeground(Color.WHITE);
+		btnXuatFile.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXuatFile.setFocusPainted(false);
+		btnXuatFile.setBorderPainted(false);
+		btnXuatFile.setBackground(new Color(233, 180, 46));
+		btnXuatFile.setBounds(209, 578, 112, 47);
+		pnlChinh.add(btnXuatFile);
 		modelCTLuong = (DefaultTableModel) tblChiTietLuong.getModel();
 
 	}
