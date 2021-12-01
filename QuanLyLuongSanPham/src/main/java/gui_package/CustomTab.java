@@ -24,7 +24,7 @@ public class CustomTab extends JPanel {
 	public CustomTab(JTabbedPane tabbedPane) {
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(5, 2, 2, 2));
-		setPreferredSize(new Dimension(300, 50));
+		setPreferredSize(new Dimension(300, 30));
 		setOpaque(false);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addLabel(tabbedPane);
@@ -49,7 +49,7 @@ public class CustomTab extends JPanel {
 		/** add more space between the label and the button */
 		label.setBorder(new EmptyBorder(0, 0, 0, 10));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.BOLD, 36));
+		label.setFont(new Font("Tahoma", Font.BOLD, 25));
 		label.setForeground(Color.WHITE);
 		add(label, BorderLayout.CENTER);
 	}

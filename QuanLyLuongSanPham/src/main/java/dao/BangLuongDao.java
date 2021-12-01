@@ -366,6 +366,35 @@ public class BangLuongDao {
 	}
 
 	/**
+	 * Lấy top 10 lương nhân viên cao nhất theo năm
+	 * 
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	public List<?> getTop10LuongNhanVien(int year) {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			String query = "SELECT TOP(10) nv.maNhanVien, nv.tenNhanVien, sum( bl.heSoLuong * bl.soNgayCong * nv.mucLuong + bl.tienSanPham * 0.1 ) AS tong\r\n"
+					+ "FROM BangLuong AS bl INNER JOIN NhanVien AS nv ON bl.maNhanVien = nv.maNhanVien\r\n"
+					+ "where YEAR(bl.thoiGian) = " + year + " and nv.trangThaiLamViec = 1\r\n"
+					+ "group by nv.maNhanVien, nv.tenNhanVien";
+			List<?> list = session.createSQLQuery(query).getResultList();
+			tr.commit();
+			return list;
+		} catch (Exception e) {
+			tr.rollback();
+		} finally {
+			session.close();
+		}
+
+		return null;
+
+	}
+
+	/**
 	 * Lấy số lượng sản phẩm của nhân viên trong tháng
 	 * 
 	 * @param month

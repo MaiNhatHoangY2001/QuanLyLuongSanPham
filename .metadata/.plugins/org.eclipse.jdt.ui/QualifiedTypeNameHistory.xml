@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="dao.TaiKhoanDao"/>
-    <fullyQualifiedTypeName name="model.TaiKhoan"/>
-    <fullyQualifiedTypeName name="services.DangNhapService"/>
-    <fullyQualifiedTypeName name="services.QuanLyNhanVienService"/>
-    <fullyQualifiedTypeName name="services.QuanLyHoaDonService"/>
-    <fullyQualifiedTypeName name="java.awt.Button"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
     <fullyQualifiedTypeName name="gui.Gui_Chinh"/>
@@ -34,7 +28,6 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="javax.swing.JTable"/>
     <fullyQualifiedTypeName name="javax.swing.table.JTableHeader"/>
-    <fullyQualifiedTypeName name="javax.swing.UIManager"/>
     <fullyQualifiedTypeName name="javax.swing.ListCellRenderer"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
@@ -53,10 +46,18 @@
     <fullyQualifiedTypeName name="javax.swing.text.AttributeSet"/>
     <fullyQualifiedTypeName name="javax.swing.text.PlainDocument"/>
     <fullyQualifiedTypeName name="gui_package.MyIntFilter"/>
-    <fullyQualifiedTypeName name="gui.Gui_ChiTietBangLuong"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="gui_package.ChucNang"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="gui_package.CustomTab"/>
+    <fullyQualifiedTypeName name="gui.Gui_ChiTietBangLuong"/>
+    <fullyQualifiedTypeName name="gui.Gui_QuanLyHoaDon"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKe"/>
+    <fullyQualifiedTypeName name="javax.swing.JPanel"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKeThuChi"/>
+    <fullyQualifiedTypeName name="javax.swing.UIManager"/>
+    <fullyQualifiedTypeName name="gui.Gui_ThongKeLuong"/>
 </qualifiedTypeNameHistroy>

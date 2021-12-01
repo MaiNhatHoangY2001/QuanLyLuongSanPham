@@ -46,7 +46,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	private JButton temp;
 	private TaiKhoan taiKhoan;
 
-	private Gui_ThongKeThuChi trangTK = new Gui_ThongKeThuChi();
+	private Gui_ThongKe trangTK = new Gui_ThongKe();
 	private Gui_QuanLyHoaDon trangHD = new Gui_QuanLyHoaDon();
 	private Gui_QuanLyLuong trangLuong = new Gui_QuanLyLuong();
 	private Gui_QuanLyNhanVien trangNV = new Gui_QuanLyNhanVien();
