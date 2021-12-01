@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,6 +32,7 @@ import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import javax.swing.text.PlainDocument;
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
@@ -53,6 +55,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	/**
@@ -100,6 +103,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 	private JButton btnCongThuong;
 	private JButton btnTruThuong;
 	private JComboBox<String> cboLoc;
+	private JButton btnXemCT;
 
 	public Gui_QuanLyLuong() {
 		setSize(1600, 1046);
@@ -112,12 +116,12 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		pnlHead.setBackground(new Color(242, 129, 25));
 		add(pnlHead);
 
-		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBounds(0, 89, 1600, 72);
-		panel_1_1.setPreferredSize(new Dimension(1600, 72));
-		panel_1_1.setBackground(new Color(194, 93, 0));
-		add(panel_1_1);
-		panel_1_1.setLayout(null);
+		JPanel pnlThanhNgang = new JPanel();
+		pnlThanhNgang.setBounds(0, 89, 1600, 72);
+		pnlThanhNgang.setPreferredSize(new Dimension(1600, 72));
+		pnlThanhNgang.setBackground(new Color(194, 93, 0));
+		add(pnlThanhNgang);
+		pnlThanhNgang.setLayout(null);
 
 		lblNewLabel = new JLabel("QUẢN LÝ LƯƠNG");
 		lblNewLabel.setForeground(Color.WHITE);
@@ -150,12 +154,12 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		cboMonth.getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cboMonth.setLocale(new Locale("vi"));
 		cboMonth.setBounds(542, 14, 137, 47);
-		panel_1_1.add(cboMonth);
+		pnlThanhNgang.add(cboMonth);
 
 		spnYear = new JYearChooser();
 		spnYear.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		spnYear.setBounds(675, 14, 65, 47);
-		panel_1_1.add(spnYear);
+		pnlThanhNgang.add(spnYear);
 
 		cboMonth.addPropertyChangeListener("month", new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -167,6 +171,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				clearThongTinNhanVien();
 				ChucNang.clearDataTable(modelSanPham);
 				ChucNang.addNullDataTable(modelSanPham);
+				btnXemCT.setEnabled(false);
 			}
 		});
 		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
@@ -181,6 +186,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				clearThongTinNhanVien();
 				ChucNang.clearDataTable(modelSanPham);
 				ChucNang.addNullDataTable(modelSanPham);
+				btnXemCT.setEnabled(false);
 			}
 		});
 
@@ -204,14 +210,14 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				btnTim.setEnabled(true);
 			}
 		});
-		panel_1_1.add(cboTimKiem);
+		pnlThanhNgang.add(cboTimKiem);
 
 		txtTimKiem = new JTextField();
 		txtTimKiem.setToolTipText("Nhập thông tin tìm kiếm");
 		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTimKiem.setBounds(1000, 14, 220, 47);
 		txtTimKiem.setColumns(10);
-		panel_1_1.add(txtTimKiem);
+		pnlThanhNgang.add(txtTimKiem);
 		// sự kiên txt
 		txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -253,7 +259,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnTim.setIcon(new ImageIcon("img\\icons8-search-24.png"));
 		btnTim.setBounds(1273, 14, 44, 47);
 		btnTim.setEnabled(false);
-		panel_1_1.add(btnTim);
+		pnlThanhNgang.add(btnTim);
 		// sự kiện btn
 		btnTim.addActionListener(e -> eventTimKiem());
 
@@ -281,7 +287,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnXoaRong.setBorderPainted(false);
 		btnXoaRong.setBackground(new Color(233, 180, 46));
 		btnXoaRong.setBounds(1219, 14, 44, 47);
-		panel_1_1.add(btnXoaRong);
+		pnlThanhNgang.add(btnXoaRong);
 		btnXoaRong.setEnabled(false);
 		btnXoaRong.addActionListener(e -> {
 			txtTimKiem.setText("");
@@ -290,9 +296,10 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		});
 
 		/**
-		 * thêm bảng lương, nút cho thời gian về hiện tại và nút in
+		 * thêm bảng lương, xem chi tiết, nút cho thời gian về hiện tại và nút in
 		 */
 		btnTao = new JButton("Tạo bảng lương");
+		btnTao.setToolTipText("Chỉ tạo được bảng lương ở tháng hiện tại");
 		btnTao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTao.setFocusPainted(false);
 		btnTao.setBorderPainted(false);
@@ -300,8 +307,35 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnTao.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnTao.setBackground(new Color(233, 180, 46));
 		btnTao.setBounds(10, 14, 185, 47);
-		panel_1_1.add(btnTao);
+		pnlThanhNgang.add(btnTao);
 		btnTao.addActionListener(e -> eventTaoBangLuong());
+
+		btnXemCT = new JButton("Xem chi tiết");
+		btnXemCT.setToolTipText("Xem chi tiết bảng lương của 1 nhân viên (Chọn 1 bảng lương trong thông tin bảng lương)");
+		btnXemCT.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXemCT.setEnabled(false);
+		btnXemCT.setForeground(Color.WHITE);
+		btnXemCT.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXemCT.setFocusPainted(false);
+		btnXemCT.setBorderPainted(false);
+		btnXemCT.setBackground(new Color(233, 180, 46));
+		btnXemCT.setBounds(204, 14, 185, 47);
+		pnlThanhNgang.add(btnXemCT);
+		btnXemCT.addActionListener(e -> {
+			Gui_ChiTietBangLuong guiCT = new Gui_ChiTietBangLuong();
+			guiCT.setVisible(true);
+			int month = cboMonth.getMonth() + 1;
+			int year = spnYear.getYear();
+			String chucVu = tblTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 3).equals("2.0")
+					? "Nhân viên hành chánh"
+					: "Nhân viên bán hàng";
+			List<String> bangLuong = new ArrayList<>();
+
+			for (int i = 0; i < 9; i++) {
+				bangLuong.add(tblTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), i).toString());
+			}
+			guiCT.setDataCTBangLuong(month, year, chucVu, bangLuong);
+		});
 
 		btnHienTai = new JButton("Hiện tại");
 		btnHienTai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -311,7 +345,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnHienTai.setBorderPainted(false);
 		btnHienTai.setBackground(new Color(233, 180, 46));
 		btnHienTai.setBounds(750, 14, 112, 47);
-		panel_1_1.add(btnHienTai);
+		pnlThanhNgang.add(btnHienTai);
 		btnHienTai.addActionListener(e -> {
 			cboMonth.setMonth(LocalDate.now().getMonthValue() - 1);
 			spnYear.setYear(LocalDate.now().getYear());
@@ -325,7 +359,8 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnXuatFile.setBorderPainted(false);
 		btnXuatFile.setBackground(new Color(233, 180, 46));
 		btnXuatFile.setBounds(1533, 14, 44, 47);
-		panel_1_1.add(btnXuatFile);
+		pnlThanhNgang.add(btnXuatFile);
+
 		// Sự kiện
 		btnXuatFile.addActionListener(e -> {
 			new Gui_XuatFile(cboMonth.getMonth() + 1, spnYear.getYear()).setVisible(true);
@@ -606,6 +641,16 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		txtThuong.setColumns(10);
 		txtThuong.setBounds(1196, 550, 289, 47);
 		add(txtThuong);
+
+		txtThuong.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 
 		btnTruThuong = new JButton("");
 		btnTruThuong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1035,7 +1080,9 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 			oldValue1 = Double.parseDouble(modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 5).toString());
 			oldValue2 = Double.parseDouble(modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 6).toString());
 			oldValue3 = Double.parseDouble(modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 7).toString());
-		}
+			btnXemCT.setEnabled(true);
+		} else
+			btnXemCT.setEnabled(false);
 		// Lấy mã nhân viên từ bảng tính lương đang chọn
 		Object maNhanVien = modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 0);
 		Object heSoLuong = modelTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 3);

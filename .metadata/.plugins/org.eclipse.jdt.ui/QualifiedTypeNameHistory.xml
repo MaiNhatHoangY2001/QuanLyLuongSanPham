@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
     <fullyQualifiedTypeName name="dao.TaiKhoanDao"/>
     <fullyQualifiedTypeName name="model.TaiKhoan"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="services.DangNhapService"/>
     <fullyQualifiedTypeName name="services.QuanLyNhanVienService"/>
     <fullyQualifiedTypeName name="services.QuanLyHoaDonService"/>
@@ -12,7 +10,6 @@
     <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
     <fullyQualifiedTypeName name="gui.Gui_Chinh"/>
     <fullyQualifiedTypeName name="gui.Gui_DangNhap"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.hibernate.persister.walking.spi.MetamodelGraphWalker"/>
     <fullyQualifiedTypeName name="services.ThongKeService"/>
     <fullyQualifiedTypeName name="model.NhanVien"/>
@@ -20,10 +17,7 @@
     <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
     <fullyQualifiedTypeName name="java.awt.Rectangle"/>
     <fullyQualifiedTypeName name="java.awt.GraphicsEnvironment"/>
-    <fullyQualifiedTypeName name="java.awt.Cursor"/>
-    <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
-    <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="javax.swing.DefaultCellEditor"/>
     <fullyQualifiedTypeName name="java.lang.Character"/>
@@ -35,7 +29,34 @@
     <fullyQualifiedTypeName name="org.hibernate.boot.model.naming.ImplicitNameSource"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="model.BangLuong"/>
     <fullyQualifiedTypeName name="services.QuanLyLuongService"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="javax.swing.JTable"/>
+    <fullyQualifiedTypeName name="javax.swing.table.JTableHeader"/>
+    <fullyQualifiedTypeName name="javax.swing.UIManager"/>
+    <fullyQualifiedTypeName name="javax.swing.ListCellRenderer"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
+    <fullyQualifiedTypeName name="java.awt.Dimension"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="javax.swing.AbstractListModel"/>
+    <fullyQualifiedTypeName name="javax.swing.ListModel"/>
+    <fullyQualifiedTypeName name="javax.swing.event.MouseInputAdapter"/>
+    <fullyQualifiedTypeName name="java.awt.Cursor"/>
+    <fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
+    <fullyQualifiedTypeName name="java.awt.Point"/>
+    <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+    <fullyQualifiedTypeName name="javax.swing.table.TableColumn"/>
+    <fullyQualifiedTypeName name="javax.swing.table.TableCellRenderer"/>
+    <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
+    <fullyQualifiedTypeName name="javax.swing.text.DocumentFilter"/>
+    <fullyQualifiedTypeName name="javax.swing.text.AttributeSet"/>
+    <fullyQualifiedTypeName name="javax.swing.text.PlainDocument"/>
+    <fullyQualifiedTypeName name="gui_package.MyIntFilter"/>
+    <fullyQualifiedTypeName name="gui.Gui_ChiTietBangLuong"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="gui_package.ChucNang"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
