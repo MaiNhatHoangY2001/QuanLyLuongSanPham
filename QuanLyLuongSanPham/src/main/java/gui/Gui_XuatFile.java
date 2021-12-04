@@ -135,5 +135,7 @@ public class Gui_XuatFile extends JFrame {
 		pnlIn.add(btnSrc);
 
 	}
-
+public static void main(String[] args) {
+	new Gui_XuatFile(null, ALLBITS, ABORT);
+}
 }

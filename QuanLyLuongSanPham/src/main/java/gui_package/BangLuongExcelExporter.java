@@ -112,7 +112,7 @@ public class BangLuongExcelExporter {
 		workbook.write(outputStream);
 		workbook.close();
 
-		outputStream.close();
+		outputStream.close(); 
 
 	}
 }
