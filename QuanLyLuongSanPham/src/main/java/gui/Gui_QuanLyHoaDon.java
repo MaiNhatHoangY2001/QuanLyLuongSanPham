@@ -40,6 +40,7 @@ import gui_package.ChucNang;
 import model.HoaDonBanHang;
 import model.HoaDonNhapHang;
 import model.KhachHang;
+import model.TaiKhoan;
 import services.QuanLyHoaDonService;
 
 public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
@@ -66,7 +67,8 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private JTextField txtDiaChi;
 	private JTextField txtMaNv;
 	private JTextField txtTenNv;
-	protected JPanel pnlHead;;
+	protected JPanel pnlHead;
+	private TaiKhoan taiKhoan;;
 
 	/**
 	 * Create the panel.
@@ -345,6 +347,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 
 			} else {
 				Gui_ThemHoaDonNhap themHoaDonNhap = new Gui_ThemHoaDonNhap();
+				themHoaDonNhap.setTaiKhoan(taiKhoan); 
 				themHoaDonNhap.setVisible(getFocusTraversalKeysEnabled());
 			}
 
@@ -497,6 +500,9 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 			model.addRow(o);
 		}
 
+	}
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan=taiKhoan;
 	}
 
 	@Override

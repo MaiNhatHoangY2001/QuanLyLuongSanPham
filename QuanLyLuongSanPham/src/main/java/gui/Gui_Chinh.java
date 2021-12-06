@@ -1,33 +1,28 @@
 package gui;
 
 import java.awt.CardLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import gui_package.ChucNang;
 import model.TaiKhoan;
-import services.QuanLyHoaDonService;
 import services.QuanLyLuongService;
-import services.QuanLyNhanVienService;
-
-import java.awt.Cursor;
 
 public class Gui_Chinh extends JFrame implements ActionListener, WindowListener {
 	/**
@@ -100,13 +95,13 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		getContentPane().setLayout(null);
-
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		// thông báo khi thoát
 		addWindowListener(this);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 115, 0));
-		panel.setBounds(0, 0, 320, 1029);
+		panel.setBounds(0, 0, 320, 1055);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -229,7 +224,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnThongKe.addActionListener(this);
 
 		pnlChange = new JPanel();
-		pnlChange.setBounds(320, 0, 1600, 1007);
+		pnlChange.setBounds(320, 0, 1600, 1055);
 		getContentPane().add(pnlChange);
 		pnlChange.setLayout(new CardLayout(0, 0));
 
@@ -257,6 +252,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 		if (key == btnQuanLyHoaDon) {
 			cardLayout.show(pnlChange, "btnQuanLyHoaDon");
+			trangHD.setTaiKhoan(taiKhoan);
 		} else if (key == btnQuanLyLuong)
 			cardLayout.show(pnlChange, "btnQuanLyLuong");
 		else if (key == btnQuanLyNhanVien)

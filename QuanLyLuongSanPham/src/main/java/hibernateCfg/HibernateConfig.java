@@ -21,14 +21,16 @@ import model.SanPham;
 import model.TaiKhoan;
 
 public class HibernateConfig {
-	public static SessionFactory sessionFactory = null;
-	private static HibernateConfig instance = new HibernateConfig();
+	private static SessionFactory sessionFactory = null;
+	private static HibernateConfig instance=null ;
 
 	public static HibernateConfig getInstance() {
-		return instance;
+		if(instance == null)
+			return new HibernateConfig();
+		return instance ;
 	}
 
-	public HibernateConfig() {
+	private HibernateConfig() {
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
 		Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(BangLuong.class)

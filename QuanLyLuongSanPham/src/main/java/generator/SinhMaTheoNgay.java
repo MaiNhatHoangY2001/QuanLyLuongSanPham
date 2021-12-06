@@ -41,7 +41,7 @@ public class SinhMaTheoNgay implements IdentifierGenerator, Configurable {
 			return maVietTat + dateString + (String.format("%04d", max + 1));
 		}
 
-	}
+	}	                                                                                                                                     
 
 	@Override
 	public void configure(org.hibernate.type.Type type, java.util.Properties params, ServiceRegistry serviceRegistry)

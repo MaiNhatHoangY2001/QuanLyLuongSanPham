@@ -1,33 +1,29 @@
 package gui;
 
-import java.awt.event.*;
-import java.awt.*;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import java.awt.Font;
+import javax.swing.border.LineBorder;
 
 import gui_package.CircleBtn;
 import gui_package.RoundedPanel;
 import model.TaiKhoan;
 import services.DangNhapService;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Gui_DangNhap extends JFrame {
 
@@ -51,13 +47,15 @@ public class Gui_DangNhap extends JFrame {
 	private JLabel lblTK;
 	private JLabel lblLuong;
 	private DangNhapService dangNhapService = new DangNhapService();
-	private Gui_Chinh chinh = new Gui_Chinh();
+	private Gui_Chinh chinh;
 	private JLabel lblQuenMK;
+	private static Gui_DangNhap dangNhap = null;
 
 	/**
 	 * Create the frame.
 	 */
 	public Gui_DangNhap() {
+		chinh = new Gui_Chinh();
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -249,7 +247,10 @@ public class Gui_DangNhap extends JFrame {
 	}
 
 	public static Gui_DangNhap getInstance() {
-		return new Gui_DangNhap();
+		if (dangNhap == null) {
+			return new Gui_DangNhap();
+		}
+		return dangNhap;
 	}
 
 	public boolean KiemTraRongText(JTextField txt) {

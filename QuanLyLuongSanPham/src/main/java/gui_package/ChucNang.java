@@ -98,11 +98,17 @@ public class ChucNang {
 	 * @param model
 	 */
 	public static void clearDataTable(DefaultTableModel model) {
+
 		while (model.getRowCount() > 0) {
 			model.removeRow(0);
 		}
 	}
-
+	public static void clearDataNullTable(DefaultTableModel model) {
+		for (int i = model.getDataVector().size()-1; i >=0; i--) {
+			if(model.getValueAt(i, 0)==null)
+				model.removeRow(i);
+		}
+	}
 	/**
 	 * Chức năng giúp thêm vào những hàng rỗng cho đẹp bảng
 	 * 

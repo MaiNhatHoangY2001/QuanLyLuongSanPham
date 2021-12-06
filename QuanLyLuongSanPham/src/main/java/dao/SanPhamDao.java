@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 
 import hibernateCfg.HibernateConfig;
 import model.NhanVien;
@@ -18,6 +19,22 @@ public class SanPhamDao {
 		sessionFactory = HibernateConfig.getInstance().getSessionFactory();
 	}
 
+	public List<String> layDanhSachNcc() {
+		Session session = sessionFactory.openSession();
+		Transaction tr = session.getTransaction();
+		try {
+			tr.begin();
+			 @SuppressWarnings("unchecked")
+			List<String> ds = session.createNativeQuery("  select nCC from SanPham   group by ncc").getResultList();
+			tr.commit();
+			return ds;
+		} catch (Exception e) {
+			tr.rollback();
+			e.printStackTrace();
+		}
+		session.close();
+		return null;
+	}
 	public boolean themSanPham(SanPham sanPham) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -246,7 +263,7 @@ public class SanPhamDao {
 			session.close();
 		}
 		return null;
-
 	}
+	
 
 }

@@ -140,4 +140,7 @@ public class QuanLyHoaDonService {
 			return sanPhamDao.themSanPham(sanPham);
 		return false;
 	}
+	public List<String> getNhaCungCap() {
+		return sanPhamDao.layDanhSachNcc();
+	}
 }
