@@ -38,6 +38,7 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import gui_package.BangLuongExcelExporter;
+import gui_package.ExportPhieuLuong;
 
 public class Gui_XuatFile extends JFrame {
 
@@ -50,7 +51,7 @@ public class Gui_XuatFile extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Gui_XuatFile(List<Object[]> list, int month, int year) {
+	public Gui_XuatFile(List<?> list, int month, int year, String chucVu, String loaiIn) {
 		setResizable(false);
 		setBounds(100, 100, 603, 288);
 		setTitle("Xuất file");
@@ -80,8 +81,13 @@ public class Gui_XuatFile extends JFrame {
 						"Thông báo dữ liệu trống", JOptionPane.YES_NO_OPTION);
 			if (rs == JOptionPane.YES_OPTION) {
 				try {
-					BangLuongExcelExporter bangLuong = new BangLuongExcelExporter(list, month, year);
-					bangLuong.exportBangLuong(path);
+					if (loaiIn.equals("BL")) {
+						BangLuongExcelExporter bangLuong = new BangLuongExcelExporter(list, month, year);
+						bangLuong.exportBangLuong(path);
+					} else {
+						ExportPhieuLuong exportPhieuLuong = new ExportPhieuLuong(list, month, year, chucVu);
+						exportPhieuLuong.saveFile(path);
+					}
 					JOptionPane.showMessageDialog(this, "Xuất File thành công");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(this, "Xuất File không thành công");
@@ -135,5 +141,4 @@ public class Gui_XuatFile extends JFrame {
 		pnlIn.add(btnSrc);
 
 	}
-
 }

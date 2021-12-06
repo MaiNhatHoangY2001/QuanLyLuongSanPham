@@ -365,7 +365,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 		// Sự kiện
 		btnXuatFile.addActionListener(e -> {
-			new Gui_XuatFile(listAllBangLuong(), cboMonth.getMonth() + 1, spnYear.getYear()).setVisible(true);
+			new Gui_XuatFile(listAllBangLuong(), cboMonth.getMonth() + 1, spnYear.getYear(), "", "BL").setVisible(true);
 		});
 
 		/**

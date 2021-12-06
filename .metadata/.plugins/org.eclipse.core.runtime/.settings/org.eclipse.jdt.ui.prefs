@@ -4,7 +4,7 @@
 content_assist_add_import=true
 content_assist_autoactivation=true
 content_assist_autoactivation_delay=0
-content_assist_autoactivation_triggers_java=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._
+content_assist_autoactivation_triggers_java=.
 content_assist_autoactivation_triggers_javadoc=@\#
 content_assist_autoinsert=true
 content_assist_case_sensitivity=false
@@ -29,6 +29,7 @@ org.eclipse.jdt.internal.ui.navigator.librariesnode=true
 org.eclipse.jdt.ui.formatterprofiles.version=21
 org.eclipse.jdt.ui.typefilter.disabled=
 org.eclipse.jdt.ui.typefilter.enabled=com.sun.*;io.micrometer.shaded.*;java.awt.List;java.rmi.*;jdk.*;org.graalvm.*;sun.*;
+sourceHoverBackgroundColor=255,255,225
 spelling_locale_initialized=true
 typefilter_migrated=true
 useAnnotationsPrefPage=true

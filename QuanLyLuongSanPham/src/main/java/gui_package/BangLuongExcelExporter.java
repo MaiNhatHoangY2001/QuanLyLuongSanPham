@@ -17,10 +17,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class BangLuongExcelExporter {
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
-	private List<Object[]> listValue;
+	private List<?> listValue;
 	private int month, year;
 
-	public BangLuongExcelExporter(List<Object[]> listValue, int month, int year) {
+	public BangLuongExcelExporter(List<?> listValue, int month, int year) {
 		this.listValue = listValue;
 		this.month = month;
 		this.year = year;
@@ -112,7 +112,7 @@ public class BangLuongExcelExporter {
 		workbook.write(outputStream);
 		workbook.close();
 
-		outputStream.close();
+		outputStream.close(); 
 
 	}
 }

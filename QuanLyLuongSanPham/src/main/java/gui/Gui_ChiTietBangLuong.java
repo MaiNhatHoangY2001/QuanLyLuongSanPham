@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -55,6 +56,9 @@ public class Gui_ChiTietBangLuong extends JFrame {
 	private JLabel lblTenNV;
 	private JLabel lblChucVu;
 	private JButton btnXuatFile;
+	private List<String> list;
+	private int month, year;
+	private String chucVu;
 
 	/**
 	 * Launch the application.
@@ -190,9 +194,19 @@ public class Gui_ChiTietBangLuong extends JFrame {
 		pnlChinh.add(btnXuatFile);
 		modelCTLuong = (DefaultTableModel) tblChiTietLuong.getModel();
 
+		// Sự kiện
+		btnXuatFile.addActionListener(e -> {
+			new Gui_XuatFile(list, month, year, chucVu, "CT").setVisible(true);
+		});
+
 	}
 
 	public void setDataCTBangLuong(int month, int year, String chucVu, List<String> bangLuong) {
+		this.list = bangLuong;
+		this.month = month;
+		this.year = year;
+		this.chucVu = chucVu;
+
 		lblTieuDe.setText("Bảng lương tháng " + month + "/" + year);
 		lblMaNV.setText("Mã nhân viên: " + bangLuong.get(0));
 		lblTenNV.setText("Tên nhân viên: " + bangLuong.get(1));
@@ -212,6 +226,7 @@ public class Gui_ChiTietBangLuong extends JFrame {
 		}
 
 		txtThanhTien.setText(bangLuong.get(8));
+
 	}
 
 	private static class HeaderRenderer implements TableCellRenderer {
