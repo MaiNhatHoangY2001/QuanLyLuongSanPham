@@ -1,20 +1,23 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Cursor;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.DimensionUIResource;
 
@@ -25,13 +28,7 @@ import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
 import model.NhanVien;
 
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-
-public class Gui_ThemNhanVien extends JFrame implements ActionListener {
+public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -58,6 +55,7 @@ public class Gui_ThemNhanVien extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public Gui_ThemNhanVien() {
+		setModal(true);
 		setUndecorated(true);
 		setBounds(100, 100, 1440, 1024);
 		contentPane = new JPanel();

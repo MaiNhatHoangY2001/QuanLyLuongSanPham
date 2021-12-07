@@ -86,6 +86,7 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 	 * Create the frame.
 	 */
 	public Gui_ThemHoaDonNhap() {
+		setTitle("Thêm hóa đơn nhập hàng");
 		setModal(true);
 
 //			try {
