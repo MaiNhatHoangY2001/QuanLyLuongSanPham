@@ -49,7 +49,7 @@ public class Gui_DangNhap extends JFrame {
 	private DangNhapService dangNhapService = new DangNhapService();
 	private Gui_Chinh chinh;
 	private JLabel lblQuenMK;
-	private static Gui_DangNhap dangNhap = null;
+	private static Gui_DangNhap dangNhap=new Gui_DangNhap() ;
 
 	/**
 	 * Create the frame.
