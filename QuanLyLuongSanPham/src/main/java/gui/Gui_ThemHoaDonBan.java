@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -308,7 +310,20 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 		panel_3.add(txtThue);
 		listKh = new ArrayList<KhachHang>();
 		listGh = new ArrayList<SanPham>();
+		txtTimSp.addFocusListener(new FocusListener() {
 
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		this.addWindowListener(new WindowListener() {
 
 			@Override
@@ -406,51 +421,55 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 			}
 		});
 		btnDatHang.addActionListener(e -> {
-			if (modelGioHang.getDataVector().size() > 0)
-				if (cboKhachHang.getSelectedIndex() >= 0)
-					if (!txtMaNV.getText().trim().equals("")) {
-						int index = cboKhachHang.getSelectedIndex();
-						NhanVien nhanVien = quanLyHoaDonService.getNhanVienTheoMa(txtMaNV.getText().trim());
-						HoaDonBanHang hoaDonBanHang = new HoaDonBanHang(
-								Double.parseDouble(
-										txtChietKhau.getText().trim().equals("") ? "0" : txtChietKhau.getText().trim())
-										/ 100,
-								Double.parseDouble(txtThue.getText().trim().equals("") ? "0" : txtThue.getText().trim())
-										/ 100,
-								nhanVien, listKh.get(index));
-						int i = 0;
-						List<ChiTietHoaDonBan> listCt = new ArrayList<ChiTietHoaDonBan>();
-						for (SanPham sanPham : listGh) {
-							ChiTietHoaDonBan chiTietHoaDonBan = new ChiTietHoaDonBan(sanPham.getGiaThanh(),
-									Integer.parseInt((String) tblGioHang.getValueAt(i, 3)), hoaDonBanHang, sanPham);
-							listCt.add(chiTietHoaDonBan);
-						}
-						hoaDonBanHang.setDsChiTietHoaDonBan(listCt);
-						if (quanLyHoaDonService.themHoaDon(hoaDonBanHang)) {
-							try {
-								for (ChiTietHoaDonBan chiTietHoaDonBan : listCt) {
-									quanLyHoaDonService.themChiTietBan(chiTietHoaDonBan);
+			if (kiemTraDuLieu()) {
+				if (modelGioHang.getDataVector().size() > 0)
+					if (cboKhachHang.getSelectedIndex() >= 0)
+						if (!txtMaNV.getText().trim().equals("")) {
+							int index = cboKhachHang.getSelectedIndex();
+							NhanVien nhanVien = quanLyHoaDonService.getNhanVienTheoMa(txtMaNV.getText().trim());
+							HoaDonBanHang hoaDonBanHang = new HoaDonBanHang(
+									Double.parseDouble(txtChietKhau.getText().trim().equals("") ? "0"
+											: txtChietKhau.getText().trim()) / 100,
+									Double.parseDouble(
+											txtThue.getText().trim().equals("") ? "0" : txtThue.getText().trim()) / 100,
+									nhanVien, listKh.get(index));
+							int i = 0;
+							List<ChiTietHoaDonBan> listCt = new ArrayList<ChiTietHoaDonBan>();
+							for (SanPham sanPham : listGh) {
+								ChiTietHoaDonBan chiTietHoaDonBan = new ChiTietHoaDonBan(sanPham.getGiaThanh(),
+										Integer.parseInt((String) tblGioHang.getValueAt(i, 3)), hoaDonBanHang, sanPham);
+								listCt.add(chiTietHoaDonBan);
+							}
+							hoaDonBanHang.setDsChiTietHoaDonBan(listCt);
+							if (quanLyHoaDonService.themHoaDon(hoaDonBanHang)) {
+								try {
+									for (ChiTietHoaDonBan chiTietHoaDonBan : listCt) {
+										quanLyHoaDonService.themChiTietBan(chiTietHoaDonBan);
+									}
+									JOptionPane.showMessageDialog(this, "Mua hàng thành công", "Thông báo",
+											JOptionPane.INFORMATION_MESSAGE);
+
+									this.dispose();
+								} catch (Exception e2) {
+									JOptionPane.showMessageDialog(this,
+											"Thêm thất bại \nVui lòng kiểm tra lại thông tin:", "Lỗi",
+											JOptionPane.ERROR_MESSAGE);
 								}
-								JOptionPane.showMessageDialog(this, "Mua hàng thành công", "Thông báo",
-										JOptionPane.INFORMATION_MESSAGE);
-				
-								this.dispose();
-							} catch (Exception e2) {
-								JOptionPane.showMessageDialog(this, "Thêm thất bại \nVui lòng kiểm tra lại thông tin:",
-										"Lỗi", JOptionPane.ERROR_MESSAGE);
+
 							}
 
+						} else {
+							JOptionPane.showMessageDialog(this, "Mã nhân viên trống", "Cảnh báo",
+									JOptionPane.WARNING_MESSAGE);
 						}
-
-					} else {
-						JOptionPane.showMessageDialog(this, "Mã nhân viên trống", "Cảnh báo",
+					else {
+						JOptionPane.showMessageDialog(this, "Khách hàng trống", "Cảnh báo",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				else {
-					JOptionPane.showMessageDialog(this, "Khách hàng trống", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào", "Cảnh báo",
+							JOptionPane.WARNING_MESSAGE);
 				}
-			else {
-				JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		txtMaNV.addKeyListener(new KeyListener() {
@@ -468,6 +487,10 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 					if (nhanVien == null) {
 						JOptionPane.showMessageDialog(null,
 								"Không tồn tại nhân viên nào có mã:" + txtMaNV.getText().trim(), "Cảnh báo",
+								JOptionPane.WARNING_MESSAGE);
+					} else if (!nhanVien.gettrangThaiLamViec()) {
+						JOptionPane.showMessageDialog(null,
+								"Nhân viên có mã:" + txtMaNV.getText().trim() + "Đã nghỉ việc", "Cảnh báo",
 								JOptionPane.WARNING_MESSAGE);
 					}
 				}
@@ -554,22 +577,31 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 				int row = e.getFirstRow();
 
 				if (col == 3) {
-					if (isInterger((String) tblGioHang.getValueAt(row, 3))) {
-						NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
-						Double gia = listGh.get(row).getGiaThanh();
-						int soLuong = Integer.parseInt(((String) tblGioHang.getValueAt(row, 3)).trim());
-						if (soLuong > 0) {
-							Double thanhTien = soLuong * gia;
-							tblGioHang.setValueAt(format.format(thanhTien), row, 4);
-							capNhatTongTien();
+					if (!(tblGioHang.getValueAt(row, 3) == null || tblGioHang.getValueAt(row, 3).equals(""))) {
+						if (isInterger((String) tblGioHang.getValueAt(row, 3))) {
+							NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
+							Double gia = listGh.get(row).getGiaThanh();
+							int soLuong = Integer.parseInt(((String) tblGioHang.getValueAt(row, 3)).trim());
+							if (soLuong > 0) {
+								Double thanhTien = soLuong * gia;
+								tblGioHang.setValueAt(format.format(thanhTien), row, 4);
+								capNhatTongTien();
+							} else {
+								JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0", "Cảnh báo",
+										JOptionPane.WARNING_MESSAGE);
+								tblGioHang.setValueAt("1", row, 3);
+							}
 						} else {
-							JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0", "Cảnh báo",
+							JOptionPane.showMessageDialog(this, "Phải nhập số nguyên", "Cảnh báo",
 									JOptionPane.WARNING_MESSAGE);
-						}
-					} else {
-						JOptionPane.showMessageDialog(this, "Phải nhập số nguyên", "Cảnh báo",
-								JOptionPane.WARNING_MESSAGE);
+							tblGioHang.setValueAt("1", row, 3);
 
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "Không được để trống", "Cảnh báo",
+								JOptionPane.WARNING_MESSAGE);
+						tblGioHang.setValueAt("1", row, 3);
 					}
 
 				}
@@ -740,9 +772,9 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 	public void timTheoNhaCungCap(String ncc) {
 		tempListSp = new ArrayList<SanPham>();
 //		listSp= new ArrayList<SanPham>();
-		
+
 		tempListSp = quanLyHoaDonService.timSanPhamTheoNhaCungCap(ncc);
-		listSp=tempListSp;
+		listSp = tempListSp;
 		ChucNang.clearDataTable(modelSanPham);
 		addSp(tempListSp);
 		ChucNang.addNullDataTable(modelSanPham);
@@ -751,7 +783,7 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 	public void timTheoTenSanPham(String ten) {
 		tempListSp = new ArrayList<SanPham>();
 		tempListSp = quanLyHoaDonService.timSanPhamTheoTen(ten);
-		listSp=tempListSp;
+		listSp = tempListSp;
 		ChucNang.clearDataTable(modelSanPham);
 		addSp(tempListSp);
 		ChucNang.addNullDataTable(modelSanPham);
@@ -783,6 +815,53 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public boolean kiemTraDuLieu() {
+		if (txtMaNV.getText().trim().equals("")) {
+			JOptionPane.showMessageDialog(this, "Mã nhân vien không được để trống");
+			txtMaNV.requestFocus();
+			txtMaNV.selectAll();
+			return false;
+		}
+
+		NhanVien nhanVien = quanLyHoaDonService.getNhanVienTheoMa(txtMaNV.getText().trim());
+//		if(nhanVien.get)
+		if (nhanVien == null) {
+			JOptionPane.showMessageDialog(this, "Không tồn tại nhân viên nào có mã:" + txtMaNV.getText().trim(),
+					"Cảnh báo", JOptionPane.WARNING_MESSAGE);
+			return false;
+		} else if (!nhanVien.gettrangThaiLamViec()) {
+			JOptionPane.showMessageDialog(this, "Nhân viên có mã:" + txtMaNV.getText().trim() + "Đã nghỉ việc",
+					"Cảnh báo", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		try {
+			double chietKhau = Double.parseDouble(txtChietKhau.getText().trim());
+			if(chietKhau<0) {
+				JOptionPane.showMessageDialog(this, "Chiết khấu phải là số từ 0-100");
+				return false;
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Chiết khấu phải là số từ 0-100");
+			txtChietKhau.requestFocus();
+			txtChietKhau.selectAll();
+			return false;
+		}
+		try {
+			double thue = Double.parseDouble(txtThue.getText().trim());
+			if(thue<0) {
+				JOptionPane.showMessageDialog(this, "Thuế phải là số dương");
+				return false;
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Thuế phải là số dương");
+			txtThue.requestFocus();
+			txtThue.selectAll();
+			return false;
+		}
+		return true;
 
 	}
 }
