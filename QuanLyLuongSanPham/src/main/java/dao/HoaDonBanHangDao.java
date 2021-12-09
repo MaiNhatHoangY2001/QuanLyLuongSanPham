@@ -42,11 +42,9 @@ public class HoaDonBanHangDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=o.thanhTien  "
-					+ "FROM            ChiTietHoaDonBan AS d INNER JOIN "
-					+ "                         HoaDonBanHang AS o ON d.maHoaDonBan = o.maHoaDonBan INNER JOIN "
-					+ "                         KhachHang AS k ON o.maKhachHang = k.maKhachHang "
-					+ "where	 k.tenKhachHang like '%" + tenKH + "%' ";
+			String query = "SELECT        o.maHoaDonBan, o.ngayLapHoaDon, o.khuyenMai, o.thue, thanhTien=o.thanhTien  \r\n"
+					+ "FROM          HoaDonBanHang AS o  INNER JOIN  KhachHang AS k ON o.maKhachHang = k.maKhachHang \r\n"
+					+ "where	 k.tenKhachHang like '%"+tenKH+"%' ";
 			List<?> list = session.createNativeQuery(query).getResultList();
 			tr.commit();
 			return list;
@@ -153,9 +151,11 @@ public class HoaDonBanHangDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
+			return null;
 		}
-		session.close();
-		return null;
+		finally {
+			session.close();
+		}
 	}
 
 	/**

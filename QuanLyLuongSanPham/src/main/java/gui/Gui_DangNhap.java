@@ -224,13 +224,18 @@ public class Gui_DangNhap extends JFrame {
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
 			if (!(KiemTraRongText(txtTaiKhoan))) {
-				if (taiKhoan != null)
-					if (mk.equals(taiKhoan.getMatKhau())) {
-						chinh.setTaiKhoan(taiKhoan);
-						chinh.setVisible(true);
-						this.setVisible(false);
-					} else {
-						JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+				if (taiKhoan != null )
+					if(taiKhoan.getNhanVien().gettrangThaiLamViec()) {
+						if (mk.equals(taiKhoan.getMatKhau())) {
+							chinh.setTaiKhoan(taiKhoan);
+							chinh.setVisible(true);
+							this.setVisible(false);
+						} else {
+							JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "Nhân viên này đã nghỉ việc");
 					}
 				else {
 					JOptionPane.showMessageDialog(this, "Sai tên tài khoản");

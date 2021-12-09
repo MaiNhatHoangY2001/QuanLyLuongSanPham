@@ -1,6 +1,7 @@
 package gui_package;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
@@ -9,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Timer;
@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -151,8 +150,12 @@ public class ChucNang {
 		/**
 		 * Tên đăng nhập
 		 */
-		
-		JLabel lblTenDN = new JLabel(name);
+		Component temp = panel.getComponentAt(1272, 11);
+		panel.remove(temp);
+		panel.revalidate();
+		panel.repaint();
+		JLabel lblTenDN = new JLabel();
+		lblTenDN.setText(name);
 		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTenDN.setForeground(Color.WHITE);
