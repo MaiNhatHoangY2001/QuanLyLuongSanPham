@@ -122,7 +122,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_1.add(btnThemHoaDon);
 
 		txtNgayLap = new JDateChooser((new JCalendar()).getDate());
-		txtNgayLap.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtNgayLap.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNgayLap.setForeground(Color.WHITE);
 		txtNgayLap.setBounds(222, 11, 161, 45);
 		txtNgayLap.setDateFormatString("dd/MM/yyyy");

@@ -547,7 +547,7 @@ public class NhanVienDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "select maNhanVien from NhanVien where maNhanVien not in (SELECT hd.maNhanVien FROM NhanVien AS nv INNER JOIN HoaDonBanHang AS hd ON nv.maNhanVien = hd.maNhanVien GROUP BY hd.maNhanVien) and maNhanVien = "
+			String query = "select maNhanVien from NhanVien where maNhanVien in (SELECT tenTaiKhoan FROM TaiKhoan) and maNhanVien = "
 					+ "'" + maNhanVien + "'";
 			ma = (String) session.createSQLQuery(query).getSingleResult();
 			tr.commit();
