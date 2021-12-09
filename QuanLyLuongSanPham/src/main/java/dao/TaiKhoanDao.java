@@ -25,12 +25,12 @@ public class TaiKhoanDao {
 		} catch (Exception e) {
 			tr.rollback();
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 		return false;
 	}
+
 	public boolean capNhatTaiKhoan(TaiKhoan tk) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();
@@ -40,20 +40,22 @@ public class TaiKhoanDao {
 			tr.commit();
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			tr.rollback();
 		} finally {
 			session.close();
 		}
 		return false;
 	}
+
 	public TaiKhoan getTaiKhoan(String tenTaiKhoan) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String queryString =   "select * from TaiKhoan where tenTaiKhoan like '"+tenTaiKhoan+"'";
+			String queryString = "select * from TaiKhoan where tenTaiKhoan like '" + tenTaiKhoan + "'";
 			TaiKhoan taikhoan = session.createNativeQuery(queryString, TaiKhoan.class).getSingleResult();
-			//TaiKhoan taikhoan = session.find(TaiKhoan.class, tenTaiKhoan);
+			// TaiKhoan taikhoan = session.find(TaiKhoan.class, tenTaiKhoan);
 			tr.commit();
 			return taikhoan;
 		} catch (Exception e) {
@@ -84,6 +86,7 @@ public class TaiKhoanDao {
 		}
 		return null;
 	}
+
 	public boolean xoaTaiKhoanTheoMa(String maTKCanXoa) {
 		Session session = sessionFactory.openSession();
 		Transaction tr = session.getTransaction();

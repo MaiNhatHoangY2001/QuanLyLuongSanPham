@@ -463,6 +463,13 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 		}
 		try {
 			double thue = Double.parseDouble(txtThue.getText().trim());
+			if(thue<0) {
+				JOptionPane.showMessageDialog(this, "Thuế không được âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				txtThue.requestFocus();
+				txtThue.selectAll();
+				return false;
+				
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Thuế phải là số", "Lỗi", JOptionPane.ERROR_MESSAGE);
 			txtThue.requestFocus();
@@ -471,6 +478,13 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 		}
 		try {
 			int sl = Integer.parseInt(txtSoLuong.getText().trim());
+			if(sl<0) {
+				JOptionPane.showMessageDialog(this, "Số lượng không được âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				txtThue.requestFocus();
+				txtThue.selectAll();
+				return false;
+				
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Số lượng phải là số nguyên", "Lỗi", JOptionPane.ERROR_MESSAGE);
 			txtSoLuong.requestFocus();

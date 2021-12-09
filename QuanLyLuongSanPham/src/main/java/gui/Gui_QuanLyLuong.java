@@ -984,7 +984,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		int year = spnYear.getYear();
 
 		for (NhanVien nhanVien : nhanViens) {
-			if (nhanVien.gettrangThaiLamViec()) {
+			if (nhanVien.gettrangThaiLamViec() && !nhanVien.getMaNhanVien().equals("NV00000000")) {
 				Double tienSanPham = quanLyLuongService.getTienSanPham(nhanVien.getMaNhanVien(), month, year);
 				Double heSoLuong = (double) (quanLyLuongService.kiemTraNhanVien(nhanVien.getMaNhanVien()) ? 2 : 1);
 				LocalDate thoiGian;

@@ -456,6 +456,8 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 			soTrang = 1;
 			tongSoTrang = 1;
 			loadTableCustom(list, soTrang, tongSP);
+		} else {
+			loadMacDinh();
 		}
 	}
 

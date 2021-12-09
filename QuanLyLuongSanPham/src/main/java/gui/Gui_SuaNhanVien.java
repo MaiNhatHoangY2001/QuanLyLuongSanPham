@@ -19,7 +19,6 @@ import gui_package.Regex;
 import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
 import model.NhanVien;
-import model.SanPham;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -119,7 +118,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 		JPanel pnlContent = new JPanel();
 		pnlContent.setLayout(null);
 		pnlContent.setBackground(new Color(242, 129, 25));
-		pnlContent.setBounds(0, 151, 1440, 873);
+		pnlContent.setBounds(0, 150, 1440, 873);
 		contentPane.add(pnlContent);
 
 		// Hiện mã nhân viên

@@ -31,7 +31,6 @@ public class Gui_DangNhap extends JFrame {
 	private int xClicked;
 	private int yClicked;
 	private JLabel lblLogo;
-	private JLabel lblDangNhap;
 	private JPanel panelThongTinDN;
 	protected JButton btnDangNhap;
 	private JButton btnThoat;
@@ -101,28 +100,26 @@ public class Gui_DangNhap extends JFrame {
 		lblTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblTaiKhoan.setForeground(Color.BLACK);
 		lblTaiKhoan.setIconTextGap(-20);
-		lblTaiKhoan.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTaiKhoan.setBounds(30, 124, 109, 50);
+		lblTaiKhoan.setBounds(107, 133, 109, 50);
 		panelThongTinDN.add(lblTaiKhoan);
 
 		txtTaiKhoan = new JTextField("vanchinh");
 		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTaiKhoan.setBounds(149, 124, 827, 50);
+		txtTaiKhoan.setBounds(226, 133, 791, 50);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 
 		txtMatKhau = new JPasswordField("admin");
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMatKhau.setColumns(10);
-		txtMatKhau.setBounds(149, 224, 827, 50);
+		txtMatKhau.setBounds(226, 208, 791, 50);
 		panelThongTinDN.add(txtMatKhau);
 
 		lblMatKhau = new JLabel("Mật Khẩu:");
 		lblMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblMatKhau.setForeground(Color.BLACK);
 		lblMatKhau.setIconTextGap(-20);
-		lblMatKhau.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblMatKhau.setBounds(20, 232, 119, 35);
+		lblMatKhau.setBounds(107, 208, 109, 50);
 		panelThongTinDN.add(lblMatKhau);
 
 		btnDangNhap = new CircleBtn("Đăng Nhập");
@@ -130,7 +127,7 @@ public class Gui_DangNhap extends JFrame {
 		btnDangNhap.setBounds(149, 334, 150, 60);
 		panelThongTinDN.add(btnDangNhap);
 
-		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 20));
 		btnDangNhap.setBackground(new Color(233, 180, 46));
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));
 
@@ -145,7 +142,7 @@ public class Gui_DangNhap extends JFrame {
 			}
 		});
 		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnXoa.setFont(new Font("Calibri", Font.BOLD, 20));
 
 		btnThoat = new CircleBtn("Thoát");
 		btnThoat.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -156,26 +153,26 @@ public class Gui_DangNhap extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnThoat.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnThoat.setFont(new Font("Calibri", Font.BOLD, 20));
 		btnThoat.setBorder(new LineBorder(new Color(1, 242, 233)));
 		btnThoat.setBackground(new Color(233, 180, 46));
 
-		lblDangNhap = new JLabel("ĐĂNG NHẬP");
-		lblDangNhap.setBounds(460, 37, 206, 61);
-		panelThongTinDN.add(lblDangNhap);
-		lblDangNhap.setForeground(Color.WHITE);
-		lblDangNhap.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDangNhap.setFont(new Font("Calibri", Font.BOLD, 40));
 
 		lblQuenMK = new JLabel("quên mật khẩu ?");
 		lblQuenMK.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblQuenMK.setIconTextGap(-20);
 		lblQuenMK.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQuenMK.setForeground(Color.BLACK);
+		lblQuenMK.setForeground(Color.GRAY);
 		lblQuenMK.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		lblQuenMK.setBounds(840, 273, 151, 50);
+		lblQuenMK.setBounds(866, 269, 151, 30);
 		panelThongTinDN.add(lblQuenMK);
+		
+		JLabel lblNewLabel = new JLabel("Đăng Nhập");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblNewLabel.setBounds(450, 44, 224, 50);
+		panelThongTinDN.add(lblNewLabel);
 
 		lbTieuDe = new JLabel("QUẢN LÝ LƯƠNG CỬA HÀNG ĐIỆN THOẠI 17");
 		lbTieuDe.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -224,13 +221,18 @@ public class Gui_DangNhap extends JFrame {
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
 			if (!(KiemTraRongText(txtTaiKhoan))) {
-				if (taiKhoan != null)
-					if (mk.equals(taiKhoan.getMatKhau())) {
-						chinh.setTaiKhoan(taiKhoan);
-						chinh.setVisible(true);
-						this.setVisible(false);
-					} else {
-						JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+				if (taiKhoan != null )
+					if(taiKhoan.getNhanVien().gettrangThaiLamViec()) {
+						if (mk.equals(taiKhoan.getMatKhau())) {
+							chinh.setTaiKhoan(taiKhoan);
+							chinh.setVisible(true);
+							this.setVisible(false);
+						} else {
+							JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "Nhân viên này đã nghỉ việc");
 					}
 				else {
 					JOptionPane.showMessageDialog(this, "Sai tên tài khoản");

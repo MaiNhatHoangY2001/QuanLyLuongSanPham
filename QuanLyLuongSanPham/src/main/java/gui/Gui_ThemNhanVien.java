@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,11 +23,17 @@ import javax.swing.border.MatteBorder;
 import javax.swing.plaf.DimensionUIResource;
 
 import dao.NhanVienDao;
+import dao.TaiKhoanDao;
 import gui_package.CircleBtn;
 import gui_package.Regex;
 import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
 import model.NhanVien;
+import model.TaiKhoan;
+
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+import java.awt.Insets;
 
 public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 
@@ -50,6 +57,9 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 	private JComboBox<String> cmbNam;
 	private NhanVienDao daoNV;
 	private RoundTextField txtHeSoLuong;
+	private TaiKhoanDao daoTK;
+	private JRadioButton rdbtnHanhChinh;
+	private JRadioButton rdbtnBanHang;
 
 	/**
 	 * Create the frame.
@@ -64,7 +74,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		/**
 		 * Phần Header
@@ -106,72 +116,72 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		((RoundedPanel) pnlInput).setArcs(new DimensionUIResource(100, 100));
 		pnlInput.setLayout(null);
 		pnlInput.setBackground(new Color(248, 198, 153));
-		pnlInput.setBounds(120, 65, 1200, 597);
+		pnlInput.setBounds(120, 42, 1200, 666);
 		pnlContent.add(pnlInput);
 
 		// Nhập tên nhân viên
 		JLabel lblHoTen = new JLabel("Họ Và Tên:");
 		lblHoTen.setForeground(Color.BLACK);
 		lblHoTen.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblHoTen.setBounds(81, 39, 225, 40);
+		lblHoTen.setBounds(81, 38, 225, 40);
 		pnlInput.add(lblHoTen);
 
 		txtTen = new RoundTextField("", 1000);
 		txtTen.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		txtTen.setColumns(10);
-		txtTen.setBounds(316, 37, 801, 45);
+		txtTen.setBounds(316, 34, 801, 45);
 		pnlInput.add(txtTen);
 
 		// Nhập dịa chỉ
 		JLabel lblDiaChi = new JLabel("Địa Chỉ:");
 		lblDiaChi.setForeground(Color.BLACK);
 		lblDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDiaChi.setBounds(81, 276, 225, 40);
+		lblDiaChi.setBounds(81, 272, 225, 40);
 		pnlInput.add(lblDiaChi);
 
 		txtDiaChi = new RoundTextField("", 1000);
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtDiaChi.setColumns(10);
-		txtDiaChi.setBounds(316, 274, 801, 45);
+		txtDiaChi.setBounds(316, 271, 801, 45);
 		pnlInput.add(txtDiaChi);
 
 		// Nhập số điện thoại
 		JLabel lblSDT = new JLabel("Số Điện Thoại:");
 		lblSDT.setForeground(Color.BLACK);
 		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblSDT.setBounds(81, 355, 225, 40);
+		lblSDT.setBounds(81, 350, 225, 40);
 		pnlInput.add(lblSDT);
 
 		txtSDT = new RoundTextField("", 1000);
 		txtSDT.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtSDT.setColumns(10);
-		txtSDT.setBounds(316, 353, 801, 45);
+		txtSDT.setBounds(316, 350, 801, 45);
 		pnlInput.add(txtSDT);
 
 		// Nhập chứng minh nhân dân
 		JLabel lblCMND = new JLabel("CMND:");
 		lblCMND.setForeground(Color.BLACK);
 		lblCMND.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblCMND.setBounds(81, 434, 225, 40);
+		lblCMND.setBounds(81, 428, 225, 40);
 		pnlInput.add(lblCMND);
 
 		txtCMND = new RoundTextField("", 1000);
 		txtCMND.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtCMND.setColumns(10);
-		txtCMND.setBounds(316, 432, 801, 45);
+		txtCMND.setBounds(316, 429, 801, 45);
 		pnlInput.add(txtCMND);
 
 		// Nhập Email
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(Color.BLACK);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEmail.setBounds(81, 513, 225, 40);
+		lblEmail.setBounds(81, 506, 225, 40);
 		pnlInput.add(lblEmail);
 
 		txtEmail = new RoundTextField("", 1000);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(316, 511, 801, 45);
+		txtEmail.setBounds(316, 508, 801, 45);
 		pnlInput.add(txtEmail);
 
 		/*
@@ -181,7 +191,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		JLabel lblNgaySinh = new JLabel("Ngày sinh:");
 		lblNgaySinh.setForeground(Color.BLACK);
 		lblNgaySinh.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNgaySinh.setBounds(81, 118, 225, 40);
+		lblNgaySinh.setBounds(81, 116, 225, 40);
 		pnlInput.add(lblNgaySinh);
 
 		// Ngày
@@ -191,7 +201,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 						"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 		cmbNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbNgay.setBackground(Color.WHITE);
-		cmbNgay.setBounds(316, 116, 250, 45);
+		cmbNgay.setBounds(316, 113, 250, 45);
 		pnlInput.add(cmbNgay);
 
 		// Tháng
@@ -200,7 +210,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 				"Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
 		cmbThang.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbThang.setBackground(Color.WHITE);
-		cmbThang.setBounds(590, 116, 250, 45);
+		cmbThang.setBounds(590, 113, 250, 45);
 		pnlInput.add(cmbThang);
 
 		// Năm
@@ -213,7 +223,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		cmbNam.setModel(modelNam);
 		cmbNam.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		cmbNam.setBackground(Color.WHITE);
-		cmbNam.setBounds(867, 116, 250, 45);
+		cmbNam.setBounds(867, 113, 250, 45);
 		pnlInput.add(cmbNam);
 
 		/*
@@ -223,14 +233,36 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		JLabel lblHeSoLuong = new JLabel("Mức Lương:");
 		lblHeSoLuong.setForeground(Color.BLACK);
 		lblHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblHeSoLuong.setBounds(81, 197, 225, 40);
+		lblHeSoLuong.setBounds(81, 194, 225, 40);
 		pnlInput.add(lblHeSoLuong);
 
 		// JtextField HeSoLuong
 		txtHeSoLuong = new RoundTextField("", 1000);
 		txtHeSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		txtHeSoLuong.setBounds(316, 195, 801, 45);
+		txtHeSoLuong.setBounds(316, 192, 801, 45);
 		pnlInput.add(txtHeSoLuong);
+
+		JLabel lblChcV = new JLabel("Chức vụ:");
+		lblChcV.setForeground(Color.BLACK);
+		lblChcV.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblChcV.setBounds(81, 584, 225, 40);
+		pnlInput.add(lblChcV);
+
+		rdbtnHanhChinh = new JRadioButton("   Hành Chính");
+		rdbtnHanhChinh.setMargin(new Insets(2, 10, 2, 2));
+		rdbtnHanhChinh.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		rdbtnHanhChinh.setBounds(316, 587, 250, 45);
+		pnlInput.add(rdbtnHanhChinh);
+
+		rdbtnBanHang = new JRadioButton("   Bán Hàng");
+		rdbtnBanHang.setMargin(new Insets(2, 10, 2, 2));
+		rdbtnBanHang.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		rdbtnBanHang.setBounds(590, 587, 250, 45);
+		pnlInput.add(rdbtnBanHang);
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnBanHang);
+		group.add(rdbtnHanhChinh);
 
 		/*
 		 * Các nút
@@ -240,7 +272,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		btnLuu.setForeground(Color.WHITE);
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnLuu.setBackground(new Color(233, 180, 46));
-		btnLuu.setBounds(187, 727, 230, 70);
+		btnLuu.setBounds(188, 750, 230, 70);
 		btnLuu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnLuu);
 
@@ -249,7 +281,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		btnXoaRong.setForeground(Color.WHITE);
 		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnXoaRong.setBackground(new Color(233, 180, 46));
-		btnXoaRong.setBounds(604, 727, 230, 70);
+		btnXoaRong.setBounds(605, 750, 230, 70);
 		btnXoaRong.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnXoaRong);
 
@@ -258,7 +290,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		btnHuyBo.setForeground(Color.WHITE);
 		btnHuyBo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnHuyBo.setBackground(new Color(233, 180, 46));
-		btnHuyBo.setBounds(1021, 727, 230, 70);
+		btnHuyBo.setBounds(1022, 750, 230, 70);
 		btnHuyBo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnHuyBo);
 
@@ -270,6 +302,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 		btnHuyBo.addActionListener(this);
 
 		daoNV = new NhanVienDao();
+		daoTK = new TaiKhoanDao();
 	}
 
 	@Override
@@ -280,6 +313,11 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 				NhanVien nv = getNhanVienTuTextfield();
 				if (daoNV.themNhanVien(nv)) {
 					JOptionPane.showMessageDialog(this, "Thêm thành công");
+					if (rdbtnHanhChinh.isSelected() == true) {
+						TaiKhoan taikhoan = new TaiKhoan(nv.getMaNhanVien(), nv.getMaNhanVien());
+						taikhoan.setNhanVien(nv);
+						daoTK.themTaiKhoan(taikhoan);
+					}
 				} else
 					JOptionPane.showMessageDialog(this, "Thêm thất bại");
 
@@ -339,7 +377,6 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 	 * @return
 	 */
 	private NhanVien getNhanVienTuTextfield() {
-
 		String ten = txtTen.getText();
 		LocalDate date = getDate();
 		String diaChi = txtDiaChi.getText();

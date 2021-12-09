@@ -78,7 +78,7 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 		JPanel pnlHeader = new JPanel();
 		pnlHeader.setBorder(new MatteBorder(0, 0, 5, 0, (Color) Color.WHITE));
 		pnlHeader.setBackground(new Color(242, 129, 25));
-		pnlHeader.setBounds(0, 0, 1424, 150);
+		pnlHeader.setBounds(0, 0, 1440, 150);
 		contentPane.add(pnlHeader);
 		pnlHeader.setLayout(null);
 
@@ -98,7 +98,7 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 
 		JPanel pnlContent = new JPanel();
 		pnlContent.setBackground(new Color(242, 129, 25));
-		pnlContent.setBounds(0, 151, 1424, 834);
+		pnlContent.setBounds(0, 151, 1440, 873);
 		contentPane.add(pnlContent);
 		pnlContent.setLayout(null);
 
@@ -108,7 +108,7 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 		JPanel pnlInput = new RoundedPanel();
 		((RoundedPanel) pnlInput).setArcs(new DimensionUIResource(50, 50));
 		pnlInput.setBackground(new Color(248, 198, 153));
-		pnlInput.setBounds(113, 113, 1200, 581);
+		pnlInput.setBounds(120, 110, 1200, 581);
 		pnlContent.add(pnlInput);
 		pnlInput.setLayout(null);
 
@@ -244,7 +244,7 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 		btnLuu.setForeground(Color.WHITE);
 		btnLuu.setBackground(new Color(233, 180, 46));
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnLuu.setBounds(168, 729, 250, 70);
+		btnLuu.setBounds(172, 756, 250, 70);
 		btnLuu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnLuu);
 
@@ -253,7 +253,7 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 		btnXoaRong.setForeground(Color.WHITE);
 		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnXoaRong.setBackground(new Color(233, 180, 46));
-		btnXoaRong.setBounds(586, 729, 250, 70);
+		btnXoaRong.setBounds(594, 756, 250, 70);
 		btnXoaRong.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnXoaRong);
 
@@ -262,19 +262,19 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 		btnHuyBo.setForeground(Color.WHITE);
 		btnHuyBo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnHuyBo.setBackground(new Color(233, 180, 46));
-		btnHuyBo.setBounds(1004, 729, 250, 70);
+		btnHuyBo.setBounds(1016, 756, 250, 70);
 		btnHuyBo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		pnlContent.add(btnHuyBo);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(233, 180, 46));
-		panel.setBounds(113, 35, 279, 43);
+		panel.setBounds(120, 50, 279, 43);
 		pnlContent.add(panel);
 		panel.setLayout(null);
 
 		// Hien Ma San Pham
 		txtSanPham = new JTextField();
-		txtSanPham.setEnabled(false);
+		txtSanPham.setEditable(false);
 		txtSanPham.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtSanPham.setBounds(114, 0, 165, 43);
 		panel.add(txtSanPham);
@@ -315,8 +315,6 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 			SanPham sanPham1 = daoSP.getSanPham(txtSanPham.getText());
 			SanPham sanPham2 = layThongTinTuJtextField();
 			sanPham2.setMaSanpham(txtSanPham.getText());
-			System.out.println(sanPham1);
-			System.out.println(sanPham2);
 			if (kiemTraHaiSanPham(sanPham1, sanPham2)) {
 				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thoát không?", "Thông báo thoát",
 						JOptionPane.YES_NO_OPTION);
@@ -447,24 +445,17 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 	 * @param sp1: Thông tin sản phẩm
 	 */
 	public void hienThongTinSanPham(SanPham sp1) {
-		System.out.println(sp1.getNgaySanXuat());
 		txtTenSanPham.setText(sp1.getTenSanPham());
 		txtGiaThanh.setText(fm.format(sp1.getGiaThanh()));
 		txtNCC.setText(sp1.getnCC());
 		txtSanPham.setText(sp1.getMaSanpham());
-
 		int ngay = sp1.getNgaySanXuat().getDayOfMonth();
-		System.out.println(ngay);
 		cmbNgay.setSelectedItem(ngay + "");
 		int thang = sp1.getNgaySanXuat().getMonthValue();
-		System.out.println(thang);
 		cmbThang.setSelectedItem("Tháng " + thang);
 		int nam = sp1.getNgaySanXuat().getYear();
-		System.out.println(nam);
 		cmbNam.setSelectedItem(nam + "");
-
 		cmbLoai.setSelectedItem(sp1.getLoai());
-
 		if (sp1.isTrangThai() == true)
 			radConBan.setSelected(true);
 		else

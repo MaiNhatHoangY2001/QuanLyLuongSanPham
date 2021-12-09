@@ -51,33 +51,34 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 	public void setTaiKhoan(TaiKhoan taiKhoan) {
 		this.taiKhoan = taiKhoan;
-		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
-
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+//		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
+//		this.revalidate();
+//		this.repaint();
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangHD.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangLuong.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangNV.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangTK.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangSP.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangtaiKhoan.pnlHead, this, Gui_DangNhap.getInstance());
-
 		phanQuyen();
 		System.out.println(taiKhoan.getTenTaiKhoan());
 	}
 
 	private void phanQuyen() {
 		if (!(taiKhoan.getTenTaiKhoan().equals("NV00000000"))) {
-			panel_1.remove(btnQuanLyNhanVien);
-			panel_1.remove(btnQuanLyTaiKhoan);
+			btnQuanLyNhanVien.setVisible(false);
+			btnQuanLyTaiKhoan.setVisible(false);
 			btnThoat.setBounds(0, 460, 320, 115);
 		} else {
-			btnQuanLyNhanVien.setEnabled(true);
-			btnQuanLyTaiKhoan.setEnabled(true);
+			btnQuanLyNhanVien.setVisible(true);
+			btnQuanLyTaiKhoan.setVisible(true);
+			btnThoat.setBounds(0, 690, 320, 115);
 		}
 	}
 

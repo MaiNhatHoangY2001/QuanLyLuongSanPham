@@ -336,8 +336,11 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 
 		} else if (o.equals(btnLuu)) {
 			TaiKhoan nv1 = daoTK.getTaiKhoan(txtTenTK.getText());
-			if (daoTK.capNhatTaiKhoan(nv1)) {
+			nv1.setMatKhau(txtMK.getText());
+			boolean rs = daoTK.capNhatTaiKhoan(nv1);
+			if (rs == true) {
 				JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thành công");
+				TaiKhoan tk = daoTK.getTaiKhoan(txtTenTK.getText());
 				listTK = daoTK.getDsTaiKhoan();
 				LoadTaiKhoan(listTK);
 			} else
