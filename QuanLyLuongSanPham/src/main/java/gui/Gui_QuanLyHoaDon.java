@@ -37,6 +37,7 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import gui_package.ChucNang;
+import gui_package.HintTextFieldUI;
 import model.HoaDonBanHang;
 import model.HoaDonNhapHang;
 import model.KhachHang;
@@ -130,6 +131,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_1.add(txtNgayLap);
 
 		cboTimKiem = new JComboBox();
+		
 		cboTimKiem.setToolTipText("Tìm kiếm hóa đơn theo các tiêu chí ");
 		cboTimKiem.setModel(
 				new DefaultComboBoxModel(new String[] { "Mã hóa đơn", "Số điện thoại Khách", "Theo tên khách" }));
@@ -141,6 +143,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_1.add(cboTimKiem);
 
 		txtTimKiem = new JTextField();
+		txtTimKiem.setUI(new HintTextFieldUI("Nhập vào thông tin muốn tìm", true));
 		txtTimKiem.setToolTipText("Nhập vào thông tin tìm kiếm");
 		txtTimKiem.setBounds(1001, 11, 349, 45);
 		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));

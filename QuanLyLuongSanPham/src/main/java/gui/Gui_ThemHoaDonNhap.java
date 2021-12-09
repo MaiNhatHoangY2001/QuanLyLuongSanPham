@@ -65,6 +65,7 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 	private JTextField txtTongTien;
 	private List<SanPham> dsSanPham;
 	private List<ChiTietHoaDonNhap> dsChiTiet;
+	private HoaDonNhapHang hoaDonNhapHang;
 
 	/**
 	 * Launch the application.
@@ -195,7 +196,7 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 		txtSoLuong.setBounds(290, 145, 214, 35);
 		panel_2.add(txtSoLuong);
 
-		txtThue = new JTextField();
+		txtThue = new JTextField("0");
 		txtThue.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtThue.setToolTipText("Nhâp vào thuế từ 0% đến 100%");
 		txtThue.setColumns(10);
@@ -288,14 +289,14 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 
 		JLabel lblNewLabel_2 = new JLabel("Tổng tiền");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(10, 222, 106, 33);
+		lblNewLabel_2.setBounds(10, 222, 87, 33);
 		panel_1.add(lblNewLabel_2);
 
 		txtTongTien = new JTextField();
 		txtTongTien.setEditable(false);
 		txtTongTien.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtTongTien.setColumns(10);
-		txtTongTien.setBounds(114, 222, 238, 35);
+		txtTongTien.setBounds(97, 222, 238, 35);
 		panel_1.add(txtTongTien);
 
 		loadNcc();
@@ -346,7 +347,7 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 		btnThem.addActionListener(e -> {
 			if (kiemTraDuLieu() == true) {
 //				SinhMaThuCong sinhMaThuCong= new SinhMaThuCong("SP",HibernateConfig.getInstance().getSessionFactory().getCurrentSession() );
-				HoaDonNhapHang hoaDonNhapHang = getHoaDonNhapByForm();
+				hoaDonNhapHang = getHoaDonNhapByForm();
 				ChiTietHoaDonNhap chiTietHoaDonNhap = getChiTietFromForm();
 				SanPham sanPham = getSanPhamFromForm();
 				dsSanPham.add(sanPham);
@@ -355,13 +356,16 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 				NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
 				Object[] rowData = { sanPham.getTenSanPham(), sanPham.getnCC(), sanPham.getNgaySanXuat(),
 						sanPham.getLoai(), format.format(sanPham.getGiaThanh()), hoaDonNhapHang.getThue()*100 +"%", chiTietHoaDonNhap.getSoLoHang() };
-				txtTongTien.setText(format.format(hoaDonNhapHang.getThanhTien()) + " VND");
+				thayDoiLblTien();
+				for (int i = 0; i < dsChiTiet.size(); i++) {
+					model.setValueAt( hoaDonNhapHang.getThue()*100 +"%", i, 5);
+				}
 				ChucNang.clearDataNullTable(model);
 				model.addRow(rowData);
 				ChucNang.addNullDataTable(model);
 			}
 		});
-		
+	
 		mnXoa.addActionListener(e->{
 			int index = tblSanPham.getSelectedRow();
 			if(tblSanPham.getValueAt(index, 0)== null) {
@@ -370,6 +374,9 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 			dsChiTiet.remove(index);
 			dsSanPham.remove(index);
 			model.removeRow(index);
+			hoaDonNhapHang.setDsChiTietHoaDonNhap(dsChiTiet);
+			thayDoiLblTien();
+			
 		});
 		btnLapHoaDon.addActionListener(e -> {
 			if (dsChiTiet.size() <= 0) {
@@ -383,11 +390,13 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 				for (ChiTietHoaDonNhap chiTietHoaDonNhap : dsChiTiet) {
 					chiTietHoaDonNhap.setHoaDonNhapHang(hoaDonNhapHang);
 					quanLyHoaDonService.themChiTietNhap(chiTietHoaDonNhap);
+					
 				}
 				JOptionPane.showMessageDialog(this, "lập hóa đơn thành công", "Thông báo",
 						JOptionPane.INFORMATION_MESSAGE);
 				txtTenSp.requestFocus();
 				txtTenSp.selectAll();
+				this.dispose();
 			} else
 				JOptionPane.showMessageDialog(this, "Lập hóa đơn thất bại", "Thông báo",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -465,6 +474,7 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 			double thue = Double.parseDouble(txtThue.getText().trim());
 			if(thue<0) {
 				JOptionPane.showMessageDialog(this, "Thuế không được âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				txtThue.setText("0");
 				txtThue.requestFocus();
 				txtThue.selectAll();
 				return false;
@@ -478,15 +488,17 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 		}
 		try {
 			int sl = Integer.parseInt(txtSoLuong.getText().trim());
-			if(sl<0) {
-				JOptionPane.showMessageDialog(this, "Số lượng không được âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
-				txtThue.requestFocus();
-				txtThue.selectAll();
+			if(sl<=0) {
+				JOptionPane.showMessageDialog(this, "Số lượng không được nhỏ hơn 1", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				txtSoLuong.setText("1");
+				txtSoLuong.requestFocus();
+				txtSoLuong.selectAll();
 				return false;
 				
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Số lượng phải là số nguyên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+			
 			txtSoLuong.requestFocus();
 			txtSoLuong.selectAll();
 			return false;
@@ -500,5 +512,10 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 		for (String string : dsNcc) {
 			cboNhaCungCap.addItem(string);
 		}
+	}
+	public void thayDoiLblTien() {
+		NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
+		double tong=hoaDonNhapHang.getThanhTien();
+		txtTongTien.setText(format.format(tong) + " VND");
 	}
 }

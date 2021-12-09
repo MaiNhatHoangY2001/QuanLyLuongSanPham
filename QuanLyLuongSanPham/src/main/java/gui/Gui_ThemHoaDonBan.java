@@ -837,6 +837,12 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 					"Cảnh báo", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
+		if(quanLyHoaDonService.kiemTraLoaiNhanVien(nhanVien)) {
+			JOptionPane.showMessageDialog(this, "Nhân viên có mã:" + txtMaNV.getText().trim() + "Không phải nhân viên bán hàng. Phải nhập nhân viên bán hàng",
+					"Cảnh báo", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		
 		try {
 			double chietKhau = Double.parseDouble(txtChietKhau.getText().trim());
 			if(chietKhau<0) {
