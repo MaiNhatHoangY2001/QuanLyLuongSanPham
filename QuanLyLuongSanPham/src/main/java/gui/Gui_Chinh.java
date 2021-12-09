@@ -1,30 +1,28 @@
 package gui;
 
 import java.awt.CardLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import gui_package.ChucNang;
 import model.TaiKhoan;
-import services.QuanLyHoaDonService;
 import services.QuanLyLuongService;
-import services.QuanLyNhanVienService;
-
-import java.awt.Cursor;
 
 public class Gui_Chinh extends JFrame implements ActionListener, WindowListener {
 	/**
@@ -43,89 +41,68 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 	private JButton temp;
 	private TaiKhoan taiKhoan;
 
-	private Gui_ThongKeThuChi trangTK = new Gui_ThongKeThuChi();
+	private Gui_ThongKe trangTK = new Gui_ThongKe();
 	private Gui_QuanLyHoaDon trangHD = new Gui_QuanLyHoaDon();
 	private Gui_QuanLyLuong trangLuong = new Gui_QuanLyLuong();
 	private Gui_QuanLyNhanVien trangNV = new Gui_QuanLyNhanVien();
 	private Gui_QuanLySanPham trangSP = new Gui_QuanLySanPham();
 	private Gui_QuanLyTaiKhoan trangtaiKhoan = new Gui_QuanLyTaiKhoan();
+	private JPanel panel_1;
 
 	public void setTaiKhoan(TaiKhoan taiKhoan) {
 		this.taiKhoan = taiKhoan;
-		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
-
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+//		QuanLyLuongService quanLyLuongService = new QuanLyLuongService();
+//		this.revalidate();
+//		this.repaint();
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangHD.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangLuong.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangNV.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangTK.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangSP.pnlHead, this, Gui_DangNhap.getInstance());
-		ChucNang.setLabelName(quanLyLuongService.getNhanVien(taiKhoan.getTenTaiKhoan()).getTenNhanVien(),
+		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
 				trangtaiKhoan.pnlHead, this, Gui_DangNhap.getInstance());
-
 		phanQuyen();
 		System.out.println(taiKhoan.getTenTaiKhoan());
 	}
 
 	private void phanQuyen() {
 		if (!(taiKhoan.getTenTaiKhoan().equals("NV00000000"))) {
-			btnQuanLyNhanVien.setEnabled(false);
-			btnQuanLyTaiKhoan.setEnabled(false);
+			btnQuanLyNhanVien.setVisible(false);
+			btnQuanLyTaiKhoan.setVisible(false);
+			btnThoat.setBounds(0, 460, 320, 115);
 		} else {
-			btnQuanLyNhanVien.setEnabled(true);
-			btnQuanLyTaiKhoan.setEnabled(true);
+			btnQuanLyNhanVien.setVisible(true);
+			btnQuanLyTaiKhoan.setVisible(true);
+			btnThoat.setBounds(0, 690, 320, 115);
 		}
 	}
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Gui_Chinh gui_Chinh = new Gui_Chinh();
-//					Gui_DangNhap gui_DangNhap = new Gui_DangNhap();
-//
-//					gui_DangNhap.setVisible(true);
-//					gui_DangNhap.setLocationRelativeTo(null);
-//
-//					gui_DangNhap.btnDangNhap.addActionListener(new ActionListener() {
-//						public void actionPerformed(ActionEvent e) {
-//							gui_DangNhap.setVisible(false);
-//							gui_Chinh.setVisible(true);
-//
-//						}
-//
-//					});
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Gui_Chinh() {
 
+		Rectangle r = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setSize(1920, 1037);
+		setSize(r.width, r.height);
+		//1920 1040
 		setResizable(false);
 		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		getContentPane().setLayout(null);
-
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		// thông báo khi thoát
 		addWindowListener(this);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 115, 0));
-		panel.setBounds(0, 0, 320, 1029);
+		panel.setBounds(0, 0, 320, 1055);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -141,10 +118,11 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		lblNewLabel_1.setBounds(9, 147, 294, 27);
 		panel.add(lblNewLabel_1);
 
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBounds(0, 200, 320, 807);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(242, 129, 25));
 
 		/**
 		 * các nút menu
@@ -247,7 +225,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnThongKe.addActionListener(this);
 
 		pnlChange = new JPanel();
-		pnlChange.setBounds(320, 0, 1600, 1007);
+		pnlChange.setBounds(320, 0, 1600, 1055);
 		getContentPane().add(pnlChange);
 		pnlChange.setLayout(new CardLayout(0, 0));
 
@@ -275,6 +253,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 
 		if (key == btnQuanLyHoaDon) {
 			cardLayout.show(pnlChange, "btnQuanLyHoaDon");
+			trangHD.setTaiKhoan(taiKhoan);
 		} else if (key == btnQuanLyLuong)
 			cardLayout.show(pnlChange, "btnQuanLyLuong");
 		else if (key == btnQuanLyNhanVien)

@@ -1,6 +1,7 @@
 package gui_package;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
@@ -9,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Timer;
@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -98,11 +97,17 @@ public class ChucNang {
 	 * @param model
 	 */
 	public static void clearDataTable(DefaultTableModel model) {
+
 		while (model.getRowCount() > 0) {
 			model.removeRow(0);
 		}
 	}
-
+	public static void clearDataNullTable(DefaultTableModel model) {
+		for (int i = model.getDataVector().size()-1; i >=0; i--) {
+			if(model.getValueAt(i, 0)==null)
+				model.removeRow(i);
+		}
+	}
 	/**
 	 * Chức năng giúp thêm vào những hàng rỗng cho đẹp bảng
 	 * 
@@ -145,8 +150,12 @@ public class ChucNang {
 		/**
 		 * Tên đăng nhập
 		 */
-		
-		JLabel lblTenDN = new JLabel(name);
+		Component temp = panel.getComponentAt(1272, 11);
+		panel.remove(temp);
+		panel.revalidate();
+		panel.repaint();
+		JLabel lblTenDN = new JLabel();
+		lblTenDN.setText(name);
 		lblTenDN.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblTenDN.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTenDN.setForeground(Color.WHITE);
@@ -195,13 +204,13 @@ public class ChucNang {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
+				lblDangXuat.setForeground(Color.WHITE);
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
+				lblDangXuat.setForeground(Color.GRAY);
 				
 			}
 			

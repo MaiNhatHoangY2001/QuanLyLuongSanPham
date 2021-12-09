@@ -1,20 +1,12 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,15 +22,9 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.toedter.calendar.JYearChooser;
-
 import gui_package.ChucNang;
-import model.BangLuong;
-import model.NhanVien;
 import services.ThongKeService;
 import gui_package.RoundedPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Gui_ThongKeThuChi extends JPanel {
 
@@ -46,10 +32,6 @@ public class Gui_ThongKeThuChi extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel lblGio;
-	private JLabel lblNgay;
-	private JYearChooser spnYear;
-	private JButton btnHienTai;
 	private String[] colsThongKe = { "Tháng", "Tổng Tiền bán sản phẩm", "Tiền nhập sản phẩm", "Tiền Lương nhân viên" };
 	private String[] colsSanPham = { "STT", "Tên sản phẩm", "Số lượng bán" };
 	private JTable tblThongKe;
@@ -62,97 +44,14 @@ public class Gui_ThongKeThuChi extends JPanel {
 	private JLabel lblTongTienThu;
 	private JTable tblSanPham;
 	private DefaultTableModel modelSanPham;
-	protected JPanel pnlHead;
 
 	/**
 	 * Create the frame.
 	 */
 	public Gui_ThongKeThuChi() {
-		setSize(1600, 1046);
+		setSize(1600, 812);
 		setBackground(new Color(242, 129, 25));
 		setLayout(null);
-
-		pnlHead = new JPanel();
-		pnlHead.setLayout(null);
-		pnlHead.setBackground(new Color(242, 129, 25));
-		pnlHead.setBounds(0, 0, 1600, 92);
-		add(pnlHead);
-
-		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setPreferredSize(new Dimension(1600, 72));
-		panel_1_1.setBackground(new Color(194, 93, 0));
-		panel_1_1.setBounds(0, 89, 1600, 72);
-		add(panel_1_1);
-		panel_1_1.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("THỐNG KÊ THU CHI");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 50));
-		lblNewLabel.setBounds(491, 0, 531, 92);
-		pnlHead.add(lblNewLabel);
-
-		/**
-		 * set Ngày giờ
-		 */
-		lblNgay = new JLabel("New label");
-		lblNgay.setForeground(Color.WHITE);
-		lblNgay.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNgay.setBounds(0, 16, 233, 33);
-		pnlHead.add(lblNgay);
-
-		lblGio = new JLabel("New label");
-		lblGio.setForeground(Color.WHITE);
-		lblGio.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblGio.setBounds(0, 50, 201, 42);
-		pnlHead.add(lblGio);
-
-		ChucNang.setGio(lblGio, lblNgay);
-		Image imgUser = new ImageIcon("img\\user1.png").getImage();
-		Image imgDX = new ImageIcon("img\\dangxuat.png").getImage();
-
-		/**
-		 * 
-		 * spnYear
-		 */
-
-		spnYear = new JYearChooser();
-		spnYear.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		spnYear.setBounds(605, 14, 112, 47);
-		panel_1_1.add(spnYear);
-
-		spnYear.addPropertyChangeListener("year", new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				setDataThongKe(spnYear.getYear());
-			}
-		});
-
-		btnHienTai = new JButton("Hiện tại");
-		btnHienTai.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnHienTai.setForeground(Color.WHITE);
-		btnHienTai.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnHienTai.setFocusPainted(false);
-		btnHienTai.setBorderPainted(false);
-		btnHienTai.setBackground(new Color(233, 180, 46));
-		btnHienTai.setBounds(727, 14, 112, 47);
-		panel_1_1.add(btnHienTai);
-
-		JButton btnLamMoi = new JButton("Làm mới");
-		btnLamMoi.addActionListener(e -> {
-			setDataThongKe(spnYear.getYear());
-		});
-		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnLamMoi.setForeground(Color.WHITE);
-		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnLamMoi.setFocusPainted(false);
-		btnLamMoi.setBorderPainted(false);
-		btnLamMoi.setBackground(new Color(233, 180, 46));
-		btnLamMoi.setBounds(849, 14, 112, 47);
-		panel_1_1.add(btnLamMoi);
-		btnHienTai.addActionListener(e -> {
-			spnYear.setYear(LocalDate.now().getYear());
-		});
 
 		/**
 		 * Thống kê dữ liệu trong tháng
@@ -190,7 +89,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		headerTable.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		headerTable.setBackground(new Color(248, 198, 153));
 		JScrollPane thanhCuon = new JScrollPane(tblThongKe);
-		thanhCuon.setBounds(10, 797, 750, 205);
+		thanhCuon.setBounds(10, 587, 750, 205);
 		thanhCuon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		thanhCuon.setToolTipText("Thống kê dữ liệu trong tháng");
 
@@ -220,15 +119,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 
 			@Override
 			public boolean isCellEditable(int row, int col) {
-				switch (col) {
-				case 5:
-					if (modelThongKe.getValueAt(row, col) != null) {
-						return true;
-					}
-					return false;
-				default:
-					return false;
-				}
+				return false;
 			}
 		};
 		tblSanPham.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -240,7 +131,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		headerTable1.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		headerTable1.setBackground(new Color(248, 198, 153));
 		JScrollPane thanhCuon1 = new JScrollPane(tblSanPham);
-		thanhCuon1.setBounds(770, 797, 794, 205);
+		thanhCuon1.setBounds(770, 587, 794, 205);
 		thanhCuon1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		thanhCuon1.setToolTipText("Thống kê dữ liệu trong tháng");
 
@@ -260,7 +151,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		 */
 		RoundedPanel panel_2 = new RoundedPanel();
 		panel_2.setBackground(new Color(248, 198, 153));
-		panel_2.setBounds(78, 172, 428, 92);
+		panel_2.setBounds(77, 11, 428, 92);
 		add(panel_2);
 		panel_2.setLayout(null);
 
@@ -279,7 +170,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		RoundedPanel panel_2_1 = new RoundedPanel();
 		panel_2_1.setBackground(new Color(248, 198, 153));
 		panel_2_1.setLayout(null);
-		panel_2_1.setBounds(585, 172, 428, 92);
+		panel_2_1.setBounds(584, 11, 428, 92);
 		add(panel_2_1);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Tổng tiền chi");
@@ -297,7 +188,7 @@ public class Gui_ThongKeThuChi extends JPanel {
 		RoundedPanel panel_2_2 = new RoundedPanel();
 		panel_2_2.setBackground(new Color(248, 198, 153));
 		panel_2_2.setLayout(null);
-		panel_2_2.setBounds(1092, 172, 428, 92);
+		panel_2_2.setBounds(1091, 11, 428, 92);
 		add(panel_2_2);
 
 		JLabel lblNewLabel_1_2 = new JLabel("Tổng doanh thu");
@@ -312,29 +203,24 @@ public class Gui_ThongKeThuChi extends JPanel {
 		lblTongDoanhThu.setBounds(20, 44, 398, 37);
 		panel_2_2.add(lblTongDoanhThu);
 
-		// Đổ dữ liệu
-		if (spnYear != null) {
-			setDataThongKe(spnYear.getYear());
-		}
-
 		/**
 		 * Biểu đồ doanh thu
 		 */
 		ChartPanel chartPanel = new ChartPanel(createChart());
-		chartPanel.setBounds(10, 275, 1554, 479);
+		chartPanel.setBounds(10, 119, 1554, 430);
 		add(chartPanel);
 		chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
 
 		JLabel lblChiTit = new JLabel("Chi tiết");
 		lblChiTit.setForeground(Color.WHITE);
 		lblChiTit.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblChiTit.setBounds(22, 765, 201, 29);
+		lblChiTit.setBounds(20, 560, 201, 29);
 		add(lblChiTit);
 
 		JLabel lblGio_1_1 = new JLabel("Sản phẩm bán chạy");
 		lblGio_1_1.setForeground(Color.WHITE);
 		lblGio_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblGio_1_1.setBounds(785, 765, 228, 29);
+		lblGio_1_1.setBounds(784, 560, 228, 29);
 		add(lblGio_1_1);
 
 	}

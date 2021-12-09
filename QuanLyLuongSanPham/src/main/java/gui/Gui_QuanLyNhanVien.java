@@ -238,7 +238,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		scrollPane.setBounds(10, 47, 1564, 723);
 		pnlContent.add(scrollPane);
 		// Header Title Nhan Vien
-		String headerTitle[] = { "Mã","Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái", "Địa chỉ" };
+		String headerTitle[] = { "Mã", "Họ và Tên", "Ngày Sinh", "SĐT", "Email", "Mức Lương", "Trạng Thái", "Địa chỉ" };
 		// Model Table
 		model = new DefaultTableModel(headerTitle, 50) {
 			/**
@@ -266,8 +266,8 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		headerTable.setBackground(new Color(248, 198, 153));
 		scrollPane.setViewportView(table);
 		scrollPane.setEnabled(false);
-		
-		int[] i = {5};
+
+		int[] i = { 5 };
 		ChucNang.setRightAlignmentTable(i, table);
 
 		JPanel panel = new JPanel();
@@ -351,9 +351,6 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 		if (o.equals(btnThemNV)) {
 			Gui_ThemNhanVien frm = new Gui_ThemNhanVien();
 			frm.setVisible(true);
-			if (frm.isVisible() == false) {
-				System.out.println("test");
-			}
 			// Sự kiện sửa nhân viên
 		} else if (o.equals(btnSuaNV)) {
 			if (table.getSelectedRowCount() == 0) {
@@ -369,20 +366,24 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 			if (table.getSelectedRowCount() == 0) {
 				JOptionPane.showMessageDialog(this, "Bạn chưa chọn nhân viên để xa thải");
 			} else {
-				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xa thải Nhân viên này không ?",
-						"Cảnh báo", JOptionPane.YES_NO_OPTION);
-				if (tl == JOptionPane.YES_OPTION) {
-					boolean rs = false;
-					NhanVien nv = nvSV.getNhanVienTheoMa(listMaNV.get(table.getSelectedRow()));
-					nv.settrangThaiLamViec(false);
-					rs = nvSV.capNhatNhanVien(nv);
-					if (rs == true) {
-						JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên thành công");
-						LoadMacDinh();
-					} else
-						JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên không thành công");
-				}
+				NhanVien nv = nvSV.getNhanVienTheoMa(listMaNV.get(table.getSelectedRow()));
+				if (nv.gettrangThaiLamViec() == true) {
+					int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xa thải Nhân viên này không ?",
+							"Cảnh báo", JOptionPane.YES_NO_OPTION);
+					if (tl == JOptionPane.YES_OPTION) {
+						boolean rs = false;
 
+						nv.settrangThaiLamViec(false);
+						rs = nvSV.capNhatNhanVien(nv);
+						if (rs == true) {
+							JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên thành công");
+							LoadMacDinh();
+						} else
+							JOptionPane.showMessageDialog(this, "Bạn đã xa thải nhân viên không thành công");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Nhân viên đã nghĩ việc\nHãy chọn nhân viên khách");
+				}
 			}
 			// SỰ kiện Làm mới bản
 		} else if (o.equals(btnLamMoi)) {
@@ -544,9 +545,9 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 	}
 
 	public void load1ThongTinNhanVien(NhanVien nv) {
-		String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(), nv.getEmail(),
-				vnFormat.format(nv.getMucLuong()), nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ",
-				nv.getDiaChi() };
+		String n[] = { nv.getMaNhanVien(), nv.getTenNhanVien(), dtf.format(nv.getNgaySinh()), nv.getsDT(),
+				nv.getEmail(), vnFormat.format(nv.getMucLuong()),
+				nv.gettrangThaiLamViec() == true ? "Đang Làm" : "Đã Nghỉ", nv.getDiaChi() };
 		model.addRow(n);
 		listMaNV = new ArrayList<String>();
 		listMaNV.add(nv.getMaNhanVien());

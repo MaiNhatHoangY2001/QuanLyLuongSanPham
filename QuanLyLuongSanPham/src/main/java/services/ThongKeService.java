@@ -25,6 +25,10 @@ public class ThongKeService {
 		return bangLuongDao.getTongLuongNhanVien(month, year);
 	}
 
+	public List<?> getTop10LuongNhanVien(int year) {
+		return bangLuongDao.getTop10LuongNhanVien(year);
+	}
+
 	public double getTongBanTheoThoiGian(int month, int year) {
 		return hoaDonBanHangDao.getThanhTienTheoThoiGian(month, year);
 	}

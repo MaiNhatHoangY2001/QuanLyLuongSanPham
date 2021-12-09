@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="setTaiKhoan"/>
+		<item key="selection" value="Gui_Chinh"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="Gui_Chinh"/>
+			<item value="btnXuatFile"/>
+			<item value="chucVu"/>
+			<item value="get10NhanVienTheoKhoang"/>
+			<item value="export"/>
+			<item value="colsThongKe"/>
+			<item value="modelSanPham"/>
+			<item value="tblSanPham"/>
+			<item value="tblChiTietLuong"/>
+			<item value="RowHeaderRenderer"/>
+			<item value="getAllBangLuong"/>
+			<item value="admin"/>
+			<item value="vanchinh"/>
 			<item value="setTaiKhoan"/>
 			<item value="mouse"/>
-			<item value="eventTimKiem"/>
-			<item value="log"/>
-			<item value="bntIn"/>
-			<item value="Gui_In"/>
-			<item value="Gui"/>
-			<item value="setDataPanelThongTinNV"/>
-			<item value="btnTao"/>
-			<item value="disable"/>
-			<item value="gettrangThaiLamViec"/>
-			<item value="taiKhoan"/>
-			<item value="tenTaiKhoan"/>
-			<item value="getDsTaiKhoan"/>
-			<item value="tai khoan"/>
 		</list>
 		<list key="replacehistory">
-			<item value="tblSanPham"/>
+			<item value="colsCTLuong"/>
+			<item value="modelCTLuong"/>
+			<item value="tblChiTietLuong"/>
 			<item value=""/>
+			<item value="tblSanPham"/>
 			<item value="242, 129,25"/>
 			<item value="320, 115"/>
 			<item value="320,115"/>
@@ -37,16 +40,13 @@
 			<item value="tblTKThu"/>
 			<item value="tblTienChi"/>
 			<item value="scrTienChi"/>
-			<item value="MatHang"/>
-			<item value="lblTenKH"/>
-			<item value="lblMaKH"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="1526"/>
 		<item key="DIALOG_Y_ORIGIN" value="289"/>
-		<item key="DIALOG_WIDTH" value="284"/>
-		<item key="DIALOG_HEIGHT" value="391"/>
-		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		<item key="DIALOG_WIDTH" value="336"/>
+		<item key="DIALOG_HEIGHT" value="454"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

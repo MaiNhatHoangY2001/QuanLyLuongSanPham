@@ -1,33 +1,29 @@
 package gui;
 
-import java.awt.event.*;
-import java.awt.*;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import java.awt.Font;
+import javax.swing.border.LineBorder;
 
 import gui_package.CircleBtn;
 import gui_package.RoundedPanel;
 import model.TaiKhoan;
 import services.DangNhapService;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Gui_DangNhap extends JFrame {
 
@@ -50,13 +46,15 @@ public class Gui_DangNhap extends JFrame {
 	private JLabel lblTK;
 	private JLabel lblLuong;
 	private DangNhapService dangNhapService = new DangNhapService();
-	private Gui_Chinh chinh = new Gui_Chinh();
+	private Gui_Chinh chinh;
 	private JLabel lblQuenMK;
+	private static Gui_DangNhap dangNhap=new Gui_DangNhap() ;
 
 	/**
 	 * Create the frame.
 	 */
 	public Gui_DangNhap() {
+		chinh = new Gui_Chinh();
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -105,15 +103,13 @@ public class Gui_DangNhap extends JFrame {
 		lblTaiKhoan.setBounds(107, 133, 109, 50);
 		panelThongTinDN.add(lblTaiKhoan);
 
-		txtTaiKhoan = new JTextField("NV19020001");
-		txtTaiKhoan.setMargin(new Insets(2, 10, 2, 2));
+		txtTaiKhoan = new JTextField("vanchinh");
 		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTaiKhoan.setBounds(226, 133, 791, 50);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 
-		txtMatKhau = new JPasswordField();
-		txtMatKhau.setMargin(new Insets(2, 10, 2, 2));
+		txtMatKhau = new JPasswordField("admin");
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMatKhau.setColumns(10);
 		txtMatKhau.setBounds(226, 208, 791, 50);
@@ -127,8 +123,8 @@ public class Gui_DangNhap extends JFrame {
 		panelThongTinDN.add(lblMatKhau);
 
 		btnDangNhap = new CircleBtn("Đăng Nhập");
-		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnDangNhap.setBounds(107, 326, 250, 60);
+		btnDangNhap.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnDangNhap.setBounds(149, 334, 150, 60);
 		panelThongTinDN.add(btnDangNhap);
 
 		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -136,9 +132,8 @@ public class Gui_DangNhap extends JFrame {
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		btnXoa = new CircleBtn("Xóa");
-		btnXoa.setText("Xóa Rổng");
-		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnXoa.setBounds(437, 326, 250, 60);
+		btnXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnXoa.setBounds(486, 334, 150, 60);
 		panelThongTinDN.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,8 +145,8 @@ public class Gui_DangNhap extends JFrame {
 		btnXoa.setFont(new Font("Calibri", Font.BOLD, 20));
 
 		btnThoat = new CircleBtn("Thoát");
-		btnThoat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnThoat.setBounds(767, 324, 250, 60);
+		btnThoat.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnThoat.setBounds(825, 334, 150, 60);
 		panelThongTinDN.add(btnThoat);
 		btnThoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -161,7 +156,8 @@ public class Gui_DangNhap extends JFrame {
 		btnThoat.setFont(new Font("Calibri", Font.BOLD, 20));
 		btnThoat.setBorder(new LineBorder(new Color(1, 242, 233)));
 		btnThoat.setBackground(new Color(233, 180, 46));
-		
+
+
 		lblQuenMK = new JLabel("quên mật khẩu ?");
 		lblQuenMK.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -178,7 +174,7 @@ public class Gui_DangNhap extends JFrame {
 		lblNewLabel.setBounds(450, 44, 224, 50);
 		panelThongTinDN.add(lblNewLabel);
 
-		lbTieuDe = new JLabel("ỨNG DỤNG QUẢN LÝ CỬA HÀNG ĐIỆN THOẠI 17");
+		lbTieuDe = new JLabel("QUẢN LÝ LƯƠNG CỬA HÀNG ĐIỆN THOẠI 17");
 		lbTieuDe.setVerticalAlignment(SwingConstants.BOTTOM);
 		lbTieuDe.setFont(new Font("Calibri", Font.BOLD, 48));
 		lbTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
@@ -225,13 +221,18 @@ public class Gui_DangNhap extends JFrame {
 			String mk = txtMatKhau.getText().trim();
 			TaiKhoan taiKhoan = dangNhapService.geTaiKhoan(ten);
 			if (!(KiemTraRongText(txtTaiKhoan))) {
-				if (taiKhoan != null)
-					if (mk.equals(taiKhoan.getMatKhau())) {
-						chinh.setTaiKhoan(taiKhoan);
-						chinh.setVisible(true);
-						this.setVisible(false);
-					} else {
-						JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+				if (taiKhoan != null )
+					if(taiKhoan.getNhanVien().gettrangThaiLamViec()) {
+						if (mk.equals(taiKhoan.getMatKhau())) {
+							chinh.setTaiKhoan(taiKhoan);
+							chinh.setVisible(true);
+							this.setVisible(false);
+						} else {
+							JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(this, "Nhân viên này đã nghỉ việc");
 					}
 				else {
 					JOptionPane.showMessageDialog(this, "Sai tên tài khoản");
@@ -248,7 +249,10 @@ public class Gui_DangNhap extends JFrame {
 	}
 
 	public static Gui_DangNhap getInstance() {
-		return new Gui_DangNhap();
+		if (dangNhap == null) {
+			return new Gui_DangNhap();
+		}
+		return dangNhap;
 	}
 
 	public boolean KiemTraRongText(JTextField txt) {

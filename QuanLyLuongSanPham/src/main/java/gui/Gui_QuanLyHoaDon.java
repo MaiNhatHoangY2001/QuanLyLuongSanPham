@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
@@ -13,10 +15,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -40,6 +40,7 @@ import gui_package.ChucNang;
 import model.HoaDonBanHang;
 import model.HoaDonNhapHang;
 import model.KhachHang;
+import model.TaiKhoan;
 import services.QuanLyHoaDonService;
 
 public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
@@ -66,7 +67,9 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private JTextField txtDiaChi;
 	private JTextField txtMaNv;
 	private JTextField txtTenNv;
-	protected JPanel pnlHead;;
+	protected JPanel pnlHead;
+	private TaiKhoan taiKhoan;
+	private List<?> listTable;;
 
 	/**
 	 * Create the panel.
@@ -120,7 +123,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_1.add(btnThemHoaDon);
 
 		txtNgayLap = new JDateChooser((new JCalendar()).getDate());
-		txtNgayLap.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtNgayLap.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNgayLap.setForeground(Color.WHITE);
 		txtNgayLap.setBounds(222, 11, 161, 45);
 		txtNgayLap.setDateFormatString("dd/MM/yyyy");
@@ -345,6 +348,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 
 			} else {
 				Gui_ThemHoaDonNhap themHoaDonNhap = new Gui_ThemHoaDonNhap();
+				themHoaDonNhap.setTaiKhoan(taiKhoan); 
 				themHoaDonNhap.setVisible(getFocusTraversalKeysEnabled());
 			}
 
@@ -354,13 +358,34 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 			tblHoaDon.removeAll();
 			modelChiTiet.getDataVector().removeAllElements();
 			tblChiTiet.removeAll();
-			txtNgayLap.getJCalendar();
 			Date input = txtNgayLap.getDate();
 			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			loadTableHoaDon(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
 
 			ChucNang.addNullDataTable(modelHoaDon);
 			ChucNang.addNullDataTable(modelChiTiet);
+		});
+		txtTimKiem.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					chucNangCboTimKIem();
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
 		});
 	}
 
@@ -381,12 +406,16 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	}
 
 	private void loadTableHoaDon(List<?> list) {
+		listTable=list;
+		ChucNang.clearDataTable(modelHoaDon);
+		
 		for (Object object : list) {
 			Object[] o = (Object[]) object;
 			NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
 			o[4] = format.format(Double.parseDouble(o[4].toString()));
 			modelHoaDon.addRow(o);
 		}
+		ChucNang.addNullDataTable(modelHoaDon);
 	}
 
 	public static void main(String[] args) {
@@ -399,19 +428,26 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
 		Object ob = e.getSource();
 		if (ob.equals(tblHoaDon)) {
 			int temp = cboLoaiHoaDon.getSelectedIndex();
+
 			if (temp == 0) {
+				int row = tblHoaDon.getSelectedRow();
+				if(row==-1 || row>listTable.size()-1) {
+					return;
+				}
 				modelChiTiet.getDataVector().removeAllElements();
 				tblChiTiet.removeAll();
-				int row = tblHoaDon.getSelectedRow();
+				System.out.println(row);
 				String maHoaDon = (String) tblHoaDon.getValueAt(row, 0);
 				List<?> listChiTiet = quanLyHoaDonService.getChiTietHoaDonBanTheoMaHoaDon(maHoaDon);
 				if (listChiTiet.size() != 0) {
 					duaDuLieuVaoTable(listChiTiet, modelChiTiet);
 					HoaDonBanHang hd = quanLyHoaDonService.getHoaDonBanHang(maHoaDon);
-					KhachHang khachHang = quanLyHoaDonService.getKhachHang(hd.getKhachHang().getMaKhachHang());
+//					KhachHang khachHang = quanLyHoaDonService.getKhachHang(hd.getKhachHang().getMaKhachHang());
+					KhachHang khachHang = hd.getKhachHang();
 					System.out.println(khachHang);
 					txtMaKh.setText(khachHang.getMaKhachHang());
 					txtSdt.setText(khachHang.getsDT());
@@ -459,10 +495,8 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		int temp = cboTimKiem.getSelectedIndex();
 		int temp1 = cboLoaiHoaDon.getSelectedIndex();
 		xoaRongKhachHang();
-		modelHoaDon.getDataVector().removeAllElements();
-		tblHoaDon.removeAll();
-		modelChiTiet.getDataVector().removeAllElements();
-		tblChiTiet.removeAll();
+		ChucNang.clearDataTable(modelHoaDon);
+		ChucNang.clearDataTable(modelChiTiet);
 		String vanBanTim = txtTimKiem.getText().trim();
 		if (!vanBanTim.equals("")) {
 			if (temp == 0) {
@@ -475,6 +509,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 			} else if (temp == 2) {
 				List<?> listKQ = quanLyHoaDonService.timHoaDonTheoTenKH(vanBanTim);
 				loadTableHoaDon(listKQ);
+				System.out.println("So phan tu table "+ listTable.size());
 			}
 		}
 		ChucNang.addNullDataTable(modelChiTiet);
@@ -497,6 +532,9 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 			model.addRow(o);
 		}
 
+	}
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan=taiKhoan;
 	}
 
 	@Override

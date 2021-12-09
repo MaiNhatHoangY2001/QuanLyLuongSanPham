@@ -1,8 +1,6 @@
 package hibernateCfg;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -21,11 +19,13 @@ import model.SanPham;
 import model.TaiKhoan;
 
 public class HibernateConfig {
-	public static SessionFactory sessionFactory = null;
-	private static HibernateConfig instance = new HibernateConfig();
+	private static SessionFactory sessionFactory;
+	private static HibernateConfig instance = new HibernateConfig() ;
 
 	public static HibernateConfig getInstance() {
-		return instance;
+		if(instance == null)
+			return new HibernateConfig();
+		return instance ;
 	}
 
 	public HibernateConfig() {
@@ -46,16 +46,16 @@ public class HibernateConfig {
 		return sessionFactory;
 	}
 
-	public static void main(String[] args) {
-		SessionFactory factory= HibernateConfig.getInstance().getSessionFactory();
-		Session session=factory.getCurrentSession();
-		Transaction tr = session.getTransaction();
-		try {
-			tr.begin();
-			
-			tr.commit();
-		} catch (Exception e) {
-			tr.rollback();
-		}
-	}
+//	public static void main(String[] args) {
+//		SessionFactory factory= HibernateConfig.getInstance().getSessionFactory();
+//		Session session=factory.getCurrentSession();
+//		Transaction tr = session.getTransaction();
+//		try {
+//			tr.begin();
+//			
+//			tr.commit();
+//		} catch (Exception e) {
+//			tr.rollback();
+//		}
+//	}
 }

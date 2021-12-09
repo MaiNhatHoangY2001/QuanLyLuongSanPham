@@ -33,7 +33,8 @@ public class Gui_ThemKhachHang extends JDialog implements ActionListener {
 	private JButton btnHuy;
 	private QuanLyHoaDonService quanLyHoaDonService;
 	public Gui_ThemKhachHang() {
-
+		setModal(true);
+		setTitle("Thêm khách hàng");
 		quanLyHoaDonService = new QuanLyHoaDonService();
 		setResizable(false);
 		setIconImage(new ImageIcon("img/logo.png").getImage());

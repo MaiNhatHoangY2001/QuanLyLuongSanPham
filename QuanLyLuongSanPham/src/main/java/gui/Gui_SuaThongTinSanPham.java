@@ -1,20 +1,26 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.DimensionUIResource;
 
@@ -24,15 +30,7 @@ import gui_package.RoundTextField;
 import gui_package.RoundedPanel;
 import model.SanPham;
 
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-
-public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
+public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -64,6 +62,7 @@ public class Gui_SuaThongTinSanPham extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public Gui_SuaThongTinSanPham(SanPham sanPham) {
+		setModal(true);
 		setUndecorated(true);
 		setBounds(100, 100, 1440, 1024);
 		contentPane = new JPanel();

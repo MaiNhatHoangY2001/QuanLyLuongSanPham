@@ -31,6 +31,8 @@ public class QuanLyHoaDonService {
 	}
 
 	public List<?> getChiTietHoaDonBanTheoMaHoaDon(String maHoaDon) {
+		if(maHoaDon== null || maHoaDon.equals(""))
+			return null;
 		return chiTietHoaDonBanDao.getChiTietTheoMaHoaDon(maHoaDon);
 	}
 
@@ -43,18 +45,26 @@ public class QuanLyHoaDonService {
 	}
 
 	public KhachHang getKhachHang(String maKhachHang) {
+		if(maKhachHang== null || maKhachHang.equals(""))
+			return null;
 		return khachHangDao.getKhachHang(maKhachHang);
 	}
 
 	public HoaDonBanHang getHoaDonBanHang(String maHoaDon) {
+		if(maHoaDon== null || maHoaDon.equals(""))
+			return null;
 		return hoaDonBanHangDao.getHoaDonBanHang(maHoaDon);
 	}
 
 	public HoaDonNhapHang getHoaDonNhapHang(String maHoaDon) {
+		if(maHoaDon== null || maHoaDon.equals(""))
+			return null;
 		return hoaDonNhapHangDao.getHoaDonNhapHang(maHoaDon);
 	}
 
 	public Object timHoaDonTheoMa(int b, String maHoaDon) {
+		if(maHoaDon== null || maHoaDon.equals(""))
+			return null;
 		if (b == 0) {
 			return hoaDonBanHangDao.timKiemTheoMa(maHoaDon);
 		} else {
@@ -139,5 +149,8 @@ public class QuanLyHoaDonService {
 		if (sanPham != null)
 			return sanPhamDao.themSanPham(sanPham);
 		return false;
+	}
+	public List<String> getNhaCungCap() {
+		return sanPhamDao.layDanhSachNcc();
 	}
 }
