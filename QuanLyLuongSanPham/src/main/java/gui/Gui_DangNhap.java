@@ -35,7 +35,6 @@ public class Gui_DangNhap extends JFrame {
 	private int xClicked;
 	private int yClicked;
 	private JLabel lblLogo;
-	private JLabel lblDangNhap;
 	private JPanel panelThongTinDN;
 	protected JButton btnDangNhap;
 	private JButton btnThoat;
@@ -103,40 +102,43 @@ public class Gui_DangNhap extends JFrame {
 		lblTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblTaiKhoan.setForeground(Color.BLACK);
 		lblTaiKhoan.setIconTextGap(-20);
-		lblTaiKhoan.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTaiKhoan.setBounds(30, 124, 109, 50);
+		lblTaiKhoan.setBounds(107, 133, 109, 50);
 		panelThongTinDN.add(lblTaiKhoan);
 
 		txtTaiKhoan = new JTextField("NV19020001");
+		txtTaiKhoan.setMargin(new Insets(2, 10, 2, 2));
 		txtTaiKhoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtTaiKhoan.setBounds(149, 124, 827, 50);
+		txtTaiKhoan.setBounds(226, 133, 791, 50);
 		panelThongTinDN.add(txtTaiKhoan);
 		txtTaiKhoan.setColumns(10);
 
 		txtMatKhau = new JPasswordField();
+		txtMatKhau.setMargin(new Insets(2, 10, 2, 2));
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMatKhau.setColumns(10);
-		txtMatKhau.setBounds(149, 224, 827, 50);
+		txtMatKhau.setBounds(226, 208, 791, 50);
 		panelThongTinDN.add(txtMatKhau);
 
 		lblMatKhau = new JLabel("Mật Khẩu:");
 		lblMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblMatKhau.setForeground(Color.BLACK);
 		lblMatKhau.setIconTextGap(-20);
-		lblMatKhau.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblMatKhau.setBounds(20, 232, 119, 35);
+		lblMatKhau.setBounds(107, 208, 109, 50);
 		panelThongTinDN.add(lblMatKhau);
 
 		btnDangNhap = new CircleBtn("Đăng Nhập");
-		btnDangNhap.setBounds(149, 334, 150, 60);
+		btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDangNhap.setBounds(107, 326, 250, 60);
 		panelThongTinDN.add(btnDangNhap);
 
-		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnDangNhap.setFont(new Font("Calibri", Font.BOLD, 20));
 		btnDangNhap.setBackground(new Color(233, 180, 46));
 		btnDangNhap.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		btnXoa = new CircleBtn("Xóa");
-		btnXoa.setBounds(486, 334, 150, 60);
+		btnXoa.setText("Xóa Rổng");
+		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXoa.setBounds(437, 326, 250, 60);
 		panelThongTinDN.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,36 +147,36 @@ public class Gui_DangNhap extends JFrame {
 			}
 		});
 		btnXoa.setBackground(new Color(233, 180, 46));
-		btnXoa.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnXoa.setFont(new Font("Calibri", Font.BOLD, 20));
 
 		btnThoat = new CircleBtn("Thoát");
-		btnThoat.setBounds(825, 334, 150, 60);
+		btnThoat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnThoat.setBounds(767, 324, 250, 60);
 		panelThongTinDN.add(btnThoat);
 		btnThoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnThoat.setFont(new Font("Calibri", Font.BOLD, 16));
+		btnThoat.setFont(new Font("Calibri", Font.BOLD, 20));
 		btnThoat.setBorder(new LineBorder(new Color(1, 242, 233)));
 		btnThoat.setBackground(new Color(233, 180, 46));
-
-		lblDangNhap = new JLabel("ĐĂNG NHẬP");
-		lblDangNhap.setBounds(460, 37, 206, 61);
-		panelThongTinDN.add(lblDangNhap);
-		lblDangNhap.setForeground(Color.WHITE);
-		lblDangNhap.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDangNhap.setFont(new Font("Calibri", Font.BOLD, 40));
 		
 		lblQuenMK = new JLabel("quên mật khẩu ?");
 		lblQuenMK.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblQuenMK.setIconTextGap(-20);
 		lblQuenMK.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQuenMK.setForeground(Color.BLACK);
+		lblQuenMK.setForeground(Color.GRAY);
 		lblQuenMK.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		lblQuenMK.setBounds(840, 273, 151, 50);
+		lblQuenMK.setBounds(866, 269, 151, 30);
 		panelThongTinDN.add(lblQuenMK);
+		
+		JLabel lblNewLabel = new JLabel("Đăng Nhập");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
+		lblNewLabel.setBounds(450, 44, 224, 50);
+		panelThongTinDN.add(lblNewLabel);
 
 		lbTieuDe = new JLabel("ỨNG DỤNG QUẢN LÝ CỬA HÀNG ĐIỆN THOẠI 17");
 		lbTieuDe.setVerticalAlignment(SwingConstants.BOTTOM);
