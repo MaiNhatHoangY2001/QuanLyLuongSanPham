@@ -152,7 +152,7 @@ public class SanPhamDao {
 		try {
 			tr.begin();
 
-			list = session.createNativeQuery("select * from SanPham", SanPham.class).getResultList();
+			list = session.createNativeQuery("select * from SanPham where trangThai=1", SanPham.class).getResultList();
 
 			tr.commit();
 		} catch (Exception e) {
@@ -186,7 +186,7 @@ public class SanPhamDao {
 		Transaction tr = session.getTransaction();
 		try {
 			tr.begin();
-			String query = "select * from SanPham\r\n" + "where giaThanh >= " + from + " and giaThanh <= " + to + "\r\n"
+			String query = "select * from SanPham\r\n" + "where trangThai=1 and giaThanh >= " + from + " and giaThanh <= " + to + "\r\n"
 					+ "order by giaThanh asc";
 			list = session.createNativeQuery(query, SanPham.class).getResultList();
 			tr.commit();

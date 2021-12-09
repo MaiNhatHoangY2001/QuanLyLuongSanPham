@@ -201,13 +201,13 @@ public class ChucNang {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
+				lblDangXuat.setForeground(Color.WHITE);
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
+				lblDangXuat.setForeground(Color.GRAY);
 				
 			}
 			

@@ -19,7 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,7 +42,7 @@ import model.NhanVien;
 import model.SanPham;
 import services.QuanLyHoaDonService;
 
-public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
+public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 	private JTable tblSanPham;
 	private JTable tblGioHang;
 
@@ -90,6 +90,8 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 	 * Create the frame.
 	 */
 	public Gui_ThemHoaDonBan() {
+		setModal(true);
+		setTitle("Thêm hóa đơn bán hàng");
 		setIconImage(new ImageIcon("img/logo.png").getImage());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		quanLyHoaDonService = new QuanLyHoaDonService();
@@ -730,7 +732,6 @@ public class Gui_ThemHoaDonBan extends JFrame implements KeyListener {
 			if (sanPham.getGiaThanh() >= from && sanPham.getGiaThanh() <= to)
 				tempListSp.add(sanPham);
 		}
-		System.out.println(tempListSp + "Chinh");
 		ChucNang.clearDataTable(modelSanPham);
 		addSp(tempListSp);
 		ChucNang.addNullDataTable(modelSanPham);

@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,7 +26,7 @@ import javax.swing.table.TableCellRenderer;
 
 import gui_package.ChucNang;
 
-public class Gui_ChiTietBangLuong extends JFrame {
+public class Gui_ChiTietBangLuong extends JDialog {
 
 	private JPanel pnlChinh;
 	private JTable tblChiTietLuong;
@@ -64,6 +64,7 @@ public class Gui_ChiTietBangLuong extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui_ChiTietBangLuong() {
+		setModal(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 549, 670);
 		setResizable(false);

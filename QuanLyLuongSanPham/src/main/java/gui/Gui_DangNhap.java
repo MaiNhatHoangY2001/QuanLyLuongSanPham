@@ -177,7 +177,7 @@ public class Gui_DangNhap extends JFrame {
 		lblQuenMK.setBounds(840, 273, 151, 50);
 		panelThongTinDN.add(lblQuenMK);
 
-		lbTieuDe = new JLabel("ỨNG DỤNG QUẢN LÝ CỬA HÀNG ĐIỆN THOẠI 17");
+		lbTieuDe = new JLabel("QUẢN LÝ LƯƠNG CỬA HÀNG ĐIỆN THOẠI 17");
 		lbTieuDe.setVerticalAlignment(SwingConstants.BOTTOM);
 		lbTieuDe.setFont(new Font("Calibri", Font.BOLD, 48));
 		lbTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
