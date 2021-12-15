@@ -37,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import gui_package.ChucNang;
+import gui_package.HintTextFieldUI;
 import model.ChiTietHoaDonBan;
 import model.HoaDonBanHang;
 import model.KhachHang;
@@ -135,6 +136,7 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 		panel_1.add(cboTimSp);
 
 		txtTimSp = new JTextField();
+		txtTimSp.setUI(new HintTextFieldUI("Tìm kiếm", true));
 		txtTimSp.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		txtTimSp.setBounds(788, 11, 378, 44);
 		panel_1.add(txtTimSp);
@@ -308,6 +310,7 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		txtThue.setBounds(309, 726, 93, 44);
 		panel_3.add(txtThue);
+		
 		listKh = new ArrayList<KhachHang>();
 		listGh = new ArrayList<SanPham>();
 		txtTimSp.addFocusListener(new FocusListener() {
