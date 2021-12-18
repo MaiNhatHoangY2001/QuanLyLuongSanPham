@@ -36,6 +36,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.event.MouseListener;
 import java.time.format.DateTimeFormatter;
 import javax.swing.border.LineBorder;
+import java.awt.Insets;
+import java.awt.Cursor;
 
 public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseListener {
 	private String[] colsnameLK = { "Tên Tài Khoản", "Mật Khẩu" };
@@ -58,6 +60,7 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 	private JTextField txtMK;
 	private CircleBtn btnXoa;
 	private CircleBtn btnLuu;
+	
 	private JPanel panelTTNV;
 	private JLabel lblMa;
 	private JLabel lblTen;
@@ -66,6 +69,8 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 	private JLabel lblEmail;
 	private JLabel lblNS;
 	private JLabel lblttnv;
+	private CircleBtn btnLamMoi;
+	private NhanVienDao daoNV;
 
 	public Gui_QuanLyTaiKhoan() {
 		setSize(1600, 1046);
@@ -115,102 +120,122 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 		panelThem = new RoundedPanel();
 		panelThem.setBackground(new Color(248, 198, 153));
 		panelThem.setLayout(null);
-		panelThem.setBounds(976, 20, 600, 811);
+		panelThem.setBounds(976, 36, 600, 780);
 		panelTable.add(panelThem);
 
 		panelSuaTK = new JPanel();
 		panelSuaTK.setLayout(null);
 		panelSuaTK.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		panelSuaTK.setBackground(new Color(248, 198, 153));
-		panelSuaTK.setBounds(20, 72, 556, 355);
+		panelSuaTK.setBounds(20, 90, 556, 289);
 		panelThem.add(panelSuaTK);
 
 		lblTen_3 = new JLabel("Mật Khẩu:");
 		lblTen_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTen_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblTen_3.setBounds(57, 154, 106, 29);
+		lblTen_3.setBounds(11, 83, 153, 45);
 		panelSuaTK.add(lblTen_3);
 
 		lblTen_4 = new JLabel("Tên Tài Khoản:");
 		lblTen_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTen_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblTen_4.setBounds(10, 59, 153, 29);
+		lblTen_4.setBounds(11, 19, 153, 45);
 		panelSuaTK.add(lblTen_4);
 
 		txtTenTK = new JTextField();
 		txtTenTK.setEditable(false);
+		txtTenTK.setMargin(new Insets(2, 10, 2, 2));
+		txtTenTK.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTenTK.setColumns(10);
-		txtTenTK.setBounds(173, 55, 369, 45);
+		txtTenTK.setBounds(175, 19, 369, 45);
 		panelSuaTK.add(txtTenTK);
 
 		txtMK = new JTextField();
+		txtMK.setMargin(new Insets(2, 10, 2, 2));
+		txtMK.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtMK.setColumns(10);
-		txtMK.setBounds(173, 150, 369, 45);
+		txtMK.setBounds(175, 83, 369, 45);
 		panelSuaTK.add(txtMK);
 
 		btnLuu = new CircleBtn("Lưu Tài Khoản");
-		btnLuu.setBounds(226, 261, 120, 40);
+		btnLuu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnLuu.setBounds(65, 147, 180, 50);
 		btnLuu.setBackground(new Color(233, 180, 46));
 		panelSuaTK.add(btnLuu);
+
+		btnXoa = new CircleBtn("Xóa Tài Khoản");
+		btnXoa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoa.setBounds(310, 147, 180, 50);
+		panelSuaTK.add(btnXoa);
+		btnXoa.setBackground(new Color(233, 180, 46));
+		btnXoa.addActionListener(this);
+
+		btnXoaRong = new CircleBtn("Xóa Rỗng");
+		btnXoaRong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnXoaRong.setBounds(65, 216, 180, 50);
+		panelSuaTK.add(btnXoaRong);
+		btnXoaRong.setBackground(new Color(233, 180, 46));
 		
-				btnXoa = new CircleBtn("Xóa Tài Khoản");
-				btnXoa.setBounds(57, 261, 120, 40);
-				panelSuaTK.add(btnXoa);
-				btnXoa.setBackground(new Color(233, 180, 46));
-				
-						btnXoaRong = new CircleBtn("Xóa Rỗng");
-						btnXoaRong.setBounds(395, 261, 120, 40);
-						panelSuaTK.add(btnXoaRong);
-						btnXoaRong.setBackground(new Color(233, 180, 46));
-				btnXoa.addActionListener(this);
+		btnLamMoi = new CircleBtn("Xóa Rỗng");
+		btnLamMoi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLamMoi.setText("Làm Mới");
+		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnLamMoi.setBackground(new Color(233, 180, 46));
+		btnLamMoi.setBounds(310, 216, 180, 50);
+		panelSuaTK.add(btnLamMoi);
+		btnXoaRong.addActionListener(this);
+		btnLamMoi.addActionListener(this);
 
 		panelTTNV = new JPanel();
 		panelTTNV.setLayout(null);
 		panelTTNV.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		panelTTNV.setBackground(new Color(248, 198, 153));
-		panelTTNV.setBounds(20, 499, 556, 289);
+		panelTTNV.setBounds(20, 469, 556, 289);
 		panelThem.add(panelTTNV);
 
 		lblMa = new JLabel("Mã Nhân Viên:");
-		lblMa.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMa.setBounds(32, 40, 492, 29);
+		lblMa.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblMa.setBounds(32, 7, 492, 40);
 		panelTTNV.add(lblMa);
 
 		lblTen = new JLabel("Tên Nhân Viên:");
-		lblTen.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTen.setBounds(32, 80, 492, 29);
+		lblTen.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTen.setBounds(32, 54, 492, 40);
 		panelTTNV.add(lblTen);
 
 		lblDC = new JLabel("Địa Chỉ:");
-		lblDC.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDC.setBounds(32, 120, 492, 29);
+		lblDC.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDC.setBounds(32, 101, 492, 40);
 		panelTTNV.add(lblDC);
 
 		lblSDT = new JLabel("Số Điện Thoại:");
-		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSDT.setBounds(32, 160, 492, 29);
+		lblSDT.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSDT.setBounds(32, 148, 492, 40);
 		panelTTNV.add(lblSDT);
 
 		lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEmail.setBounds(32, 236, 492, 29);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblEmail.setBounds(32, 242, 492, 40);
 		panelTTNV.add(lblEmail);
 
 		lblNS = new JLabel("Ngày Sinh:");
-		lblNS.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNS.setBounds(32, 200, 492, 29);
+		lblNS.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNS.setBounds(32, 195, 492, 40);
 		panelTTNV.add(lblNS);
-		
+
 		JLabel lblNewLabel = new JLabel("CHỈNH SỬA TÀI KHOẢN");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(20, 11, 556, 50);
+		lblNewLabel.setBounds(20, 20, 556, 50);
 		panelThem.add(lblNewLabel);
-		
+
 		lblttnv = new JLabel("THÔNG TIN NHÂN VIÊN");
 		lblttnv.setHorizontalAlignment(SwingConstants.CENTER);
 		lblttnv.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblttnv.setBounds(20, 438, 556, 50);
+		lblttnv.setBounds(20, 399, 556, 50);
 		panelThem.add(lblttnv);
 
 		new DefaultTableModel(colsnameLK, 0);
@@ -245,15 +270,15 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 		headerTable2.setBackground(new Color(248, 198, 153));
 		JScrollPane thanhCuon2 = new JScrollPane(tblTaiKhoan);
 		thanhCuon2.setEnabled(false);
-		thanhCuon2.setBounds(0, 20, 955, 811);
+		thanhCuon2.setBounds(11, 36, 955, 780);
 		thanhCuon2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		panelTable.add(thanhCuon2);
 
 		JLabel lblThongTinTK = new JLabel("Thông Tin Tài Khoản");
-		lblThongTinTK.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblThongTinTK.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblThongTinTK.setForeground(Color.WHITE);
-		lblThongTinTK.setBounds(0, 0, 366, 22);
+		lblThongTinTK.setBounds(11, 0, 366, 37);
 		panelTable.add(lblThongTinTK);
 
 		modelTaiKhoan = (DefaultTableModel) tblTaiKhoan.getModel();
@@ -261,6 +286,7 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 		tblTaiKhoan.addMouseListener(this);
 
 		// load data
+		daoNV = new NhanVienDao();
 		daoTK = new TaiKhoanDao();
 		listTK = daoTK.getDsTaiKhoan();
 		LoadTaiKhoan(listTK);
@@ -269,9 +295,9 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		 if (o.equals(btnXoa)) {
+		if (o.equals(btnXoa)) {
 			if (tblTaiKhoan.getSelectedRowCount() == 0) {
-				JOptionPane.showMessageDialog(this, "Chọn dòng muốn xóa");
+				JOptionPane.showMessageDialog(this, "Vui lòng chọn tài khoản muốn xóa");
 			} else {
 				int tl = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa tài khoản này không?",
 						"Xóa Tài Khoản", JOptionPane.YES_NO_OPTION);
@@ -280,25 +306,41 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 					boolean x = daoTK.xoaTaiKhoanTheoMa(tenTaiKhoan);
 					if (x) {
 						JOptionPane.showMessageDialog(this, "Xóa tài khoản thành công");
+						NhanVien nhanvien = daoNV.getNhanVienTheoMa(tenTaiKhoan);
+						nhanvien.settrangThaiLamViec(false);
+						daoNV.capNhatNhanVien(nhanvien);
 						listTK = daoTK.getDsTaiKhoan();
 						LoadTaiKhoan(listTK);
 					} else
 						JOptionPane.showMessageDialog(this, "Xóa tài khoản thất bại");
 				}
-
 			}
-
 		} else if (o.equals(btnLuu)) {
-			TaiKhoan nv1 = daoTK.getTaiKhoan(txtTenTK.getText());
-			nv1.setMatKhau(txtMK.getText());
-			boolean rs = daoTK.capNhatTaiKhoan(nv1);
-			if (rs == true) {
-				JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thành công");
-				TaiKhoan tk = daoTK.getTaiKhoan(txtTenTK.getText());
-				listTK = daoTK.getDsTaiKhoan();
-				LoadTaiKhoan(listTK);
-			} else
-				JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+			String tentaikhoan = txtTenTK.getText();
+			String makhau = txtMK.getText();
+			if (!tentaikhoan.equals("")) {
+				TaiKhoan taikhoan = daoTK.getTaiKhoan(tentaikhoan);
+				taikhoan.setMatKhau(makhau);
+				if (makhau.equals("")) {
+					JOptionPane.showMessageDialog(null, "Mật khẩu không được rỗng");
+				} else if (daoTK.capNhatTaiKhoan(taikhoan)) {
+					JOptionPane.showMessageDialog(this, "Cập nhật tài khoản thành công");
+					listTK = daoTK.getDsTaiKhoan();
+					LoadTaiKhoan(listTK);
+				} else {
+					JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Vui lòng chọn tài khoản cần sửa");
+			}
+		} else if (o.equals(btnXoaRong)) {
+			txtTenTK.setText("");
+			txtMK.setText("");
+		} else if (o.equals(btnLamMoi)) {
+			txtTenTK.setText("");
+			txtMK.setText("");
+			listTK = daoTK.getDsTaiKhoan();
+			LoadTaiKhoan(listTK);
 		}
 	}
 
@@ -321,7 +363,6 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 		txtTenTK.setText((String) tenTaiKhoan);
 		txtMK.setText((String) matKhau);
 		setDataPanelThongTinNV(tenTaiKhoan);
-
 	}
 
 	public void setDataPanelThongTinNV(Object maNhanVien) {
