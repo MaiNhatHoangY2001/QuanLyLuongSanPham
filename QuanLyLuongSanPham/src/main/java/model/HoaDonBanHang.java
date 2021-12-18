@@ -7,9 +7,7 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -116,9 +114,6 @@ public class HoaDonBanHang {
 		return thanhTien;
 	}
 
-	public void setThanhTien(double thanhTien) {
-		this.thanhTien = thanhTien;
-	}
 
 	public NhanVien getNhanVien() {
 		return nhanVien;

@@ -143,7 +143,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_1.add(cboTimKiem);
 
 		txtTimKiem = new JTextField();
-		txtTimKiem.setUI(new HintTextFieldUI("Nhập vào thông tin muốn tìm", true));
+		txtTimKiem.setUI(new HintTextFieldUI("Tìm kiếm", true));
 		txtTimKiem.setToolTipText("Nhập vào thông tin tìm kiếm");
 		txtTimKiem.setBounds(1001, 11, 349, 45);
 		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));

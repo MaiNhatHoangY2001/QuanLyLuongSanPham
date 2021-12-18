@@ -3,7 +3,6 @@ package gui_package;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,9 +13,6 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import dao.BangLuongDao;
-import model.BangLuong;
 
 public class ExportPhieuLuong {
 	private XSSFWorkbook workbook;

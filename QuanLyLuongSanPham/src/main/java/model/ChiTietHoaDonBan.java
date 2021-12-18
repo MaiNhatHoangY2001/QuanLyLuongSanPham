@@ -34,6 +34,7 @@ public class ChiTietHoaDonBan {
 
 	/**
 	 * Tính tổng tiền
+	 * 
 	 * @return
 	 */
 	public double tinhTongTien() {
@@ -51,7 +52,6 @@ public class ChiTietHoaDonBan {
 	public ChiTietHoaDonBan() {
 		super();
 	}
-
 
 	public double getDonGia() {
 		return donGia;

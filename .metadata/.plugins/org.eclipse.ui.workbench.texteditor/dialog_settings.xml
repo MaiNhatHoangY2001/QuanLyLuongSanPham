@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="txt"/>
+		<item key="selection" value="btnXua"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="btnXua"/>
+			<item value="btnXemCT"/>
+			<item value="btnXemCT\"/>
+			<item value="btn"/>
 			<item value="txt"/>
 			<item value="Gui_Chinh"/>
 			<item value="btnXuatFile"/>
@@ -19,10 +23,6 @@
 			<item value="tblSanPham"/>
 			<item value="tblChiTietLuong"/>
 			<item value="RowHeaderRenderer"/>
-			<item value="getAllBangLuong"/>
-			<item value="admin"/>
-			<item value="vanchinh"/>
-			<item value="setTaiKhoan"/>
 		</list>
 		<list key="replacehistory">
 			<item value="colsCTLuong"/>

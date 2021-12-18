@@ -320,7 +320,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		pnlThanhNgang.add(btnXemCT);
 		btnXemCT.addActionListener(e -> {
 			Gui_ChiTietBangLuong guiCT = new Gui_ChiTietBangLuong();
-			guiCT.setVisible(true);
+
 			int month = cboMonth.getMonth() + 1;
 			int year = spnYear.getYear();
 			String chucVu = tblTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 3).equals("2.0")
@@ -332,6 +332,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				bangLuong.add(tblTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), i).toString());
 			}
 			guiCT.setDataCTBangLuong(month, year, chucVu, bangLuong);
+			guiCT.setVisible(true);
 		});
 
 		btnHienTai = new JButton("Hiện tại");
