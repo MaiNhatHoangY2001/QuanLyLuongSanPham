@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -55,17 +56,17 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 //		this.revalidate();
 //		this.repaint();
 		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
-				trangHD.pnlHead, this, Gui_DangNhap.getInstance());
+				trangHD.pnlHead, this, Gui_DangNhap.getInstance(), trangHD);
 		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
-				trangLuong.pnlHead, this, Gui_DangNhap.getInstance());
+				trangLuong.pnlHead, this, Gui_DangNhap.getInstance(), trangLuong);
 		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
-				trangNV.pnlHead, this, Gui_DangNhap.getInstance());
+				trangNV.pnlHead, this, Gui_DangNhap.getInstance(), trangNV);
 		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
-				trangTK.pnlHead, this, Gui_DangNhap.getInstance());
+				trangTK.pnlHead, this, Gui_DangNhap.getInstance(), trangTK);
 		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
-				trangSP.pnlHead, this, Gui_DangNhap.getInstance());
+				trangSP.pnlHead, this, Gui_DangNhap.getInstance(), trangSP);
 		ChucNang.setLabelName(taiKhoan.getNhanVien().getTenNhanVien(),
-				trangtaiKhoan.pnlHead, this, Gui_DangNhap.getInstance());
+				trangtaiKhoan.pnlHead, this, Gui_DangNhap.getInstance(), trangtaiKhoan);
 		phanQuyen();
 		System.out.println(taiKhoan.getTenTaiKhoan());
 	}
@@ -94,7 +95,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		//1920 1040
 		setResizable(false);
 		setTitle("Ứng dụng quản lý cửa hàng điện thoại 17");
-		setIconImage(new ImageIcon("img/logo.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		getContentPane().setLayout(null);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		// thông báo khi thoát
@@ -107,7 +108,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		panel.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("img/dt-navbar.png"));
+		lblNewLabel.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/dt-navbar.png"))));
 		lblNewLabel.setBounds(95, 21, 174, 104);
 		panel.add(lblNewLabel);
 
@@ -130,7 +131,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnThoat = new JButton("Thoát");
 		btnThoat.setFocusPainted(false);
 		btnThoat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnThoat.setIcon(new ImageIcon("img\\thoat.png"));
+		btnThoat.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/thoat.png"))));
 		btnThoat.setBounds(0, 690, 320, 115);
 		panel_1.add(btnThoat);
 		btnThoat.setIconTextGap(10);
@@ -146,7 +147,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLyTaiKhoan = new JButton("Quản lý tài khoản");
 		btnQuanLyTaiKhoan.setFocusPainted(false);
 		btnQuanLyTaiKhoan.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnQuanLyTaiKhoan.setIcon(new ImageIcon("img\\user.png"));
+		btnQuanLyTaiKhoan.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/user.png"))));
 		btnQuanLyTaiKhoan.setBounds(0, 575, 320, 115);
 		panel_1.add(btnQuanLyTaiKhoan);
 		btnQuanLyTaiKhoan.setIconTextGap(10);
@@ -158,7 +159,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLySanPham = new JButton("Quản lý sản phẩm");
 		btnQuanLySanPham.setFocusPainted(false);
 		btnQuanLySanPham.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnQuanLySanPham.setIcon(new ImageIcon("img\\sanpham.png"));
+		btnQuanLySanPham.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/sanpham.png"))));
 		btnQuanLySanPham.setBounds(0, 0, 320, 115);
 
 		panel_1.add(btnQuanLySanPham);
@@ -171,7 +172,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnThongKe = new JButton("Thống kê thu chi");
 		btnThongKe.setFocusPainted(false);
 		btnThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnThongKe.setIcon(new ImageIcon("img\\thongke.png"));
+		btnThongKe.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/thongke.png"))));
 		btnThongKe.setBounds(0, 345, 320, 115);
 		panel_1.add(btnThongKe);
 		btnThongKe.setIconTextGap(0);
@@ -183,7 +184,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLyLuong = new JButton("Quản lý lương");
 		btnQuanLyLuong.setFocusPainted(false);
 		btnQuanLyLuong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnQuanLyLuong.setIcon(new ImageIcon("img\\luong.png"));
+		btnQuanLyLuong.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/luong.png"))));
 		btnQuanLyLuong.setBounds(0, 230, 320, 115);
 		panel_1.add(btnQuanLyLuong);
 		btnQuanLyLuong.setIconTextGap(10);
@@ -195,7 +196,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLyHoaDon = new JButton("Quản lý hóa đơn");
 		btnQuanLyHoaDon.setFocusPainted(false);
 		btnQuanLyHoaDon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnQuanLyHoaDon.setIcon(new ImageIcon("img\\hoadon.png"));
+		btnQuanLyHoaDon.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/hoadon.png"))));
 		btnQuanLyHoaDon.setBounds(0, 115, 320, 115);
 		panel_1.add(btnQuanLyHoaDon);
 		btnQuanLyHoaDon.setIconTextGap(10);
@@ -209,7 +210,7 @@ public class Gui_Chinh extends JFrame implements ActionListener, WindowListener 
 		btnQuanLyNhanVien.setFocusPainted(false);
 		btnQuanLyNhanVien.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuanLyNhanVien.setIconTextGap(10);
-		btnQuanLyNhanVien.setIcon(new ImageIcon("img\\nv.png"));
+		btnQuanLyNhanVien.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/nv.png"))));
 		btnQuanLyNhanVien.setBounds(0, 460, 320, 115);
 		panel_1.add(btnQuanLyNhanVien);
 		btnQuanLyNhanVien.setForeground(Color.WHITE);

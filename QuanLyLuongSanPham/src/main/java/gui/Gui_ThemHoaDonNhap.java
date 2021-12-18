@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.NumberFormat;
@@ -107,7 +108,7 @@ public class Gui_ThemHoaDonNhap extends JDialog {
 //			}
 		dsSanPham = new ArrayList<SanPham>();
 		dsChiTiet = new ArrayList<ChiTietHoaDonNhap>();
-		setIconImage(new ImageIcon("img/logo.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		quanLyHoaDonService = new QuanLyHoaDonService();
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

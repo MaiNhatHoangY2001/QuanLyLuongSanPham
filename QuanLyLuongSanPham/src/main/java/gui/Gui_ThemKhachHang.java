@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +38,7 @@ public class Gui_ThemKhachHang extends JDialog implements ActionListener {
 		setTitle("Thêm khách hàng");
 		quanLyHoaDonService = new QuanLyHoaDonService();
 		setResizable(false);
-		setIconImage(new ImageIcon("img/logo.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocation(600, 200);
 		setSize(800, 400);

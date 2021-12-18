@@ -34,6 +34,7 @@ import model.TaiKhoan;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 
@@ -96,7 +97,7 @@ public class Gui_ThemNhanVien extends JDialog implements ActionListener {
 
 		// Logo
 		JLabel lblNewLabel = new JLabel("");
-		Image imgUser = new ImageIcon("img\\dtVua.png").getImage();
+		Image imgUser = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/dtVua.png"))).getImage();
 		lblNewLabel.setIcon(new ImageIcon(imgUser));
 		lblNewLabel.setBounds(50, 42, 96, 66);
 		pnlHeader.add(lblNewLabel);

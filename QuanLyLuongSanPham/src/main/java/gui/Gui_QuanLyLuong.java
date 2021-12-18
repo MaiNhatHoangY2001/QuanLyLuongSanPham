@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -252,7 +253,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnTim.setFocusPainted(false);
 		btnTim.setBorderPainted(false);
 		btnTim.setBackground(new Color(233, 180, 46));
-		btnTim.setIcon(new ImageIcon("img\\icons8-search-24.png"));
+		btnTim.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8-search-24.png"))));
 		btnTim.setBounds(1273, 14, 44, 47);
 		btnTim.setEnabled(false);
 		pnlThanhNgang.add(btnTim);
@@ -277,7 +278,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnXoaRong = new JButton("");
 		btnXoaRong.setToolTipText("Xóa rỗng và tắt tìm kiếm");
 		btnXoaRong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnXoaRong.setIcon(new ImageIcon("img\\icons8-delete-30.png"));
+		btnXoaRong.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8-delete-30.png"))));
 		btnXoaRong.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXoaRong.setFocusPainted(false);
 		btnXoaRong.setBorderPainted(false);
@@ -352,7 +353,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnXuatFile = new JButton("");
 		btnXuatFile.setToolTipText("Xuất file bảng lương trong tháng");
 		btnXuatFile.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnXuatFile.setIcon(new ImageIcon("img\\icons8-file-24.png"));
+		btnXuatFile.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8-file-24.png"))));
 		btnXuatFile.setFocusPainted(false);
 		btnXuatFile.setBorderPainted(false);
 		btnXuatFile.setBackground(new Color(233, 180, 46));
@@ -654,7 +655,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnTruThuong = new JButton("");
 		btnTruThuong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTruThuong.setToolTipText("Trừ thưởng của toàn bộ nhân viên");
-		btnTruThuong.setIcon(new ImageIcon("img\\icons8-minus-30.png"));
+		btnTruThuong.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8-minus-30.png"))));
 		btnTruThuong.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnTruThuong.setFocusPainted(false);
 		btnTruThuong.setBorderPainted(false);
@@ -692,7 +693,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 		btnCongThuong = new JButton("");
 		btnCongThuong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnCongThuong.setIcon(new ImageIcon("img\\icons8-plus-+-30.png"));
+		btnCongThuong.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icons8-plus-+-30.png"))));
 		btnCongThuong.setToolTipText("thưởng toàn bộ nhân viên");
 		btnCongThuong.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCongThuong.setFocusPainted(false);
@@ -805,7 +806,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 		JLabel lblNewLabel_2 = new JLabel("");
 
-		lblNewLabel_2.setIcon(new ImageIcon("src/main/resources/images/img_bill/user.PNG"));
+		lblNewLabel_2.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/nhanvien.PNG"))));
 		lblNewLabel_2.setBounds(47, 54, 190, 181);
 		panel_2.add(lblNewLabel_2);
 

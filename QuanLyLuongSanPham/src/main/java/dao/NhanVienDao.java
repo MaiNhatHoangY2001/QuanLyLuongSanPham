@@ -523,7 +523,7 @@ public class NhanVienDao {
 			list = session.createNativeQuery(
 					"SELECT nv.* FROM NhanVien AS nv INNER JOIN BangLuong AS bl ON nv.maNhanVien = bl.maNhanVien"
 							+ " WHERE YEAR(thoiGian) = " + year + " and MONTH(thoiGian) = " + month
-							+ " and nv.tenNhanVien = '" + tenNV + "'",
+							+ " and nv.tenNhanVien like N'%" + tenNV + "%'",
 					NhanVien.class).getResultList();
 			tr.commit();
 			return list;

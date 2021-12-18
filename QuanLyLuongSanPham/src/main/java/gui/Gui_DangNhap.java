@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -55,7 +56,7 @@ public class Gui_DangNhap extends JFrame {
 	 */
 	public Gui_DangNhap() {
 		chinh = new Gui_Chinh();
-		setIconImage(new ImageIcon("img/logo.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		addMouseListener(new MouseAdapter() {
@@ -84,7 +85,7 @@ public class Gui_DangNhap extends JFrame {
 		contentPane.setLayout(null);
 
 		lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon("img\\dt2.png"));
+		lblLogo.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/dt2.png"))));
 		lblLogo.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setBounds(440, 79, 320, 224);
@@ -189,28 +190,28 @@ public class Gui_DangNhap extends JFrame {
 		panelNgang.setLayout(null);
 
 		lblHD = new JLabel("");
-		lblHD.setIcon(new ImageIcon("img\\l.png"));
+		lblHD.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/l.png"))));
 		lblHD.setBounds(41, 43, 148, 154);
 		panelNgang.add(lblHD);
 		lblHD.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblHD.setHorizontalAlignment(SwingConstants.CENTER);
 
 		lblTK = new JLabel("");
-		lblTK.setIcon(new ImageIcon("img\\tk.png"));
+		lblTK.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/tk.png"))));
 		lblTK.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTK.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTK.setBounds(237, 43, 148, 154);
 		panelNgang.add(lblTK);
 
 		lblDB = new JLabel("");
-		lblDB.setIcon(new ImageIcon("img\\database.png"));
+		lblDB.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/database.png"))));
 		lblDB.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblDB.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDB.setBounds(812, 43, 148, 154);
 		panelNgang.add(lblDB);
 
 		lblLuong = new JLabel("");
-		lblLuong.setIcon(new ImageIcon("img\\sp.png"));
+		lblLuong.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/sp.png"))));
 		lblLuong.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblLuong.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLuong.setBounds(1012, 43, 148, 154);

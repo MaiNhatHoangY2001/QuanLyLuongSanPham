@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Gui_XuatFile extends JFrame {
 		setResizable(false);
 		setBounds(100, 100, 603, 288);
 		setTitle("Xuất file");
-		setIconImage(new ImageIcon("img/logo.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

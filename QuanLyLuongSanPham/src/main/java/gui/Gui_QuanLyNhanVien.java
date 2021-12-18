@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -122,9 +123,7 @@ public class Gui_QuanLyNhanVien extends JPanel implements ActionListener, ItemLi
 
 		pnlHead.add(lblGio);
 		ChucNang.setGio(lblGio, lblNgay);
-
-		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
-		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
+		
 		// JLable Icon Logout
 
 		/*

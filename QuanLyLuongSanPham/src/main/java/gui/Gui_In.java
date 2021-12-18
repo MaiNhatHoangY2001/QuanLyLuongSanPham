@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.io.File;
 
 import javax.swing.DefaultComboBoxModel;
@@ -55,6 +56,7 @@ public class Gui_In extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 
 		JPanel pnlIn = new RoundedPanel();
 		pnlIn.setLayout(null);

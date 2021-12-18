@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -146,7 +147,7 @@ public class ChucNang {
 		}
 
 	}
-	public static void setLabelName(String name,JPanel panel,Gui_Chinh fChinh,Gui_DangNhap fDangNhap){
+	public static void setLabelName(String name,JPanel panel,Gui_Chinh fChinh,Gui_DangNhap fDangNhap, JPanel panelChinh){
 		/**
 		 * Tên đăng nhập
 		 */
@@ -164,7 +165,7 @@ public class ChucNang {
 		panel.add(lblTenDN);
 
 		JLabel lblIconUser = new JLabel("");
-		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
+		Image imgUser = new ImageIcon(Toolkit.getDefaultToolkit().getImage(panelChinh.getClass().getResource("/img/userNho.png"))).getImage();
 		lblIconUser.setIcon(new ImageIcon(imgUser));
 		lblIconUser.setBounds(1536, 10, 38, 30);
 		panel.add(lblIconUser);
@@ -179,7 +180,7 @@ public class ChucNang {
 		panel.add(lblDangXuat);
 
 		JLabel lblIconDX = new JLabel("");
-		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
+		Image imgDX = new ImageIcon(Toolkit.getDefaultToolkit().getImage(panelChinh.getClass().getResource("/img/thoatNho.png"))).getImage();
 		lblIconDX.setIcon(new ImageIcon(imgDX));
 		lblIconDX.setBounds(1536, 50, 38, 30);
 		panel.add(lblIconDX);

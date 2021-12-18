@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -106,7 +107,7 @@ public class Gui_SuaNhanVien extends JFrame implements ActionListener {
 
 		// Icon
 		JLabel lblIcon = new JLabel("");
-		Image imgUser = new ImageIcon("img\\dtVua.png").getImage();
+		Image imgUser = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/dtVua.png"))).getImage();
 		lblIcon.setIcon(new ImageIcon(imgUser));
 		lblIcon.setBounds(50, 42, 96, 66);
 		pnlHeader.add(lblIcon);

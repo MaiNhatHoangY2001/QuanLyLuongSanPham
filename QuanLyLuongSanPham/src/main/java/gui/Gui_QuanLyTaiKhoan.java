@@ -100,8 +100,6 @@ public class Gui_QuanLyTaiKhoan extends JPanel implements ActionListener, MouseL
 		pnlHead.add(lblGio);
 
 		ChucNang.setGio(lblGio, lblNgay);
-		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
-		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
 
 		/**
 		 * Phần dưới chứa bảng

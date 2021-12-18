@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -91,7 +92,7 @@ public class Gui_SuaThongTinSanPham extends JDialog implements ActionListener {
 
 		// Icon
 		JLabel lblIcon = new JLabel("New label");
-		Image imgUser = new ImageIcon("img\\dtVua.png").getImage();
+		Image imgUser = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/dtVua.png"))).getImage();
 		lblIcon.setIcon(new ImageIcon(imgUser));
 		lblIcon.setBounds(50, 42, 96, 66);
 		pnlHeader.add(lblIcon);

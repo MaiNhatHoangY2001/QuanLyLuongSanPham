@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,8 +69,7 @@ public class Gui_ChiTietBangLuong extends JDialog {
 		setBounds(100, 100, 549, 670);
 		setResizable(false);
 		setTitle("Chi tiết bảng lương");
-		setIconImage(new ImageIcon("img/logo.png").getImage());
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		pnlChinh = new JPanel();
 		pnlChinh.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlChinh);

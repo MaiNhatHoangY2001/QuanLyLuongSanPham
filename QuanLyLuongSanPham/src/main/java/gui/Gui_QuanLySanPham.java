@@ -125,9 +125,6 @@ public class Gui_QuanLySanPham extends JPanel implements ActionListener, ItemLis
 		pnlHead.add(lblGio);
 		ChucNang.setGio(lblGio, lblNgay);
 
-		Image imgUser = new ImageIcon("img\\userNho.png").getImage();
-		Image imgDX = new ImageIcon("img\\thoatNho.png").getImage();
-
 		/*
 		 * Phan: Chuc Nang
 		 */

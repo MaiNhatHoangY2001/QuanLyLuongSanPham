@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -96,7 +97,7 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 	public Gui_ThemHoaDonBan() {
 		setModal(true);
 		setTitle("Thêm hóa đơn bán hàng");
-		setIconImage(new ImageIcon("img/logo.png").getImage());
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		quanLyHoaDonService = new QuanLyHoaDonService();
 		this.setResizable(false);
@@ -117,7 +118,7 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 		panel.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("src/main/resources/images/img_bill/logoChung.PNG"));
+		lblNewLabel_4.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logoChung.PNG"))));
 		lblNewLabel_4.setBounds(28, 28, 152, 73);
 		panel.add(lblNewLabel_4);
 
