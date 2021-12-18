@@ -64,7 +64,6 @@ public class Gui_ChiTietBangLuong extends JDialog {
 	 * Create the frame.
 	 */
 	public Gui_ChiTietBangLuong() {
-		setModal(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 549, 670);
 		setResizable(false);
@@ -191,12 +190,11 @@ public class Gui_ChiTietBangLuong extends JDialog {
 		this.month = month;
 		this.year = year;
 		this.chucVu = chucVu;
-
+		ChucNang.clearDataTable(modelCTLuong);
 		lblTieuDe.setText("Bảng lương tháng " + month + "/" + year);
 		lblMaNV.setText("Mã nhân viên: " + bangLuong.get(0));
 		lblTenNV.setText("Tên nhân viên: " + bangLuong.get(1));
 		lblChucVu.setText("Chức vụ: " + chucVu);
-		ChucNang.clearDataTable(modelCTLuong);
 
 		List<String> tieuDe = new ArrayList<>();
 		tieuDe.add("Mức Lương");

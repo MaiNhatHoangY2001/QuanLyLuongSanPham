@@ -45,6 +45,7 @@ import com.toedter.calendar.JYearChooser;
 
 import gui_package.ChucNang;
 import gui_package.CustomTable;
+import gui_package.HintTextFieldUI;
 import gui_package.RoundedPanel;
 import model.BangLuong;
 import model.ChiTietHoaDonBan;
@@ -211,6 +212,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtTimKiem.setBounds(1000, 14, 220, 47);
 		txtTimKiem.setColumns(10);
+		txtTimKiem.setUI(new HintTextFieldUI("Nhập thông tin tìm", true));
 		pnlThanhNgang.add(txtTimKiem);
 		// sự kiên txt
 		txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
@@ -318,7 +320,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		pnlThanhNgang.add(btnXemCT);
 		btnXemCT.addActionListener(e -> {
 			Gui_ChiTietBangLuong guiCT = new Gui_ChiTietBangLuong();
-			guiCT.setVisible(true);
+
 			int month = cboMonth.getMonth() + 1;
 			int year = spnYear.getYear();
 			String chucVu = tblTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), 3).equals("2.0")
@@ -330,6 +332,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 				bangLuong.add(tblTinhLuong.getValueAt(tblTinhLuong.getSelectedRow(), i).toString());
 			}
 			guiCT.setDataCTBangLuong(month, year, chucVu, bangLuong);
+			guiCT.setVisible(true);
 		});
 
 		btnHienTai = new JButton("Hiện tại");
@@ -635,6 +638,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		txtThuong.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtThuong.setColumns(10);
 		txtThuong.setBounds(1196, 550, 289, 47);
+		txtThuong.setUI(new HintTextFieldUI("Nhập thưởng", true));
 		add(txtThuong);
 
 		txtThuong.addKeyListener(new KeyAdapter() {
