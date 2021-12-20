@@ -508,9 +508,9 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 
 							switch (colEdit) {
 							case 5:
-								if (newValue > 31) {
+								if (newValue > 31 || newValue < 0) {
 									JOptionPane.showMessageDialog(null,
-											"Nhập sai số ngày công (số ngày công phải nhỏ hơn 31)");
+											"Nhập sai số ngày công (số ngày công phải nhỏ hơn 31) và lớn hơn 0");
 								} else
 									bangLuongDao.updateSoNgayCong(maNhanVien, month, year, (int) newValue);
 								break;
