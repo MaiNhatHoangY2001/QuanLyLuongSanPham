@@ -558,6 +558,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnPre.setBorderPainted(false);
 		add(btnPre);
 		btnPre.addActionListener(e -> {
+			btnXemCT.setEnabled(false);
 			int trang = Integer.parseInt(txtTrang.getText());
 			trang = trang == 1 ? 1 : trang - 1;
 			txtTrang.setText(Integer.toString(trang));
@@ -577,7 +578,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnFor.addActionListener(e -> {
 			int trang = Integer.parseInt(txtTrang.getText());
 			int soLuong = 0;
-
+			btnXemCT.setEnabled(false);
 			switch (cboLoc.getSelectedIndex()) {
 			case 0:
 				soLuong = new QuanLyLuongService().getSoLuongBangLuong(cboMonth.getMonth() + 1, spnYear.getYear());
@@ -609,7 +610,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnCuoi.setBorderPainted(false);
 		btnCuoi.addActionListener(e -> {
 			int soLuong = 0;
-
+			btnXemCT.setEnabled(false);
 			switch (cboLoc.getSelectedIndex()) {
 			case 0:
 				soLuong = new QuanLyLuongService().getSoLuongBangLuong(cboMonth.getMonth() + 1, spnYear.getYear());
@@ -640,6 +641,7 @@ public class Gui_QuanLyLuong extends JPanel implements MouseListener {
 		btnDau.setFocusPainted(false);
 		btnDau.setBorderPainted(false);
 		btnDau.addActionListener(e -> {
+			btnXemCT.setEnabled(false);
 			txtTrang.setText(Integer.toString(1));
 			setDataTableBangLuong(cboMonth.getMonth() + 1, spnYear.getYear());
 		});
