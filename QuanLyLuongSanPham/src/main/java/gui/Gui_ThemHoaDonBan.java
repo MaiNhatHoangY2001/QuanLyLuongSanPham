@@ -305,6 +305,8 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 
 		txtThue = new JTextField();
 		txtThue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		txtThue.setText("0");
+		txtChietKhau.setText("0");
 		txtThue.setToolTipText("Thuế");
 		txtThue.setColumns(10);
 		txtThue.setBorder(new TitledBorder(
@@ -443,6 +445,7 @@ public class Gui_ThemHoaDonBan extends JDialog implements KeyListener {
 							for (SanPham sanPham : listGh) {
 								ChiTietHoaDonBan chiTietHoaDonBan = new ChiTietHoaDonBan(sanPham.getGiaThanh(),
 										Integer.parseInt((String) tblGioHang.getValueAt(i, 3)), hoaDonBanHang, sanPham);
+								i++;
 								listCt.add(chiTietHoaDonBan);
 							}
 							hoaDonBanHang.setDsChiTietHoaDonBan(listCt);

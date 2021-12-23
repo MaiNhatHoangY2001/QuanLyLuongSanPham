@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
