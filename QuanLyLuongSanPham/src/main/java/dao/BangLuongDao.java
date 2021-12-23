@@ -458,7 +458,7 @@ public class BangLuongDao {
 			tr.rollback();
 		}
 		session.close();
-		return thu == null ? 0 : doanhthu.doubleValue();
+		return doanhthu == null ? 0 : doanhthu.doubleValue();
 
 	}
 
