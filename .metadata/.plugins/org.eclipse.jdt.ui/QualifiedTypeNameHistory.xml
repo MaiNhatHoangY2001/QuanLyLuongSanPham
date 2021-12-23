@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="model.NhanVien"/>
     <fullyQualifiedTypeName name="gui_package.HintTextFieldUI"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
 </qualifiedTypeNameHistroy>

@@ -70,7 +70,8 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 	private JTextField txtTenNv;
 	protected JPanel pnlHead;
 	private TaiKhoan taiKhoan;
-	private List<?> listTable;;
+	private List<?> listTable;
+	private JButton btnLamMoi;;
 
 	/**
 	 * Create the panel.
@@ -107,7 +108,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		add(panel_1);
 
 		btnThemHoaDon = new JButton("Thêm hóa đơn");
-		btnThemHoaDon.setBounds(409, 15, 204, 41);
+		btnThemHoaDon.setBounds(388, 13, 204, 41);
 		panel_1.setLayout(null);
 
 		cboLoaiHoaDon = new JComboBox();
@@ -126,7 +127,7 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		txtNgayLap = new JDateChooser((new JCalendar()).getDate());
 		txtNgayLap.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtNgayLap.setForeground(Color.WHITE);
-		txtNgayLap.setBounds(222, 11, 161, 45);
+		txtNgayLap.setBounds(217, 11, 161, 45);
 		txtNgayLap.setDateFormatString("dd/MM/yyyy");
 		panel_1.add(txtNgayLap);
 
@@ -149,6 +150,13 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		panel_1.add(txtTimKiem);
 		txtTimKiem.setColumns(10);
+		
+		btnLamMoi = new JButton("Làm mới");
+		btnLamMoi.setForeground(Color.WHITE);
+		btnLamMoi.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnLamMoi.setBackground(new Color(233, 180, 46));
+		btnLamMoi.setBounds(602, 13, 161, 41);
+		panel_1.add(btnLamMoi);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBackground(new Color(255, 153, 0));
@@ -303,7 +311,22 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		panel_4.add(txtTenNv);
 		ChucNang.setTableAlternateRow();
 		tblHoaDon.addMouseListener(this);
+		
+		btnLamMoi.addActionListener(e->{
+			modelHoaDon.getDataVector().removeAllElements();
+			tblHoaDon.removeAll();
+			modelChiTiet.getDataVector().removeAllElements();
+			tblChiTiet.removeAll();
+//			Date input = txtNgayLap.getDate();
+//			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Date dateN= new Date();
+			LocalDate date = LocalDate.now();
+			txtNgayLap.setDate(dateN);
+			loadTableHoaDon(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
 
+			ChucNang.addNullDataTable(modelHoaDon);
+			ChucNang.addNullDataTable(modelChiTiet);
+		});
 		cboTimKiem.addActionListener(e -> {
 			int temp = cboTimKiem.getSelectedIndex();
 			chucNangCboTimKIem();
@@ -563,5 +586,4 @@ public class Gui_QuanLyHoaDon extends JPanel implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-
 }
